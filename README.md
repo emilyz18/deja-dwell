@@ -17,8 +17,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
     - Functionality to swap between the two accounts (only if the user has both accounts, i.e. no option to swap if the user has 1 account only)
 2. Matching
     - Stable matching algorithm between tenant property preference and property, tailored to our data
-    - Display matching score between user preference & housing post on both the landlord and tenant’s dashboard (only shows in console log) 
-
+    - Display matching score between user preference & housing post on both the landlord and tenant’s dashboard (only shows in console log)
 3. Dashboard
     - Landlord: Display list of applicants
         - Profile picture
@@ -47,7 +46,6 @@ Our project is a platform designed for tenants and landlords to facilitate findi
     - the landlord will reach out to the list of tenants matched by the system  (externally, interview/in person house tour), once the landlord and tenant sign the contract (externally), the landlord will press accept and other tenants on the list will be automatically rejected.
     - Landlord will only see contact info of tenant after they apply, tenant will only see landlord contact info after they apply 
 
-
 ## Stretch Requirements
 1. On-demand feedback
     - As the user looks through options we ask them why they did not choose this specific option
@@ -75,13 +73,13 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 
 ## Prototype Sketches
 #### Tenant Dashboard
-<img src ="images/prototypeSketches/TenantDashboard.png">
+<img src ="images/prototypeSketches/TenantDashboard.png" width=700>
 
 #### Tenant Profile
-<img src ="images/prototypeSketches/TenantProfile.png">
+<img src ="images/prototypeSketches/TenantProfile.png" width=700>
 
 #### Landlord Dashboard
-<img src ="images/prototypeSketches/LandlordDashboard.png">
+<img src ="images/prototypeSketches/LandlordDashboard.png" width=700>
 
 ## References
 
