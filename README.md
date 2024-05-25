@@ -6,8 +6,8 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 ## Team Members
 - Derek: one sentence about you!
 - Emily: one sentence about you!
-- Jackson: Hellooo, I am a 4th year comp-sci student. I like being on airplanes and'm scared of big bodies of water.
-- Xinyue: Hi. I am an 4th year computer science student. I love coffee.
+- Jackson: Hello, I am a 4th year comp-sci student. I like being on airplanes and'm scared of big bodies of water.
+- Xinyue: Hi. I am a 4th year computer science student. I love coffee.
 
 ## Minimal Requirements
 1. Create/modify a user profile (user information and housing preference)
@@ -25,8 +25,8 @@ Our project is a platform designed for tenants and landlords to facilitate findi
         - Age
         - Occupation
         - Length of lease
-    - Tenant: Display matching property posts in cards format
-        - Image of property
+    - Tenant: Display matching property posts in card format
+        - Image of the property
         - Address
         - Price
         - Property properties
@@ -38,13 +38,15 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 2. Application status
     - For Tenant account: Store history of applied post 
     - For the landlord: Store history of matched applicants(Tenants) along with their applied post
-3. Two types of rent match (tigh match (search bar) and loose match (profile/preference match by system))
-4. Make the matching algorithm more robust
+3. Two types of rent match:
+   - tight match (search bar)
+   - loose match (profile/preference match by system)
+5. Make the matching algorithm more robust
     - Add weightings to scores 
-    - Add additional sorting for list of applicants ( tenant profile <-> landlord preference matching)
-5. For landlord account:  A Landlord dashboard page that shows the current list of applicants with accept/reject buttons for each applicant.
-    - the landlord will reach out to the list of tenants matched by the system  (externally, interview/in person house tour), once the landlord and tenant sign the contract (externally), the landlord will press accept and other tenants on the list will be automatically rejected.
-    - Landlord will only see contact info of tenant after they apply, tenant will only see landlord contact info after they apply 
+    - Add additional sorting for the list of applicants ( tenant profile <-> landlord preference matching)
+6. For landlord account:  A Landlord dashboard page that shows the current list of applicants with accept/reject buttons for each applicant.
+    - the landlord will reach out to the list of tenants matched by the system  (externally, interview/in-person house tour), once the landlord and tenant sign the contract (externally), the landlord will press accept and other tenants on the list will be automatically rejected.
+    - Landlord will only see contact info of tenant after they apply, tenant will only see landlord's contact info after they apply 
 
 ## Stretch Requirements
 1. On-demand feedback
@@ -53,7 +55,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 3. Preference updating based on swap and feedback demand
 4. Actual swiping of each selection
 5. Allow the landlord to list multiple properties
-6. Once match, enable landlord and tenant to interact
+6. Once matched, enable the landlord and tenant to interact
     - Chat message
     - Contact exchange
     - Interview process
