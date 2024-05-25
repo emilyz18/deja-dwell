@@ -6,7 +6,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 ## Team Members
 - Derek: one sentence about you!
 - Emily: one sentence about you!
-- Jackson: one sentence about you!
+- Jackson: Hellooo, I am a 4th year comp-sci student. I like being on airplanes and'm scared of big bodies of water.
 - Xinyue: Hi. I am an 4th year computer science student. I love coffee.
 
 ## Minimal Requirements
