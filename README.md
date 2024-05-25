@@ -7,7 +7,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 - Derek: one sentence about you!
 - Emily: one sentence about you!
 - Jackson: one sentence about you!
-- Ashley: one sentence about you!
+- Xinyue: Hi. I am an 4th year computer science student. I love coffee.
 
 ## Minimal Requirements
 1. Create/modify a user profile (user information and housing preference)
