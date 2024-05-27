@@ -5,7 +5,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 
 ## Team Members
 - Derek: one sentence about you!
-- Emily: one sentence about you!
+- Emily: Hi, I am a 4th year computer science student. I like to draw and play chess.
 - Jackson: Hello, I am a 4th year comp-sci student. I like being on airplanes and'm scared of big bodies of water.
 - Xinyue: Hi. I am a 4th year computer science student. I love coffee.
 
