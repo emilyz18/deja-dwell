@@ -1,9 +1,9 @@
-/* LandlordPropertyCard.css */
+.landlord-dashboard-display {
+    width: 80%;
+  }
 
 .landlord-property-card {
   display: flex;
-  /* background-color: red; */
-  width: 80%;
 }
 
 .carousel-container {
@@ -12,16 +12,21 @@
 }
 
 .property-information {
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    height: 240px; /* Height must match carousel*/
-    margin-left: 20px;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  height: 240px; /* Height must match carousel*/
+  margin-left: 20px;
 }
 
-  .property-information p {
-    margin: 0;
-    margin-right: 10px;
-    flex-grow: 1; /* Allow content container to grow vertically */
-    overflow: auto; /* Enable scrolling for long content */
-    scrollbar-width: thin;
+.property-description {
+  margin: 0;
+  margin-right: 10px;
+  flex-grow: 1; /* Allow content container to grow vertically */
+  overflow: auto; /* Enable scrolling for long content */
+  scrollbar-width: thin;
+}
+
+.property-information h3 {
+  margin: 0;
+  margin-bottom: px;
 }

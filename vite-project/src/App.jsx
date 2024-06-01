@@ -1,16 +1,29 @@
 import "./App.css";
-import ApplicantCard from "./components/applicantCard/ApplicantCard";
-import LandlordPropertyCard from "./components/landlordPropertyCard/LandlordPropertyCard";
-import { postingData } from "./mockData/carouselImages";
 function App() {
 
   return (
     <>
-
-      Test
-      <LandlordPropertyCard postingData={postingData}/>
     </>
   );
 }
 
 export default App;
+
+
+
+// uncomment the lines below to view landlord dashboard:
+
+// import "./App.css";
+// import LandlordPropertyCard from "./components/landlordPropertyCard/LandlordPropertyCard";
+// import { postingData } from "./mockData/postingData";
+// function App() {
+
+//   return (
+//     <>
+//       <LandlordPropertyCard postingData={postingData}/>
+//     </>
+//   );
+// }
+
+// export default App;
+
