@@ -59,6 +59,8 @@ import { LandLordSideBar } from "./components/sideBars/landLordSideBar";
 import { TenantSideBar } from "./components/sideBars/tenantSideBar";
 import { postingData } from "./mockData/postingData";
 import { mockUser } from "./mockData/mockUser";
+import PropertyCardList from "./components/propertyCardList/PropertyCardList";
+import { propertyList } from "./mockData/postingData";
 import { useState } from "react";
 
 function App() {
@@ -84,7 +86,10 @@ function App() {
           </>
           
         ) : (
-            <TenantSideBar accountType={accountType} profile={mockUser} onSwitchAcc={handleSwitchAcc} />
+          <>
+          <TenantSideBar accountType={accountType} profile={mockUser} onSwitchAcc={handleSwitchAcc} />
+          <PropertyCardList propList={propertyList.propertys}/>
+          </>
             
         )}
 

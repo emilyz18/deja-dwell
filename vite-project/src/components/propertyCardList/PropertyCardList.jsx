@@ -21,7 +21,7 @@ function PropertyCardList(props) {
 
     return (
         <>
-            <ul id="property-list" className="propertyList">
+            <ul id="property-list" className="property-list">
                 {properties.map((property,index) => (
                     <MiniPropertyCard
                         key={index}
