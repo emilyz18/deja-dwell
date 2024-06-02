@@ -36,13 +36,13 @@ return (
 // uncomment the lines below to view Mini property card:
 
 import "./App.css";
-import MiniPropertyCard from "./components/miniPropertyCard/MiniPropertyCard";
-import { house1 } from "./mockData/postingData";
+import PropertyCardList from "./components/propertyCardList/PropertyCardList";
+import { propertyList } from "./mockData/postingData";
 function App() {
 
 return (
  <>
-   <MiniPropertyCard propertyInfo={house1}/>
+   <PropertyCardList propList={propertyList.propertys}/>
    </>
   );
  }

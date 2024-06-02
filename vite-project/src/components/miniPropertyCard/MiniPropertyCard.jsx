@@ -3,15 +3,17 @@ import "./MiniPropertyCard.css";
 import Carousel from '../carousel/Carousel';
 
 function MiniPropertyCard(props) {
-    const { propertyInfo } = props;
+    const { propertyInfo, likedFn, dislikedFn } = props;
     if (!propertyInfo) return null;
 
     const likeProperty = () => {
         console.log("house " +  propertyInfo.houseID + " was liked!");
+        likedFn(propertyInfo.houseID);
     }
 
     const dislikeProperty = () => {
         console.log("house " +  propertyInfo.houseID  + " was rejected!");
+        dislikedFn(propertyInfo.houseID);
     }
 
     const expandProperty = () => {

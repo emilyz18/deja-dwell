@@ -30,8 +30,8 @@ const applicant1 = {
 };
 
 const applicant2 = {
-    name: "Jane Smith",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXGPVZv-HQ-CYzQzs-TM4aSh3ICOGVlakbmA&s", 
+  name: "Jane Smith",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXGPVZv-HQ-CYzQzs-TM4aSh3ICOGVlakbmA&s",
   contactInformation: {
     phoneNumber: "555-987-6543",
     email: "jane.smith@example.com",
@@ -44,8 +44,8 @@ const applicant2 = {
 };
 
 const applicant3 = {
-    name: "Sam Wilson",
-    image: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?cs=srgb&dl=pexels-simon-robben-55958-614810.jpg&fm=jpg",
+  name: "Sam Wilson",
+  image: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?cs=srgb&dl=pexels-simon-robben-55958-614810.jpg&fm=jpg",
   contactInformation: {
     phoneNumber: "555-111-2222",
     email: "sam.wilson@example.com",
@@ -58,8 +58,8 @@ const applicant3 = {
 };
 
 const applicant4 = {
-    name: "Emily Jones",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO2vBQ1vOla9pPM6M0ZsYZb7OckCS21cgN_Q&s",
+  name: "Emily Jones",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO2vBQ1vOla9pPM6M0ZsYZb7OckCS21cgN_Q&s",
   contactInformation: {
     phoneNumber: "555-333-4444",
     email: "emily.jones@example.com",
@@ -71,7 +71,7 @@ const applicant4 = {
   financialSituation: "Stable income, good credit",
 };
 
-export const house1 =  {
+export const house1 = {
   houseID: 1,
   images: slides,
   address: "123 Main St, Anytown, USA",
@@ -88,3 +88,13 @@ export const postingData = {
   house: house1,
   applicants: [applicant1, applicant2, applicant3, applicant4],
 };
+
+export const propertyList = {
+  propertys: [
+    { "houseID": 1, "images": slides, "address": "3rd Floor", "price": 9864, "description": "In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.", "title": "Hoard", "roomType": "Chrysler", "location": "Launceston", "parkingAvailability": 2 },
+    { "houseID": 2, "images": slides, "address": "Apt 569", "price": 5875, "description": "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.", "title": "Arkansas", "roomType": "Mitsubishi", "location": "Misheronskiy", "parkingAvailability": 3 },
+    { "houseID": 3, "images": slides, "address": "Room 500", "price": 984, "description": "Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.", "title": "Hovde", "roomType": "Suzuki", "location": "Quivilla", "parkingAvailability": 1 },
+    { "houseID": 4, "images": slides, "address": "19th Floor", "price": 4768, "description": "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.", "title": "Spaight", "roomType": "Mitsubishi", "location": "Bitanjuan", "parkingAvailability": 1 },
+    { "houseID": 5, "images": slides, "address": "Apt 33", "price": 2326, "description": "Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.", "title": "Tomscot", "roomType": "GMC", "location": "Polo", "parkingAvailability": 9 }
+  ]
+}
