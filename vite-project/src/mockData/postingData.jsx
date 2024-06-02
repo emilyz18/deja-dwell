@@ -71,17 +71,20 @@ const applicant4 = {
   financialSituation: "Stable income, good credit",
 };
 
+export const house1 =  {
+  houseID: 1,
+  images: slides,
+  address: "123 Main St, Anytown, USA",
+  price: "$2000 per month",
+  description:
+    "Welcome to our cozy family home nestled in a serene suburban neighborhood. This spacious and inviting house boasts 3 bedrooms and 2 bathrooms, providing ample space for comfortable living. Step into the modern kitchen, equipped with sleek stainless steel appliances, perfect for culinary enthusiasts and family gatherings. The heart of the home is the living room, adorned with a charming fireplace, creating a warm and inviting atmosphere. From here, step outside to the expansive backyard, an ideal spot for outdoor gatherings, barbecues, and relaxation under the open sky. The master bedroom is a sanctuary, complete with an ensuite bathroom for added privacy and convenience. You'll love the luxury of a walk-in closet, offering ample storage space for your wardrobe and belongings. The two additional bedrooms are versatile spaces, perfect for accommodating a home office, guest rooms, or creative hobbies. Parking is a breeze with a 2-car garage and plenty of space in the driveway for additional vehicles. This home is pet-friendly, allowing your furry companions to enjoy the spacious surroundings. Convenience is key, with easy access to nearby parks for outdoor recreation, top-rated schools for educational opportunities, and bustling shopping centers for all your retail needs. Experience the comfort and charm of suburban living at its finest in this inviting family home.",
+  title: "Cozy Family Home For Rent",
+  roomType: "3Bed-2Bath",
+  location: "Suburban neighborhood in Burnaby",
+  parkingAvailability: "2 car garage",
+};
+
 export const postingData = {
-  house: {
-    images: slides,
-    address: "123 Main St, Anytown, USA",
-    price: "$2000 per month",
-    description:
-      "Welcome to our cozy family home nestled in a serene suburban neighborhood. This spacious and inviting house boasts 3 bedrooms and 2 bathrooms, providing ample space for comfortable living. Step into the modern kitchen, equipped with sleek stainless steel appliances, perfect for culinary enthusiasts and family gatherings. The heart of the home is the living room, adorned with a charming fireplace, creating a warm and inviting atmosphere. From here, step outside to the expansive backyard, an ideal spot for outdoor gatherings, barbecues, and relaxation under the open sky. The master bedroom is a sanctuary, complete with an ensuite bathroom for added privacy and convenience. You'll love the luxury of a walk-in closet, offering ample storage space for your wardrobe and belongings. The two additional bedrooms are versatile spaces, perfect for accommodating a home office, guest rooms, or creative hobbies. Parking is a breeze with a 2-car garage and plenty of space in the driveway for additional vehicles. This home is pet-friendly, allowing your furry companions to enjoy the spacious surroundings. Convenience is key, with easy access to nearby parks for outdoor recreation, top-rated schools for educational opportunities, and bustling shopping centers for all your retail needs. Experience the comfort and charm of suburban living at its finest in this inviting family home.",
-    title: "Cozy Family Home For Rent",
-    roomType: "3 bedrooms, 2 bathrooms",
-    location: "Suburban neighborhood in Burnaby",
-    parkingAvailability: "2 car garage",
-  },
+  house: house1,
   applicants: [applicant1, applicant2, applicant3, applicant4],
 };
