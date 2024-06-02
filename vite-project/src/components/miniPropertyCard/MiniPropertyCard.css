@@ -1,8 +1,12 @@
 .property-card {
-    width: 400px;
+    width: 40%;
     border: 1px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
+    margin-bottom: 24px; /* Add space below each card */
+    justify-content: center; /* Center the card within its container */
+    margin-left: auto;
+    margin-right: auto;
   }
   
 .carousel-container {

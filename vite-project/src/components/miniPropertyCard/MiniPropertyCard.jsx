@@ -22,7 +22,7 @@ function MiniPropertyCard(props) {
 
     return (
         <>
-            <div className="property-card">
+            <li className="property-card">
                 <div className="carousel-container">
                     <Carousel
                         data={propertyInfo.images}
@@ -42,7 +42,7 @@ function MiniPropertyCard(props) {
                         <button className="circle-button cross-button" onClick={dislikeProperty}>✖</button>
                     </div>
                 </div>
-            </div>
+            </li>
         </>
     );
 }
