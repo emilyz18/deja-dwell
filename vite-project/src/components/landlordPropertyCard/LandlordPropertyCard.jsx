@@ -3,6 +3,8 @@ import Carousel from "../carousel/Carousel";
 import "./LandlordPropertyCard.css"; // Import the CSS file
 import ApplicantCard from "../applicantCard/ApplicantCard";
 
+import Box from '@mui/material/Box';
+
 const LandlordPropertyCard = ({ postingData }) => {
   const { house, applicants: initialApplicants } = postingData;
   const {
@@ -30,6 +32,7 @@ const LandlordPropertyCard = ({ postingData }) => {
 
   return (
     <>
+    
       <div className="landlord-dashboard-display">
         <div className="landlord-property-card">
           <div className="carousel-container">

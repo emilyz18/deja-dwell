@@ -84,6 +84,7 @@ export const house1 = {
   parkingAvailability: "2 car garage",
 };
 
+
 export const postingData = {
   house: house1,
   applicants: [applicant1, applicant2, applicant3, applicant4],
