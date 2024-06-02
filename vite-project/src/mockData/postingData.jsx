@@ -71,6 +71,8 @@ const applicant4 = {
   financialSituation: "Stable income, good credit",
 };
 
+
+
 export const postingData = {
   house: {
     images: slides,
