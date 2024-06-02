@@ -8,12 +8,12 @@ const landlordLinks = [
 
 
 // import { mockUser } from "../../mockData/mockUser"
-export function LandLordSideBar({ profile }) {
+export function LandLordSideBar({ accountType, profile, onSwitchAcc}) {
 
     return (
         <>
             <div>
-                <BaseSidebar navBarLinks={landlordLinks} profile={profile} />
+                <BaseSidebar accountType={accountType} navBarLinks={landlordLinks} profile={profile} onSwitchAcc={onSwitchAcc} />
             </div>
         </>
     );

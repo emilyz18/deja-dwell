@@ -1,6 +1,7 @@
-// import React from 'react';
-import "./baseSideBar.css";
 /* June 1st, 6:00pm, the following structure modified from genreated code usign Chagpt 4.0o with prompt "how to create reusable side bar element that can be used for side bars with dfference type of account in React " */
+//Drawer Coponent adapt from https://mui.com/material-ui/react-drawer/
+
+import "./baseSideBar.css";
 import * as React from 'react';
 
 import Avatar from '@mui/material/Avatar';
@@ -14,10 +15,8 @@ import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 
-//https://mui.com/material-ui/react-drawer/
-
-const drawerWidth = 240;
-export function BaseSidebar({ navBarLinks, profile }) {
+const drawerWidth = 300 ;
+export function BaseSidebar({ accountType, navBarLinks, profile, onSwitchAcc}) {
 
     return (
         <>  
@@ -30,6 +29,7 @@ export function BaseSidebar({ navBarLinks, profile }) {
                         '& .MuiDrawer-paper': {
                             width: drawerWidth,
                             boxSizing: 'border-box',
+                            padding: '20px',
                         },
                     }}
                     variant="permanent"
@@ -40,10 +40,10 @@ export function BaseSidebar({ navBarLinks, profile }) {
 
                     <List> 
                         <ListItem>
-                            <ListItemAvatar>
+                            <ListItemAvatar sx={{ margin: '10px' }}>
                                 <Avatar src={profile.image} sx={{ width: 100, height: 100 }} ></Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary={profile.name} />
+                            <ListItemText sx={{ margin: '8px' }} primary={profile.name} />
                         </ListItem>
                         <Divider />
                         
@@ -58,24 +58,14 @@ export function BaseSidebar({ navBarLinks, profile }) {
                     </List>
 
                     <Divider />
-                    <Button onClick={() => {alert('clicked');}}>
-                        Swith to Tenant Account
+
+                    {/* TODO */}
+                    
+                    <Button onClick={onSwitchAcc}>
+                        Swith to  { accountType ==='landlord' ? 'Tenant': 'Landlord'} Account
                     </Button>
 
                 </Drawer>
-
-                {/* <p>{profile.name}</p>
-                <img src={profile.image} />
-                <ul>
-                    {navBarLinks.map((linkPair, index) => (
-                        <li key={index}>
-                            <a href={linkPair.path}>{linkPair.label}</a>
-                        </li>
-                    ))}
-                </ul>
-                <button>
-                    Switch Dashboard
-                </button> */}
         </div >
 
         </>

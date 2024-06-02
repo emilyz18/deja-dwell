@@ -13,7 +13,7 @@ export function AppRouter() {
                     <LandlordPropertyCard />
                 } />
 
-                {/* need rount for tenent card */}
+                {/* need route for tenent card */}
 
             </Routes>
         
