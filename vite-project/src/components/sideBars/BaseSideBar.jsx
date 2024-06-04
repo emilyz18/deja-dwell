@@ -17,10 +17,8 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 
 const drawerWidth = 300 ;
 export function BaseSideBar({ accountType, navBarLinks, profile, onSwitchAcc}) {
-
     return (
-        <>  
-            
+        <>
             <div className='BaseSidebar'>
                 <Drawer
                     sx={{
@@ -62,16 +60,10 @@ export function BaseSideBar({ accountType, navBarLinks, profile, onSwitchAcc}) {
                     {/* TODO */}
                     
                     <Button onClick={onSwitchAcc}>
-                        Swith to  { accountType ==='landlord' ? 'Tenant': 'Landlord'} Account
+                        Switch to { accountType ==='landlord' ? 'Tenant': 'Landlord'} Account
                     </Button>
-
                 </Drawer>
-        </div >
-
+            </div >
         </>
     );
-
 }
-
-
-
