@@ -8,15 +8,9 @@ export function AppRouter() {
     return (
         <BrowserRounter>
             <Routes>
-
-                <Route path='/components/landlordPropertyCard' element={ 
-                    <LandlordPropertyCard />
-                } />
-
-                {/* need route for tenent card */}
-
+                <Route path='/components/landlordPropertyCard' element={<LandlordPropertyCard />}/>
+                {/* need route for tenant card */}
             </Routes>
-        
         </BrowserRounter>
     )
 }

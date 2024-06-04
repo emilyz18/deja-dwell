@@ -1,7 +1,7 @@
 /* June 1st, 6:00pm, the following structure modified from generated code using Chatgpt 4.0o with prompt "how to create reusable sidebar element that can be used for sidebars with difference type of account in React " */
 //Drawer Component adapt from https://mui.com/material-ui/react-drawer/
 
-import "./baseSideBar.css";
+import "./BaseSideBar.css";
 import * as React from 'react';
 
 import Avatar from '@mui/material/Avatar';
@@ -16,7 +16,7 @@ import Button from '@mui/material/Button';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 
 const drawerWidth = 300 ;
-export function BaseSidebar({ accountType, navBarLinks, profile, onSwitchAcc}) {
+export function BaseSideBar({ accountType, navBarLinks, profile, onSwitchAcc}) {
 
     return (
         <>  

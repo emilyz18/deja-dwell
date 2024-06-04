@@ -55,8 +55,8 @@ return (
 
 import "./css/App.css";
 import LandlordPropertyCard from "./components/landlordPropertyCard/LandlordPropertyCard";
-import { LandLordSideBar } from "./components/sideBars/landLordSideBar";
-import { TenantSideBar } from "./components/sideBars/tenantSideBar";
+import { LandLordSideBar } from "./components/sideBars/LandLordSideBar.jsx";
+import { TenantSideBar } from "./components/sideBars/TenantSideBar.jsx";
 import { postingData } from "./mockData/postingData";
 import { mockUser } from "./mockData/mockUser";
 import PropertyCardList from "./components/propertyCardList/PropertyCardList";

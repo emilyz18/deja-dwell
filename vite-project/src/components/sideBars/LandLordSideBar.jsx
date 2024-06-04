@@ -1,4 +1,4 @@
-import { BaseSidebar } from "./baseSideBar";
+import { BaseSideBar } from "./BaseSideBar.jsx";
 
 
 const landlordLinks = [
@@ -13,7 +13,7 @@ export function LandLordSideBar({ accountType, profile, onSwitchAcc}) {
     return (
         <>
             <div>
-                <BaseSidebar accountType={accountType} navBarLinks={landlordLinks} profile={profile} onSwitchAcc={onSwitchAcc} />
+                <BaseSideBar accountType={accountType} navBarLinks={landlordLinks} profile={profile} onSwitchAcc={onSwitchAcc} />
             </div>
         </>
     );
