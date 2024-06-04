@@ -1,5 +1,5 @@
-/* June 1st, 6:00pm, the following structure modified from genreated code usign Chagpt 4.0o with prompt "how to create reusable side bar element that can be used for side bars with dfference type of account in React " */
-//Drawer Coponent adapt from https://mui.com/material-ui/react-drawer/
+/* June 1st, 6:00pm, the following structure modified from generated code using Chatgpt 4.0o with prompt "how to create reusable sidebar element that can be used for sidebars with difference type of account in React " */
+//Drawer Component adapt from https://mui.com/material-ui/react-drawer/
 
 import "./baseSideBar.css";
 import * as React from 'react';

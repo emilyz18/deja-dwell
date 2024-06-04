@@ -53,7 +53,7 @@ return (
 */
 // uncomment the lines below to view landlord dashboard:
 
-import "./App.css";
+import "./css/App.css";
 import LandlordPropertyCard from "./components/landlordPropertyCard/LandlordPropertyCard";
 import { LandLordSideBar } from "./components/sideBars/landLordSideBar";
 import { TenantSideBar } from "./components/sideBars/tenantSideBar";
@@ -63,17 +63,18 @@ import PropertyCardList from "./components/propertyCardList/PropertyCardList";
 import { propertyList } from "./mockData/postingData";
 import { useState } from "react";
 
-function App() {
+const LANDLORD = "landlord"
+const TENANT = "tenant"
 
-  const [accountType, setaccountType] = useState("landlord");
+function App() {
+  const [accountType, setAccountType] = useState(LANDLORD);
 
   function handleSwitchAcc() {
-    if (accountType === "landlord") {
-      setaccountType("tenant");
+    if (accountType === LANDLORD) {
+      setAccountType(TENANT);
     } else {
-      setaccountType("landlord");
+      setAccountType(LANDLORD);
     }
-
   }
 
   return (
@@ -84,23 +85,15 @@ function App() {
             <LandLordSideBar accountType={accountType} profile={mockUser} onSwitchAcc={handleSwitchAcc} />
             <LandlordPropertyCard postingData={postingData} />
           </>
-          
         ) : (
           <>
-          <TenantSideBar accountType={accountType} profile={mockUser} onSwitchAcc={handleSwitchAcc} />
-          <PropertyCardList propList={propertyList.propertys}/>
+            <TenantSideBar accountType={accountType} profile={mockUser} onSwitchAcc={handleSwitchAcc} />
+            <PropertyCardList propList={propertyList.propertys}/>
           </>
-            
         )}
-
-
-       
       </div>
-      
-    
     </>
   );
 }
 
 export default App;
-
