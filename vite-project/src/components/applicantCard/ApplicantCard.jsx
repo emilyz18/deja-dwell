@@ -1,8 +1,8 @@
 import React from "react";
 import "./ApplicantCard.css"; // Ensure you create and style this CSS file accordingly
 
-const ApplicantCard = ({ applicant, onReject, onAccept}) => {
-  const { image, name, age} = applicant;
+const ApplicantCard = ({applicant, onReject, onAccept}) => {
+  const { image, name, age, phoneNumber } = applicant;
 
   const handleReject = () => {
     onReject(name);
@@ -20,7 +20,7 @@ const ApplicantCard = ({ applicant, onReject, onAccept}) => {
       <div className="applicant-info">
         <h3>{name}</h3>
         <p>Age: {age}</p>
-        <p>Phone #: {applicant.contactInformation.phoneNumber}</p>
+        <p>Phone #: {phoneNumber}</p>
       </div>
       <div className="applicant-actions">
         <button className="accept-button" onClick={handleAccept}>Accept</button>

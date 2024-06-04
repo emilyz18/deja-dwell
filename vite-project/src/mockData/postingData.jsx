@@ -18,10 +18,8 @@ const slides = [
 const applicant1 = {
   name: "John Doe",
   image: 'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
-  contactInformation: {
-    phoneNumber: "555-123-4567",
-    email: "john.doe@example.com",
-  },
+  phoneNumber: "555-123-4567",
+  email: "john.doe@example.com",
   gender: "male",
   age: "30",
   occupation: "Software Engineer",
@@ -32,10 +30,8 @@ const applicant1 = {
 const applicant2 = {
   name: "Jane Smith",
   image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXGPVZv-HQ-CYzQzs-TM4aSh3ICOGVlakbmA&s",
-  contactInformation: {
-    phoneNumber: "555-987-6543",
-    email: "jane.smith@example.com",
-  },
+  phoneNumber: "555-987-6543",
+  email: "jane.smith@example.com",
   gender: "Female",
   age: "51",
   occupation: "Marketing Manager",
@@ -46,10 +42,8 @@ const applicant2 = {
 const applicant3 = {
   name: "Sam Wilson",
   image: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?cs=srgb&dl=pexels-simon-robben-55958-614810.jpg&fm=jpg",
-  contactInformation: {
-    phoneNumber: "555-111-2222",
-    email: "sam.wilson@example.com",
-  },
+  phoneNumber: "555-111-2222",
+  email: "sam.wilson@example.com",
   gender: "Male",
   age: "26",
   occupation: "Teacher",
@@ -60,10 +54,8 @@ const applicant3 = {
 const applicant4 = {
   name: "Emily Jones",
   image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO2vBQ1vOla9pPM6M0ZsYZb7OckCS21cgN_Q&s",
-  contactInformation: {
-    phoneNumber: "555-333-4444",
-    email: "emily.jones@example.com",
-  },
+  phoneNumber: "555-333-4444",
+  email: "emily.jones@example.com",
   age: "21",
   gender: "Female",
   occupation: "Accountant",

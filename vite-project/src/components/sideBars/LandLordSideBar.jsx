@@ -1,15 +1,12 @@
 import { BaseSideBar } from "./BaseSideBar.jsx";
 
-
 const landlordLinks = [
     { path: "#", label: "Edit Preference" },
     { path: "/components/landlordPropertyCard", label: "View Applicants" }
 ];
 
-
 // import { mockUser } from "../../mockData/mockUser"
 export function LandLordSideBar({ accountType, profile, onSwitchAcc}) {
-
     return (
         <>
             <div>
@@ -17,9 +14,4 @@ export function LandLordSideBar({ accountType, profile, onSwitchAcc}) {
             </div>
         </>
     );
-
 }
-    
-    
-    
-

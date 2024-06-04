@@ -2,7 +2,7 @@
 import React from "react";
 import { BrowserRounter, Routes, Route } from "react-rounter-dom";
 
-import { LandlordPropertyCard } from './components/landlordPropertyCard/LandlordPropertyCard'; 
+import { LandlordPropertyCard } from './components/landlordPropertyCard/LandlordPropertyCard';
 
 export function AppRouter() {
     return (

@@ -14,9 +14,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
+import {TenantInputForm} from "../../InputForms/tenantInputForm/TenantInputForm.jsx";
+import {LandlordInputForm} from "../../InputForms/landlordInputForm/LandlordInputForm.jsx";
 
-const drawerWidth = 300 ;
-export function BaseSideBar({ accountType, navBarLinks, profile, onSwitchAcc}) {
+const drawerWidth = 300;
+
+export function BaseSideBar({accountType, navBarLinks, profile, onSwitchAcc}) {
     return (
         <>
             <div className='BaseSidebar'>
@@ -33,37 +36,44 @@ export function BaseSideBar({ accountType, navBarLinks, profile, onSwitchAcc}) {
                     variant="permanent"
                     anchor="left"
                 >
-                    <Toolbar />
-                    <Divider />
+                    <Toolbar/>
+                    <Divider/>
 
-                    <List> 
+                    <List>
                         <ListItem>
-                            <ListItemAvatar sx={{ margin: '10px' }}>
-                                <Avatar src={profile.image} sx={{ width: 100, height: 100 }} ></Avatar>
+                            <ListItemAvatar sx={{margin: '10px'}}>
+                                <Avatar src={profile.image} sx={{width: 100, height: 100}}></Avatar>
                             </ListItemAvatar>
-                            <ListItemText sx={{ margin: '8px' }} primary={profile.name} />
+                            <ListItemText sx={{margin: '8px'}} primary={profile.name}/>
                         </ListItem>
-                        <Divider />
-                        
+                        <Divider/>
+
                         {navBarLinks.map((linkPair, index) => (
                             <ListItem key={index} disablePadding>
                                 <ListItemButton component="a" href="{linkPair.path}">
-                                    <ListItemText primary={linkPair.label} />
+                                    <ListItemText primary={linkPair.label}/>
                                 </ListItemButton>
                             </ListItem>
-                            
+
                         ))}
                     </List>
 
-                    <Divider />
+                    <Divider/>
 
                     {/* TODO */}
-                    
+
                     <Button onClick={onSwitchAcc}>
-                        Switch to { accountType ==='landlord' ? 'Tenant': 'Landlord'} Account
+                        Switch to {accountType === 'landlord' ? 'Tenant' : 'Landlord'} Account
                     </Button>
+
+                    <Divider/>
+
+                    <div>
+                        <LandlordInputForm/>
+                        <TenantInputForm/>
+                    </div>
                 </Drawer>
-            </div >
+            </div>
         </>
-    );
+    )
 }
