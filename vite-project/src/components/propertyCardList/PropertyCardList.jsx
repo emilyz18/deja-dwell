@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./PropertyCardList.css";
 import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard';
+import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard';
 
 function PropertyCardList(props) {
     const { propList } = props;
@@ -23,12 +24,16 @@ function PropertyCardList(props) {
         <>
             <ul id="property-list" className="property-list">
                 {properties.map((property,index) => (
-                    <MiniPropertyCard
-                        key={index}
-                        propertyInfo={property}
-                        likedFn={likedProperty}
-                        dislikedFn={dislikedProperty}
-                    />
+                    <>
+                        <MiniPropertyCard
+                            key={index}
+                            propertyInfo={property}
+                            likedFn={likedProperty}
+                            dislikedFn={dislikedProperty}
+                        />
+                        {/* uncomment follow to view the cord */}
+                        {/* <ExpandedPropertyCard propertyInfo={property} /> */}
+                    </>
                 ))}
             </ul>
         </>
