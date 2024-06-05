@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import '../inputForm.css'
 
 export function TenantInputForm() {
     const [name, setName] = useState("");
@@ -45,7 +46,7 @@ export function TenantInputForm() {
         <div>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <h1>Enter tenant information below: </h1>
+                    <h1 className="input-form-heading">Enter tenant information below: </h1>
                     <p>Fields marked with <span aria-label="required"> *</span> are required.</p>
                 </div>
                 <div>
@@ -104,6 +105,7 @@ export function TenantInputForm() {
                         className="phoneNumber-field"
                         label="Phone Number"
                         variant="filled"
+                        required
                         value={phoneNumber}
                         onChange={e => setPhoneNumber(e.target.value)}
                         placeholder="Enter phone number here..."
@@ -116,6 +118,7 @@ export function TenantInputForm() {
                         className="email-field"
                         label="Email"
                         variant="filled"
+                        required
                         type="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
@@ -124,7 +127,7 @@ export function TenantInputForm() {
                         margin="normal"
                     />
                 </div>
-                <div>
+                <div className="button">
                     <Button
                         className="submit-button"
                         type="submit"
@@ -134,7 +137,7 @@ export function TenantInputForm() {
                         Add Tenant
                     </Button>
                 </div>
-                <div>
+                <div className="button">
                     <Button
                         className="clear-fields-button"
                         type="reset"

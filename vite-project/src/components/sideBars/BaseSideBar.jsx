@@ -14,8 +14,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import {TenantInputForm} from "../../InputForms/tenantInputForm/TenantInputForm.jsx";
-import {LandlordInputForm} from "../../InputForms/landlordInputForm/LandlordInputForm.jsx";
 
 const drawerWidth = 300;
 
@@ -68,10 +66,6 @@ export function BaseSideBar({accountType, navBarLinks, profile, onSwitchAcc}) {
 
                     <Divider/>
 
-                    <div>
-                        <LandlordInputForm/>
-                        <TenantInputForm/>
-                    </div>
                 </Drawer>
             </div>
         </>

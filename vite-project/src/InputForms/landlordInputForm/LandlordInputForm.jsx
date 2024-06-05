@@ -45,7 +45,7 @@ export function LandlordInputForm() {
         <div>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <h1>Enter landlord information below: </h1>
+                    <h1 className="input-form-heading">Enter landlord information below: </h1>
                     <p>Fields marked with <span aria-label="required"> *</span> are required.</p>
                 </div>
                 <div>
@@ -104,6 +104,7 @@ export function LandlordInputForm() {
                         className="phoneNumber-field"
                         label="Phone Number"
                         variant="filled"
+                        required
                         value={phoneNumber}
                         onChange={e => setPhoneNumber(e.target.value)}
                         placeholder="Enter phone number here..."
@@ -116,6 +117,7 @@ export function LandlordInputForm() {
                         className="email-field"
                         label="Email"
                         variant="filled"
+                        required
                         type="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
@@ -124,7 +126,7 @@ export function LandlordInputForm() {
                         margin="normal"
                     />
                 </div>
-                <div>
+                <div className="button">
                     <Button
                         className="submit-button"
                         type="submit"
@@ -134,7 +136,7 @@ export function LandlordInputForm() {
                         Add Landlord
                     </Button>
                 </div>
-                <div>
+                <div className="button">
                     <Button
                         className="clear-fields-button"
                         type="reset"
