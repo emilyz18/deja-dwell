@@ -1,7 +1,9 @@
+/* not sure what this does, but commenting it out removed css issue on landlord dashboard - Emily */
+
 .BaseSidebar {
-    width: 200px;
-    background-color: #d1cbcb;
+    /* width: 200px; */
+    /* background-color: #d1cbcb; */
     padding: 10px;
-    border-right: 1px solid #ddd;
-    display: block;
+    /* border-right: 1px solid #ddd; */
+    /* display: block; */
 }
