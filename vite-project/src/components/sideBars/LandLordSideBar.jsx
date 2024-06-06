@@ -1,6 +1,7 @@
 import { BaseSideBar } from "./BaseSideBar.jsx";
 
 const landlordLinks = [
+    { path: "#", label: "Edit Profile" },
     { path: "#", label: "Edit Preference" },
     { path: "/components/landlordPropertyCard", label: "View Applicants" }
 ];
