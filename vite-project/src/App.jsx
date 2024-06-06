@@ -1,76 +1,29 @@
-/*
-import "./App.css";
-function App() {
-
-  return (
-    <>
-    </>
-  );
-}
-
-export default App;
-*/
-
-
-// uncomment the lines below to view landlord dashboard:
-/*
-import "./App.css";
-import LandlordPropertyCard from "./components/landlordPropertyCard/LandlordPropertyCard";
-import { postingData } from "./mockData/postingData";
-function App() {
-
-return (
- <>
-   <LandlordPropertyCard postingData={postingData}/>
-   </>
-  );
- }
-
- export default App;
-*/
-
-
-
-
-
-// uncomment the lines below to view Mini property card:
-/*
-import "./App.css";
-import PropertyCardList from "./components/propertyCardList/PropertyCardList";
-import { propertyList } from "./mockData/postingData";
-function App() {
-
-return (
- <>
-   <PropertyCardList propList={propertyList.propertys}/>
-   </>
-  );
- }
-
- export default App;
-
-
-*/
-// uncomment the lines below to view landlord dashboard:
+// useNavigate : from tutorial https://dev.to/salehmubashar/usenavigate-tutorial-react-js-aop 
 
 import "./css/App.css";
+import * as React from "react";
+// import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+
+import { useState } from "react";
+
 import LandlordPropertyCard from "./components/landlordPropertyCard/LandlordPropertyCard";
+import PropertyCardList from "./components/propertyCardList/PropertyCardList";
 import { LandLordSideBar } from "./components/sideBars/LandLordSideBar.jsx";
 import { TenantSideBar } from "./components/sideBars/TenantSideBar.jsx";
-import { postingData } from "./mockData/postingData";
-import { mockUser } from "./mockData/mockUser";
-import PropertyCardList from "./components/propertyCardList/PropertyCardList";
-import { propertyList } from "./mockData/postingData";
-import { useState } from "react";
 import {LandlordInputForm} from "./InputForms/landlordInputForm/LandlordInputForm.jsx";
 import {TenantInputForm} from "./InputForms/tenantInputForm/TenantInputForm.jsx";
-import * as React from "react";
+
+import { postingData } from "./mockData/postingData";
+import { mockUser } from "./mockData/mockUser";
+import { propertyList } from "./mockData/postingData";
 
 const LANDLORD = "landlord"
 const TENANT = "tenant"
 
 function App() {
   const [accountType, setAccountType] = useState(LANDLORD);
+  const navigate = useNavigate();
 
   function handleSwitchAcc() {
     if (accountType === LANDLORD) {
@@ -78,28 +31,44 @@ function App() {
     } else {
       setAccountType(LANDLORD);
     }
+    navigate(accountType === LANDLORD ? "/tenantAccount/matches" : "/landlordAccount/applicants");
+    
   }
 
+
   return (
-      <>
-        <div className="root">
-          {accountType === 'landlord' ? (
-              <>
-                <LandLordSideBar accountType={accountType} profile={mockUser} onSwitchAcc={handleSwitchAcc}/>
-                <LandlordPropertyCard postingData={postingData}/>
-              </>
+    //<Router>
+      <div className="root">
+        {accountType === LANDLORD ? (
+          <>
+          <LandLordSideBar accountType={accountType} profile={mockUser} onSwitchAcc={handleSwitchAcc} />
+          
+          </>
+        ) : (
+          <TenantSideBar accountType={accountType} profile={mockUser} onSwitchAcc={handleSwitchAcc} />
+        )}
+        <Routes>
+          {accountType === LANDLORD ? (
+          <>
+            {/* for now the home page is the applicates */}
+              <Route path="/" element={<LandlordPropertyCard postingData={postingData} />} />
+              <Route path="/landlordAccount/applicants" element={<LandlordPropertyCard postingData={postingData} />} />
+              <Route path="/landlordAccount/profile" element={<LandlordInputForm />} />
+            </>
           ) : (
               <>
-                <TenantSideBar accountType={accountType} profile={mockUser} onSwitchAcc={handleSwitchAcc}/>
-                <PropertyCardList propList={propertyList.propertys}/>
+                <Route path="/" element={<PropertyCardList propList={propertyList.propertys} />} />
+                <Route path="/tenantAccount/matches" element={<PropertyCardList propList={propertyList.propertys} />} />
+                <Route path="/tenantAccount/applicants" element={<TenantInputForm />} /> 
               </>
           )}
-          <div>
-            <LandlordInputForm/>
-            <TenantInputForm/>
-          </div>
-        </div>
-      </>
+          
+          
+          
+  
+        </Routes>
+      </div>
+    //</Router>
   );
 }
 

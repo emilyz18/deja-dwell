@@ -1,8 +1,11 @@
 /* June 1st, 6:00pm, the following structure modified from generated code using Chatgpt 4.0o with prompt "how to create reusable sidebar element that can be used for sidebars with difference type of account in React " */
 //Drawer Component adapt from https://mui.com/material-ui/react-drawer/
 
+//June 5st, around 8pm asked using Chatgpt 4.0o"with prompt "How to combine Link from react router to MaterialUI". Changed code in line 54
+
 import "./BaseSideBar.css";
 import * as React from 'react';
+import { Link } from "react-router-dom";
 
 import Avatar from '@mui/material/Avatar';
 import Drawer from '@mui/material/Drawer';
@@ -47,19 +50,19 @@ export function BaseSideBar({accountType, navBarLinks, profile, onSwitchAcc}) {
                         <Divider/>
 
                         {navBarLinks.map((linkPair, index) => (
-                            <ListItem key={index} disablePadding>
-                                <ListItemButton component="a" href="{linkPair.path}">
+                            <ListItem key={index}>
+                                <ListItemButton component={Link} to={linkPair.path}>
                                     <ListItemText primary={linkPair.label}/>
                                 </ListItemButton>
                             </ListItem>
 
                         ))}
+
                     </List>
 
                     <Divider/>
 
-                    {/* TODO */}
-
+                    
                     <Button onClick={onSwitchAcc}>
                         Switch to {accountType === 'landlord' ? 'Tenant' : 'Landlord'} Account
                     </Button>

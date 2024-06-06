@@ -1,10 +1,11 @@
 import { BaseSideBar } from "./BaseSideBar.jsx";
+import { Link } from 'react-router-dom';
 
 
 const tenantLinks = [
-    { path: "#", label: "Edit Profile" },
+    { path: "/tenantAccount/applicants", label: "Edit Profile" },
     { path: "#", label: "Edit Preference" },
-    { path: "#", label: "See Matches" },
+    { path: "/tenantAccount/matches", label: "See Matches" },
     { path: "#", label: "View Applied History" }
 ];
 

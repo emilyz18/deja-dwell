@@ -32,7 +32,7 @@ function PropertyCardList(props) {
                             dislikedFn={dislikedProperty}
                         />
                         {/* uncomment follow to view the cord */}
-                        <ExpandedPropertyCard propertyInfo={property} />
+                        {/* <ExpandedPropertyCard propertyInfo={property} /> */}
                     </>
                 ))}
             </ul>
