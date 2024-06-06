@@ -48,7 +48,7 @@ const LandlordPropertyCard = ({ postingData }) => {
     
       <div className="landlord-dashboard-display">
         <div className="landlord-property-card">
-          <div className="carousel-container">
+          <div className="landlord-carousel-container">
             <Carousel
               data={images}
               size={{ width: "400px", height: "240px" }}
