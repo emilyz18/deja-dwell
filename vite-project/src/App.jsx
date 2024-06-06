@@ -25,16 +25,16 @@ const TENANT = "tenant"
 function App() {
   const [accountType, setAccountType] = useState(LANDLORD);
   const navigate = useNavigate();
-  const location = useLocation();
+  const location = useLocation(); //location: current location object,
 
-  
+  // useEffect Hook to set Initial State Based on the URL:
   useEffect(() => {
     if (location.pathname.startsWith("/landlordAccount")) {
       setAccountType(LANDLORD);
     } else {
       setAccountType(TENANT);
     }
-  }, [location.pathname]);
+  }, [location.pathname]); 
 
   function handleSwitchAcc() {
     if (accountType === LANDLORD) {
