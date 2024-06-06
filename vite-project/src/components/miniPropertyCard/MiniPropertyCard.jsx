@@ -37,9 +37,9 @@ function MiniPropertyCard(props) {
                         <span className="house-type">{propertyInfo.roomType}</span>
                     </div>
                     <div className="buttons-row">
-                        <button className="circle-button checkmark-button" onClick={likeProperty}>✔</button>
-                        <button className="expand-button" onClick={expandProperty}>Expand Info</button>
                         <button className="circle-button cross-button" onClick={dislikeProperty}>✖</button>
+                        <button className="expand-button" onClick={expandProperty}>Expand Info</button>
+                        <button className="circle-button checkmark-button" onClick={likeProperty}>✔</button>
                     </div>
                 </div>
             </li>
