@@ -1,11 +1,12 @@
-// useNavigate : from tutorial https://dev.to/salehmubashar/usenavigate-tutorial-react-js-aop 
+// useNavigate : from tutorial https://dev.to/salehmubashar/usenavigate-tutorial-react-js-aop
+// June 6,  useEffect() and useLocation() is guided by Chatgpt 4.0o for statmanagment, with prompt code in this file + " When I am at /tenantAccount/matches then refresh the page, I  get a screen with the landlord side bar and blank page"
 
 import "./css/App.css";
 import * as React from "react";
 // import { BrowserRouter as Router } from "react-router-dom";
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useNavigate, useLocation } from "react-router-dom";
 
-import { useState } from "react";
+import { useState, useEffect} from "react";
 
 import LandlordPropertyCard from "./components/landlordPropertyCard/LandlordPropertyCard";
 import PropertyCardList from "./components/propertyCardList/PropertyCardList";
@@ -24,14 +25,26 @@ const TENANT = "tenant"
 function App() {
   const [accountType, setAccountType] = useState(LANDLORD);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  
+  useEffect(() => {
+    if (location.pathname.startsWith("/landlordAccount")) {
+      setAccountType(LANDLORD);
+    } else {
+      setAccountType(TENANT);
+    }
+  }, [location.pathname]);
 
   function handleSwitchAcc() {
     if (accountType === LANDLORD) {
       setAccountType(TENANT);
+      navigate("/tenantAccount/matches");
     } else {
       setAccountType(LANDLORD);
+      navigate("/landlordAccount/applicants");
     }
-    navigate(accountType === LANDLORD ? "/tenantAccount/matches" : "/landlordAccount/applicants");
+    // navigate(accountType === LANDLORD ? "/tenantAccount/matches" : "/landlordAccount/applicants");
     
   }
 
