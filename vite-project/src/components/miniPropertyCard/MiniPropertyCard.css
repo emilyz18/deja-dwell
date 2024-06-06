@@ -1,0 +1,99 @@
+.property-card {
+    width: 40%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px; /* Add space below each card */
+    justify-content: center; /* Center the card within its container */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+.carousel-container {
+    height: 60%;
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+
+  .carousel{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+
+  .carousel-container img {
+    width: 100%; /* Ensure images take full width */
+    height: 100%; /* Ensure images take full height */
+    object-fit: cover; /* Cover the container without distortion */
+  }
+  
+  .card-details {
+    background-color: white;
+    padding: 16px;
+  }
+  
+  .house-title {
+    margin: 0;
+    font-size: 1.2em;
+    text-align: left;
+  }
+  
+  .details-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+  }
+  
+  .details-row span {
+    font-size: 0.9em;
+  }
+  
+  .house-type {
+    background-color: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 12px;
+  }
+  
+  .buttons-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+  }
+  
+  .circle-button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  
+  .checkmark-button {
+    background-color: green;
+    color: white;
+  }
+  
+  .cross-button {
+    background-color: red;
+    color: white;
+  }
+  
+  .expand-button {
+    flex-grow: 1;
+    margin: 0 8px;
+    padding: 8px 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  

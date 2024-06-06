@@ -1,0 +1,7 @@
+.BaseSidebar {
+    width: 200px;
+    background-color: #d1cbcb;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+    display: block;
+}
