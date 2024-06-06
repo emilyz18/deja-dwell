@@ -33,7 +33,7 @@ const ExpandedApplicantCard = ({ applicant, onClose }) => {
         <p>Habbit: {earlyBirdNightOut}</p>
         <p>Financial Situation: {financialSituation}</p>
       </div>
-      <Button size="small" onClick={onClose} color="error">
+      <Button variant="contained" size="small" onClick={onClose} color="error">
         Close
       </Button>
     </div>
