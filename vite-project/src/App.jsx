@@ -80,27 +80,33 @@ function App() {
     }
   }
 
+  // return (
+  //     <>
+  //       <div className="root">
+  //         {accountType === 'landlord' ? (
+  //             <>
+  //               <LandLordSideBar accountType={accountType} profile={mockUser} onSwitchAcc={handleSwitchAcc}/>
+  //               <LandlordPropertyCard postingData={postingData}/>
+  //             </>
+  //         ) : (
+  //             <>
+  //               <TenantSideBar accountType={accountType} profile={mockUser} onSwitchAcc={handleSwitchAcc}/>
+  //               <PropertyCardList propList={propertyList.propertys}/>
+  //             </>
+  //         )}
+  //         <div>
+  //           <LandlordInputForm/>
+  //           <TenantInputForm/>
+  //         </div>
+  //       </div>
+  //     </>
+  // );
   return (
-      <>
-        <div className="root">
-          {accountType === 'landlord' ? (
-              <>
-                <LandLordSideBar accountType={accountType} profile={mockUser} onSwitchAcc={handleSwitchAcc}/>
-                <LandlordPropertyCard postingData={postingData}/>
-              </>
-          ) : (
-              <>
-                <TenantSideBar accountType={accountType} profile={mockUser} onSwitchAcc={handleSwitchAcc}/>
-                <PropertyCardList propList={propertyList.propertys}/>
-              </>
-          )}
-          <div>
-            <LandlordInputForm/>
-            <TenantInputForm/>
-          </div>
-        </div>
+    <>
+      <LandlordPropertyCard postingData={postingData}/>
       </>
-  );
+     );
+  
 }
 
 export default App;
