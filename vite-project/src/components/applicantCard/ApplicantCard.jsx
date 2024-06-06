@@ -5,11 +5,13 @@ import Button from "@mui/material/Button";
 const ApplicantCard = ({ applicant, onReject, onAccept, onClick }) => {
   const { image, name, phoneNumber, lengthOfLease, familySize } = applicant;
 
-  const handleReject = () => {
+  const handleReject = (event) => {
+    event.stopPropagation(); // Prevent event bubbling to the card click handler
     onReject(name);
   };
 
-  const handleAccept = () => {
+  const handleAccept = (event) => {
+    event.stopPropagation(); // Prevent event bubbling to the card click handler
     onAccept(name);
   };
 
