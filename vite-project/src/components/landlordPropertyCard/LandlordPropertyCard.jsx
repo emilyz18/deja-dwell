@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import Carousel from "../carousel/Carousel";
 import "./LandlordPropertyCard.css"; // Import the CSS file
 import ApplicantCard from "../applicantCard/ApplicantCard";
-
-import Box from '@mui/material/Box';
+import ExpandedApplicantCard from "../applicantCard/ExpandedApplicantCard";
 
 const LandlordPropertyCard = ({ postingData }) => {
   const { house, applicants: initialApplicants } = postingData;
@@ -18,6 +17,10 @@ const LandlordPropertyCard = ({ postingData }) => {
   } = house;
 
   const [applicants, setApplicants] = useState(initialApplicants);
+  const [popupVisible, setPopupVisible] = useState(false);
+
+  const [selectedApplicant, setSelectedApplicant] = useState(null);
+
 
   const handleRejectApplicant = (name) => {
     setApplicants(applicants.filter((applicant) => applicant.name !== name));
@@ -30,12 +33,22 @@ const LandlordPropertyCard = ({ postingData }) => {
     setApplicants([acceptedApplicant]);
   };
 
+  const handleClosePopup = () => {
+    setPopupVisible(false);
+  };
+
+  const handleCardClick = (applicant) => {
+    setSelectedApplicant(applicant);
+    setPopupVisible(true);
+  };
+
+
   return (
     <>
     
       <div className="landlord-dashboard-display">
         <div className="landlord-property-card">
-          <div className="carousel-container">
+          <div className="landlord-carousel-container">
             <Carousel
               data={images}
               size={{ width: "400px", height: "240px" }}
@@ -60,9 +73,13 @@ const LandlordPropertyCard = ({ postingData }) => {
               applicant={applicant}
               onReject={handleRejectApplicant}
               onAccept={handleAcceptApplicant}
+              onClick={() => handleCardClick(applicant)}
             />
           ))}
         </div>
+        {popupVisible && (
+        <ExpandedApplicantCard applicant={selectedApplicant} onClose={handleClosePopup} /> // conditionally renders MemberPopup based on popupVisible
+      )}
       </div>
     </>
   );

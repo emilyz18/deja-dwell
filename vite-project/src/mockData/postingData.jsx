@@ -22,7 +22,9 @@ const applicant1 = {
   email: "john.doe@example.com",
   gender: "male",
   age: "30",
+  familySize: 2,
   occupation: "Software Engineer",
+  lengthOfLease: "Sept 2024 to Dec 2024",
   earlyBirdNightOut: "Early bird",
   financialSituation: "Stable income, good credit",
 };
@@ -34,7 +36,9 @@ const applicant2 = {
   email: "jane.smith@example.com",
   gender: "Female",
   age: "51",
+  familySize: 3,
   occupation: "Marketing Manager",
+  lengthOfLease: "Jan 2025 to Dec 2025",
   earlyBirdNightOut: "Night out",
   financialSituation: "Stable income, excellent credit",
 };
@@ -46,7 +50,9 @@ const applicant3 = {
   email: "sam.wilson@example.com",
   gender: "Male",
   age: "26",
+  familySize: 3,
   occupation: "Teacher",
+  lengthOfLease: "Nov 2024 to Apr 2026",
   earlyBirdNightOut: "Early bird",
   financialSituation: "Stable income, fair credit",
 };
@@ -57,8 +63,10 @@ const applicant4 = {
   phoneNumber: "555-333-4444",
   email: "emily.jones@example.com",
   age: "21",
+  familySize: 4,
   gender: "Female",
   occupation: "Accountant",
+  lengthOfLease: "Dec 2024 Onwards",
   earlyBirdNightOut: "Night out",
   financialSituation: "Stable income, good credit",
 };
