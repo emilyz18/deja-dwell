@@ -25,35 +25,37 @@ function MiniPropertyCard(props) {
   return (
     <>
       <li className="property-card">
-        <div className="carousel-container">
-          <Carousel
-            data={propertyInfo.images}
-            size={{ width: null, height: null }}
-          />
-        </div>
-        <div className="card-details">
-          <h3 className="house-title">{propertyInfo.title}</h3>
-          <div className="details-row">
-            <span className="rent">${propertyInfo.price}</span>
-            <span className="address">{propertyInfo.address}</span>
-            <span className="house-type">{propertyInfo.roomType}</span>
+        <div className="property-card-container">
+          <div className="carousel-container">
+            <Carousel
+              data={propertyInfo.images}
+              size={{ width: null, height: null }}
+            />
           </div>
-          <div className="buttons-row">
-            <button
-              className="circle-button cross-button"
-              onClick={dislikeProperty}
-            >
-              ✖
-            </button>
-            <Button variant="contained" onClick={expandProperty}>
-              Expand Info
-            </Button>
-            <button
-              className="circle-button checkmark-button"
-              onClick={likeProperty}
-            >
-              ✔
-            </button>
+          <div className="card-details">
+            <h3 className="house-title">{propertyInfo.title}</h3>
+            <div className="details-row">
+              <span className="rent">${propertyInfo.price}</span>
+              <span className="address">{propertyInfo.address}</span>
+              <span className="house-type">{propertyInfo.roomType}</span>
+            </div>
+            <div className="buttons-row">
+              <button
+                className="circle-button cross-button"
+                onClick={dislikeProperty}
+              >
+                ✖
+              </button>
+              <Button variant="contained" onClick={expandProperty}>
+                Expand Info
+              </Button>
+              <button
+                className="circle-button checkmark-button"
+                onClick={likeProperty}
+              >
+                ✔
+              </button>
+            </div>
           </div>
         </div>
       </li>
