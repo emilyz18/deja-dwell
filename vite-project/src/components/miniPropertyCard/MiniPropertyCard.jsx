@@ -1,6 +1,7 @@
 import React from 'react';
 import "./MiniPropertyCard.css";
 import Carousel from '../carousel/Carousel';
+import { Button } from '@mui/material';
 
 function MiniPropertyCard(props) {
     const { propertyInfo, likedFn, dislikedFn, displayPopup } = props;
@@ -41,7 +42,7 @@ function MiniPropertyCard(props) {
                     </div>
                     <div className="buttons-row">
                         <button className="circle-button cross-button" onClick={dislikeProperty}>✖</button>
-                        <button className="expand-button" onClick={expandProperty}>Expand Info</button>
+                        <Button variant="contained" onClick={expandProperty}>Expand Info</Button>
                         <button className="circle-button checkmark-button" onClick={likeProperty}>✔</button>
                     </div>
                 </div>
