@@ -1,3 +1,7 @@
+/* The css code in this file was done from following the tutorial: https://www.youtube.com/watch?v=QpsGo8kZiTo,
+as well as using the code in this repo: https://github.com/CodeCompleteYT/react-image-carousel on May 31st. I modified 
+the tutorial code to change how the width and height is set. */
+
 .carousel {
   position: relative;
   display: flex;

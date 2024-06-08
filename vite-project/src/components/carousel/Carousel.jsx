@@ -3,6 +3,9 @@ import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs'
 
 import './Carousel.css'
 
+// The carousel component was done from following the tutorial: https://www.youtube.com/watch?v=QpsGo8kZiTo,
+// as well as using the code in this repo: https://github.com/CodeCompleteYT/react-image-carousel on May 31st. I modified 
+// the tutorial code to add another prop, as well as change the way data is being passed in.
 const Carousel = ({ data, size }) => {
   const [slide, setSlide] = useState(0)
   const { width, height } = size

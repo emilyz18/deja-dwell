@@ -15,6 +15,11 @@ const slides = [
   },
 ]
 
+// The mock applicant information was generated with the help of ChatGPT 3.5 on May31.
+// prompt: generate some mock user data in json, with fields like name,
+// age, phone number, email, occupation, financial situation, and so on.
+// I modified the output to add some more fields.  
+
 const applicant1 = {
   name: 'John Doe',
   image:
@@ -74,6 +79,11 @@ const applicant4 = {
   earlyBirdNightOut: 'Night out',
   financialSituation: 'Stable income, good credit',
 }
+
+
+// The housing data information was generated with the help of ChatGPT 3.5 on May31.
+// prompt: generate some mock data for house for rent posting in json, with fields like title,
+// description, price, room type, and parking availability.  
 
 export const house1 = {
   houseID: 1,
