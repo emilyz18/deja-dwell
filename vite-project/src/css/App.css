@@ -5,7 +5,7 @@
 .root {
   display: flex;
   flex-direction: column;
-  margin-left: 320px; /* This margin accounts of the fixed position of the sidebar on the left side of the page */
+  margin-left: 320px; /* This margin accounts of the fixed width and position of the sidebar (300px) on the left side of the page */
 }
 
 h1,
