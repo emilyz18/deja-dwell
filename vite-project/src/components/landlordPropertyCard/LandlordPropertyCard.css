@@ -1,5 +1,4 @@
 .landlord-dashboard-display {
-  /*This can be deleted, but will keep in case it is needed later*/
   width: 100%;
 }
 
@@ -20,8 +19,7 @@
 }
 
 .property-description {
-  margin: 0;
-  margin-right: 10px;
+  margin: 0 10px 0 0;
   flex-grow: 1; /* Allow content container to grow vertically */
   overflow: auto; /* Enable scrolling for long content */
   scrollbar-width: thin;

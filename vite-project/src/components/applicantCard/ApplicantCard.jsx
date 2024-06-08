@@ -1,5 +1,5 @@
 import React from 'react'
-import './ApplicantCard.css' // Ensure you create and style this CSS file accordingly
+import './ApplicantCard.css'
 import Button from '@mui/material/Button'
 
 const ApplicantCard = ({ applicant, onReject, onAccept, onClick }) => {

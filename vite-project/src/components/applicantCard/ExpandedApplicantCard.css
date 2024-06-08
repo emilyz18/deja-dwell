@@ -1,7 +1,8 @@
 /* 
 The code below was generated with the help of ChatGPT 3.5 on May 31, 2024
 Prompt used: "In react with javascript how to make a component appear on top of other contents in css"
-The generated code was adapted: I made changes to the css code to suite my own needs */
+The generated code was adapted: I made changes to the css code to suite my own needs
+*/
 .member-popup {
   position: fixed;
   top: 50%;

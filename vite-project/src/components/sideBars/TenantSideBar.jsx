@@ -7,7 +7,6 @@ const tenantLinks = [
   { path: '#', label: 'View Applied History' },
 ]
 
-// import { mockUser } from "../../mockData/mockUser"
 export function TenantSideBar({ accountType, profile, onSwitchAcc }) {
   return (
     <>
