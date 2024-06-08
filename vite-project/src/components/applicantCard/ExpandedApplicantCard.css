@@ -3,38 +3,38 @@ The code below was generated with the help of ChatGPT 3.5 on May 31, 2024
 Prompt used: "In react with javascript how to make a component appear on top of other contents in css"
 The generated code was adapted: I made changes to the css code to suite my own needs */
 .member-popup {
-    position: fixed;
-    top: 50%; 
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000; /* appears on top of other content */
-  }
-  
-  .member-popup h2 {
-    margin-bottom: 10px;
-  }
-  
-  .member-popup p {
-    margin-bottom: 8px;
-  }
-  
-  .member-popup button {
-    margin-top: 10px;
-  }
-  
-  img {
-    width: 11rem;
-    height: auto;
-  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000; /* appears on top of other content */
+}
 
-  .expanded-information {
-    font-size: 80%;
-  }
+.member-popup h2 {
+  margin-bottom: 10px;
+}
 
-  .expanded-name {
-    font-size: 80%;
-  }
+.member-popup p {
+  margin-bottom: 8px;
+}
+
+.member-popup button {
+  margin-top: 10px;
+}
+
+img {
+  width: 11rem;
+  height: auto;
+}
+
+.expanded-information {
+  font-size: 80%;
+}
+
+.expanded-name {
+  font-size: 80%;
+}

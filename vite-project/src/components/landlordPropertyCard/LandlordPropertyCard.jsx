@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import Carousel from "../carousel/Carousel";
-import "./LandlordPropertyCard.css"; // Import the CSS file
-import ApplicantCard from "../applicantCard/ApplicantCard";
-import ExpandedApplicantCard from "../applicantCard/ExpandedApplicantCard";
+import React, { useState } from 'react'
+import Carousel from '../carousel/Carousel'
+import './LandlordPropertyCard.css' // Import the CSS file
+import ApplicantCard from '../applicantCard/ApplicantCard'
+import ExpandedApplicantCard from '../applicantCard/ExpandedApplicantCard'
 
 const LandlordPropertyCard = ({ postingData }) => {
-  const { house, applicants: initialApplicants } = postingData;
+  const { house, applicants: initialApplicants } = postingData
   const {
     images,
     title,
@@ -14,45 +14,42 @@ const LandlordPropertyCard = ({ postingData }) => {
     price,
     roomType,
     parkingAvailability,
-  } = house;
+  } = house
 
-  const [applicants, setApplicants] = useState(initialApplicants);
-  const [popupVisible, setPopupVisible] = useState(false);
+  const [applicants, setApplicants] = useState(initialApplicants)
+  const [popupVisible, setPopupVisible] = useState(false)
 
-  const [selectedApplicant, setSelectedApplicant] = useState(null);
-
+  const [selectedApplicant, setSelectedApplicant] = useState(null)
 
   const handleRejectApplicant = (name) => {
-    setApplicants(applicants.filter((applicant) => applicant.name !== name));
-  };
+    setApplicants(applicants.filter((applicant) => applicant.name !== name))
+  }
 
   const handleAcceptApplicant = (name) => {
     const acceptedApplicant = applicants.find(
       (applicant) => applicant.name === name
-    );
-    setApplicants([acceptedApplicant]);
-  };
+    )
+    setApplicants([acceptedApplicant])
+  }
 
   const handleClosePopup = () => {
-    setPopupVisible(false);
-  };
+    setPopupVisible(false)
+  }
 
   const handleCardClick = (applicant) => {
-    setSelectedApplicant(applicant);
-    setPopupVisible(true);
-  };
-
+    setSelectedApplicant(applicant)
+    setPopupVisible(true)
+  }
 
   return (
     <>
-    
       <div className="landlord-dashboard-display">
         <div className="landlord-property-card">
           <div className="landlord-carousel-container">
             <Carousel
               data={images}
-              size={{ width: "400px", height: "240px" }}
-            />{" "}
+              size={{ width: '400px', height: '240px' }}
+            />{' '}
             {/*Height must match property-information in LandlordPropertyCard.css */}
           </div>
           <div className="property-information">
@@ -78,11 +75,14 @@ const LandlordPropertyCard = ({ postingData }) => {
           ))}
         </div>
         {popupVisible && (
-        <ExpandedApplicantCard applicant={selectedApplicant} onClose={handleClosePopup} /> // conditionally renders MemberPopup based on popupVisible
-      )}
+          <ExpandedApplicantCard
+            applicant={selectedApplicant}
+            onClose={handleClosePopup}
+          /> // conditionally renders MemberPopup based on popupVisible
+        )}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default LandlordPropertyCard;
+export default LandlordPropertyCard
