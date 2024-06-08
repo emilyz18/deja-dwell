@@ -1,5 +1,5 @@
-import "./ExpandedApplicantCard.css";
-import Button from "@mui/material/Button";
+import './ExpandedApplicantCard.css'
+import Button from '@mui/material/Button'
 
 const ExpandedApplicantCard = ({ applicant, onClose }) => {
   const {
@@ -14,13 +14,13 @@ const ExpandedApplicantCard = ({ applicant, onClose }) => {
     lengthOfLease,
     earlyBirdNightOut,
     financialSituation,
-  } = applicant;
+  } = applicant
 
   return (
     <div className="member-popup">
       <img src={image} alt={`${name}'s profile`} />
       <div className="expanded-name">
-      <h2>{name}</h2>
+        <h2>{name}</h2>
       </div>
       <div className="expanded-information">
         <p>Gender: {gender} </p>
@@ -33,11 +33,11 @@ const ExpandedApplicantCard = ({ applicant, onClose }) => {
         <p>Habbit: {earlyBirdNightOut}</p>
         <p>Financial Situation: {financialSituation}</p>
       </div>
-      <Button size="small" onClick={onClose} color="error">
+      <Button variant="contained" size="small" onClick={onClose} color="error">
         Close
       </Button>
     </div>
-  );
-};
+  )
+}
 
-export default ExpandedApplicantCard;
+export default ExpandedApplicantCard

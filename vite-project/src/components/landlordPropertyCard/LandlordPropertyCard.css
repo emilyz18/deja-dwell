@@ -1,6 +1,7 @@
-.landlord-dashboard-display { /*This can be deleted, but will keep in case it is needed later*/
-    width: 100%;
-  }
+.landlord-dashboard-display {
+  /*This can be deleted, but will keep in case it is needed later*/
+  width: 100%;
+}
 
 .landlord-property-card {
   display: flex;

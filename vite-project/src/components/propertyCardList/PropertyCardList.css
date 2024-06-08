@@ -1,9 +1,9 @@
 .property-list {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    gap: 16px; /* Space between cards */
-    justify-content: center; /* Center the cards horizontally */
-    padding: 16px; /* Add some padding around the list */
-    width: 100%;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 16px; /* Space between cards */
+  justify-content: center; /* Center the cards horizontally */
+  padding: 16px; /* Add some padding around the list */
+  width: 100%;
+}

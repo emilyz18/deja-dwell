@@ -4,23 +4,23 @@
 .image-field,
 .phoneNumber-field,
 .email-field {
-    max-width: 60%;
+  max-width: 60%;
 }
 
 h1 {
-    font-family: "Mulish", serif;
-    font-optical-sizing: auto;
-    font-weight: bold;
-    font-style: normal;
+  font-family: 'Mulish', serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
 }
 
 p {
-    font-family: "Mulish", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Mulish', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
 }
 
 .button {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }

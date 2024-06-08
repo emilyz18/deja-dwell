@@ -1,19 +1,19 @@
-import React from "react";
-import "./ApplicantCard.css"; // Ensure you create and style this CSS file accordingly
-import Button from "@mui/material/Button";
+import React from 'react'
+import './ApplicantCard.css' // Ensure you create and style this CSS file accordingly
+import Button from '@mui/material/Button'
 
 const ApplicantCard = ({ applicant, onReject, onAccept, onClick }) => {
-  const { image, name, phoneNumber, lengthOfLease, familySize } = applicant;
+  const { image, name, phoneNumber, lengthOfLease, familySize } = applicant
 
   const handleReject = (event) => {
-    event.stopPropagation(); // Prevent event bubbling to the card click handler
-    onReject(name);
-  };
+    event.stopPropagation() // Prevent event bubbling to the card click handler
+    onReject(name)
+  }
 
   const handleAccept = (event) => {
-    event.stopPropagation(); // Prevent event bubbling to the card click handler
-    onAccept(name);
-  };
+    event.stopPropagation() // Prevent event bubbling to the card click handler
+    onAccept(name)
+  }
 
   return (
     <div className="applicant-card" onClick={onClick}>
@@ -26,7 +26,11 @@ const ApplicantCard = ({ applicant, onReject, onAccept, onClick }) => {
         <p>Length of lease: {lengthOfLease}</p>
       </div>
       <div className="applicant-actions">
-        <Button className="accept-button" color="success" onClick={handleAccept}>
+        <Button
+          className="accept-button"
+          color="success"
+          onClick={handleAccept}
+        >
           Accept
         </Button>
         <Button className="reject-button" color="error" onClick={handleReject}>
@@ -34,7 +38,7 @@ const ApplicantCard = ({ applicant, onReject, onAccept, onClick }) => {
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ApplicantCard;
+export default ApplicantCard
