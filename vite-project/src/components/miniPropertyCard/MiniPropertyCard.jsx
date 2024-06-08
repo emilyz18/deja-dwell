@@ -13,12 +13,12 @@ function MiniPropertyCard(props) {
   if (!propertyInfo) return null
 
   const likeProperty = () => {
-    console.log('house ' + propertyInfo.houseID + ' was liked!')
+    // console.log('house ' + propertyInfo.houseID + ' was liked!')
     likedFn(propertyInfo.houseID)
   }
 
   const dislikeProperty = () => {
-    console.log('house ' + propertyInfo.houseID + ' was rejected!')
+    // console.log('house ' + propertyInfo.houseID + ' was rejected!')
     dislikedFn(propertyInfo.houseID)
   }
 

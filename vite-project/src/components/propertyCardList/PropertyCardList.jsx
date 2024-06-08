@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DndContext, DragOverlay, closestCenter, useDroppable } from '@dnd-kit/core';
-import { arrayMove, SortableContext, rectSortingStrategy } from '@dnd-kit/sortable';
+import { SortableContext, rectSortingStrategy } from '@dnd-kit/sortable';
 import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard';
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard';
 import './PropertyCardList.css';
@@ -9,17 +9,19 @@ function PropertyCardList(props) {
   const { propList } = props;
   const [properties, setProperties] = useState(propList);
   const [activeId, setActiveId] = useState(null);
-  const [draggingDirection, setDraggingDirection] = useState(null);
 
   const [popupPVisible, setPopupPVisible] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState(null);
 
   const likedProperty = (id) => {
+    console.log('house ' + id + ' was liked!')
+
     const updatedProperties = properties.filter((property) => property.houseID !== id);
     setProperties(updatedProperties);
   };
 
   const dislikedProperty = (id) => {
+    console.log('house ' + id + ' was rejected!')
     const updatedProperties = properties.filter((property) => property.houseID !== id);
     setProperties(updatedProperties);
   };
@@ -40,25 +42,14 @@ function PropertyCardList(props) {
   };
 
   const handleDragEnd = (event) => {
-    const { over } = event;
-
-    if (draggingDirection === 'right' && over && over.id === 'like-dropzone') {
+    const { delta } = event;
+    if (delta.x > 200) {
       likedProperty(activeId);
-    } else if (draggingDirection === 'left' && over && over.id === 'dislike-dropzone') {
+    } else if (delta.x < -200) {
       dislikedProperty(activeId);
     }
 
     setActiveId(null);
-    setDraggingDirection(null);
-  };
-
-  const handleDragMove = (event) => {
-    const { delta } = event;
-    if (delta.x > 0) {
-      setDraggingDirection('right');
-    } else if (delta.x < 0) {
-      setDraggingDirection('left');
-    }
   };
 
   const { setNodeRef: setLikeRef, isOver: isOverLike } = useDroppable({
@@ -74,7 +65,6 @@ function PropertyCardList(props) {
       <DndContext
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}
-        onDragMove={handleDragMove}
         onDragEnd={handleDragEnd}
       >
         <div className="dropzone-container">
