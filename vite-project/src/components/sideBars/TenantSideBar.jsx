@@ -1,5 +1,4 @@
 import { BaseSideBar } from './BaseSideBar.jsx'
-import { Link } from 'react-router-dom'
 
 const tenantLinks = [
   { path: '/tenantAccount/applicants', label: 'Edit Profile' },

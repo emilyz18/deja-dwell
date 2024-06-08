@@ -1,5 +1,4 @@
 import { BaseSideBar } from './BaseSideBar.jsx'
-import { Link } from 'react-router-dom'
 
 const landlordLinks = [
   { path: '/landlordAccount/profile', label: 'Edit Profile' },
