@@ -9,6 +9,7 @@ function PropertyCardList(props) {
   const { propList } = props;
   const [properties, setProperties] = useState(propList);
   const [activeId, setActiveId] = useState(null);
+  const [draggingDirection, setDraggingDirection] = useState(null);
 
   const [popupPVisible, setPopupPVisible] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState(null);
@@ -41,13 +42,23 @@ function PropertyCardList(props) {
   const handleDragEnd = (event) => {
     const { over } = event;
 
-    if (over && over.id === 'like-dropzone') {
+    if (draggingDirection === 'right' && over && over.id === 'like-dropzone') {
       likedProperty(activeId);
-    } else if (over && over.id === 'dislike-dropzone') {
+    } else if (draggingDirection === 'left' && over && over.id === 'dislike-dropzone') {
       dislikedProperty(activeId);
     }
 
     setActiveId(null);
+    setDraggingDirection(null);
+  };
+
+  const handleDragMove = (event) => {
+    const { delta } = event;
+    if (delta.x > 0) {
+      setDraggingDirection('right');
+    } else if (delta.x < 0) {
+      setDraggingDirection('left');
+    }
   };
 
   const { setNodeRef: setLikeRef, isOver: isOverLike } = useDroppable({
@@ -63,6 +74,7 @@ function PropertyCardList(props) {
       <DndContext
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}
+        onDragMove={handleDragMove}
         onDragEnd={handleDragEnd}
       >
         <div className="dropzone-container">

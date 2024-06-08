@@ -1,3 +1,5 @@
+/* property-list.css */
+
 .property-list {
   display: flex;
   flex-wrap: wrap;
@@ -6,19 +8,20 @@
   justify-content: center; /* Center the cards horizontally */
   padding: 16px; /* Add some padding around the list */
   width: 100%;
+  /* background-color: red; */
 }
 
 
 
 .dropzone-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  /* justify-content: space-between; */
+  /* align-items: center; */
 }
 
 .dropzone {
-  width: 100px;
-  height: 100%;
+  width: 50%;
+  /* height: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;

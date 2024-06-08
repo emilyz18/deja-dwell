@@ -1,44 +1,45 @@
-import React from 'react';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import './MiniPropertyCard.css';
-import Carousel from '../carousel/Carousel';
-import { Button } from '@mui/material';
+import React from 'react'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+import './MiniPropertyCard.css'
+import Carousel from '../carousel/Carousel'
+import { Button } from '@mui/material'
 
 function MiniPropertyCard(props) {
-  const { propertyInfo, likedFn, dislikedFn, displayPopup } = props;
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-  } = useSortable({ id: propertyInfo.houseID });
+  const { propertyInfo, likedFn, dislikedFn, displayPopup } = props
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: propertyInfo.houseID })
 
-  if (!propertyInfo) return null;
+  if (!propertyInfo) return null
 
   const likeProperty = () => {
-    console.log('house ' + propertyInfo.houseID + ' was liked!');
-    likedFn(propertyInfo.houseID);
-  };
+    console.log('house ' + propertyInfo.houseID + ' was liked!')
+    likedFn(propertyInfo.houseID)
+  }
 
   const dislikeProperty = () => {
-    console.log('house ' + propertyInfo.houseID + ' was rejected!');
-    dislikedFn(propertyInfo.houseID);
-  };
+    console.log('house ' + propertyInfo.houseID + ' was rejected!')
+    dislikedFn(propertyInfo.houseID)
+  }
 
   const expandProperty = () => {
-    console.log('house ' + propertyInfo.houseID + ' was expanded!');
-    displayPopup();
-  };
+    console.log('house ' + propertyInfo.houseID + ' was expanded!')
+    displayPopup()
+  }
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-  };
+  }
 
   return (
-    <li className="property-card" ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <li
+      className="property-card"
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+    >
       <div className="carousel-container">
         <Carousel
           data={propertyInfo.images}
@@ -71,7 +72,7 @@ function MiniPropertyCard(props) {
         </div>
       </div>
     </li>
-  );
+  )
 }
 
-export default MiniPropertyCard;
+export default MiniPropertyCard
