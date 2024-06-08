@@ -5,38 +5,38 @@
 */
 
 .sidebar-container {
-    display: flex;
+  display: flex;
 }
 
 .sidebar-drawer {
-    width: 300px;
+  width: 300px;
 }
 
 .sidebar-drawer .MuiDrawer-paper {
-    width: 300px;
-    box-sizing: border-box;
-    padding: 20px;
-    background-color: #efefef;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: #efefef;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-avatar {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
 }
 
 .sidebar-avatar .MuiAvatar-root {
-    width: 100px;
-    height: 100px;
-    border: 3px solid #959595;
+  width: 100px;
+  height: 100px;
+  border: 3px solid #959595;
 }
 
 .sidebar-list-item .MuiListItemButton-root {
-    border-radius: 10px;
+  border-radius: 10px;
 }
 
 .sidebar-list-item .MuiListItemButton-root:hover {
-    background-color: #e2e2e2;
+  background-color: #e2e2e2;
 }

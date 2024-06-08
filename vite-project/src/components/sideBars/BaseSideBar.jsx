@@ -8,24 +8,19 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
-import Toolbar from '@mui/material/Toolbar'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 
 export function BaseSideBar({
-                              accountType,
-                              navBarLinks,
-                              profile,
-                              onSwitchAcc,
-                            }) {
+  accountType,
+  navBarLinks,
+  profile,
+  onSwitchAcc,
+}) {
   return (
     <>
       <div className="sidebar-container">
-        <Drawer
-          className="sidebar-drawer"
-          variant="permanent"
-          anchor="left"
-        >
+        <Drawer className="sidebar-drawer" variant="permanent" anchor="left">
           <div className="sidebar-avatar">
             <Avatar src={profile.image} className="MuiAvatar-root" />
             <ListItemText

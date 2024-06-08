@@ -90,11 +90,15 @@ function App() {
               <>
                 <Route
                   path="/"
-                  element={<PropertyCardList propList={propertyList.propertys} />}
+                  element={
+                    <PropertyCardList propList={propertyList.propertys} />
+                  }
                 />
                 <Route
                   path="/tenantAccount/matches"
-                  element={<PropertyCardList propList={propertyList.propertys} />}
+                  element={
+                    <PropertyCardList propList={propertyList.propertys} />
+                  }
                 />
                 <Route
                   path="/tenantAccount/applicants"

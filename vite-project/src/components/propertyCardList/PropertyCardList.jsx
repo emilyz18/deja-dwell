@@ -42,13 +42,13 @@ function PropertyCardList(props) {
     <>
       <ul id="property-list" className="property-list">
         {properties.map((property, index) => (
-            <MiniPropertyCard
-              key={index}
-              propertyInfo={property}
-              likedFn={likedProperty}
-              dislikedFn={dislikedProperty}
-              displayPopup={() => displayPopup(property)}
-            />
+          <MiniPropertyCard
+            key={index}
+            propertyInfo={property}
+            likedFn={likedProperty}
+            dislikedFn={dislikedProperty}
+            displayPopup={() => displayPopup(property)}
+          />
         ))}
       </ul>
       <div>
