@@ -1,64 +1,78 @@
-import React, { useState } from 'react';
-import { DndContext, DragOverlay, closestCenter, useDroppable } from '@dnd-kit/core';
-import { SortableContext, rectSortingStrategy } from '@dnd-kit/sortable';
-import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard';
-import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard';
-import './PropertyCardList.css';
+import React, { useState } from 'react'
+import {
+  DndContext,
+  DragOverlay,
+  closestCenter,
+  useDroppable,
+} from '@dnd-kit/core'
+import { SortableContext, rectSortingStrategy } from '@dnd-kit/sortable'
+import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
+import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
+import './PropertyCardList.css'
 
 function PropertyCardList(props) {
-  const { propList } = props;
-  const [properties, setProperties] = useState(propList);
-  const [activeId, setActiveId] = useState(null);
+  const { propList } = props
+  const [properties, setProperties] = useState(propList)
+  const [activeId, setActiveId] = useState(null)
 
-  const [popupPVisible, setPopupPVisible] = useState(false);
-  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [popupPVisible, setPopupPVisible] = useState(false)
+  const [selectedProperty, setSelectedProperty] = useState(null)
+
+  const [isDragging, setIsDragging] = useState(null)
 
   const likedProperty = (id) => {
     console.log('house ' + id + ' was liked!')
 
-    const updatedProperties = properties.filter((property) => property.houseID !== id);
-    setProperties(updatedProperties);
-  };
+    const updatedProperties = properties.filter(
+      (property) => property.houseID !== id
+    )
+    setProperties(updatedProperties)
+  }
 
   const dislikedProperty = (id) => {
     console.log('house ' + id + ' was rejected!')
-    const updatedProperties = properties.filter((property) => property.houseID !== id);
-    setProperties(updatedProperties);
-  };
+    const updatedProperties = properties.filter(
+      (property) => property.houseID !== id
+    )
+    setProperties(updatedProperties)
+  }
 
   const displayPopup = (property) => {
-    setSelectedProperty(property);
-    setPopupPVisible(true);
-  };
+    setSelectedProperty(property)
+    setPopupPVisible(true)
+  }
 
   const closePopup = () => {
-    setPopupPVisible(false);
-    setSelectedProperty(null);
-  };
+    setPopupPVisible(false)
+    setSelectedProperty(null)
+  }
 
   const handleDragStart = (event) => {
-    const { active } = event;
-    setActiveId(active.id);
-  };
+    const { active } = event
+    setActiveId(active.id)
+    setIsDragging(true)
+  }
 
   const handleDragEnd = (event) => {
-    const { delta } = event;
+    const { delta } = event
     if (delta.x > 200) {
-      likedProperty(activeId);
+      // TODO ez: remove magic number, figure out exact x coords
+      likedProperty(activeId)
     } else if (delta.x < -200) {
-      dislikedProperty(activeId);
+      dislikedProperty(activeId)
     }
 
-    setActiveId(null);
-  };
+    setActiveId(null)
+    setIsDragging(false)
+  }
 
   const { setNodeRef: setLikeRef, isOver: isOverLike } = useDroppable({
     id: 'like-dropzone',
-  });
+  })
 
   const { setNodeRef: setDislikeRef, isOver: isOverDislike } = useDroppable({
     id: 'dislike-dropzone',
-  });
+  })
 
   return (
     <>
@@ -68,9 +82,17 @@ function PropertyCardList(props) {
         onDragEnd={handleDragEnd}
       >
         <div className="dropzone-container">
-          <div className={`dropzone left-dropzone ${isOverDislike ? 'active' : ''}`} ref={setDislikeRef}>
-            <span className="dropzone-icon">✖</span>
-          </div>
+          {isDragging ? (
+            <div
+              className={`dropzone left-dropzone ${isOverDislike ? 'active' : ''}`}
+              ref={setDislikeRef}
+            >
+              <span className="dropzone-icon">✖</span>
+            </div>
+          ) : (
+            <div className="dropzone-placeholder">
+            </div>
+          )}
           <SortableContext items={properties} strategy={rectSortingStrategy}>
             <ul id="property-list" className="property-list">
               {properties.map((property) => (
@@ -84,17 +106,28 @@ function PropertyCardList(props) {
               ))}
             </ul>
           </SortableContext>
-          <div className={`dropzone right-dropzone ${isOverLike ? 'active' : ''}`} ref={setLikeRef}>
+          {isDragging? ( <div
+            className={`dropzone right-dropzone ${isOverLike ? 'active' : ''}`}
+            ref={setLikeRef}
+          >
             <span className="dropzone-icon">✔</span>
-          </div>
+          </div>) : (<div className="dropzone-placeholder">
+            </div>)}
+         
         </div>
         <DragOverlay>
           {activeId ? (
             <MiniPropertyCard
-              propertyInfo={properties.find((property) => property.houseID === activeId)}
+              propertyInfo={properties.find(
+                (property) => property.houseID === activeId
+              )}
               likedFn={likedProperty}
               dislikedFn={dislikedProperty}
-              displayPopup={() => displayPopup(properties.find((property) => property.houseID === activeId))}
+              displayPopup={() =>
+                displayPopup(
+                  properties.find((property) => property.houseID === activeId)
+                )
+              }
             />
           ) : null}
         </DragOverlay>
@@ -108,7 +141,7 @@ function PropertyCardList(props) {
         )}
       </div>
     </>
-  );
+  )
 }
 
-export default PropertyCardList;
+export default PropertyCardList

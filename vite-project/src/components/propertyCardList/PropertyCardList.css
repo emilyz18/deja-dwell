@@ -30,6 +30,15 @@
   transition: opacity 0.2s ease-in-out;
 }
 
+.dropzone-placeholder {
+  width: 50%;
+  /* height: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+}
+
 .left-dropzone {
   background-color: rgba(255, 0, 0, 0.1);
 }
