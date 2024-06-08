@@ -21,6 +21,9 @@ const LandlordPropertyCard = ({ postingData }) => {
 
   const [selectedApplicant, setSelectedApplicant] = useState(null)
 
+  // handleRejectApplicant and handleAcceptApplicant were written with the help of ChatGPT3.5 on May 31.
+  // prompt: "code in the file" + change my code so that clicking on reject will remove the applicant from 
+  // the list, and clicking accept will remove every applicant except the one acceped.
   const handleRejectApplicant = (name) => {
     setApplicants(applicants.filter((applicant) => applicant.name !== name))
   }
