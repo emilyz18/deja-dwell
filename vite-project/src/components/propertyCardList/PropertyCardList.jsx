@@ -1,58 +1,103 @@
-import React, { useState } from 'react'
-import './PropertyCardList.css'
-import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
-import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
+import React, { useState } from 'react';
+import { DndContext, DragOverlay, closestCenter, useDroppable } from '@dnd-kit/core';
+import { arrayMove, SortableContext, rectSortingStrategy } from '@dnd-kit/sortable';
+import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard';
+import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard';
+import './PropertyCardList.css';
 
 function PropertyCardList(props) {
-  const { propList } = props
-  const [properties, setProperties] = useState(propList)
+  const { propList } = props;
+  const [properties, setProperties] = useState(propList);
+  const [activeId, setActiveId] = useState(null);
 
-  const [popupPVisible, setPopupPVisible] = useState(false)
-  const [selectedProperty, setSelectedProperty] = useState(null)
+  const [popupPVisible, setPopupPVisible] = useState(false);
+  const [selectedProperty, setSelectedProperty] = useState(null);
 
-  // TODO: to be implemented logic
   const likedProperty = (id) => {
-    const updatedProperties = properties.filter(
-      (property) => property.houseID !== id
-    )
-    setProperties(updatedProperties)
-    console.log(properties)
-  }
-  // TODO: to be implemented logic
+    const updatedProperties = properties.filter((property) => property.houseID !== id);
+    setProperties(updatedProperties);
+  };
+
   const dislikedProperty = (id) => {
-    const updatedProperties = properties.filter(
-      (property) => property.houseID !== id
-    )
-    setProperties(updatedProperties)
-    console.log(properties)
-  }
+    const updatedProperties = properties.filter((property) => property.houseID !== id);
+    setProperties(updatedProperties);
+  };
 
   const displayPopup = (property) => {
-    // const selected = properties.filter(property => property.houseID === id);
-    setSelectedProperty(property)
-    setPopupPVisible(true)
-  }
+    setSelectedProperty(property);
+    setPopupPVisible(true);
+  };
 
   const closePopup = () => {
-    setPopupPVisible(false)
-    setPopupPVisible(null)
-  }
+    setPopupPVisible(false);
+    setSelectedProperty(null);
+  };
+
+  const handleDragStart = (event) => {
+    const { active } = event;
+    setActiveId(active.id);
+  };
+
+  const handleDragEnd = (event) => {
+    const { over } = event;
+
+    if (over && over.id === 'like-dropzone') {
+      likedProperty(activeId);
+    } else if (over && over.id === 'dislike-dropzone') {
+      dislikedProperty(activeId);
+    }
+
+    setActiveId(null);
+  };
+
+  const { setNodeRef: setLikeRef, isOver: isOverLike } = useDroppable({
+    id: 'like-dropzone',
+  });
+
+  const { setNodeRef: setDislikeRef, isOver: isOverDislike } = useDroppable({
+    id: 'dislike-dropzone',
+  });
 
   return (
     <>
-      <ul id="property-list" className="property-list">
-        {properties.map((property, index) => (
+      <DndContext
+        collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+      >
+        <div className="dropzone-container">
+          <div className={`dropzone left-dropzone ${isOverDislike ? 'active' : ''}`} ref={setDislikeRef}>
+            <span className="dropzone-icon">✖</span>
+          </div>
+          <SortableContext items={properties} strategy={rectSortingStrategy}>
+            <ul id="property-list" className="property-list">
+              {properties.map((property) => (
+                <MiniPropertyCard
+                  key={property.houseID}
+                  propertyInfo={property}
+                  likedFn={likedProperty}
+                  dislikedFn={dislikedProperty}
+                  displayPopup={() => displayPopup(property)}
+                />
+              ))}
+            </ul>
+          </SortableContext>
+          <div className={`dropzone right-dropzone ${isOverLike ? 'active' : ''}`} ref={setLikeRef}>
+            <span className="dropzone-icon">✔</span>
+          </div>
+        </div>
+        <DragOverlay>
+          {activeId ? (
             <MiniPropertyCard
-              key={index}
-              propertyInfo={property}
+              propertyInfo={properties.find((property) => property.houseID === activeId)}
               likedFn={likedProperty}
               dislikedFn={dislikedProperty}
-              displayPopup={() => displayPopup(property)}
+              displayPopup={() => displayPopup(properties.find((property) => property.houseID === activeId))}
             />
-        ))}
-      </ul>
+          ) : null}
+        </DragOverlay>
+      </DndContext>
       <div>
-        {' '}
         {popupPVisible && (
           <ExpandedPropertyCard
             propertyInfo={selectedProperty}
@@ -61,7 +106,7 @@ function PropertyCardList(props) {
         )}
       </div>
     </>
-  )
+  );
 }
 
-export default PropertyCardList
+export default PropertyCardList;
