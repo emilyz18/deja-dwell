@@ -20,6 +20,7 @@ function PropertyCardList(props) {
 
   const [isDragging, setIsDragging] = useState(false)
 
+    // TODO: to be implemented logic
   const likedProperty = (id) => {
     console.log('house ' + id + ' was liked!')
 
@@ -27,14 +28,17 @@ function PropertyCardList(props) {
       (property) => property.houseID !== id
     )
     setProperties(updatedProperties)
+    console.log(properties)
   }
 
+    // TODO: to be implemented logic
   const dislikedProperty = (id) => {
     console.log('house ' + id + ' was rejected!')
     const updatedProperties = properties.filter(
       (property) => property.houseID !== id
     )
     setProperties(updatedProperties)
+    console.log(properties)
   }
 
   const displayPopup = (property) => {

@@ -6,8 +6,11 @@ import Carousel from '../carousel/Carousel'
 import { Button } from '@mui/material'
 
 function MiniPropertyCard(props) {
-  const { propertyInfo, likedFn, dislikedFn, displayPopup, reachDropzone } =
+  const { propertyInfo, likedFn, dislikedFn, displayPopup } =
     props
+
+    if (!propertyInfo) return null
+
 
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
@@ -23,18 +26,13 @@ function MiniPropertyCard(props) {
   }
 
   const expandProperty = () => {
-    console.log('expand clicked through expandProperty')
     console.log('house ' + propertyInfo.houseID + ' was expanded!')
     displayPopup()
   }
 
-  const style = {
-    transition,
-  }
-
   return (
     <>
-      <div className="property-card" ref={setNodeRef} style={style}>
+      <div className="property-card" ref={setNodeRef}>
         <Carousel
           className="carousel-container"
           data={propertyInfo.images}
