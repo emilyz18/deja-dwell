@@ -18,7 +18,7 @@ function PropertyCardList(props) {
   const [popupPVisible, setPopupPVisible] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
 
-  const [isDragging, setIsDragging] = useState(null)
+  const [isDragging, setIsDragging] = useState(false)
 
   const likedProperty = (id) => {
     console.log('house ' + id + ' was liked!')
@@ -56,7 +56,6 @@ function PropertyCardList(props) {
   const handleDragEnd = (event) => {
     const { delta } = event
     if (delta.x > 200) {
-      // TODO ez: remove magic number, figure out exact x coords
       likedProperty(activeId)
     } else if (delta.x < -200) {
       dislikedProperty(activeId)
@@ -96,24 +95,31 @@ function PropertyCardList(props) {
           <SortableContext items={properties} strategy={rectSortingStrategy}>
             <ul id="property-list" className="property-list">
               {properties.map((property) => (
-                <MiniPropertyCard
-                  key={property.houseID}
-                  propertyInfo={property}
-                  likedFn={likedProperty}
-                  dislikedFn={dislikedProperty}
-                  displayPopup={() => displayPopup(property)}
-                />
+                property.houseID === activeId ? (
+                  <div key={property.houseID} className="placeholder-card"></div>
+                ) : (
+                  <MiniPropertyCard
+                    key={property.houseID}
+                    propertyInfo={property}
+                    likedFn={likedProperty}
+                    dislikedFn={dislikedProperty}
+                    displayPopup={() => displayPopup(property)}
+                  />
+                )
               ))}
             </ul>
           </SortableContext>
-          {isDragging? ( <div
-            className={`dropzone right-dropzone ${isOverLike ? 'active' : ''}`}
-            ref={setLikeRef}
-          >
-            <span className="dropzone-icon">✔</span>
-          </div>) : (<div className="dropzone-placeholder">
-            </div>)}
-         
+          {isDragging ? (
+            <div
+              className={`dropzone right-dropzone ${isOverLike ? 'active' : ''}`}
+              ref={setLikeRef}
+            >
+              <span className="dropzone-icon">✔</span>
+            </div>
+          ) : (
+            <div className="dropzone-placeholder">
+            </div>
+          )}
         </div>
         <DragOverlay>
           {activeId ? (

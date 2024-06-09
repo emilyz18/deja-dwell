@@ -8,11 +8,13 @@
   justify-content: center; /* Center the cards horizontally */
   padding: 16px; /* Add some padding around the list */
   width: 100%;
-  /* background-color: red; */
 }
 
 
-
+.placeholder-card {
+  /* width: 300px; */
+  height: 400px;
+}
 .dropzone-container {
   display: flex;
   /* justify-content: space-between; */

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import './MiniPropertyCard.css'
@@ -34,16 +34,14 @@ function MiniPropertyCard(props) {
 
   return (
     <>
-      <div className="property-card">
-      <div className="carousel-container">
-            <Carousel
-              data={propertyInfo.images}
-              size={{ width: 450, height: 300 }}
-            />
-          </div>
+      <div className="property-card" ref={setNodeRef}>
+        <Carousel
+          className="carousel-container"
+          data={propertyInfo.images}
+          size={{ width: 450, height: 250 }}
+        />
         <div
-          ref={setNodeRef}
-          style={style}
+=          style={style}
           {...attributes}
           {...listeners}
         >

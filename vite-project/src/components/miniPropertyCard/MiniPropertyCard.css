@@ -64,7 +64,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 6px;
-  background-color: #white;
+  background-color: white;
 }
 
 .circle-button {
@@ -98,4 +98,14 @@
   color: white;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.property-card {
+  position: relative; /* Ensure the parent container is set to a relative position */
+}
+
+.dragged-card {
+  position: absolute; /* Position the dragged card absolutely within its parent */
+  z-index: 1000; /* Set a high z-index to ensure it appears on top of other elements */
+  /* Add other styling properties as needed */
 }
