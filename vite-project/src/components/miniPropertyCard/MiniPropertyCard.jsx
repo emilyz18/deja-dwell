@@ -35,18 +35,18 @@ function MiniPropertyCard(props) {
   return (
     <>
       <div className="property-card">
-        <li
+      <div className="carousel-container">
+            <Carousel
+              data={propertyInfo.images}
+              size={{ width: 450, height: 300 }}
+            />
+          </div>
+        <div
           ref={setNodeRef}
           style={style}
           {...attributes}
           {...listeners}
         >
-          <div className="carousel-container">
-            <Carousel
-              data={propertyInfo.images}
-              size={{ width: null, height: null }}
-            />
-          </div>
           <div className="card-details">
             <h3 className="house-title">{propertyInfo.title}</h3>
             <div className="details-row">
@@ -55,7 +55,7 @@ function MiniPropertyCard(props) {
               <span className="house-type">{propertyInfo.roomType}</span>
             </div>
           </div>
-        </li>
+        </div>
         <div className="buttons-row">
           <button
             className="circle-button cross-button"

@@ -10,7 +10,8 @@ const Carousel = ({ data, size }) => {
   const [slide, setSlide] = useState(0)
   const { width, height } = size
 
-  const nextSlide = () => {
+  const nextSlide = (event) => {
+    event.stopPropagation();
     setSlide(slide === data.length - 1 ? 0 : slide + 1)
   }
 
