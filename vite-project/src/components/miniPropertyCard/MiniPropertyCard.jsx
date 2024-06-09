@@ -6,7 +6,8 @@ import Carousel from '../carousel/Carousel'
 import { Button } from '@mui/material'
 
 function MiniPropertyCard(props) {
-  const { propertyInfo, likedFn, dislikedFn, displayPopup } = props
+  const { propertyInfo, likedFn, dislikedFn, displayPopup, reachDropzone } =
+    props
 
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
@@ -28,23 +29,18 @@ function MiniPropertyCard(props) {
   }
 
   const style = {
-    transform: CSS.Transform.toString(transform),
     transition,
   }
 
   return (
     <>
-      <div className="property-card" ref={setNodeRef}>
+      <div className="property-card" ref={setNodeRef} style={style}>
         <Carousel
           className="carousel-container"
           data={propertyInfo.images}
           size={{ width: 450, height: 250 }}
         />
-        <div
-=          style={style}
-          {...attributes}
-          {...listeners}
-        >
+        <div {...attributes} {...listeners}>
           <div className="card-details">
             <h3 className="house-title">{propertyInfo.title}</h3>
             <div className="details-row">

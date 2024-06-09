@@ -55,7 +55,8 @@ function PropertyCardList(props) {
 
   const handleDragEnd = (event) => {
     const { delta } = event
-    if (delta.x > 200) {
+    
+    if (delta.x > 200) { 
       likedProperty(activeId)
     } else if (delta.x < -200) {
       dislikedProperty(activeId)
@@ -67,11 +68,19 @@ function PropertyCardList(props) {
 
   const { setNodeRef: setLikeRef, isOver: isOverLike } = useDroppable({
     id: 'like-dropzone',
-  })
-
+ 
+  });
+  
   const { setNodeRef: setDislikeRef, isOver: isOverDislike } = useDroppable({
     id: 'dislike-dropzone',
-  })
+    onDragEnter: () => {
+      console.log('Draggable card entered the dislike dropzone');
+    },
+    onDragLeave: () => {
+      console.log('Draggable card left the dislike dropzone');
+    },
+  });
+  
 
   return (
     <>
