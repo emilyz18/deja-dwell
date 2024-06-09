@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import './MiniPropertyCard.css';
@@ -7,8 +7,11 @@ import { Button } from '@mui/material';
 
 function MiniPropertyCard(props) {
   const { propertyInfo, likedFn, dislikedFn, displayPopup } = props;
+  const [allowDragging, setAllowDragging] = useState(true);
+
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: propertyInfo.houseID,
+    disabled: !allowDragging, // Disable sorting if allowDragging is false
   });
 
   const likeProperty = () => {
@@ -24,13 +27,29 @@ function MiniPropertyCard(props) {
     displayPopup();
   };
 
+  const handleMouseDown = (event) => {
+    if (event.target.classList.contains('expand-info-button')) {
+      console.log("expand clicked")
+      setAllowDragging(false); // Disable dragging when clicking on the expand button
+    } else {
+      setAllowDragging(true); // Enable dragging for other elements
+    }
+  };
+
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
   };
 
   return (
-    <li className="property-card" ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <li
+      className="property-card"
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      onMouseDown={handleMouseDown} // Add onMouseDown event handler
+    >
       <div className="carousel-container">
         <Carousel data={propertyInfo.images} size={{ width: null, height: null }} />
       </div>
@@ -42,13 +61,19 @@ function MiniPropertyCard(props) {
           <span className="house-type">{propertyInfo.roomType}</span>
         </div>
         <div className="buttons-row">
-          <button className="circle-button cross-button" onClick={dislikeProperty}>
+          <button
+            className="circle-button cross-button"
+            onClick={dislikeProperty}
+          >
             ✖
           </button>
-          <Button variant="contained" onClick={expandProperty}>
+          <Button variant="contained" onClick={expandProperty} className="expand-info-button">
             Expand Info
           </Button>
-          <button className="circle-button checkmark-button" onClick={likeProperty}>
+          <button
+            className="circle-button checkmark-button"
+            onClick={likeProperty}
+          >
             ✔
           </button>
         </div>
