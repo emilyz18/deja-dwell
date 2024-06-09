@@ -6,7 +6,6 @@ const landlordLinks = [
   { path: '/landlordAccount/applicants', label: 'View Applicants' },
 ]
 
-// import { mockUser } from "../../mockData/mockUser"
 export function LandLordSideBar({ accountType, profile, onSwitchAcc }) {
   return (
     <>

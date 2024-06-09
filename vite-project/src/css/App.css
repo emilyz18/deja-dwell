@@ -1,5 +1,29 @@
+/*
+  Top-level styling or styling that should be propagated to all child components
+ */
+
 .root {
   display: flex;
   flex-direction: column;
-  margin-left: 320px;
+  margin-left: 320px; /* This margin accounts of the fixed width and position of the sidebar (300px) on the left side of the page */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Mulish', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+}
+
+p,
+span {
+  font-family: 'Mulish', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
 }
