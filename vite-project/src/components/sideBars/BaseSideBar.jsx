@@ -1,26 +1,26 @@
-import './BaseSideBar.css'
-import * as React from 'react'
-import { Link } from 'react-router-dom'
+import './BaseSideBar.css';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 
-import Avatar from '@mui/material/Avatar'
-import Drawer from '@mui/material/Drawer'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemButton from '@mui/material/ListItemButton'
-import ListItemText from '@mui/material/ListItemText'
-import Divider from '@mui/material/Divider'
-import Button from '@mui/material/Button'
+import Avatar from '@mui/material/Avatar';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
 
 export function BaseSideBar({
-  accountType,
-  navBarLinks,
-  profile,
-  onSwitchAcc,
-}) {
+                              accountType,
+                              navBarLinks,
+                              profile,
+                              onSwitchAcc,
+                            }) {
   return (
-    <>
-      <div className="sidebar-container">
-        <Drawer className="sidebar-drawer" variant="permanent" anchor="left">
+    <div className="sidebar-container">
+      <Drawer className="sidebar-drawer" variant="permanent" anchor="left">
+        <div className="sidebar-content">
           <div className="sidebar-avatar">
             <Avatar src={profile.image} className="MuiAvatar-root" />
             <ListItemText
@@ -39,14 +39,15 @@ export function BaseSideBar({
             ))}
           </List>
           <Divider />
+        </div>
+        <div className="sidebar-bottom-content">
           <Button className="sidebar-button" onClick={onSwitchAcc}>
             <span>
-              Switch to {accountType === 'landlord' ? 'Tenant' : 'Landlord'}{' '}
-              Account
+              Switch to {accountType === 'landlord' ? 'Tenant' : 'Landlord'} Account
             </span>
           </Button>
-        </Drawer>
-      </div>
-    </>
-  )
+        </div>
+      </Drawer>
+    </div>
+  );
 }

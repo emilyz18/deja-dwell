@@ -18,6 +18,10 @@
   padding: 20px;
   background-color: #efefef;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 }
 
 .sidebar-avatar {
@@ -39,4 +43,36 @@
 
 .sidebar-list-item .MuiListItemButton-root:hover {
   background-color: #e2e2e2;
+}
+
+.sidebar-content {
+  flex-grow: 1;
+}
+
+.sidebar-bottom-content {
+  padding-bottom: 20px;
+}
+
+.sidebar-button {
+  width: 100%;
+  justify-content: flex-start;
+  border-radius: 10px;
+}
+
+/*
+    The code below was generated with the help of ChatGPT 4o on June 9, 2024
+    Prompt used: "Help me create dynamic padding depending on the size of my window"
+    The generated code was adapted: I made changes to the css code to suite my own needs
+*/
+
+@media (max-height: 600px) {
+  .sidebar-bottom-content {
+    padding-bottom: 10px;
+  }
+}
+
+@media (max-height: 500px) {
+  .sidebar-bottom-content {
+    padding-bottom: 5px;
+  }
 }
