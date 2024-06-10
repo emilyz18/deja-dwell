@@ -60,7 +60,7 @@ function PropertyCardList(props) {
   const handleDragEnd = (event) => {
     const { delta } = event
     
-    if (delta.x > 200) { 
+    if (delta.x > 200) { // determines the x coord to be dragged
       likedProperty(activeId)
     } else if (delta.x < -200) {
       dislikedProperty(activeId)
@@ -84,8 +84,12 @@ function PropertyCardList(props) {
       console.log('Draggable card left the dislike dropzone');
     },
   });
-  
 
+  // The code below was written with the help of ChatGPT 3.5 on Jun 8th
+  // Prompt: Give me some examples of dragging and dropping using the dnd kit. Then, use the 
+  // dnd toolkit to incorporate drag and drop functionality on the miniProperty card + "this file".
+  // The generated code was adapted: I added place holders for dropzones and cards to be 
+  // conditionally displayed. I also wrote css myself tp suit my own needs
   return (
     <>
       <DndContext
