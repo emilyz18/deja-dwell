@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   DndContext,
   DragOverlay,
@@ -9,8 +10,15 @@ import { SortableContext, rectSortingStrategy } from '@dnd-kit/sortable'
 import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './PropertyCardList.css'
+import { getPropertiesAsync } from '../../redux/properties/thunks';
+
 
 function PropertyCardList(props) {
+
+  const dispatch = useDispatch();
+  const propertiesList = useSelector((state) => state.properties.list);
+  const getPropertiesStatus = useSelector((state) => state.properties.getProperties);
+
   const { propList } = props
   const [properties, setProperties] = useState(propList)
   const [activeId, setActiveId] = useState(null)
@@ -19,6 +27,14 @@ function PropertyCardList(props) {
   const [selectedProperty, setSelectedProperty] = useState(null)
 
   const [isDragging, setIsDragging] = useState(false)
+
+  useEffect(() => {
+    if (getPropertiesStatus === 'IDLE') {
+      dispatch(getPropertiesAsync());
+    }
+  }, [getPropertiesStatus, properties, dispatch]);
+
+  console.log(propertiesList);
 
     // TODO: to be implemented logic
   const likedProperty = (id) => {
