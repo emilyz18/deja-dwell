@@ -19,6 +19,7 @@ import { TenantInputForm } from './InputForms/tenantInputForm/TenantInputForm.js
 
 import { postingData, propertyList } from './mockData/postingData'
 import { mockUser } from './mockData/mockUser'
+import { GeneralInputForm } from './InputForms/generalInputForm.jsx'
 
 const LANDLORD = 'landlord'
 const TENANT = 'tenant'
@@ -83,7 +84,7 @@ function App() {
                 />
                 <Route
                   path="/landlordAccount/profile"
-                  element={<LandlordInputForm />}
+                  element={<GeneralInputForm />}
                 />
               </>
             ) : (
