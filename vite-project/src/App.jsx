@@ -17,8 +17,7 @@ import { TenantSideBar } from './components/sideBars/TenantSideBar.jsx'
 import { LandlordInputForm } from './InputForms/landlordInputForm/LandlordInputForm.jsx'
 import { TenantInputForm } from './InputForms/tenantInputForm/TenantInputForm.jsx'
 
-import { postingData, propertyList } from './mockData/postingData'
-import { mockUser } from './mockData/mockUser'
+import { mockUser, propertyList, postingData } from './mockData/mockUser'
 
 const LANDLORD = 'landlord'
 const TENANT = 'tenant'
@@ -91,13 +90,13 @@ function App() {
                 <Route
                   path="/"
                   element={
-                    <PropertyCardList propList={propertyList.propertys} />
+                    <PropertyCardList propList={propertyList.properties} />
                   }
                 />
                 <Route
                   path="/tenantAccount/matches"
                   element={
-                    <PropertyCardList propList={propertyList.propertys} />
+                    <PropertyCardList propList={propertyList.properties} />
                   }
                 />
                 <Route

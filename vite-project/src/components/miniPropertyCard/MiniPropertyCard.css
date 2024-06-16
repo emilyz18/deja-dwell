@@ -1,10 +1,10 @@
 .property-card {
-  /* letting dropzone to set width/margin */
   border: 1px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 24px; /* Add space below each card */
-  justify-content: center; /* Center the card within its container */
+  margin-bottom: 24px;
+  justify-content: center;
+  max-width: 450px;
 }
 
 .carousel-container {
@@ -76,12 +76,22 @@
 }
 
 .checkmark-button {
+  background-color: #1ac61a;
+  color: white;
+}
+
+.checkmark-button:hover {
   background-color: green;
   color: white;
 }
 
 .cross-button {
-  background-color: red;
+  background-color: #e81717;
+  color: white;
+}
+
+.cross-button:hover {
+  background-color: #980b0b;
   color: white;
 }
 
