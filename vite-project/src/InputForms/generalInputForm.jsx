@@ -7,6 +7,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { styled } from '@mui/material/styles';
+import { Box } from '@mui/material';
 
 export function GeneralInputForm() {
     const [name, setName] = useState('')
@@ -16,8 +17,8 @@ export function GeneralInputForm() {
     const [phoneNumber, setPhoneNumber] = useState('')
     const [email, setEmail] = useState('')
 
-    const handleAddLandlord = (landlord) => {
-        console.log('Added landlord info: ', landlord)
+    const handleAddUser = (user) => {
+        console.log('Added user info: ', user)
     }
 
     function resetForm() {
@@ -32,7 +33,7 @@ export function GeneralInputForm() {
     function handleSubmit(event) {
         event.preventDefault()
 
-        const newLandlord = {
+        const newUser = {
             id: uuidv4(),
             name,
             age,
@@ -42,7 +43,7 @@ export function GeneralInputForm() {
             email,
         }
 
-        handleAddLandlord(newLandlord)
+        handleAddUser(newUser)
         resetForm()
     }
 
@@ -64,7 +65,7 @@ export function GeneralInputForm() {
             <form onSubmit={handleSubmit}>
                 <div>
                     <h1 className="input-form-heading">
-                        My Profile{' '}
+                        My Profile {' '}
                     </h1>
                     <p>
                         Fields marked with <span aria-label="required"> *</span> are
@@ -99,8 +100,9 @@ export function GeneralInputForm() {
                 </div>
 
                 {/* gender drop down */}
-                <div>
-                    <FormControl sx={{ m: 0, minWidth: 80}}>
+
+                <Box display="flex" alignItems="center" gap={2}>
+                    <FormControl sx={{ m: 0, minWidth: 100 }}>
                         <InputLabel id="demo-simple-select-autowidth-label">Gender</InputLabel>
                         <Select
                             labelId="demo-simple-select-autowidth-label"
@@ -119,20 +121,26 @@ export function GeneralInputForm() {
                             <MenuItem value={"self-describe"}>Prefer to self-describe</MenuItem>
                         </Select>
                     </FormControl>
-                </div>
 
-                <div>
-                    <TextField
-                        className="gender-field"
-                        label="If you select self-declared, please indicate here"
-                        variant="filled"
-                        value={gender}
-                        onChange={(e) => setGender(e.target.value)}
-                        placeholder="Enter gender here..."
-                        fullWidth
-                        margin="normal"
-                    />
-                </div>
+
+                    {/* self describe */}
+                    {gender === "self-describe" && (
+                        <TextField
+                            className="gender-field"
+                            label="If you select self-declared, please indicate here"
+                            variant="filled"
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}
+                            placeholder="Enter gender here..."
+                            fullWidth
+                            margin="normal"
+                        />
+                    )}
+
+
+                </Box>
+
+
                 <div>
                     <TextField
                         className="image-field"
@@ -151,7 +159,7 @@ export function GeneralInputForm() {
                     role={undefined}
                     variant="contained"
                     tabIndex={-1}
-                    // startIcon={<CloudUploadIcon />}
+                // startIcon={<CloudUploadIcon />}
                 >
                     Upload Photo
                     <VisuallyHiddenInput type="file" />
