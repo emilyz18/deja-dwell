@@ -10,7 +10,7 @@ import { SortableContext, rectSortingStrategy } from '@dnd-kit/sortable'
 import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './PropertyCardList.css'
-import { getPropertiesAsync } from '../../redux/properties/thunks';
+import { getPropertiesAsync } from '../../redux/properties/thunks.js';
 
 
 function PropertyCardList(props) {
