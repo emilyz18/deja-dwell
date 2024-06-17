@@ -17,7 +17,7 @@ import { TenantSideBar } from './components/sideBars/TenantSideBar.jsx'
 import { LandlordInputForm } from './InputForms/landlordInputForm/LandlordInputForm.jsx'
 import { TenantInputForm } from './InputForms/tenantInputForm/TenantInputForm.jsx'
 
-import { mockUser, propertyList, postingData } from './mockData/mockUser'
+import { mockUser, propertyList, postingData } from './mockData/mockUser' //TODO Clean this? after we use proper API
 
 const LANDLORD = 'landlord'
 const TENANT = 'tenant'
