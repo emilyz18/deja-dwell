@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
@@ -8,46 +8,65 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
+import { Typography } from '@mui/material';
+import { Grid } from '@mui/material';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setName,setImage, setPhoneNumber, setEmail, setIsEditing, resetForm } from "../redux/users/singleUserReducer.js"
+
+import { getUserByIdAsync, patchUserAsync } from '../redux/users/thunks.js';
+
 
 export function GeneralInputForm() {
-    const [name, setName] = useState('')
-    const [age, setAge] = useState('')
-    const [gender, setGender] = useState('')
-    const [image, setImage] = useState('')
-    const [phoneNumber, setPhoneNumber] = useState('')
-    const [email, setEmail] = useState('')
+    // TODO: how to select current user
+    const {
+        id, 
+        name,
+        image,
+        phoneNumber,
+        email,
+        isEditing
+    } = useSelector((state) => state.singleUser);
 
-    const handleAddUser = (user) => {
-        console.log('Added user info: ', user)
+    const dispatch = useDispatch();
+
+    let curId = "8f14e45f-ceea-48d9-b10d-dc55bcf4fd70"; // temporary 
+    useEffect(() => {
+        dispatch(getUserByIdAsync(curId));
+    }, [dispatch, curId]);
+
+    const handleEdit = () => {
+        dispatch(setIsEditing(true));
     }
 
-    function resetForm() {
-        setName('')
-        setAge('')
-        setGender('')
-        setImage('')
-        setPhoneNumber('')
-        setEmail('')
+    const handleCancel = () => {
+        dispatch(setIsEditing(false));
     }
+
+
+    // const handleAddUser = (user) => {
+    //     console.log('Added user info: ', user)
+    //     putUserAsync()
+    // }
+
 
     function handleSubmit(event) {
         event.preventDefault()
 
-        const newUser = {
-            id: uuidv4(),
+        const newUserData = {
+            id,
             name,
-            age,
-            gender,
             image,
             phoneNumber,
             email,
         }
 
-        handleAddUser(newUser)
-        resetForm()
+        dispatch(patchUserAsync(newUserData));
+        
     }
 
-    // for file upload button
+    // for file upload button, from material UI documantation
     const VisuallyHiddenInput = styled('input')({
         clip: 'rect(0 0 0 0)',
         clipPath: 'inset(50%)',
@@ -61,170 +80,123 @@ export function GeneralInputForm() {
     });
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <h1 className="input-form-heading">
-                        My Profile {' '}
-                    </h1>
-                    <p>
-                        Fields marked with <span aria-label="required"> *</span> are
-                        required.
-                    </p>
-                </div>
-                <div>
-                    <TextField
-                        className="name-field"
-                        label="Landlord Name"
-                        variant="filled"
-                        required
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Enter name here..."
-                        fullWidth
-                        margin="normal"
-                    />
-                </div>
-                <div>
-                    <TextField
-                        className="age-field"
-                        label="Age"
-                        variant="filled"
-                        required
-                        type="string"
-                        value={age}
-                        onChange={(e) => setAge(e.target.value)}
-                        fullWidth
-                        margin="normal"
-                    />
-                </div>
 
-                {/* gender drop down */}
-
-                <Box display="flex" alignItems="center" gap={2}>
-                    <FormControl sx={{ m: 0, minWidth: 100 }}>
-                        <InputLabel id="demo-simple-select-autowidth-label">Gender</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-autowidth-label"
-                            id="demo-simple-select-autowidth"
-                            value={gender}
-                            onChange={(e) => setGender(e.target.value)}
-                            autoWidth
-                            label="Gender"
-                        >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={"Female"}>Female</MenuItem>
-                            <MenuItem value={"Male"}>Male</MenuItem>
-                            <MenuItem value={"Non-binary"}>Non-binary</MenuItem>
-                            <MenuItem value={"self-describe"}>Prefer to self-describe</MenuItem>
-                        </Select>
-                    </FormControl>
+        <>
+            {
+                isEditing ? (
 
 
-                    {/* self describe */}
-                    {gender === "self-describe" && (
-                        <TextField
-                            className="gender-field"
-                            label="If you select self-declared, please indicate here"
-                            variant="filled"
-                            value={gender}
-                            onChange={(e) => setGender(e.target.value)}
-                            placeholder="Enter gender here..."
-                            fullWidth
-                            margin="normal"
-                        />
-                    )}
-
-
-                </Box>
-
-
-                <div>
-                    <TextField
-                        className="image-field"
-                        label="Image URL"
-                        variant="filled"
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                        placeholder="Enter Image URL here..."
-                        fullWidth
-                        margin="normal"
-                    />
-                </div>
-                {/* file upload  */}
-                <Button
-                    component="label"
-                    role={undefined}
-                    variant="contained"
-                    tabIndex={-1}
-                // startIcon={<CloudUploadIcon />}
-                >
-                    Upload Photo
-                    <VisuallyHiddenInput type="file" />
-                </Button>
-
-                <div>
-                    <TextField
-                        className="phoneNumber-field"
-                        label="Phone Number"
-                        variant="filled"
-                        required
-                        value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                        placeholder="Enter phone number here..."
-                        fullWidth
-                        margin="normal"
-                    />
-                </div>
-                <div>
-                    <TextField
-                        className="email-field"
-                        label="Email"
-                        variant="filled"
-                        required
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Enter email here..."
-                        fullWidth
-                        margin="normal"
-                    />
-                </div>
-                <div className="button">
-                    <Button
-                        className="submit-button"
-                        type="submit"
-                        variant="contained"
-                        color="primary"
+                    <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { m: 1, width: '80ch' },
+                        }}
+                        noValidate
+                        autoComplete="off"
                     >
-                        Save
-                    </Button>
-                </div>
-                <div className="button">
-                    <Button
-                        className="clear-fields-button"
-                        type="reset"
-                        variant="contained"
-                        color="secondary"
-                        onClick={resetForm}
-                    >
-                        Clear Fields
-                    </Button>
-                </div>
-                <div className="button">
-                    <Button
-                        className="edit-button"
-                        type="reset"
-                        variant="contained"
-                        color="secondary"
-                        onClick={resetForm}
-                    >
-                        Edit Profile
-                    </Button>
-                </div>
-            </form>
-        </div>
+                        <h1>My profile </h1>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    className="name-field"
+                                    label="Full Name"
+                                    variant="filled"
+                                    required
+                                    value={name}
+                                    onChange={(e) => dispatch(setName(e.target.value))}
+                                    placeholder="Enter name here..."
+                                    fullWidth
+                                    margin="normal"
+                                />
+                            </Grid>
+                            
+                            <Grid item xs={12}>
+                                <TextField
+                                    className="image-field"
+                                    label="Image URL"
+                                    variant="filled"
+                                    value={image}
+                                    onChange={(e) => dispatch(setImage(e.target.value))}
+                                    placeholder="Enter Image URL here..."
+                                    fullWidth
+                                    margin="normal"
+                                />
+                                <Button
+                                    component="label"
+                                    variant="contained"
+                                >
+                                    Upload Photo
+                                    <VisuallyHiddenInput type="file" />
+                                </Button>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    className="phoneNumber-field"
+                                    label="Phone Number"
+                                    variant="filled"
+                                    required
+                                    value={phoneNumber}
+                                    onChange={(e) => dispatch(setPhoneNumber(e.target.value))}
+                                    placeholder="Enter phone number here..."
+                                    fullWidth
+                                    margin="normal"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    className="email-field"
+                                    label="Email"
+                                    variant="filled"
+                                    required
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => dispatch(setEmail(e.target.value))}
+                                    placeholder="Enter email here..."
+                                    fullWidth
+                                    margin="normal"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button
+                                    className="submit-button"
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handleSubmit}
+                                >
+                                    Save
+                                </Button>
+                                <Button
+                                    className="cancel-edit-button"
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={handleCancel}
+                                >
+                                    Cancel
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Box>
+
+                ) : (
+
+                    <Box>
+
+                        <Typography variant="h1">My Profile</Typography>
+                        <Typography variant="h2">Name: {name || 'N/A'}</Typography>
+        
+                        <Typography>Phone Number: {phoneNumber || 'N/A'}</Typography>
+                        <Typography>Email: {email || 'N/A'}</Typography>
+                        <Button variant="contained" color="primary" onClick={handleEdit}>
+                            Edit Profile
+                        </Button>
+                    </Box>
+
+                )
+            }
+        </>
+
+
+
     )
 }

@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { REQUEST_STATE } from '../utils';
-import { getUsersAsync, addUserAsync, deleteUserAsync, putUserAsync, patchUserAsync } from './thunks.js';
+import { getUsersAsync, addUserAsync, deleteUserAsync, putUserAsync, patchUserAsync, getUserByIdAsync } from './thunks.js';
 
 const INITIAL_STATE = {
     list: [],
     error: null,
     getUsers: REQUEST_STATE.IDLE,
+    getUserById: REQUEST_STATE.IDLE,
     addUser: REQUEST_STATE.IDLE,
     deleteUser: REQUEST_STATE.IDLE,
     putUser: REQUEST_STATE.IDLE,
@@ -15,7 +16,9 @@ const INITIAL_STATE = {
 const usersSlice = createSlice({
     name: 'users',
     initialState: INITIAL_STATE,
-    reducers: {},
+    reducers: {
+
+    },
     extraReducers: (builder) => {
         builder
             // GET Users list
@@ -31,6 +34,22 @@ const usersSlice = createSlice({
                 state.getUsers = REQUEST_STATE.REJECTED;
                 state.error = action.error;
             })
+
+            // // GET User by id list
+            .addCase(getUserByIdAsync.pending, (state) => {
+                state.getUserById = REQUEST_STATE.PENDING;
+                state.error = null;
+            })
+            .addCase(getUserByIdAsync.fulfilled, (state, action) => {
+                state.getUserById = REQUEST_STATE.FULFILLED;
+                state.list = action.payload;
+            })
+            .addCase(getUserByIdAsync.rejected, (state, action) => {
+                state.getUserById = REQUEST_STATE.REJECTED;
+                state.error = action.error;
+            })
+
+
 
             // ADD User
             .addCase(addUserAsync.pending, (state) => {

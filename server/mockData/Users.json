@@ -1,0 +1,16 @@
+[
+    {
+    "UserID": "8f14e45f-ceea-48d9-b10d-dc55bcf4fd70",
+    "LandlordID": "0d84a135-5f5b-4f56-bbcb-7fe52410d7e0",
+    "TenantID": "a7f93dbe-4c27-4e9e-a63c-4c5dbb909b79",
+    "isLandlord": true,
+    "isTenant": true,
+    "UserName": "MockUser",
+    "UserEmail": "john.doe@example.com",
+    "PhoneNumber": "1234567890",
+    "Gender": "Male",
+    "ProfileImg": "https://via.placeholder.com/150",
+    "Password": "password123"
+    }
+]
+
