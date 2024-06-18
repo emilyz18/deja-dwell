@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { signInAsync } from '../../redux/auth/thunks';
+import { signInAsync } from '../../redux/user/thunks';
 import { useNavigate } from 'react-router-dom'
 
 // COPY RIGHT: THIS PAGE CONTENT IS COPY AND MODIFY FROM https://github.com/mui/material-ui/blob/v5.15.20/docs/data/material/getting-started/templates/sign-in/SignIn.js 
@@ -25,7 +25,7 @@ const defaultTheme = createTheme();
 export default function SignIn() {
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const isAuth = useSelector((state) => state.user.isAuthenticated);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

@@ -7,8 +7,8 @@ const INITIAL_STATE = {
   isAuthenticated: false
 };
 
-const authenticateSlice = createSlice({
-  name: 'auth',
+const userSlice = createSlice({
+  name: 'user',
   initialState: INITIAL_STATE,
   reducers: {},
   extraReducers: (builder) => {
@@ -19,9 +19,9 @@ const authenticateSlice = createSlice({
         })
         .addCase(signInAsync.fulfilled, (state, action) => {
           //console.log(action.payload);
-          const auth = action.payload;
-          state.isAuthenticated = auth.Auth;
-          state.user = auth.User;
+          const userPayload = action.payload;
+          state.isAuthenticated = userPayload.Auth;
+          state.user = userPayload.User;
         })
         .addCase(signInAsync.rejected, (state, action) => {
           state.error = action.error;
@@ -31,9 +31,9 @@ const authenticateSlice = createSlice({
           state.error = null;
         })
         .addCase(signUpAsync.fulfilled, (state, action) => {
-          const auth = action.payload;
-          state.isAuthenticated = auth.Auth;
-          state.user = auth.User;
+          const userPayload = action.payload;
+          state.isAuthenticated = userPayload.Auth;
+          state.user = userPayload.User;
         })
         .addCase(signUpAsync.rejected, (state, action) => {
           state.error = action.error;
@@ -41,4 +41,4 @@ const authenticateSlice = createSlice({
   }
 });
 
-export default authenticateSlice.reducer;
+export default userSlice.reducer;

@@ -14,7 +14,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { signUpAsync } from '../../redux/auth/thunks';
+import { signUpAsync } from '../../redux/user/thunks';
 
 // COPY RIGHT: THIS PAGE CONTENT IS COPY AND MODIFY FROM https://github.com/mui/material-ui/blob/v5.15.20/docs/data/material/getting-started/templates/sign-up/SignUp.js 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -24,7 +24,7 @@ const defaultTheme = createTheme();
 export default function SignUp() {
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const isAuth = useSelector((state) => state.user.isAuthenticated);
 
   const handleSubmit = (event) => {
     event.preventDefault();
