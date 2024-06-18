@@ -16,7 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path="/login" element={<SignIn />} />
           <Route path="/register" element={<SignUp />} />
-          <Route path="/" element={<ProtectedRoute />} />
+          <Route path="/*" element={<ProtectedRoute />} />
         </Routes>
       </Provider>
     </React.StrictMode>
