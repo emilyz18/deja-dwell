@@ -20,7 +20,7 @@ const addProperty = async (property) => {
 };
 
 const getProperties = async () => {
-  return handleResponse(() => axios.get(URL_PATH));
+  return handleResponse(() => axios.get(URL_PATH + "/getProperties"));
 };
 
 const deleteProperty = async (propertyId) => {
