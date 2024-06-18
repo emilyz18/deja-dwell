@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateTenant, resetTenant } from '../../redux/users/tenantPrefReducer';
+import { updateTenant, resetTenant } from '../../redux/tenantPref/tenantPrefReducer';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
@@ -19,9 +19,28 @@ export function TenantInputForm() {
   const [customGender, setCustomGender] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
+
+  // when input form is changed 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     dispatch(updateTenant({ [name]: type === 'checkbox' ? checked : value }));
+  };
+
+  // when submit button is hit
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('Updated tenant info: ');
+    // to do , call backend probally 
+    setIsEditing(false);
+  };
+
+  // when edit button is changed : static text -> input form
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
   };
 
   const handleGenderChange = (e) => {
@@ -41,19 +60,7 @@ export function TenantInputForm() {
     dispatch(updateTenant({ gender: value }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Added tenant info: ', { ...tenantData, tenantId: uuidv4() });
-    setIsEditing(false);
-  };
-
-  const handleEdit = () => {
-    setIsEditing(true);
-  };
-
-  const handleCancel = () => {
-    setIsEditing(false);
-  };
+  
 
   return (
     <>
@@ -186,7 +193,7 @@ export function TenantInputForm() {
               />
             </Grid>
 
-            
+
 
             <Grid item xs={12}>
               <TextField
@@ -202,8 +209,8 @@ export function TenantInputForm() {
                 margin="normal"
               />
             </Grid>
-            
-            
+
+
             <Grid item xs={12}>
               <TextField
                 className="street-field"
@@ -305,7 +312,7 @@ export function TenantInputForm() {
                   <MenuItem value="2 Bedrooms">3 Bedrooms+ shared Bathroom</MenuItem>
                   <MenuItem value="2 Bedrooms">3+ Bedrooms 3+Bathrooms</MenuItem>
 
-                  
+
                 </Select>
               </FormControl>
             </Grid>
