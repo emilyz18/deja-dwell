@@ -18,7 +18,7 @@ const userSlice = createSlice({
           state.error = null;
         })
         .addCase(signInAsync.fulfilled, (state, action) => {
-          //console.log(action.payload);
+          console.log(action.payload);
           const userPayload = action.payload;
           state.isAuthenticated = userPayload.Auth;
           state.user = userPayload.User;

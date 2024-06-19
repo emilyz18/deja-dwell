@@ -8,8 +8,9 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var propertiesRouter = require('./routes/properties');
 var userRouter = require('./routes/user'); // this is use to login/signup/ for signle user
-var tenantProfileRouter = require('./routes/tenantsProfile');
-var tenanPrefRouter = request('./routes/tenantsPref');
+var tenantProfileRouter = require('./routes/tenantsprofile');
+var tenantPrefRouter = require('./routes/tenantspref');
+
 var app = express();
 
 app.use(logger('dev'));
@@ -23,7 +24,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/properties', propertiesRouter);
 app.use('/user', userRouter);
-app.use('/tenantsProfile', tenantProfileRouter);
-app.use('/tenantsPref', tenanPrefRouter);
+app.use('/tenantsprofile', tenantProfileRouter);
+app.use('/tenantspref', tenantPrefRouter);
 
 module.exports = app;

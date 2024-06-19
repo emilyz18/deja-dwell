@@ -13,7 +13,7 @@ import { Grid } from '@mui/material';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setName,setImage, setPhoneNumber, setEmail, setIsEditing, resetForm } from "../redux/users/singleUserReducer.js"
+import { setName,setImage, setPhoneNumber, setEmail, setIsEditing } from "../redux/users/singleUserReducer.js"
 
 import { getUserByIdAsync, patchUserAsync } from '../redux/users/thunks.js';
 
@@ -22,19 +22,15 @@ export function GeneralInputForm() {
     // TODO: how to select current user
     const {
         id, 
-        name,
-        image,
-        phoneNumber,
-        email,
-        isEditing
-    } = useSelector((state) => state.singleUser);
+        
+    } = useSelector((state) => state.user.user.UserID);
 
     const dispatch = useDispatch();
 
-    let curId = "8f14e45f-ceea-48d9-b10d-dc55bcf4fd70"; // temporary 
+    
     useEffect(() => {
-        dispatch(getUserByIdAsync(curId));
-    }, [dispatch, curId]);
+        dispatch(getUserByIdAsync(id));
+    }, [dispatch, id]);
 
     const handleEdit = () => {
         dispatch(setIsEditing(true));
