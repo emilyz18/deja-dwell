@@ -60,8 +60,14 @@ export function TenantInputForm() {
   // when submit button is hit
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(patchTenantProfileAsync(tenantID, tenant));
-    dispatch(patchTenantPrefAsync(tenant.tenantPreferenceID, tenantPref))
+    dispatch(patchTenantProfileAsync({ tenantID, tenant }));
+
+    if (tenant.TenantPreferenceID) { // Ensure TenantPreferenceID is defined
+      dispatch(patchTenantPrefAsync({ tenantPreferenceID: tenant.TenantPreferenceID, tenantPref }));
+    } else {
+      console.error('TenantPreferenceID undefined. Cannot patch');
+    }
+    // dispatch(patchTenantPrefAsync({ tenantPreferenceID :tenant.tenantPreferenceID, tenantPref }))
     setIsEditing(false);
   };
 

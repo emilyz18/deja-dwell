@@ -42,14 +42,16 @@ router.patch('/:tenantID', (req, res) => {
 
     const tenants = loadTenantJson(tenantsFilePath);
     if (!tenants) {
-        return res.status(500).send("Error getting tenant data");
+        return res.status(500).send("Error reading tenant profile data json");
     }
 
     const tenantIndex = tenants.findIndex(t => t.TenantID === tenantID);
     if (tenantIndex >= 0) {
+        //merge
         tenants[tenantIndex] = { ...tenants[tenantIndex], ...tenantData };
         saveTenantJson(tenantsFilePath, tenants);
-        return res.status(200).send('Tenant profile data updated successfully');
+        return res.status(200).json(tenants[tenantIndex]);
+        // return res.status(200).send('Tenant profile data updated successfully');
     } else {
         return res.status(404).send('Tenant profile not found');
     }

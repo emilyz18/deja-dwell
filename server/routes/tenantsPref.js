@@ -55,7 +55,8 @@ router.patch('/:tenantPreferenceID', (req, res) => {
         tenantPrefs[tenantPrefIndex] = { ...tenantPrefs[tenantPrefIndex], ...tenantPrefData };
 
         saveTenantJson(tenantsPrefFilePath, tenantPrefs);
-        return res.status(200).send('Tenant preference data updated successfully');
+        // return res.status(200).send('Tenant preference data updated successfully');
+        return res.status(200).json(tenantPrefs[tenantPrefIndex]);
     } else {
         return res.status(404).send('Tenant preferene data not found');
     }

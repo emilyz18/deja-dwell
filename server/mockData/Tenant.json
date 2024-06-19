@@ -1,52 +1,53 @@
 [
-    {
-      "TenantID": "b2359c02-8d7f-42f6-9a98-889267d709d1",
-      "Occupation": "Software Engineer",
-      "Company": "Tech Solutions Inc.",
-      "Income": 90000,
-      "Habit": "Early-bird",
-      "Gender": "Male",
-      "Age": 30,
-      "TenantPreferenceID": "e1f3a2b4-5d6c-4a8f-9e7d-3c8b1f6e5d9a"
-    },
-    {
-      "TenantID": "d6c9f3a2-8b7e-4d3f-9a87-5b8d2a3c6f9d",
-      "Occupation": "Graphic Designer",
-      "Company": "Creative Arts Co.",
-      "Income": 55000,
-      "Habit": "Late-owl",
-      "Gender": "Female",
-      "Age": 28,
-      "TenantPreferenceID": "c2d3a8f4-7e6b-4a2e-9b7d-2c8a1f5d6b9e"
-    },
-    {
-      "TenantID": "c9f2d8b3-8a7e-4d3f-9b67-8d2a3b6c5e9f",
-      "Occupation": "Marketing Manager",
-      "Company": "Biz Marketing Ltd.",
-      "Income": 75000,
-      "Habit": "Early-bird",
-      "Gender": "Female",
-      "Age": 32,
-      "TenantPreferenceID": "d3a8f4b2-6c7e-4a1d-9b8f-2c8a3f7d6b9e"
-    },
-    {
-      "TenantID": "f6b9e8a2-7c4e-4d3f-9a7d-2e8a1f6c3b9d",
-      "Occupation": "Project Manager",
-      "Company": "Enterprise Solutions LLC",
-      "Income": 80000,
-      "Habit": "Late-owl",
-      "Gender": "Female",
-      "Age": 35,
-      "TenantPreferenceID": "e2d3a4b8-7f6e-4c3d-9b7a-3d8a1f2d6b9c"
-    },
-    {
-      "TenantID": "b9f2e8a3-6d4e-4d1f-9a7c-2e8a1f5c7d9b",
-      "Occupation": "Data Analyst",
-      "Company": "Analytics Pros",
-      "Income": 70000,
-      "Habit": "Early-bird",
-      "Gender": "Female",
-      "Age": 29,
-      "TenantPreferenceID": "f3d2a8b4-6e7c-4a1e-9b8d-3c8a1f7d6b9e"
-    }
-  ]
+  {
+    "TenantID": "b2359c02-8d7f-42f6-9a98-889267d709d1",
+    "Occupation": "Goosefarm",
+    "Company": "Tech Solutions Inc.",
+    "Income": 90000,
+    "Habit": "Early-bird",
+    "Gender": "Male",
+    "Age": 30,
+    "TenantPreferenceID": "e1f3a2b4-5d6c-4a8f-9e7d-3c8b1f6e5d9a",
+    "gender": "Female"
+  },
+  {
+    "TenantID": "d6c9f3a2-8b7e-4d3f-9a87-5b8d2a3c6f9d",
+    "Occupation": "Graphic Designer",
+    "Company": "Creative Arts Co.",
+    "Income": 55000,
+    "Habit": "Late-owl",
+    "Gender": "Female",
+    "Age": 28,
+    "TenantPreferenceID": "c2d3a8f4-7e6b-4a2e-9b7d-2c8a1f5d6b9e"
+  },
+  {
+    "TenantID": "c9f2d8b3-8a7e-4d3f-9b67-8d2a3b6c5e9f",
+    "Occupation": "Marketing Manager",
+    "Company": "Biz Marketing Ltd.",
+    "Income": 75000,
+    "Habit": "Early-bird",
+    "Gender": "Female",
+    "Age": 32,
+    "TenantPreferenceID": "d3a8f4b2-6c7e-4a1d-9b8f-2c8a3f7d6b9e"
+  },
+  {
+    "TenantID": "f6b9e8a2-7c4e-4d3f-9a7d-2e8a1f6c3b9d",
+    "Occupation": "Project Manager",
+    "Company": "Enterprise Solutions LLC",
+    "Income": 80000,
+    "Habit": "Late-owl",
+    "Gender": "Female",
+    "Age": 35,
+    "TenantPreferenceID": "e2d3a4b8-7f6e-4c3d-9b7a-3d8a1f2d6b9c"
+  },
+  {
+    "TenantID": "b9f2e8a3-6d4e-4d1f-9a7c-2e8a1f5c7d9b",
+    "Occupation": "Data Analyst",
+    "Company": "Analytics Pros",
+    "Income": 70000,
+    "Habit": "Early-bird",
+    "Gender": "Female",
+    "Age": 29,
+    "TenantPreferenceID": "f3d2a8b4-6e7c-4a1e-9b8d-3c8a1f7d6b9e"
+  }
+]

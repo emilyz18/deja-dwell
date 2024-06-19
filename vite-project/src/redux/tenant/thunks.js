@@ -15,8 +15,9 @@ export const getTenantProfileAsync = createAsyncThunk(
 
 export const patchTenantProfileAsync = createAsyncThunk(
     actionTypes.PATCH_Tenant_PROFILE,
-    async ({ tenantID, updatedData }) => {
-        return await tenantService.patchUser(tenantID, updatedData);
+    async ({ tenantID, tenant }) => {
+        console.log('patch tenant profile:');
+        return await tenantService.patchTenantProfile(tenantID, tenant);
     }
 );
 
@@ -24,14 +25,15 @@ export const getTenantPrefAsync = createAsyncThunk(
     actionTypes.GET_Tenant_PREF,
     async (tenantPreferenceID) => {
         const response = await tenantService.getTenantPref(tenantPreferenceID);
-        console.log('!!!Fetched tenant pref:', response);
+        // console.log('!!!Fetched tenant pref:', response);
         return response;
     }
 );
 
 export const patchTenantPrefAsync = createAsyncThunk(
     actionTypes.PATH_Tenant_PREF,
-    async ({ tenantPreferenceID, updatedData }) => {
-        return await tenantService.patchTenantPref(tenantPreferenceID, updatedData);
+    async ({ tenantPreferenceID, tenantPref }) => {
+        console.log('patch tenant pref:');
+        return await tenantService.patchTenantPref(tenantPreferenceID, tenantPref);
     }
 );

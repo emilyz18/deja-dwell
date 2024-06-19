@@ -28,8 +28,8 @@ const getTenantPref = async (tenantPreferenceID) => {
 };
 
 
-const patchTenantProfile = async (tenantID, tenantProfile) => {
-    return handleResponse(() => axios.patch(`${URL_PATH_profile}/${tenantID}`, tenantProfile));
+const patchTenantProfile = async (tenantID, tenant) => {
+    return handleResponse(() => axios.patch(`${URL_PATH_profile}/${tenantID}`, tenant));
 };
 
 const patchTenantPref = async (preferenceID, tenantPref) => {
