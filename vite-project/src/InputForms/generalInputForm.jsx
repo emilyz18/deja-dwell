@@ -77,6 +77,7 @@ export function GeneralInputForm() {
                         }}
                         noValidate
                         autoComplete="off"
+                        className='general-input-form'
                     >
                         <h1>My profile </h1>
                         <Grid container spacing={2}>
@@ -156,7 +157,7 @@ export function GeneralInputForm() {
                                     Save
                                 </Button>
                                 <Button
-                                    className="cancel-edit-button"
+                                    className="button"
                                     variant="contained"
                                     color="secondary"
                                     onClick={handleCancel}
