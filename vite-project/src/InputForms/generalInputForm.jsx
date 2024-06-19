@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
+
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import { Typography } from '@mui/material';
@@ -13,53 +10,62 @@ import { Grid } from '@mui/material';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setName,setImage, setPhoneNumber, setEmail, setIsEditing } from "../redux/users/singleUserReducer.js"
 
-import { getUserByIdAsync, patchUserAsync } from '../redux/users/thunks.js';
+import { getUserAsync, editUserAsync } from '../redux/user/thunks.js';
+import { updateUser } from '../redux/user/reducer.js';
 
 
 export function GeneralInputForm() {
-    // TODO: how to select current user
-    const {
-        id, 
-        
-    } = useSelector((state) => state.user.user.UserID);
+    const [isEditing, setIsEditing] = useState(false);
+   
 
+    const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
 
-    
+
     useEffect(() => {
-        dispatch(getUserByIdAsync(id));
-    }, [dispatch, id]);
+        if (user && user.UserID) {
+            dispatch(getUserAsync(user.UserID));
+        }
+    }, [dispatch, user.UserID]);
+
+    //
+    // useEffect(() => { 
+    //     if (user) {
+    //         setFormData({
+    //             UserName: user.UserName || '',
+    //             ProfileImg: user.ProfileImg || '',
+    //             PhoneNumber: user.PhoneNumber || '',
+    //             UserEmail: user.UserEmail || ''
+    //         });
+    //     }
+    // }, [user]);
+
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        // overwite with the field that is changed
+        // dispatch(updateUser({ [name]: value })); // update user in reducer 
+        const newUserData = { ...user, [name]: value };
+        dispatch(updateUser(newUserData)); // Update user in reducer locally
+
+    };
 
     const handleEdit = () => {
-        dispatch(setIsEditing(true));
+        setIsEditing(true);
+
     }
 
     const handleCancel = () => {
-        dispatch(setIsEditing(false));
+        setIsEditing(false);
+
     }
-
-
-    // const handleAddUser = (user) => {
-    //     console.log('Added user info: ', user)
-    //     putUserAsync()
-    // }
 
 
     function handleSubmit(event) {
         event.preventDefault()
-
-        const newUserData = {
-            id,
-            name,
-            image,
-            phoneNumber,
-            email,
-        }
-
-        dispatch(patchUserAsync(newUserData));
-        
+        dispatch(editUserAsync(user));
+        setIsEditing(false);
     }
 
     // for file upload button, from material UI documantation
@@ -76,11 +82,9 @@ export function GeneralInputForm() {
     });
 
     return (
-
         <>
             {
                 isEditing ? (
-
 
                     <Box
                         component="form"
@@ -98,26 +102,29 @@ export function GeneralInputForm() {
                                     label="Full Name"
                                     variant="filled"
                                     required
-                                    value={name}
-                                    onChange={(e) => dispatch(setName(e.target.value))}
+                                    name="UserName"
+                                    value={user.UserName || ""}
+                                    onChange={handleChange}
                                     placeholder="Enter name here..."
                                     fullWidth
                                     margin="normal"
                                 />
                             </Grid>
-                            
+
                             <Grid item xs={12}>
                                 <TextField
                                     className="image-field"
                                     label="Image URL"
                                     variant="filled"
-                                    value={image}
-                                    onChange={(e) => dispatch(setImage(e.target.value))}
+                                    name="ProfileImg"
+                                    value={user.ProfileImg || ""}
+                                    onChange={handleChange}
                                     placeholder="Enter Image URL here..."
                                     fullWidth
                                     margin="normal"
                                 />
                                 <Button
+                                    value={user.ProfileImg || ""}
                                     component="label"
                                     variant="contained"
                                 >
@@ -131,8 +138,9 @@ export function GeneralInputForm() {
                                     label="Phone Number"
                                     variant="filled"
                                     required
-                                    value={phoneNumber}
-                                    onChange={(e) => dispatch(setPhoneNumber(e.target.value))}
+                                    name="PhoneNumber"
+                                    value={user.PhoneNumber || ""}
+                                    onChange={handleChange}
                                     placeholder="Enter phone number here..."
                                     fullWidth
                                     margin="normal"
@@ -145,8 +153,9 @@ export function GeneralInputForm() {
                                     variant="filled"
                                     required
                                     type="email"
-                                    value={email}
-                                    onChange={(e) => dispatch(setEmail(e.target.value))}
+                                    name="UserEmail"
+                                    value={user.UserEmail || ""}
+                                    onChange={handleChange}
                                     placeholder="Enter email here..."
                                     fullWidth
                                     margin="normal"
@@ -178,11 +187,11 @@ export function GeneralInputForm() {
 
                     <Box>
 
-                        <Typography variant="h1">My Profile</Typography>
-                        <Typography variant="h2">Name: {name || 'N/A'}</Typography>
-        
-                        <Typography>Phone Number: {phoneNumber || 'N/A'}</Typography>
-                        <Typography>Email: {email || 'N/A'}</Typography>
+                        <Typography variant="h4">My Profile</Typography>
+                        <Typography variant="h6">Name: {user.UserName || 'N/A'}</Typography>
+
+                        <Typography>Phone Number: {user.PhoneNumber || 'N/A'}</Typography>
+                        <Typography>Email: {user.UserEmail || 'N/A'}</Typography>
                         <Button variant="contained" color="primary" onClick={handleEdit}>
                             Edit Profile
                         </Button>

@@ -1,4 +1,4 @@
-// input form is generated using Chatgpt 4o, with text list of field and its type alone with sample Material UI textfield  as prompt
+// input form UI code is generated using Chatgpt 4o, with text list of field and its type alone with sample Material UI textfield  as prompt
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,21 +26,18 @@ export function TenantInputForm() {
   });
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
-  
   const { tenant, tenantPref } = useSelector((state) => state.tenant);
-
   // grabing tenant profile
   useEffect(() => {
     if (isAuthenticated && tenantID) {
-      console.log('Dispatching getTenantProfileAsync with tenantID:', tenantID);
+      // console.log('Dispatching getTenantProfileAsync with tenantID:', tenantID);
       dispatch(getTenantProfileAsync(tenantID));
     }
   }, [dispatch, isAuthenticated, tenantID]);
-
   // grabing tenant preference
   useEffect(() => {
     if (isAuthenticated && tenant.TenantPreferenceID) {
-      console.log(`Fetching tenant preference for tenantPreferenceID: ${tenant.TenantPreferenceID}`);
+      // console.log(`Fetching tenant preference for tenantPreferenceID: ${tenant.TenantPreferenceID}`);
       dispatch(getTenantPrefAsync(tenant.TenantPreferenceID));
     }
 
@@ -80,6 +77,7 @@ export function TenantInputForm() {
     setIsEditing(false);
   };
 
+  // handle genders genrated by chatgpt4o, with textfield UI code as prompt
   const handleGenderChange = (e) => {
     const value = e.target.value;
     if (value === 'self-describe') {

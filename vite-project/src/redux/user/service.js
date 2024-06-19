@@ -23,7 +23,17 @@ const signUp = async (user) => {
   return handleResponse(() => axios.post(URL_PATH + '/register', {user}));
 };
 
+const getUser = async (userID) => {
+  return handleResponse(() => axios.get(URL_PATH + `/${userID}`));
+};
+
+const editProfile = async (user) => {
+  return handleResponse(() => axios.patch(URL_PATH + '/edit', { user }));
+};
+
 export default {
   signIn,
-  signUp
+  signUp,
+  getUser,
+  editProfile
 };

@@ -57,5 +57,35 @@ router.post('/login', (req, res) => {
   }
 });
 
+router.get('/:userID', (req, res) => {
+  const { userID } = req.params;
+  const user = users.find(u => u.UserID === userID);
+  if (user) {
+    return res.json(user);
+  } else {
+    return res.status(404).send(`User with id ${userID} not found in server/user.js `);
+  }
+});
+
+
+router.patch('/edit', (req, res) => {
+  const userdata = req.body.user;
+  console.log(userdata, "req, body in path edit");
+
+  const userID = userdata.UserID;
+  console.log(userID, "userId FROM req, body in path edit");
+
+  const userIndex = users.findIndex(u => u.UserID === userID);
+
+  if (userIndex >= 0) {
+    users[userIndex] = { ...users[userIndex], ...userdata };
+    writeUsersFile();
+    return res.status(200).json(users[userIndex]);
+  } else {
+    // console.log("userIndex:", userIndex);
+    return res.status(404).json({ message: `userIndex ${userIndex}, No such user for update` });
+  }
+});
+
 
 module.exports = router;
