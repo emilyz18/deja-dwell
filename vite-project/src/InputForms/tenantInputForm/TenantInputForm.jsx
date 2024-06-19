@@ -112,6 +112,7 @@ export function TenantInputForm() {
           noValidate
           autoComplete="off"
           onSubmit={handleSubmit}
+          className='general-input-form'
         >
           <h1>Landlords need to know your ... </h1>
           <Grid container spacing={2}>
@@ -130,8 +131,8 @@ export function TenantInputForm() {
                 margin="normal"
               />
             </Grid>
-            <Grid item xs={12} md={5}>
-              <FormControl fullWidth margin="normal">
+            <Grid>
+              <FormControl margin="normal">
                 <InputLabel id="demo-simple-select-autowidth-label">Gender *</InputLabel>
                 <Select
                   labelId="demo-simple-select-autowidth-label"
@@ -142,9 +143,7 @@ export function TenantInputForm() {
                   required
                   label="Gender"
                 >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
+                  <MenuItem value=""><em>None</em></MenuItem>
                   <MenuItem value="Female">Female</MenuItem>
                   <MenuItem value="Male">Male</MenuItem>
                   <MenuItem value="Non-binary">Non-binary</MenuItem>
@@ -161,7 +160,7 @@ export function TenantInputForm() {
                 value={customGender || ''}
                 onChange={handleCustomGenderChange}
                 placeholder="Enter gender here..."
-                fullWidth
+        
                 margin="normal"
               />
             </Grid>
@@ -312,7 +311,7 @@ export function TenantInputForm() {
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControl fullWidth margin="normal">
+              <FormControl  margin="normal">
                 <InputLabel id="duration-select-label">Duration</InputLabel>
                 <Select
                   labelId="duration-select-label"
@@ -339,7 +338,7 @@ export function TenantInputForm() {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <FormControl fullWidth margin="normal">
+              <FormControl  margin="normal">
                 <InputLabel id="room-type-select-label">Room Type</InputLabel>
                 <Select
                   labelId="room-type-select-label"
@@ -403,7 +402,7 @@ export function TenantInputForm() {
             </Grid>
             <Grid item xs={12}>
               <Button
-                className="submit-button"
+                className="button"
                 type="submit"
                 variant="contained"
                 color="primary"
@@ -411,7 +410,7 @@ export function TenantInputForm() {
                 Save
               </Button>
               <Button
-                className="cancel-edit-button"
+                className="button"
                 variant="contained"
                 color="secondary"
                 onClick={handleCancel}
