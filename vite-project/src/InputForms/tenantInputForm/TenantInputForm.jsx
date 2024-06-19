@@ -13,6 +13,7 @@ import { Box, Grid, Typography, Checkbox, FormControlLabel } from '@mui/material
 import '../inputForm.css';
 import { getTenantPrefAsync, getTenantProfileAsync, patchTenantPrefAsync, patchTenantProfileAsync } from '../../redux/tenant/thunks';
 
+
 export function TenantInputForm() {
   const [customGender, setCustomGender] = useState('');
   const [isEditing, setIsEditing] = useState(false);
@@ -421,33 +422,35 @@ export function TenantInputForm() {
           </Grid>
         </Box>
       ) : (
-        <Box>
-          <Typography variant="h4">Landlord Needs to Know your</Typography>
-          <Typography>Age: {tenant.Age}</Typography>
-          <Typography>Gender: {tenant.Gender || 'N/A'}</Typography>
-          <Typography>Occupation: {tenant.Occupation || 'N/A'}</Typography>
-          <Typography>Income: {tenant.Income || 'N/A'}</Typography>
-          <Typography>Company: {tenant.Company || 'N/A'}</Typography>
-          <Typography>Habit: {tenant.Habit || 'N/A'}</Typography>
-          <Typography>Province: {tenantPref.Province || 'N/A'}</Typography>
-          <Typography>City: {tenantPref.City || 'N/A'}</Typography>
-          <Typography>Street: {tenantPref.Street || 'N/A'}</Typography>
-          <Typography>Expected Price: {tenantPref.ExpectedPrice || 'N/A'}</Typography>
-          <Typography>Max Price: {tenantPref.MaxPrice || 'N/A'}</Typography>
-          <Typography>Start Date: {tenantPref.StartDate || 'N/A'}</Typography>
-          <Typography>End Date: {tenantPref.EndDate || 'N/A'}</Typography>
-          <Typography>Duration: {tenantPref.Duration || 'N/A'}</Typography>
-          <Typography>Room Type: {tenantPref.RoomType || 'N/A'}</Typography>
-          <Typography>Own Pet: {tenantPref.isOwnPet ? 'Yes' : 'No'}</Typography>
-          <Typography>Smoke: {tenantPref.isSmoke ? 'Yes' : 'No'}</Typography>
-          <Typography>Party: {tenantPref.isParty ? 'Yes' : 'No'}</Typography>
-          <Typography>Weed: {tenantPref.isWeed ? 'Yes' : 'No'}</Typography>
-          <Typography>Number of Parking: {tenantPref.NumOfParking || 'N/A'}</Typography>
-          <Typography>Number of Resident: {tenantPref.NumOfResident || 'N/A'}</Typography>
-          <Button variant="contained" color="primary" onClick={handleEdit}>
-            Edit Profile
-          </Button>
-        </Box>
+          <Box className="general-input-form">
+            <Typography variant="h4" className="header">Landlord need to know your...</Typography>
+            <Typography className="list-item">Age: {tenant.Age}</Typography>
+            <Typography className="list-item">Gender: {tenant.Gender || 'N/A'}</Typography>
+            <Typography className="list-item">Occupation: {tenant.Occupation || 'N/A'}</Typography>
+            <Typography className="list-item">Income: {tenant.Income || 'N/A'}</Typography>
+            <Typography className="list-item">Company: {tenant.Company || 'N/A'}</Typography>
+            <Typography className="list-item">Habit: {tenant.Habit || 'N/A'}</Typography>
+
+            <Typography variant="h4" className="header">You are looking for rent that...</Typography>
+            <Typography className="list-item">Province: {tenantPref.Province || 'N/A'}</Typography>
+            <Typography className="list-item">City: {tenantPref.City || 'N/A'}</Typography>
+            <Typography className="list-item">Street: {tenantPref.Street || 'N/A'}</Typography>
+            <Typography className="list-item">Expected Price: {tenantPref.ExpectedPrice || 'N/A'}</Typography>
+            <Typography className="list-item">Max Price: {tenantPref.MaxPrice || 'N/A'}</Typography>
+            <Typography className="list-item">Start Date: {tenantPref.StartDate || 'N/A'}</Typography>
+            <Typography className="list-item">End Date: {tenantPref.EndDate || 'N/A'}</Typography>
+            <Typography className="list-item">Duration: {tenantPref.Duration || 'N/A'}</Typography>
+            <Typography className="list-item">Room Type: {tenantPref.RoomType || 'N/A'}</Typography>
+            <Typography className="list-item">Own Pet: {tenantPref.isOwnPet ? 'Yes' : 'No'}</Typography>
+            <Typography className="list-item">Smoke: {tenantPref.isSmoke ? 'Yes' : 'No'}</Typography>
+            <Typography className="list-item">Party: {tenantPref.isParty ? 'Yes' : 'No'}</Typography>
+            <Typography className="list-item">Weed: {tenantPref.isWeed ? 'Yes' : 'No'}</Typography>
+            <Typography className="list-item">Number of Parking: {tenantPref.NumOfParking || 'N/A'}</Typography>
+            <Typography className="list-item">Number of Resident: {tenantPref.NumOfResident || 'N/A'}</Typography>
+            <Button variant="contained" color="primary" className="button" onClick={handleEdit}>
+              Edit Preference
+            </Button>
+          </Box>
       )}
     </>
   );

@@ -1,12 +1,22 @@
-.name-field,
-.age-field,
-.gender-field,
-.image-field,
-.phoneNumber-field,
-.email-field {
-  max-width: 60%;
+.general-input-form {
+  margin: 50px;
 }
 
-.button {
-  margin-bottom: 10px;
+.general-input-form .header {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.general-input-form .button {
+  margin-top: 100px;
+  margin-right: 20px;
+  /* float: right; */
+}
+
+.general-input-form .list-item {
+  margin-bottom: 8px;
+}
+
+.general-input-form .file-upload-button {
+  margin-top: 8px;
 }

@@ -2,22 +2,20 @@ import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-
 import { styled } from '@mui/material/styles';
-import { Box } from '@mui/material';
-import { Typography } from '@mui/material';
+import { Box, Typography, List, ListItem } from '@mui/material';
 import { Grid } from '@mui/material';
 
 import { useSelector, useDispatch } from 'react-redux';
-
-
 import { getUserAsync, editUserAsync } from '../redux/user/thunks.js';
 import { updateUser } from '../redux/user/reducer.js';
+
+import "./inputForm.css"
 
 
 export function GeneralInputForm() {
     const [isEditing, setIsEditing] = useState(false);
-   
+
 
     const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
@@ -29,38 +27,21 @@ export function GeneralInputForm() {
         }
     }, [dispatch, user.UserID]);
 
-    //
-    // useEffect(() => { 
-    //     if (user) {
-    //         setFormData({
-    //             UserName: user.UserName || '',
-    //             ProfileImg: user.ProfileImg || '',
-    //             PhoneNumber: user.PhoneNumber || '',
-    //             UserEmail: user.UserEmail || ''
-    //         });
-    //     }
-    // }, [user]);
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        // overwite with the field that is changed
-        // dispatch(updateUser({ [name]: value })); // update user in reducer 
+        // overwite with the field that is changed 
         const newUserData = { ...user, [name]: value };
         dispatch(updateUser(newUserData)); // Update user in reducer locally
-
     };
 
     const handleEdit = () => {
         setIsEditing(true);
-
     }
 
     const handleCancel = () => {
         setIsEditing(false);
-
     }
-
 
     function handleSubmit(event) {
         event.preventDefault()
@@ -81,11 +62,14 @@ export function GeneralInputForm() {
         width: 1,
     });
 
+    const StyledTypography = styled(Typography)(({ theme }) => ({
+        marginBottom: theme.spacing(2),
+    }));
+
     return (
         <>
             {
                 isEditing ? (
-
                     <Box
                         component="form"
                         sx={{
@@ -163,7 +147,7 @@ export function GeneralInputForm() {
                             </Grid>
                             <Grid item xs={12}>
                                 <Button
-                                    className="submit-button"
+                                    className="button"
                                     type="submit"
                                     variant="contained"
                                     color="primary"
@@ -184,18 +168,25 @@ export function GeneralInputForm() {
                     </Box>
 
                 ) : (
-
-                    <Box>
-
-                        <Typography variant="h4">My Profile</Typography>
-                        <Typography variant="h6">Name: {user.UserName || 'N/A'}</Typography>
-
-                        <Typography>Phone Number: {user.PhoneNumber || 'N/A'}</Typography>
-                        <Typography>Email: {user.UserEmail || 'N/A'}</Typography>
-                        <Button variant="contained" color="primary" onClick={handleEdit}>
-                            Edit Profile
-                        </Button>
-                    </Box>
+                        <Box className="general-input-form">
+                            <Typography variant="h4" className="header">My Profile</Typography>
+                            <List>
+                                <ListItem className="list-item">
+                                    <Typography>Name: {user.UserName || 'N/A'}</Typography>
+                                </ListItem>
+                                <ListItem className="list-item">
+                                    <Typography>Phone Number: {user.PhoneNumber || 'N/A'}</Typography>
+                                </ListItem>
+                                <ListItem className="list-item">
+                                    <Typography>Email: {user.UserEmail || 'N/A'}</Typography>
+                                </ListItem>
+                                <ListItem className="list-item">
+                                    <Button variant="contained" color="primary" onClick={handleEdit} className="button">
+                                        Edit Profile
+                                    </Button>
+                                </ListItem>
+                            </List>
+                        </Box>
 
                 )
             }

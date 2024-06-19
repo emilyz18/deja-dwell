@@ -50,7 +50,7 @@ const userSlice = createSlice({
       })
       .addCase(getUserAsync.fulfilled, (state, action) => {
         // const userPayload = action.payload;
-        console.log('getUserAsync fullfilled:', action.payload);
+        // console.log('getUserAsync fullfilled:', action.payload);
 
         state.user = action.payload;
       })
