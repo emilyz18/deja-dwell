@@ -1,18 +1,28 @@
-import React from 'react';
-import './Filters.css'; // Filters specific CSS
+import React from 'react'
+import './Filters.css' // Filters specific CSS
 
 const Filters = ({ filters, handleFilterChange }) => {
   return (
     <div className="filters">
       <div className="filter-section filter-inputs">
         <label>
-          Price Range:
+          Max Price:
           <input
             type="text"
-            name="priceRange"
-            value={filters.priceRange}
+            id="maxPrice"
+            name="maxPrice"
+            value={filters.maxPrice}
             onChange={handleFilterChange}
           />
+        </label>
+        <label htmlFor="minPrice">Min Price:
+        <input
+          type="text"
+          id="minPrice"
+          name="minPrice"
+          value={filters.minPrice}
+          onChange={handleFilterChange}
+        />
         </label>
         <label>
           Province:
@@ -43,7 +53,6 @@ const Filters = ({ filters, handleFilterChange }) => {
         </label>
       </div>
 
-      
       <div className="filter-section filter-checkboxes">
         <label>
           <input
@@ -65,7 +74,7 @@ const Filters = ({ filters, handleFilterChange }) => {
         </label>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Filters;
+export default Filters
