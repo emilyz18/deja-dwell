@@ -21,16 +21,32 @@ const writeUsersFile = () => {
 
 router.post('/register', (req, res) => {
   const userdata = req.body.user;
-  const email = userdata.UserEmail;
+  const email = userdata.Email;
   const password = userdata.Password;
   const userName = userdata.UserName;
+  const accountType = userdata.accountType;
+  if(!email) {
+    res.status(402).json({ message: 'No email!!' });
+  }
   const user = users.find(u => u.UserEmail === email);
   if (user) {
     res.status(401).json({ message: 'Email Already have account!' });
   } else {
     const userId = uuid();
     const hashKey = crypto.randomBytes(16).toString('hex');
-    const newUser = { UserID: userId, UserName: userName, Password: password, UserEmail: email, HashKey: hashKey }
+    const newUser = { UserID: userId, UserName: userName, Password: password, UserEmail: email, HashKey: hashKey };
+    if(accountType == "Landlord") {
+      newUser.isLandlord = true;
+      newUser.isTenant = false;
+      const landlordId = uuid();
+      newUser.LandlordID = landlordId;
+    } else {
+      newUser.isLandlord = false;
+      newUser.isTenant = true;
+      const tenantId = uuid();
+      newUser.TenantID = tenantId;
+    }
+    console.log(newUser);
     users.push(newUser);
     writeUsersFile();
     res.status(201).json({ message: 'User registered', Auth: true, User: newUser});
