@@ -15,6 +15,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { signUpAsync } from '../../redux/user/thunks';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 // COPY RIGHT: THIS PAGE CONTENT IS COPY AND MODIFY FROM https://github.com/mui/material-ui/blob/v5.15.20/docs/data/material/getting-started/templates/sign-up/SignUp.js 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -26,6 +30,12 @@ export default function SignUp() {
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.user.isAuthenticated);
 
+  const [accountType, setAccountType] = React.useState('');
+
+  const handleChange = (event) => {
+    setAccountType(event.target.value);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -33,14 +43,19 @@ export default function SignUp() {
       userName: data.get('userName'),
       email: data.get('email'),
       password: data.get('password'),
+      accountType: accountType
     });
-
     const user = {
       UserName: data.get('userName'),
       Email: data.get('email'),
-      Password: data.get('password')
+      Password: data.get('password'),
+      accountType: accountType
     }
-    dispatch(signUpAsync(user));
+    if( !user.UserName || !user.Email ||!user.Password ||!user.accountType ) {
+      console.log("not allow for empty field");
+    } else {
+      dispatch(signUpAsync(user));
+    }
   };
 
 
@@ -51,7 +66,7 @@ export default function SignUp() {
     }
   }, [isAuth, dispatch]);
 
-  
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -103,6 +118,20 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <InputLabel id="account-type">Account Type</InputLabel>
+                <Select
+                  required
+                  labelId="account-type"
+                  id="account-type"
+                  value={accountType}
+                  label="Account Type"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={"Landlord"}>Landlord</MenuItem>
+                  <MenuItem value={"Tenant"}>Tenant</MenuItem>
+                </Select>
               </Grid>
             </Grid>
             <Button
