@@ -59,13 +59,12 @@ export function TenantInputForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(patchTenantProfileAsync({ tenantID, tenant }));
-
-    if (tenant.TenantPreferenceID) { // Ensure TenantPreferenceID is defined
+    // need to check because TenantPreferenceID is get from difference files 
+    if (tenant.TenantPreferenceID) {
       dispatch(patchTenantPrefAsync({ tenantPreferenceID: tenant.TenantPreferenceID, tenantPref }));
     } else {
-      console.error('TenantPreferenceID undefined. Cannot patch');
+      console.error('In input form component. TenantPreferenceID undefined. Cannot patch');
     }
-    // dispatch(patchTenantPrefAsync({ tenantPreferenceID :tenant.tenantPreferenceID, tenantPref }))
     setIsEditing(false);
   };
 
@@ -83,24 +82,19 @@ export function TenantInputForm() {
     const value = e.target.value;
     if (value === 'self-describe') {
       setCustomGender(customGender);
-      dispatch(updateTenant({ gender: customGender }));
+      dispatch(updateTenant({ Gender: customGender }));
     } else {
       setCustomGender('');
-      dispatch(updateTenant({ gender: value }));
+      dispatch(updateTenant({ Gender: value }));
     }
   };
-
   const handleCustomGenderChange = (e) => {
     const value = e.target.value;
     setCustomGender(value);
-    dispatch(updateTenant({ gender: value }));
+    dispatch(updateTenant({ Gender: value }));
   };
-  
-
   // console.log('Tenant data:', tenant);
   // console.log('Tenant preference data:', tenantPref);
-
-
   return (
     <>
       {isEditing ? (
@@ -132,8 +126,8 @@ export function TenantInputForm() {
               />
             </Grid>
             <Grid>
-              <FormControl margin="normal">
-                <InputLabel id="demo-simple-select-autowidth-label">Gender *</InputLabel>
+              <FormControl margin="normal" fullWidth>
+                <InputLabel id="demo-simple-select-autowidth-label">Gender*</InputLabel>
                 <Select
                   labelId="demo-simple-select-autowidth-label"
                   id="demo-simple-select-autowidth"
