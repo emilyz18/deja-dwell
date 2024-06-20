@@ -1,0 +1,30 @@
+.landlord-dashboard-display {
+  width: 100%;
+}
+
+.landlord-property-card {
+  display: flex;
+}
+
+.landlord-carousel-container {
+  width: 400px;
+  height: 240px;
+}
+
+.property-information {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  height: 240px; /* Height must match carousel*/
+  margin-left: 20px;
+}
+
+.property-description {
+  margin: 0 10px 0 0;
+  flex-grow: 1; /* Allow content container to grow vertically */
+  overflow: auto; /* Enable scrolling for long content */
+  scrollbar-width: thin;
+}
+
+.property-information h3 {
+  margin: 0;
+}

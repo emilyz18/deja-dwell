@@ -1,0 +1,55 @@
+.property-list {
+  gap: 16px; /* Space between cards */
+  justify-content: center; /* Center the cards horizontally */
+  padding: 16px; /* Add some padding around the list */
+  width: 100%;
+}
+
+
+.placeholder-card {
+  /* width: 300px; */
+  height: 410px; /* When a property card is being dragged, the next card takes over its position. This sets the height of the blank placeholder*/
+}
+.dropzone-container {
+  display: flex;
+}
+
+.dropzone {
+  width: 50%;
+  /* height: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  opacity: 0.5;
+  transition: opacity 0.2s ease-in-out;
+  border-style: dashed;
+  border-radius: 10px;
+}
+
+.dropzone-placeholder {
+  width: 50%;
+  /* height: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+}
+
+.left-dropzone {
+  background-color: rgba(255, 0, 0, 0.1);
+  border-color: red;
+}
+
+.right-dropzone {
+  background-color: rgba(0, 255, 0, 0.1);
+  border-color: green;
+}
+
+.dropzone.active {
+  opacity: 1;
+}
+
+.dropzone-icon {
+  font-size: 2em;
+}

@@ -1,0 +1,12 @@
+.name-field,
+.age-field,
+.gender-field,
+.image-field,
+.phoneNumber-field,
+.email-field {
+  max-width: 60%;
+}
+
+.button {
+  margin-bottom: 10px;
+}

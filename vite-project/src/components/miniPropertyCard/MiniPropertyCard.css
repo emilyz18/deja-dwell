@@ -1,0 +1,116 @@
+.property-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  justify-content: center;
+  max-width: 450px;
+}
+
+.carousel-container {
+  height: 60%;
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.carousel {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.carousel-container img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover;
+}
+
+.card-details {
+  background-color: white;
+  padding: 16px;
+}
+
+.house-title {
+  margin: 0;
+  font-size: 1.2em;
+  text-align: left;
+}
+
+.details-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.details-row span {
+  font-size: 0.9em;
+}
+
+.house-type {
+  background-color: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.buttons-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px;
+  background-color: white;
+}
+
+.circle-button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.checkmark-button {
+  background-color: #1ac61a;
+  color: white;
+}
+
+.checkmark-button:hover {
+  background-color: green;
+  color: white;
+}
+
+.cross-button {
+  background-color: #e81717;
+  color: white;
+}
+
+.cross-button:hover {
+  background-color: #980b0b;
+  color: white;
+}
+
+.expand-button {
+  flex-grow: 1;
+  margin: 0 8px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.property-card {
+  position: relative;
+}
+
+.dragged-card {
+  position: absolute; 
+  z-index: 1000; /* Set a high z-index to ensure it appears on top of other elements */
+}
