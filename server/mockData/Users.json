@@ -3,12 +3,12 @@
     "UserID": "57c2b1f0-4123-4e60-a29a-01f4a02dcb4b",
     "LandlordID": null,
     "TenantID": "b2359c02-8d7f-42f6-9a98-889267d709d1",
-    "HashKey": "9157b495b1007c192a29ffec4a0a5b18",
+    "HashKey": "c43e8a0fb3c40e630f1ff3d27e354f4d",
     "isLandlord": false,
     "isTenant": true,
     "UserName": "JohnDoe",
     "UserEmail": "johndoe@example.com",
-    "PhoneNumber": "123-4567",
+    "PhoneNumber": "55555",
     "Gender": "Male",
     "ProfileImg": null,
     "Password": "password123",
@@ -131,5 +131,11 @@
     "PhoneNumber": "555-7891",
     "ProfileImg": null,
     "Password": "emmapass123"
+  },
+  {
+    "UserID": "e864335b-1200-4891-bfb9-340a3008804b",
+    "UserName": "ashley",
+    "Password": "123456",
+    "HashKey": "c8756ce7ebb4746e3bedd9e3eb1d6366"
   }
 ]
