@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import { useState, useEffect } from 'react'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles';
 import { Box, Typography, List, ListItem } from '@mui/material';
 import { Grid } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserAsync, editUserAsync } from '../redux/user/thunks.js';
@@ -12,6 +12,7 @@ import { updateUser } from '../redux/user/reducer.js';
 
 import "./inputForm.css"
 
+export const defaultProfilePath = "../../public/images/default_profile_pic.jpg"
 
 export function GeneralInputForm() {
     const [isEditing, setIsEditing] = useState(false);
@@ -34,6 +35,19 @@ export function GeneralInputForm() {
         const newUserData = { ...user, [name]: value };
         dispatch(updateUser(newUserData)); // Update user in reducer locally
     };
+
+    //adpt form tutorial
+    //https://nikolasbarwicki.com/articles/how-to-display-a-preview-of-an-image-upload-in-react/#:~:text=of%20the%20FileReader.-,React%20Example,-In%20a%20React 
+    const handlePicFileUpload = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const curFile = e.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                dispatch(updateUser({ ...user, ProfileImg: reader.result }));
+            };
+            reader.readAsDataURL(curFile);
+        }
+    }
 
     const handleEdit = () => {
         setIsEditing(true);
@@ -62,9 +76,6 @@ export function GeneralInputForm() {
         width: 1,
     });
 
-    const StyledTypography = styled(Typography)(({ theme }) => ({
-        marginBottom: theme.spacing(2),
-    }));
 
     return (
         <>
@@ -114,7 +125,7 @@ export function GeneralInputForm() {
                                     variant="contained"
                                 >
                                     Upload Photo
-                                    <VisuallyHiddenInput type="file" />
+                                    <VisuallyHiddenInput type="file" accept="image/*"  onChange={handlePicFileUpload} />
                                 </Button>
                             </Grid>
                             <Grid item xs={12}>
@@ -170,6 +181,12 @@ export function GeneralInputForm() {
 
                 ) : (
                         <Box className="general-input-form">
+
+                            <Avatar
+                                alt="user profile"
+                                src={user.ProfileImg || defaultProfilePath}
+                                sx={{ marginTop: 10, width: 200, height: 200 }}
+                            />    
                             <Typography variant="h4" className="header">My Profile</Typography>
                             <List>
                                 <ListItem className="list-item">
