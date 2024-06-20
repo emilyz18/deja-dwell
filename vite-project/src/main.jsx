@@ -14,8 +14,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
       <Provider store={store}>
         <Routes>
-          <Route path="/login" element={<SignIn />} />
-          <Route path="/register" element={<SignUp />} />
+          {/* todo ezhang: uncomment */}
+          {/* <Route path="/login" element={<SignIn />} />
+          <Route path="/register" element={<SignUp />} /> */}
           <Route path="/*" element={<ProtectedRoute />} />
         </Routes>
       </Provider>

@@ -11,6 +11,7 @@ import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './PropertyCardList.css'
 import { getPropertiesAsync } from '../../redux/properties/thunks.js';
+import SearchBar from '../searchBar/SearchBar.jsx';
 
 
 function PropertyCardList(props) {
@@ -108,6 +109,7 @@ function PropertyCardList(props) {
   // conditionally displayed. I also wrote css myself tp suit my own needs
   return (
     <>
+    <SearchBar/>
       <DndContext
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}
