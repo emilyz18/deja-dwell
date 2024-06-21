@@ -4,12 +4,12 @@
   gap: 10px;
   justify-content: center;
   padding: 20px;
-  width: 80%; /* Adjust the width as needed */
-  margin: 0 auto; /* Ensure the list is centered */
+  width: 80%;
+  margin: 0 auto;
 }
 
 .placeholder-card {
-  height: 410px; /* When a property card is being dragged, the next card takes over its position. This sets the height of the blank placeholder */
+  height: 410px;
 }
 
 .dropzone-container {
@@ -57,8 +57,8 @@
 .property-popup-background {
   position: fixed;
   top: 0;
-  left: 300px; /* Offset by 300px to account for the sidebar */
-  width: calc(100% - 300px); /* Adjust width to account for the left margin */
+  left: 300px;
+  width: calc(100% - 300px);
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   display: flex;

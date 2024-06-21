@@ -12,6 +12,7 @@ import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCa
 import './PropertyCardList.css';
 import { getPropertiesAsync } from '../../redux/properties/thunks';
 import { createMatchAsync } from '../../redux/matches/matchThunks';
+import { Snackbar, Alert } from '@mui/material';
 
 function PropertyCardList() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function PropertyCardList() {
   const [popupPVisible, setPopupPVisible] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [notification, setNotification] = useState({ open: false, message: '', severity: '' });
 
   useEffect(() => {
     if (getPropertiesStatus === 'IDLE') {
@@ -37,12 +39,8 @@ function PropertyCardList() {
       HouseID: likedProperty.HouseID,
       MatchStatus: 'Applied'
     }));
-    console.log(`Liked property: ${likedProperty.Title} (HouseID: ${likedProperty.HouseID})`);
-    // Remove the property from the list
-    dispatch({
-      type: 'properties/removeProperty',
-      payload: id,
-    });
+    setNotification({ open: true, message: `Liked property: ${likedProperty.Title}`, severity: 'success' });
+    dispatch({ type: 'properties/removeProperty', payload: id });
   };
 
   const dislikedProperty = (id) => {
@@ -53,12 +51,8 @@ function PropertyCardList() {
       HouseID: dislikedProperty.HouseID,
       MatchStatus: 'Disliked'
     }));
-    console.log(`Disliked property: ${dislikedProperty.Title} (HouseID: ${dislikedProperty.HouseID})`);
-    // Remove the property from the list
-    dispatch({
-      type: 'properties/removeProperty',
-      payload: id,
-    });
+    setNotification({ open: true, message: `Disliked property: ${dislikedProperty.Title}`, severity: 'info' });
+    dispatch({ type: 'properties/removeProperty', payload: id });
   };
 
   const displayPopup = (property) => {
@@ -104,6 +98,13 @@ function PropertyCardList() {
     },
   });
 
+  const handleNotificationClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setNotification({ ...notification, open: false });
+  };
+
   return (
       <>
         <DndContext
@@ -126,10 +127,7 @@ function PropertyCardList() {
               <ul id="property-list" className="property-list">
                 {properties.map((property) =>
                     property.HouseID === activeId ? (
-                        <div
-                            key={property.HouseID}
-                            className="placeholder-card"
-                        ></div>
+                        <div key={property.HouseID} className="placeholder-card"></div>
                     ) : (
                         <MiniPropertyCard
                             key={property.HouseID}
@@ -156,32 +154,32 @@ function PropertyCardList() {
           <DragOverlay>
             {activeId ? (
                 <MiniPropertyCard
-                    propertyInfo={properties.find(
-                        (property) => property.HouseID === activeId
-                    )}
+                    propertyInfo={properties.find((property) => property.HouseID === activeId)}
                     likedFn={likedProperty}
                     dislikedFn={dislikedProperty}
                     displayPopup={() =>
-                        displayPopup(
-                            properties.find((property) => property.HouseID === activeId)
-                        )
+                        displayPopup(properties.find((property) => property.HouseID === activeId))
                     }
                 />
             ) : null}
           </DragOverlay>
         </DndContext>
         {popupPVisible && (
-            <div
-                className="property-popup-background"
-                onClick={closePopup}
-            >
+            <div className="property-popup-background" onClick={closePopup}>
               <div className="property-popup" onClick={(e) => e.stopPropagation()}>
-                <ExpandedPropertyCard
-                    propertyInfo={selectedProperty}
-                />
+                <ExpandedPropertyCard propertyInfo={selectedProperty} />
               </div>
             </div>
         )}
+        <Snackbar
+            open={notification.open}
+            autoHideDuration={3000}
+            onClose={handleNotificationClose}
+        >
+          <Alert onClose={handleNotificationClose} severity={notification.severity} sx={{ width: '100%' }}>
+            {notification.message}
+          </Alert>
+        </Snackbar>
       </>
   );
 }
