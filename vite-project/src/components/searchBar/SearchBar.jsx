@@ -21,11 +21,6 @@ const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
     setFiltersVisible(!filtersVisible);
   };
 
-//   const handleSearch = () => {
-//     console.log('Search Term:', searchTerm);
-//     console.log('Filters:', filters);
-//   };
-
   return (
     <div className="search-bar">
       <div className="search-input">

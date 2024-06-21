@@ -55,8 +55,10 @@
     display: block;
     margin-bottom: 0.25em;
   }
-  
-  input[type="text"]
+
+  select[name="duration"],
+  input[type="text"],
+  input[type="number"]
    {
     padding: 0.25em;
     display: block;

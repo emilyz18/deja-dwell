@@ -36,8 +36,11 @@ function PropertyCardList(props) {
     province: '',
     city: '',
     duration: '',
+    startDate: '',
     allowPet: false,
     allowSmoke: false,
+    allowParty: false,
+    allowWeed: false,
   })
 
   useEffect(() => {
@@ -117,31 +120,35 @@ function PropertyCardList(props) {
     const matchesSearchTerm = property.title
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
-    const matchesMinPrice =
-      filters.minPrice === '' || property.price >= parseFloat(filters.minPrice)
     const matchesMaxPrice =
       filters.maxPrice === '' || property.price <= parseFloat(filters.maxPrice)
     const matchesProvince =
       filters.province === '' ||
-      property.province.toLowerCase().includes(filters.province.toLowerCase())
+      property.province.toLowerCase() === filters.province.toLowerCase()
     const matchesCity =
       filters.city === '' ||
-      property.city.toLowerCase().includes(filters.city.toLowerCase())
+      property.city.toLowerCase() === filters.city.toLowerCase()
+    const matchesStartDate =
+      filters.startDate === '' || property.startDate === filters.startDate
     const matchesDuration =
       filters.duration === '' ||
-      property.duration.toLowerCase().includes(filters.duration.toLowerCase())
+      property.duration.toLowerCase() == filters.duration.toLowerCase()
     const matchesAllowPet = !filters.allowPet || property.allowPet
     const matchesAllowSmoke = !filters.allowSmoke || property.allowSmoke
+    const matchesAllowParty = !filters.allowParty || property.allowParty
+    const matchesAllowWeed = !filters.allowWeed || property.allowWeed
 
     return (
       matchesSearchTerm &&
-      matchesMinPrice &&
       matchesMaxPrice &&
       matchesProvince &&
       matchesCity &&
+      matchesStartDate &&
       matchesDuration &&
       matchesAllowPet &&
-      matchesAllowSmoke
+      matchesAllowSmoke &&
+      matchesAllowParty &&
+      matchesAllowWeed
     )
   })
 
