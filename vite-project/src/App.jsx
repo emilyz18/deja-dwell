@@ -1,5 +1,5 @@
 import './css/App.css'
-// eslint-disable-next-line no-unused-vars
+
 import React, { useEffect, useState } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
