@@ -21,17 +21,13 @@ export const defaultProfilePath = "../../public/images/default_profile_pic.jpg"
 
 export function GeneralInputForm() {
     const [isEditing, setIsEditing] = useState(false);
-
     // for the warning pop up
     const [warning, setWarning] = useState(false);
     const [neededInfo, setNeededInfo] = useState("");
 
-
-
     const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
     const location = useLocation();
-
 
     useEffect(() => {
         if (user && user.UserID) {
@@ -52,7 +48,6 @@ export function GeneralInputForm() {
         }
     }, [location.state]);
 
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         // overwite with the field that is changed 
@@ -72,15 +67,12 @@ export function GeneralInputForm() {
             reader.readAsDataURL(curFile);
         }
     }
-
     const handleEdit = () => {
         setIsEditing(true);
     }
-
     const handleCancel = () => {
         setIsEditing(false);
     }
-
     function handleSubmit(event) {
         event.preventDefault()
         dispatch(editUserAsync(user));
@@ -99,7 +91,6 @@ export function GeneralInputForm() {
         whiteSpace: 'nowrap',
         width: 1,
     });
-
 
     return (
         <>
@@ -237,12 +228,8 @@ export function GeneralInputForm() {
                                 </ListItem>
                             </List>
                         </Box>
-
                 )
             }
         </>
-
-
-
     )
 }

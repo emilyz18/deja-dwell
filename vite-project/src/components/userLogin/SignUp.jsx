@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -48,12 +48,10 @@ export default function SignUp() {
       Password: data.get('password'),
       accountType: accountType
     }
-    if( !user.UserName || !user.Email ||!user.Password ||!user.accountType ) {
+    if (!user.UserName || !user.Email || !user.Password || !user.accountType) {
       console.log("not allow for empty field");
     } else {
       dispatch(signUpAsync(user));
-      // for warning alert for input page
-      
     }
   };
 
@@ -61,10 +59,11 @@ export default function SignUp() {
   useEffect(() => {
     if (isAuth == true) {
       console.log("Auth!!");
+      // fromSignUp state is for displaying the warning after sign up
       if (accountType === 'Landlord') {
-        navigate('/landlordAccount/profile', { state: { fromSignUp: 'Landlord'} });
+        navigate('/landlordAccount/profile', { state: { fromSignUp: 'Landlord' } });
       } else if (accountType === 'Tenant') {
-        navigate('/tenantAccount/profile', { state: { fromSignUp: 'Tenant'} });
+        navigate('/tenantAccount/profile', { state: { fromSignUp: 'Tenant' } });
       }
     }
   }, [isAuth, dispatch, navigate, accountType]);

@@ -47,8 +47,6 @@ export default function SignIn() {
         navigate('/tenantAccount/matches');
       }
     }
-
-    
   }, [isAuth, dispatch, isLandlord, isTenant, navigate]);
 
   return (
