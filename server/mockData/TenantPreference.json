@@ -88,5 +88,24 @@
     "isWeed": true,
     "NumOfParking": 1,
     "NumOfResident": 4
+  },
+  {
+    "TenantPreferenceID": "40417192-b119-4b9f-9c05-025b71bd62d3",
+    "TenantID": "c4cc585e-e7de-4737-9356-af4ae2317112",
+    "Province": null,
+    "City": null,
+    "Street": null,
+    "ExpectedPrice": null,
+    "MaxPrice": null,
+    "StartDate": null,
+    "EndDate": null,
+    "Duration": null,
+    "RoomType": null,
+    "isOwnPet": false,
+    "isSmoke": false,
+    "isParty": false,
+    "isWeed": false,
+    "NumOfParking": null,
+    "NumOfResident": null
   }
 ]

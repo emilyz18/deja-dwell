@@ -49,5 +49,16 @@
     "Gender": "Female",
     "Age": 29,
     "TenantPreferenceID": "f3d2a8b4-6e7c-4a1e-9b8d-3c8a1f7d6b9e"
+  },
+  {
+    "TenantID": "c4cc585e-e7de-4737-9356-af4ae2317112",
+    "UserID": "160f80ca-0e17-4394-bfaa-c1cbf78ef314",
+    "TenantPreferenceID": "40417192-b119-4b9f-9c05-025b71bd62d3",
+    "Age": null,
+    "Gender": null,
+    "Occupation": null,
+    "Income": null,
+    "Company": null,
+    "Habit": null
   }
 ]
