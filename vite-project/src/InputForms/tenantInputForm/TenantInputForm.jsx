@@ -35,23 +35,24 @@ export function TenantInputForm() {
 
   // for user reducer
   const tenantID = useSelector((state) => {
-    // console.log('User state:', state.user);
     return state.user.user.TenantID
   })
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
-
   const { tenant, tenantPref } = useSelector((state) => state.tenant)
-  // grabing tenant profile
+
   useEffect(() => {
     if (isAuthenticated && tenantID) {
-      // console.log('Dispatching getTenantProfileAsync with tenantID:', tenantID);
+      console.log('Dispatching getTenantProfileAsync with tenantID:', tenantID)
       dispatch(getTenantProfileAsync(tenantID))
     }
   }, [dispatch, isAuthenticated, tenantID])
   // grabing tenant preference
+
   useEffect(() => {
     if (isAuthenticated && tenant.TenantPreferenceID) {
-      // console.log(`Fetching tenant preference for tenantPreferenceID: ${tenant.TenantPreferenceID}`);
+      console.log(
+        `Fetching tenant preference for tenantPreferenceID: ${tenant.TenantPreferenceID}`
+      )
       dispatch(getTenantPrefAsync(tenant.TenantPreferenceID))
     }
   }, [dispatch, isAuthenticated, tenant.TenantPreferenceID])

@@ -85,73 +85,7 @@ export const house1 = {
   location: 'Suburban neighborhood in Burnaby',
   parkingAvailability: '2 car garage',
 }
-
-export const propertyList = {
-  properties: [
-    {
-      houseID: 1,
-      images: slides,
-      address: '3rd Floor',
-      price: 9864,
-      description:
-        'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.',
-      title: 'Hoard',
-      roomType: 'Chrysler',
-      location: 'Launceston',
-      parkingAvailability: 2,
-    },
-    {
-      houseID: 2,
-      images: slides,
-      address: 'Apt 569',
-      price: 5875,
-      description:
-        'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.',
-      title: 'Arkansas',
-      roomType: 'Mitsubishi',
-      location: 'Misheronskiy',
-      parkingAvailability: 3,
-    },
-    {
-      houseID: 3,
-      images: slides,
-      address: 'Room 500',
-      price: 984,
-      description:
-        'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.',
-      title: 'Hovde',
-      roomType: 'Suzuki',
-      location: 'Quivilla',
-      parkingAvailability: 1,
-    },
-    {
-      houseID: 4,
-      images: slides,
-      address: '19th Floor',
-      price: 4768,
-      description:
-        'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.',
-      title: 'Spaight',
-      roomType: 'Mitsubishi',
-      location: 'Bitanjuan',
-      parkingAvailability: 1,
-    },
-    {
-      houseID: 5,
-      images: slides,
-      address: 'Apt 33',
-      price: 2326,
-      description:
-        'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.',
-      title: 'Tomscot',
-      roomType: 'GMC',
-      location: 'Polo',
-      parkingAvailability: 9,
-    },
-  ],
-}
 export const postingData = {
   house: house1,
   applicants: [applicant1, applicant2, applicant3, applicant4],
 }
-

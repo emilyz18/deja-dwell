@@ -23,9 +23,8 @@ export const patchTenantProfileAsync = createAsyncThunk(
 export const getTenantPrefAsync = createAsyncThunk(
   actionTypes.GET_Tenant_PREF,
   async (tenantPreferenceID) => {
-    const response = await tenantService.getTenantPref(tenantPreferenceID)
     // console.log('!!!Fetched tenant pref:', response);
-    return response
+    return await tenantService.getTenantPref(tenantPreferenceID)
   }
 )
 

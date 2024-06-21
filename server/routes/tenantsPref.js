@@ -21,10 +21,10 @@ const saveTenantJson = (file, data) => {
 
 router.get('/:tenantPreferenceID', (req, res) => {
     const { tenantPreferenceID } = req.params;
-    // console.log('Received request for tenantPreferenceID:', tenantPreferenceID); 
+    console.log('Received request for tenantPreferenceID:', tenantPreferenceID);
     const tenantPrefs = loadTenantJson(tenantsPrefFilePath);
     if (!tenantPrefs) {
-        return res.status(500).send("Error loading tenant preferene data from JSON file");
+        return res.status(500).send("Error loading tenant preference data from JSON file");
     }
 
     const tenantPref = tenantPrefs.find(t => t.TenantPreferenceID === tenantPreferenceID);

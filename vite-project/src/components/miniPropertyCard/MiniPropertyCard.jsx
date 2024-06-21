@@ -17,19 +17,19 @@ function MiniPropertyCard(props) {
   // improvements in the future
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
-      id: propertyInfo.houseID,
+      id: propertyInfo.HouseID,
     })
 
   const likeProperty = () => {
-    likedFn(propertyInfo.houseID)
+    likedFn(propertyInfo.HouseID)
   }
 
   const dislikeProperty = () => {
-    dislikedFn(propertyInfo.houseID)
+    dislikedFn(propertyInfo.HouseID)
   }
 
   const expandProperty = () => {
-    console.log('house ' + propertyInfo.houseID + ' was expanded!')
+    console.log('house ' + propertyInfo.HouseID + ' was expanded!')
     displayPopup()
   }
 
@@ -38,16 +38,22 @@ function MiniPropertyCard(props) {
       <div className="property-card" ref={setNodeRef}>
         <Carousel
           className="carousel-container"
-          data={propertyInfo.images}
+          data={propertyInfo.HouseImgs}
           size={{ width: 450, height: 250 }}
         />
         <div {...attributes} {...listeners}>
           <div className="card-details">
-            <h3 className="house-title">{propertyInfo.title}</h3>
+            <h3 className="house-title">{propertyInfo.Title}</h3>
             <div className="details-row">
-              <span className="rent">${propertyInfo.price}</span>
-              <span className="address">{propertyInfo.address}</span>
-              <span className="house-type">{propertyInfo.roomType}</span>
+              <span className="rent">${propertyInfo.ExpectedPrice}</span>
+              <span className="address">
+                {propertyInfo.Street +
+                  ', ' +
+                  propertyInfo.City +
+                  ', ' +
+                  propertyInfo.Province}
+              </span>
+              <span className="house-type">{propertyInfo.RoomType}</span>
             </div>
           </div>
         </div>

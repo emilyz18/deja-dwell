@@ -39,8 +39,8 @@ export default function SignIn() {
     if (isAuth === true) {
       console.log('Authorization successful')
       if (isLandlord) {
-        navigate('Heading to landlord dashboard...')
-        console.log('Using landlord dashboard')
+        navigate('/landlordAccount/applicants')
+        console.log('Heading to landlord dashboard...')
       } else if (isTenant) {
         navigate('/tenantAccount/matches')
         console.log('Heading to tenant dashboard...')

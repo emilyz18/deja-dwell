@@ -11,6 +11,7 @@ var propertiesRouter = require('./routes/properties');
 var userRouter = require('./routes/user'); // this is use to login/signup/ for signle user
 var tenantProfileRouter = require('./routes/tenantsprofile');
 var tenantPrefRouter = require('./routes/tenantspref');
+var matchesRouter = require('./routes/matches');
 
 var app = express();
 
@@ -27,6 +28,8 @@ app.use('/properties', propertiesRouter);
 app.use('/user', userRouter);
 app.use('/tenantsprofile', tenantProfileRouter);
 app.use('/tenantspref', tenantPrefRouter);
+app.use('/matches', matchesRouter);
+
 
 // for payload to large
 app.use(bodyParser.json({ limit: '50mb' })); // Increase payload limit
