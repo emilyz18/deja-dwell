@@ -8,7 +8,7 @@ import LandlordPropertyCard from './components/landlordPropertyCard/LandlordProp
 import PropertyCardList from './components/propertyCardList/PropertyCardList'
 import { LandLordSideBar } from './components/sideBars/LandLordSideBar'
 import { TenantSideBar } from './components/sideBars/TenantSideBar'
-import { TenantInputForm } from './InputForms/tenantInputForm/TenantInputForm'
+import { TenantInputForm } from './InputForms/TenantInputForm.jsx'
 import { GeneralInputForm } from './InputForms/generalInputForm'
 
 import { getUserAsync } from './redux/user/thunks'

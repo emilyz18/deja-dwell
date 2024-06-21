@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   updateTenant,
   updateTenantPref,
-} from '../../redux/tenant/tenantReducer'
+} from '../redux/tenant/tenantReducer.js'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
@@ -23,7 +23,7 @@ import {
   getTenantProfileAsync,
   patchTenantPrefAsync,
   patchTenantProfileAsync,
-} from '../../redux/tenant/thunks'
+} from '../redux/tenant/thunks.js'
 
 export function TenantInputForm() {
   const [customGender, setCustomGender] = useState('')
