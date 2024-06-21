@@ -4,13 +4,12 @@ import Carousel from '../carousel/Carousel'
 import { Button } from '@mui/material'
 
 function MiniPropertyCard(props) {
-  const { propertyInfo, likedFn, dislikedFn, displayPopup } =
-    props
+  const { propertyInfo, likedFn, dislikedFn, displayPopup } = props
 
-    if (!propertyInfo) return null
+  if (!propertyInfo) return null
 
   // useSortable was written with the help of ChatGPT 3.5 on Jun 8th
-  // Prompt: Give me some examples of dragging and dropping using the dnd kit. Then, use the 
+  // Prompt: Give me some examples of dragging and dropping using the dnd kit. Then, use the
   // dnd toolkit to incorporate drag and drop functionality on the miniProperty card + "code in this file".
   // The generated code was adapted: I changed div organization to exclude some elements from being draggable
 

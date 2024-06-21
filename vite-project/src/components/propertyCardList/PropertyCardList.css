@@ -5,7 +5,6 @@
   width: 100%;
 }
 
-
 .placeholder-card {
   /* width: 300px; */
   height: 410px; /* When a property card is being dragged, the next card takes over its position. This sets the height of the blank placeholder*/

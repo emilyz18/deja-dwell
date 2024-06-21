@@ -45,7 +45,6 @@ function App() {
       setAccountType(LANDLORD)
       navigate('/landlordAccount/applicants')
     }
-
   }
 
   return (
@@ -99,12 +98,12 @@ function App() {
                   element={
                     <PropertyCardList propList={propertyList.properties} />
                   }
-                  />
+                />
 
-                  <Route
-                    path="/tenantAccount/profile"
-                    element={<GeneralInputForm />}
-                  />
+                <Route
+                  path="/tenantAccount/profile"
+                  element={<GeneralInputForm />}
+                />
 
                 <Route
                   path="/tenantAccount/preference"
