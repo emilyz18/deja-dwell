@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   DndContext,
   DragOverlay,
@@ -10,15 +10,15 @@ import { SortableContext, rectSortingStrategy } from '@dnd-kit/sortable'
 import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './PropertyCardList.css'
-import { getPropertiesAsync } from '../../redux/properties/thunks.js';
-import SearchBar from '../searchBar/SearchBar.jsx';
-
+import { getPropertiesAsync } from '../../redux/properties/thunks.js'
+import SearchBar from '../searchBar/SearchBar.jsx'
 
 function PropertyCardList(props) {
-
-  const dispatch = useDispatch();
-  const propertiesList = useSelector((state) => state.properties.list);
-  const getPropertiesStatus = useSelector((state) => state.properties.getProperties);
+  const dispatch = useDispatch()
+  const propertiesList = useSelector((state) => state.properties.list)
+  const getPropertiesStatus = useSelector(
+    (state) => state.properties.getProperties
+  )
 
   const { propList } = props
   const [properties, setProperties] = useState(propList)
@@ -29,15 +29,26 @@ function PropertyCardList(props) {
 
   const [isDragging, setIsDragging] = useState(false)
 
+  const [searchTerm, setSearchTerm] = useState('')
+  const [filters, setFilters] = useState({
+    minPrice: '',
+    maxPrice: '',
+    province: '',
+    city: '',
+    duration: '',
+    allowPet: false,
+    allowSmoke: false,
+  })
+
   useEffect(() => {
     if (getPropertiesStatus === 'IDLE') {
-      dispatch(getPropertiesAsync());
+      dispatch(getPropertiesAsync())
     }
-  }, [getPropertiesStatus, properties, dispatch]);
+  }, [getPropertiesStatus, properties, dispatch])
 
-  console.log(propertiesList);
+  console.log(propertiesList)
 
-    // TODO: to be implemented logic
+  // TODO: to be implemented logic
   const likedProperty = (id) => {
     console.log('house ' + id + ' was liked!')
 
@@ -48,7 +59,7 @@ function PropertyCardList(props) {
     console.log(properties)
   }
 
-    // TODO: to be implemented logic
+  // TODO: to be implemented logic
   const dislikedProperty = (id) => {
     console.log('house ' + id + ' was rejected!')
     const updatedProperties = properties.filter(
@@ -76,8 +87,9 @@ function PropertyCardList(props) {
 
   const handleDragEnd = (event) => {
     const { delta } = event
-    
-    if (delta.x > 200) { // determines the x coord to be dragged
+
+    if (delta.x > 200) {
+      // determines the x coord to be dragged
       likedProperty(activeId)
     } else if (delta.x < -200) {
       dislikedProperty(activeId)
@@ -89,27 +101,63 @@ function PropertyCardList(props) {
 
   const { setNodeRef: setLikeRef, isOver: isOverLike } = useDroppable({
     id: 'like-dropzone',
- 
-  });
-  
+  })
+
   const { setNodeRef: setDislikeRef, isOver: isOverDislike } = useDroppable({
     id: 'dislike-dropzone',
     onDragEnter: () => {
-      console.log('Draggable card entered the dislike dropzone');
+      console.log('Draggable card entered the dislike dropzone')
     },
     onDragLeave: () => {
-      console.log('Draggable card left the dislike dropzone');
+      console.log('Draggable card left the dislike dropzone')
     },
-  });
+  })
+
+  const filteredProperties = properties.filter((property) => {
+    const matchesSearchTerm = property.title
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+    const matchesMinPrice =
+      filters.minPrice === '' || property.price >= parseFloat(filters.minPrice)
+    const matchesMaxPrice =
+      filters.maxPrice === '' || property.price <= parseFloat(filters.maxPrice)
+    const matchesProvince =
+      filters.province === '' ||
+      property.province.toLowerCase().includes(filters.province.toLowerCase())
+    const matchesCity =
+      filters.city === '' ||
+      property.city.toLowerCase().includes(filters.city.toLowerCase())
+    const matchesDuration =
+      filters.duration === '' ||
+      property.duration.toLowerCase().includes(filters.duration.toLowerCase())
+    const matchesAllowPet = !filters.allowPet || property.allowPet
+    const matchesAllowSmoke = !filters.allowSmoke || property.allowSmoke
+
+    return (
+      matchesSearchTerm &&
+      matchesMinPrice &&
+      matchesMaxPrice &&
+      matchesProvince &&
+      matchesCity &&
+      matchesDuration &&
+      matchesAllowPet &&
+      matchesAllowSmoke
+    )
+  })
 
   // The code below was written with the help of ChatGPT 3.5 on Jun 8th
-  // Prompt: Give me some examples of dragging and dropping using the dnd kit. Then, use the 
+  // Prompt: Give me some examples of dragging and dropping using the dnd kit. Then, use the
   // dnd toolkit to incorporate drag and drop functionality on the miniProperty card + "this file".
-  // The generated code was adapted: I added place holders for dropzones and cards to be 
+  // The generated code was adapted: I added place holders for dropzones and cards to be
   // conditionally displayed. I also wrote css myself tp suit my own needs
   return (
     <>
-    <SearchBar/>
+      <SearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        filters={filters}
+        setFilters={setFilters}
+      />{' '}
       <DndContext
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}
@@ -124,14 +172,19 @@ function PropertyCardList(props) {
               <span className="dropzone-icon">✖</span>
             </div>
           ) : (
-            <div className="dropzone-placeholder">
-            </div>
+            <div className="dropzone-placeholder"></div>
           )}
-          <SortableContext items={properties} strategy={rectSortingStrategy}>
+          <SortableContext
+            items={filteredProperties}
+            strategy={rectSortingStrategy}
+          >
             <ul id="property-list" className="property-list">
-              {properties.map((property) => (
+              {filteredProperties.map((property) =>
                 property.houseID === activeId ? (
-                  <div key={property.houseID} className="placeholder-card"></div>
+                  <div
+                    key={property.houseID}
+                    className="placeholder-card"
+                  ></div>
                 ) : (
                   <MiniPropertyCard
                     key={property.houseID}
@@ -141,7 +194,7 @@ function PropertyCardList(props) {
                     displayPopup={() => displayPopup(property)}
                   />
                 )
-              ))}
+              )}
             </ul>
           </SortableContext>
           {isDragging ? (
@@ -152,8 +205,7 @@ function PropertyCardList(props) {
               <span className="dropzone-icon">✔</span>
             </div>
           ) : (
-            <div className="dropzone-placeholder">
-            </div>
+            <div className="dropzone-placeholder"></div>
           )}
         </div>
         <DragOverlay>
