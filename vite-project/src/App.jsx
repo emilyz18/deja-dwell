@@ -18,6 +18,7 @@ import { LandlordInputForm } from './InputForms/landlordInputForm/LandlordInputF
 import { TenantInputForm } from './InputForms/tenantInputForm/TenantInputForm.jsx'
 
 import { mockUser, propertyList, postingData } from './mockData/mockUser' //TODO Clean this? after we use proper API
+import { GeneralInputForm } from './InputForms/generalInputForm.jsx'
 
 const LANDLORD = 'landlord'
 const TENANT = 'tenant'
@@ -44,7 +45,7 @@ function App() {
       setAccountType(LANDLORD)
       navigate('/landlordAccount/applicants')
     }
-    // navigate(accountType === LANDLORD ? "/tenantAccount/matches" : "/landlordAccount/applicants");
+
   }
 
   return (
@@ -82,7 +83,7 @@ function App() {
                 />
                 <Route
                   path="/landlordAccount/profile"
-                  element={<LandlordInputForm />}
+                  element={<GeneralInputForm />}
                 />
               </>
             ) : (
@@ -98,9 +99,15 @@ function App() {
                   element={
                     <PropertyCardList propList={propertyList.properties} />
                   }
-                />
+                  />
+
+                  <Route
+                    path="/tenantAccount/profile"
+                    element={<GeneralInputForm />}
+                  />
+
                 <Route
-                  path="/tenantAccount/applicants"
+                  path="/tenantAccount/preference"
                   element={<TenantInputForm />}
                 />
               </>
