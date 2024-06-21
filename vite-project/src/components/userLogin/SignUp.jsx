@@ -62,7 +62,12 @@ export default function SignUp() {
   useEffect(() => {
     if (isAuth == true) {
       console.log("Auth!!");
-      navigate('/');
+      if (accountType === 'Landlord') {
+        navigate('/landlordAccount/profile');
+      } else if (accountType === 'Tenant') {
+        navigate('/tenantAccount/profile');
+        
+      }
     }
   }, [isAuth, dispatch]);
 
