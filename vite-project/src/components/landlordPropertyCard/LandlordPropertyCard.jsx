@@ -5,11 +5,13 @@ import ApplicantCard from '../applicantCard/ApplicantCard'
 import ExpandedApplicantCard from '../applicantCard/ExpandedApplicantCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPropertiesAsync } from '../../redux/properties/thunks'
+import { Snackbar, Alert } from '@mui/material'
 
 const LandlordPropertyCard = ({ landlordId }) => {
   const dispatch = useDispatch()
   const properties = useSelector((state) => state.properties.list)
   const [selectedProperty, setSelectedProperty] = useState(null)
+  const [notification, setNotification] = useState({ open: false, message: '', severity: '' })
 
   const initialApplicants = [
     // This is a boilerplate. Replace it with actual data fetching logic.
@@ -46,6 +48,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
 
   const handleRejectApplicant = (name) => {
     setApplicants(applicants.filter((applicant) => applicant.name !== name))
+    setNotification({ open: true, message: `Rejected applicant: ${name}`, severity: 'error' })
   }
 
   const handleAcceptApplicant = (name) => {
@@ -53,6 +56,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
         (applicant) => applicant.name === name
     )
     setApplicants([acceptedApplicant])
+    setNotification({ open: true, message: `Accepted applicant: ${name}`, severity: 'success' })
   }
 
   const handleClosePopup = () => {
@@ -62,6 +66,13 @@ const LandlordPropertyCard = ({ landlordId }) => {
   const handleCardClick = (applicant) => {
     setSelectedApplicant(applicant)
     setPopupVisible(true)
+  }
+
+  const handleNotificationClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setNotification({ ...notification, open: false })
   }
 
   if (!selectedProperty) {
@@ -117,6 +128,19 @@ const LandlordPropertyCard = ({ landlordId }) => {
               />
           )}
         </div>
+        <Snackbar
+            open={notification.open}
+            autoHideDuration={3000}
+            onClose={handleNotificationClose}
+        >
+          <Alert
+              onClose={handleNotificationClose}
+              severity={notification.severity}
+              sx={{ width: '100%' }}
+          >
+            {notification.message}
+          </Alert>
+        </Snackbar>
       </>
   )
 }
