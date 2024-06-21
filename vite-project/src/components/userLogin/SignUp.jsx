@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -17,7 +15,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { signUpAsync } from '../../redux/user/thunks';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 // COPY RIGHT: THIS PAGE CONTENT IS COPY AND MODIFY FROM https://github.com/mui/material-ui/blob/v5.15.20/docs/data/material/getting-started/templates/sign-up/SignUp.js 
@@ -55,6 +52,8 @@ export default function SignUp() {
       console.log("not allow for empty field");
     } else {
       dispatch(signUpAsync(user));
+      // for warning alert for input page
+      
     }
   };
 
@@ -63,13 +62,13 @@ export default function SignUp() {
     if (isAuth == true) {
       console.log("Auth!!");
       if (accountType === 'Landlord') {
-        navigate('/landlordAccount/profile');
+        navigate('/landlordAccount/profile', { state: { fromSignUp: true, accountType: 'Landlord'} });
       } else if (accountType === 'Tenant') {
-        navigate('/tenantAccount/profile');
-        
+        navigate('/tenantAccount/profile', { state: { fromRegister: true, accountType: 'Tanent'} });
+
       }
     }
-  }, [isAuth, dispatch]);
+  }, [isAuth, dispatch, navigate]);
 
 
   return (

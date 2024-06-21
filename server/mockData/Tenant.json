@@ -49,5 +49,71 @@
     "Gender": "Female",
     "Age": 29,
     "TenantPreferenceID": "f3d2a8b4-6e7c-4a1e-9b8d-3c8a1f7d6b9e"
+  },
+  {
+    "TenantID": "c797fc2d-63a5-402a-b4ed-cb6a6f9f5758",
+    "UserID": "534128dc-8cbd-43e7-9bcd-7024f21bd7d7",
+    "TenantPreferenceID": "a33542c7-acc6-45ad-a6b4-e1b7747bed24",
+    "Age": null,
+    "Gender": null,
+    "Occupation": null,
+    "Income": null,
+    "Company": null,
+    "Habit": null
+  },
+  {
+    "TenantID": "5e95ae48-94fa-4610-8d22-b4b714aa520a",
+    "UserID": "e464f6a3-5497-4c71-afad-4b460176c4cb",
+    "TenantPreferenceID": "1dc6e567-b9bd-4672-9f73-f2ebac707fd3",
+    "Age": null,
+    "Gender": null,
+    "Occupation": null,
+    "Income": null,
+    "Company": null,
+    "Habit": null
+  },
+  {
+    "TenantID": "569fe1eb-788f-4f3a-b38f-081dd23c5f7e",
+    "UserID": "be924562-51f3-4bc7-9e07-d02c06f172ff",
+    "TenantPreferenceID": "c67f6a82-38c3-4fe8-bbf3-11d2cd0c852c",
+    "Age": null,
+    "Gender": null,
+    "Occupation": null,
+    "Income": null,
+    "Company": null,
+    "Habit": null
+  },
+  {
+    "TenantID": "9d783586-7d66-4813-8b23-1f3e7b5ecc48",
+    "UserID": "e7b1a5f9-a16f-4719-8741-eb2354e02152",
+    "TenantPreferenceID": "f93e16b8-cbb4-452a-8e56-0c40149dadce",
+    "Age": null,
+    "Gender": null,
+    "Occupation": null,
+    "Income": null,
+    "Company": null,
+    "Habit": null
+  },
+  {
+    "TenantID": "51c4eb93-5fde-4abb-b5b8-5366d1f0d6fe",
+    "UserID": "9b7740ba-1c20-4908-ba7b-7c2c3ff933a1",
+    "TenantPreferenceID": "433f4d0f-0109-4de0-beec-59d20979a9d9",
+    "Age": null,
+    "Gender": null,
+    "Occupation": null,
+    "Income": null,
+    "Company": null,
+    "Habit": null
+  },
+  {
+    "TenantID": "9b359607-a16b-4793-b6e1-1410b2a2a2b5",
+    "UserID": "cff5921f-a671-49ab-8d55-36722c295dbc",
+    "TenantPreferenceID": "487b4316-2b46-446e-9233-19771f01fefe",
+    "Age": null,
+    "Gender": null,
+    "Occupation": null,
+    "Income": null,
+    "Company": null,
+    "Habit": null
   }
 ]

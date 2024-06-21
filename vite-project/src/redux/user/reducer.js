@@ -4,7 +4,9 @@ import { signInAsync, signUpAsync, editUserAsync, getUserAsync } from './thunks'
 
 const INITIAL_STATE = {
   user: null,
-  isAuthenticated: false
+  isAuthenticated: false,
+  isLandlord: false,
+  isTenant: false,
 };
 
 const userSlice = createSlice({
@@ -27,6 +29,8 @@ const userSlice = createSlice({
         const userPayload = action.payload;
         state.isAuthenticated = userPayload.Auth;
         state.user = userPayload.User;
+        state.isLandlord = userPayload.User.isLandlord;
+        state.isTenant = userPayload.User.isTenant;
       })
       .addCase(signInAsync.rejected, (state, action) => {
         state.error = action.error;

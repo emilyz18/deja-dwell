@@ -1,25 +1,36 @@
-import { useState, useEffect } from 'react'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles';
 import { Box, Typography, List, ListItem } from '@mui/material';
 import { Grid } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import Alert from '@mui/material/Alert';
 
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserAsync, editUserAsync } from '../redux/user/thunks.js';
 import { updateUser } from '../redux/user/reducer.js';
 
 import "./inputForm.css"
 
+
 export const defaultProfilePath = "../../public/images/default_profile_pic.jpg"
+
 
 export function GeneralInputForm() {
     const [isEditing, setIsEditing] = useState(false);
 
+    // for the warning pop up
+    const [warning, setWarning] = useState(false);
+    const [neededInfo, setNeededInfo] = useState("");
+
+
 
     const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
+    const location = useLocation();
 
 
     useEffect(() => {
@@ -27,6 +38,21 @@ export function GeneralInputForm() {
             dispatch(getUserAsync(user.UserID));
         }
     }, [dispatch, user.UserID]);
+
+    // see if from sign up, if yes, display warning
+    useEffect(() => {
+        // state exist (state: if coming from sign up page)
+        if (location.state && location.state.fromSignUp) {
+            
+            setWarning(true);
+            if (location.state.fromSignUp && location.state.fromSignUp === 'Landlord') {
+                setNeededInfo("Profile");
+            } else {
+                setNeededInfo("Profile and Rent preference");
+            }
+        }
+        
+    }, [location.state]);
 
 
     const handleChange = (e) => {
@@ -79,6 +105,14 @@ export function GeneralInputForm() {
 
     return (
         <>
+            {warning && (
+                <Stack sx={{ width: '100%' }} spacing={2}>
+                    <Alert severity="warning" onClose={() => setWarning(false)}>
+                        Please complete your {neededInfo}.
+                    </Alert>
+                </Stack>
+            )}
+
             {
                 isEditing ? (
                     <Box
