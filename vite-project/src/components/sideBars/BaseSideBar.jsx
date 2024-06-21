@@ -22,10 +22,10 @@ export function BaseSideBar({
       <Drawer className="sidebar-drawer" variant="permanent" anchor="left">
         <div className="sidebar-content">
           <div className="sidebar-avatar">
-            <Avatar src={profile.image} className="MuiAvatar-root" />
+            <Avatar src={profile.ProfileImg} className="MuiAvatar-root" />
             <ListItemText
               style={{ margin: '5px', textAlign: 'center' }}
-              primary={profile.name}
+              primary={profile.UserName}
             />
           </div>
           <Divider />
