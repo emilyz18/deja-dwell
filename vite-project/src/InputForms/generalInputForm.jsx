@@ -43,15 +43,13 @@ export function GeneralInputForm() {
     useEffect(() => {
         // state exist (state: if coming from sign up page)
         if (location.state && location.state.fromSignUp) {
-            
             setWarning(true);
-            if (location.state.fromSignUp && location.state.fromSignUp === 'Landlord') {
+            if (location.state.fromSignUp === 'Landlord') {
                 setNeededInfo("Profile");
-            } else {
+            } else if (location.state.fromSignUp === 'Tenant') {
                 setNeededInfo("Profile and Rent preference");
             }
         }
-        
     }, [location.state]);
 
 

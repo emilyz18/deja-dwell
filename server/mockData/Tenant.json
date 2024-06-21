@@ -115,5 +115,38 @@
     "Income": null,
     "Company": null,
     "Habit": null
+  },
+  {
+    "TenantID": "bc78a574-b6b7-49b1-bdc6-42ce873d7bfc",
+    "UserID": "8af0a362-0d47-438f-9cb9-c3696640154b",
+    "TenantPreferenceID": "fa29db55-e7a6-4734-a721-3545e1b7f3b9",
+    "Age": null,
+    "Gender": null,
+    "Occupation": null,
+    "Income": null,
+    "Company": null,
+    "Habit": null
+  },
+  {
+    "TenantID": "be7c0031-52ce-4e94-ad41-e7708ea5a32c",
+    "UserID": "b28ace08-9886-4e5a-a85b-af6a4581cc9d",
+    "TenantPreferenceID": "fbc71998-040c-42d5-8aab-63a44f1ef49c",
+    "Age": null,
+    "Gender": null,
+    "Occupation": null,
+    "Income": null,
+    "Company": null,
+    "Habit": null
+  },
+  {
+    "TenantID": "f847d5a9-c271-4a95-b7db-2a067321f2fa",
+    "UserID": "fab4da48-f106-4f86-ab79-121a3d02c6b8",
+    "TenantPreferenceID": "814526e6-b463-4f73-b598-830472fc4373",
+    "Age": "12",
+    "Gender": "12",
+    "Occupation": null,
+    "Income": null,
+    "Company": null,
+    "Habit": null
   }
 ]

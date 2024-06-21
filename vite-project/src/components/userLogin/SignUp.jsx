@@ -62,13 +62,12 @@ export default function SignUp() {
     if (isAuth == true) {
       console.log("Auth!!");
       if (accountType === 'Landlord') {
-        navigate('/landlordAccount/profile', { state: { fromSignUp: true, accountType: 'Landlord'} });
+        navigate('/landlordAccount/profile', { state: { fromSignUp: 'Landlord'} });
       } else if (accountType === 'Tenant') {
-        navigate('/tenantAccount/profile', { state: { fromRegister: true, accountType: 'Tanent'} });
-
+        navigate('/tenantAccount/profile', { state: { fromSignUp: 'Tenant'} });
       }
     }
-  }, [isAuth, dispatch, navigate]);
+  }, [isAuth, dispatch, navigate, accountType]);
 
 
   return (

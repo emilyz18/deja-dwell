@@ -42,7 +42,6 @@ export default function SignIn() {
       console.log("isLandlord!!: ", isLandlord);
       console.log("isTenant!!", isTenant);
       if (isLandlord) {
-        console.log("after sign up isLandlord? : ", isLandlord);
         navigate('/landlordAccount/applicants');
       } else if (isTenant) {
         navigate('/tenantAccount/matches');
