@@ -12,11 +12,11 @@ import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 
 export function BaseSideBar({
-                              accountType,
-                              navBarLinks,
-                              profile,
-                              onSwitchAcc,
-                            }) {
+  accountType,
+  navBarLinks,
+  profile,
+  onSwitchAcc,
+}) {
   const handleSwitchAcc = () => {
     if (accountType === 'landlord' && !profile.TenantID) {
       alert("You don't have a tenant account")
@@ -28,37 +28,37 @@ export function BaseSideBar({
   }
 
   return (
-      <div className="sidebar-container">
-        <Drawer className="sidebar-drawer" variant="permanent" anchor="left">
-          <div className="sidebar-content">
-            <div className="sidebar-avatar">
-              <Avatar src={profile.ProfileImg} className="MuiAvatar-root" />
-              <ListItemText
-                  style={{ margin: '5px', textAlign: 'center' }}
-                  primary={profile.UserName}
-              />
-            </div>
-            <Divider />
-            <List>
-              {navBarLinks.map((linkPair, index) => (
-                  <ListItem key={index} className="sidebar-list-item">
-                    <ListItemButton component={Link} to={linkPair.path}>
-                      <ListItemText primary={linkPair.label} />
-                    </ListItemButton>
-                  </ListItem>
-              ))}
-            </List>
-            <Divider />
+    <div className="sidebar-container">
+      <Drawer className="sidebar-drawer" variant="permanent" anchor="left">
+        <div className="sidebar-content">
+          <div className="sidebar-avatar">
+            <Avatar src={profile.ProfileImg} className="MuiAvatar-root" />
+            <ListItemText
+              style={{ margin: '5px', textAlign: 'center' }}
+              primary={profile.UserName}
+            />
           </div>
-          <div className="sidebar-bottom-content">
-            <Button className="sidebar-button" onClick={handleSwitchAcc}>
+          <Divider />
+          <List>
+            {navBarLinks.map((linkPair, index) => (
+              <ListItem key={index} className="sidebar-list-item">
+                <ListItemButton component={Link} to={linkPair.path}>
+                  <ListItemText primary={linkPair.label} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+        </div>
+        <div className="sidebar-bottom-content">
+          <Button className="sidebar-button" onClick={handleSwitchAcc}>
             <span>
               Switch to {accountType === 'landlord' ? 'Tenant' : 'Landlord'}{' '}
               Account
             </span>
-            </Button>
-          </div>
-        </Drawer>
-      </div>
+          </Button>
+        </div>
+      </Drawer>
+    </div>
   )
 }

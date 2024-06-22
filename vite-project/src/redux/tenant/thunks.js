@@ -3,13 +3,13 @@ import { actionTypes } from './actionTypes'
 import tenantService from './service'
 
 export const getAllTenantProfileAsync = createAsyncThunk(
-    actionTypes.GET_ALL_TENANT_PROFILE,
-    async () => {
-        // return await tenantService.getTenantProfile(tenantID);
-        const response = await tenantService.getAllTenantProfile()
-        // console.log('Fetched tenant profile:', response);
-        return response
-    }
+  actionTypes.GET_ALL_TENANT_PROFILE,
+  async () => {
+    // return await tenantService.getTenantProfile(tenantID);
+    const response = await tenantService.getAllTenantProfile()
+    // console.log('Fetched tenant profile:', response);
+    return response
+  }
 )
 
 export const getTenantProfileAsync = createAsyncThunk(
@@ -31,10 +31,10 @@ export const patchTenantProfileAsync = createAsyncThunk(
 )
 
 export const getAllTenantPrefAsync = createAsyncThunk(
-    actionTypes.GET_ALL_Tenant_PREF,
-    async () => {
-        return await tenantService.getAllTenantPref()
-    }
+  actionTypes.GET_ALL_Tenant_PREF,
+  async () => {
+    return await tenantService.getAllTenantPref()
+  }
 )
 
 export const getTenantPrefAsync = createAsyncThunk(

@@ -12,7 +12,12 @@ The generated code was adapted: I made changes to the css code to suite my own n
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5); /* Optional: add a semi-transparent background */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Optional: add a semi-transparent background */
   z-index: 1000;
 }
 
@@ -45,4 +50,3 @@ The generated code was adapted: I made changes to the css code to suite my own n
   margin-bottom: 10px;
   font-size: 0.9rem;
 }
-

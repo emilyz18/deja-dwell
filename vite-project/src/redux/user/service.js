@@ -40,5 +40,5 @@ export default {
   signUp,
   getUser,
   editProfile,
-  getAllUsers // Add this new export
+  getAllUsers, // Add this new export
 }
