@@ -1,4 +1,3 @@
-/* Filters.css */
 .filters {
     display: flex;
     justify-content: space-between;
@@ -12,17 +11,14 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    /* background-color: rebeccapurple; */
   }
   
   .filter-checkboxes {
     margin-left: 1em;
-    /* background-color: red; */
   }
 
   .filter-inputs {
     margin-left: 1em;
-    /* background-color: red; */
     display: flex;
     flex-direction: column;
 
@@ -44,7 +40,6 @@
 
   .filter-inputs {
     margin-left: 1em;
-    /* background-color: red; */
   }
   
   .filter-group {

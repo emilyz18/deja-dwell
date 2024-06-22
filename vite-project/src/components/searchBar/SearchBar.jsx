@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Filters from './Filters';
-import './SearchBar.css'; // Your SearchBar specific CSS
+import './SearchBar.css';
 
 const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
   const [filtersVisible, setFiltersVisible] = useState(false);
@@ -30,7 +30,6 @@ const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
           onChange={handleSearchChange}
           placeholder="Search..."
         />
-        {/* <button onClick={handleSearch}>Search</button> */}
         <button onClick={toggleFilters}>Filters</button>
       </div>
       {filtersVisible && (

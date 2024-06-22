@@ -1,5 +1,5 @@
 import React from 'react'
-import './Filters.css' // Filters specific CSS
+import './Filters.css'
 
 const Filters = ({ filters, handleFilterChange }) => {
     console.log("start date")
