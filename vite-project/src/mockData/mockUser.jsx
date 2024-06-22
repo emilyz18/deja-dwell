@@ -104,7 +104,7 @@ export const propertyList = {
       description:
         'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.',
       title: 'Luxury Apartment near Downtown',
-      roomType: 'Chrysler',
+      roomType: 'Studio',
       location: 'Launceston',
       parkingAvailability: 2,
     },
@@ -124,7 +124,7 @@ export const propertyList = {
       description:
         'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.',
       title: 'Charming Studio Apartment',
-      roomType: 'Mitsubishi',
+      roomType: '1 Bedroom 1 Bathroom',
       location: 'Misheronskiy',
       parkingAvailability: 3,
     },
@@ -144,7 +144,7 @@ export const propertyList = {
       description:
         'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.',
       title: 'Modern Townhouse with Garden',
-      roomType: 'Suzuki',
+      roomType: '2 Bedrooms 2 Bathrooms',
       location: 'Quivilla',
       parkingAvailability: 1,
     },
@@ -164,7 +164,7 @@ export const propertyList = {
       description:
         'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.',
       title: 'Spacious Penthouse with Terrace',
-      roomType: 'Mitsubishi',
+      roomType: '2 Bedrooms 1 Bathroom',
       location: 'Bitanjuan',
       parkingAvailability: 1,
     },
@@ -184,7 +184,7 @@ export const propertyList = {
       description:
         'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.',
       title: 'some apartment',
-      roomType: 'GMC',
+      roomType: '3+ Bedrooms 3+Bathrooms',
       location: 'Polo',
       parkingAvailability: 9,
     },

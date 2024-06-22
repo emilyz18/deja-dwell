@@ -37,6 +37,7 @@ function PropertyCardList(props) {
     city: '',
     duration: '',
     startDate: '',
+    roomType: '',
     allowPet: false,
     allowSmoke: false,
     allowParty: false,
@@ -132,7 +133,10 @@ function PropertyCardList(props) {
       filters.startDate === '' || property.startDate === filters.startDate
     const matchesDuration =
       filters.duration === '' ||
-      property.duration.toLowerCase() == filters.duration.toLowerCase()
+      property.duration.toLowerCase() === filters.duration.toLowerCase()
+    const matchesRoomType =
+      filters.roomType === '' ||
+      property.roomType.toLowerCase() === filters.roomType.toLowerCase()
     const matchesAllowPet = !filters.allowPet || property.allowPet
     const matchesAllowSmoke = !filters.allowSmoke || property.allowSmoke
     const matchesAllowParty = !filters.allowParty || property.allowParty
@@ -145,6 +149,7 @@ function PropertyCardList(props) {
       matchesCity &&
       matchesStartDate &&
       matchesDuration &&
+      matchesRoomType &&
       matchesAllowPet &&
       matchesAllowSmoke &&
       matchesAllowParty &&

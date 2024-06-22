@@ -57,6 +57,8 @@
   }
 
   select[name="duration"],
+  select[name="roomType"],
+
   input[type="text"],
   input[type="number"]
    {
