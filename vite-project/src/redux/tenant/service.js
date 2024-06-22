@@ -1,48 +1,56 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const URL_PATH_profile = 'http://localhost:3000/tenantsprofile'
-const URL_PATH_preference = 'http://localhost:3000/tenantspref'
+const URL_PATH_PROFILE = 'http://localhost:3000/tenantsprofile';
+const URL_PATH_PREFERENCE = 'http://localhost:3000/tenantspref';
 
 const handleResponse = async (request) => {
   try {
-    const response = await request()
-    return response.data
+    const response = await request();
+    return response.data;
   } catch (error) {
     if (error.response) {
-      const errorMsg = error.response.data?.message
-      throw new Error(errorMsg)
+      const errorMsg = error.response.data?.message;
+      throw new Error(errorMsg);
     }
-    throw error
+    throw error;
   }
-}
+};
 
-// get user by id for now, might be email if we have log in functionality
+// Get all tenant profiles
+const getAllTenantProfile = async () => {
+  return handleResponse(() => axios.get(`${URL_PATH_PROFILE}`));
+};
+
+// Get all tenant preferences
+const getAllTenantPref = async () => {
+  return handleResponse(() => axios.get(`${URL_PATH_PREFERENCE}`));
+};
+
+// Get tenant profile by ID
 const getTenantProfile = async (tenantID) => {
-  return handleResponse(() => axios.get(`${URL_PATH_profile}/${tenantID}`))
-}
+  return handleResponse(() => axios.get(`${URL_PATH_PROFILE}/${tenantID}`));
+};
 
+// Get tenant preference by ID
 const getTenantPref = async (tenantPreferenceID) => {
-  console.log('Calling API with tenantPreferenceID:', tenantPreferenceID) // Add this log
-  return handleResponse(() =>
-    axios.get(`${URL_PATH_preference}/${tenantPreferenceID}`)
-  )
-}
+  return handleResponse(() => axios.get(`${URL_PATH_PREFERENCE}/${tenantPreferenceID}`));
+};
 
+// Patch tenant profile by ID
 const patchTenantProfile = async (tenantID, tenant) => {
-  return handleResponse(() =>
-    axios.patch(`${URL_PATH_profile}/${tenantID}`, tenant)
-  )
-}
+  return handleResponse(() => axios.patch(`${URL_PATH_PROFILE}/${tenantID}`, tenant));
+};
 
+// Patch tenant preference by ID
 const patchTenantPref = async (preferenceID, tenantPref) => {
-  return handleResponse(() =>
-    axios.patch(`${URL_PATH_preference}/${preferenceID}`, tenantPref)
-  )
-}
+  return handleResponse(() => axios.patch(`${URL_PATH_PREFERENCE}/${preferenceID}`, tenantPref));
+};
 
 export default {
+  getAllTenantProfile,
+  getAllTenantPref,
   getTenantProfile,
   getTenantPref,
   patchTenantProfile,
   patchTenantPref,
-}
+};

@@ -31,9 +31,14 @@ const editProfile = async (user) => {
   return handleResponse(() => axios.patch(URL_PATH + '/edit', { user }))
 }
 
+const getAllUsers = async () => {
+  return handleResponse(() => axios.get(URL_PATH))
+}
+
 export default {
   signIn,
   signUp,
   getUser,
   editProfile,
+  getAllUsers // Add this new export
 }

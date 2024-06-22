@@ -138,6 +138,10 @@ router.get('/:userID', (req, res) => {
   }
 });
 
+router.get('/', (req, res) => {
+  return res.json(users);
+});
+
 router.patch('/edit', (req, res) => {
   const userdata = req.body.user;
   console.log(userdata, 'req, body in patch edit');

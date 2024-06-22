@@ -13,6 +13,7 @@ import './PropertyCardList.css';
 import { getPropertiesAsync } from '../../redux/properties/thunks';
 import { createMatchAsync } from '../../redux/matches/matchThunks';
 import { Snackbar, Alert } from '@mui/material';
+import { v4 as uuidv4 } from 'uuid';
 
 function PropertyCardList() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function PropertyCardList() {
   const likedProperty = (id) => {
     const likedProperty = properties.find((property) => property.HouseID === id);
     dispatch(createMatchAsync({
+      MatchID: uuidv4(),
       TenantID: user.TenantID,
       LandlordID: likedProperty.LandlordID,
       HouseID: likedProperty.HouseID,
@@ -46,6 +48,7 @@ function PropertyCardList() {
   const dislikedProperty = (id) => {
     const dislikedProperty = properties.find((property) => property.HouseID === id);
     dispatch(createMatchAsync({
+      MatchID: uuidv4(),
       TenantID: user.TenantID,
       LandlordID: dislikedProperty.LandlordID,
       HouseID: dislikedProperty.HouseID,

@@ -19,7 +19,16 @@ const saveTenantJson = (file, data) => {
     fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
 };
 
-// Get tenant profile (NOT tenant preference !!)
+// Get all tenant profiles
+router.get('/', (req, res) => {
+    const tenants = loadTenantJson(tenantsFilePath);
+    if (!tenants) {
+        return res.status(500).send("Error getting tenant data");
+    }
+    return res.status(200).json(tenants);
+});
+
+// Get tenant profile by ID
 router.get('/:tenantID', (req, res) => {
     const { tenantID } = req.params;
     const tenants = loadTenantJson(tenantsFilePath);
@@ -47,11 +56,9 @@ router.patch('/:tenantID', (req, res) => {
 
     const tenantIndex = tenants.findIndex(t => t.TenantID === tenantID);
     if (tenantIndex >= 0) {
-        //merge
         tenants[tenantIndex] = { ...tenants[tenantIndex], ...tenantData };
         saveTenantJson(tenantsFilePath, tenants);
         return res.status(200).json(tenants[tenantIndex]);
-        // return res.status(200).send('Tenant profile data updated successfully');
     } else {
         return res.status(404).send('Tenant profile not found');
     }

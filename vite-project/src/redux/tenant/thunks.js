@@ -2,8 +2,18 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { actionTypes } from './actionTypes'
 import tenantService from './service'
 
+export const getAllTenantProfileAsync = createAsyncThunk(
+    actionTypes.GET_ALL_TENANT_PROFILE,
+    async () => {
+        // return await tenantService.getTenantProfile(tenantID);
+        const response = await tenantService.getAllTenantProfile()
+        // console.log('Fetched tenant profile:', response);
+        return response
+    }
+)
+
 export const getTenantProfileAsync = createAsyncThunk(
-  actionTypes.GET_Tenant_PROFILE,
+  actionTypes.GET_TENANT_PROFILE,
   async (tenantID) => {
     // return await tenantService.getTenantProfile(tenantID);
     const response = await tenantService.getTenantProfile(tenantID)
@@ -18,6 +28,13 @@ export const patchTenantProfileAsync = createAsyncThunk(
     console.log('patch tenant profile:')
     return await tenantService.patchTenantProfile(tenantID, tenant)
   }
+)
+
+export const getAllTenantPrefAsync = createAsyncThunk(
+    actionTypes.GET_ALL_Tenant_PREF,
+    async () => {
+        return await tenantService.getAllTenantPref()
+    }
 )
 
 export const getTenantPrefAsync = createAsyncThunk(
