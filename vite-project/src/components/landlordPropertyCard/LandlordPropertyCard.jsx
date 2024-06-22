@@ -45,9 +45,8 @@ const LandlordPropertyCard = ({ landlordId }) => {
           .filter((match) => match.LandlordID === landlordId && match.MatchStatus !== 'Rejected')
           .map((match) => {
             const tenantProfile = tenants.find((t) => t.TenantID === match.TenantID);
-            const tenantPreference = tenantPrefs.find((p) => p.TenantPreferenceID === match.TenantID);
+            const tenantPreference = tenantPrefs.find((p) => p.TenantPreferenceID === tenantProfile.TenantPreferenceID);
             const userProfile = users.find((u) => u.TenantID === match.TenantID);
-
             if (tenantProfile && tenantPreference && userProfile) {
               return {
                 name: userProfile.UserName,
@@ -181,7 +180,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
                     />
                 ))
             ) : (
-                <div className="no-applicants">No more applicants</div>
+                <div className="no-applicants">No Applicants at the moment!</div>
             )}
           </div>
           {popupVisible && (
