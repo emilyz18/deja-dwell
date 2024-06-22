@@ -147,45 +147,45 @@ function PropertyCardList() {
     },
   })
 
-  const filteredProperties = properties.filter((property) => {
-    const matchesSearchTerm = property.title
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
-    const matchesMaxPrice =
-      filters.maxPrice === '' || property.price <= parseFloat(filters.maxPrice)
-    const matchesProvince =
-      filters.province === '' ||
-      property.province.toLowerCase() === filters.province.toLowerCase()
-    const matchesCity =
-      filters.city === '' ||
-      property.city.toLowerCase() === filters.city.toLowerCase()
-    const matchesStartDate =
-      filters.startDate === '' || property.startDate === filters.startDate
-    const matchesDuration =
-      filters.duration === '' ||
-      property.duration.toLowerCase() === filters.duration.toLowerCase()
-    const matchesRoomType =
-      filters.roomType === '' ||
-      property.roomType.toLowerCase() === filters.roomType.toLowerCase()
-    const matchesAllowPet = !filters.allowPet || property.allowPet
-    const matchesAllowSmoke = !filters.allowSmoke || property.allowSmoke
-    const matchesAllowParty = !filters.allowParty || property.allowParty
-    const matchesAllowWeed = !filters.allowWeed || property.allowWeed
-
-    return (
-      matchesSearchTerm &&
-      matchesMaxPrice &&
-      matchesProvince &&
-      matchesCity &&
-      matchesStartDate &&
-      matchesDuration &&
-      matchesRoomType &&
-      matchesAllowPet &&
-      matchesAllowSmoke &&
-      matchesAllowParty &&
-      matchesAllowWeed
-    )
-  })
+  // const filteredProperties = properties.filter((property) => {
+  //   const matchesSearchTerm = property.title
+  //     .toLowerCase()
+  //     .includes(searchTerm.toLowerCase())
+  //   const matchesMaxPrice =
+  //     filters.maxPrice === '' || property.price <= parseFloat(filters.maxPrice)
+  //   const matchesProvince =
+  //     filters.province === '' ||
+  //     property.province.toLowerCase() === filters.province.toLowerCase()
+  //   const matchesCity =
+  //     filters.city === '' ||
+  //     property.city.toLowerCase() === filters.city.toLowerCase()
+  //   const matchesStartDate =
+  //     filters.startDate === '' || property.startDate === filters.startDate
+  //   const matchesDuration =
+  //     filters.duration === '' ||
+  //     property.duration.toLowerCase() === filters.duration.toLowerCase()
+  //   const matchesRoomType =
+  //     filters.roomType === '' ||
+  //     property.roomType.toLowerCase() === filters.roomType.toLowerCase()
+  //   const matchesAllowPet = !filters.allowPet || property.allowPet
+  //   const matchesAllowSmoke = !filters.allowSmoke || property.allowSmoke
+  //   const matchesAllowParty = !filters.allowParty || property.allowParty
+  //   const matchesAllowWeed = !filters.allowWeed || property.allowWeed
+  //
+  //   return (
+  //     matchesSearchTerm &&
+  //     matchesMaxPrice &&
+  //     matchesProvince &&
+  //     matchesCity &&
+  //     matchesStartDate &&
+  //     matchesDuration &&
+  //     matchesRoomType &&
+  //     matchesAllowPet &&
+  //     matchesAllowSmoke &&
+  //     matchesAllowParty &&
+  //     matchesAllowWeed
+  //   )
+  // })
 
   // The code below was written with the help of ChatGPT 3.5 on Jun 8th
   // Prompt: Give me some examples of dragging and dropping using the dnd kit. Then, use the
