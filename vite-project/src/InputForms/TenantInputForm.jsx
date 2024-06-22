@@ -330,18 +330,11 @@ export function TenantInputForm() {
                   value={tenantPref.Duration || ''}
                   onChange={handleChange}
                 >
-                  <MenuItem value="<1month">Less than 1 month</MenuItem>
-                  <MenuItem value="1month">1 month</MenuItem>
-                  <MenuItem value="2months">2 months</MenuItem>
-                  <MenuItem value="3months">3 months</MenuItem>
+                  <MenuItem value="<3month">Less than 3 month</MenuItem>
                   <MenuItem value="4months">4 months</MenuItem>
-                  <MenuItem value="5months">5 months</MenuItem>
                   <MenuItem value="6months">6 months</MenuItem>
-                  <MenuItem value="7months">7 months</MenuItem>
                   <MenuItem value="8months">8 months</MenuItem>
-                  <MenuItem value="9months">9 months</MenuItem>
                   <MenuItem value="10months">10 months</MenuItem>
-                  <MenuItem value="11months">11 months</MenuItem>
                   <MenuItem value="12months">12 months</MenuItem>
                   <MenuItem value="long-term">Long term</MenuItem>
                 </Select>
@@ -358,10 +351,10 @@ export function TenantInputForm() {
                   onChange={handleChange}
                 >
                   <MenuItem value="Studio">Studio</MenuItem>
-                  <MenuItem value="1B1B">1 Bedroom 1 bedroom</MenuItem>
+                  <MenuItem value="1B1B">1 Bedroom 1 Bathroom</MenuItem>
                   <MenuItem value="2B2B">2 Bedrooms 2 Bathrooms</MenuItem>
                   <MenuItem value="2B1B">2 Bedrooms 1 Bathrooms</MenuItem>
-                  <MenuItem value="3B+sB">3 Bedrooms+ shared Bathroom</MenuItem>
+                  <MenuItem value="3B+sB">3 Bedrooms Shared Bathroom</MenuItem>
                   <MenuItem value="3B+3B+">3+ Bedrooms 3+Bathrooms</MenuItem>
                 </Select>
               </FormControl>

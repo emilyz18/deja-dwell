@@ -10,6 +10,7 @@ import { SortableContext, rectSortingStrategy } from '@dnd-kit/sortable'
 import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './PropertyCardList.css'
+import SearchBar from '../searchBar/SearchBar.jsx'
 import { getPropertiesAsync } from '../../redux/properties/thunks'
 import { createMatchAsync } from '../../redux/matches/matchThunks'
 import { Snackbar, Alert } from '@mui/material'
@@ -22,6 +23,15 @@ function PropertyCardList() {
     (state) => state.properties.getProperties
   )
   const user = useSelector((state) => state.user.user)
+// function PropertyCardList(props) {
+//   const dispatch = useDispatch()
+//   const propertiesList = useSelector((state) => state.properties.list)
+//   const getPropertiesStatus = useSelector(
+//     (state) => state.properties.getProperties
+//   )
+//
+//   const { propList } = props
+//   const [properties, setProperties] = useState(propList)
   const [activeId, setActiveId] = useState(null)
   const [popupPVisible, setPopupPVisible] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
@@ -32,11 +42,27 @@ function PropertyCardList() {
     severity: '',
   })
 
+  const [searchTerm, setSearchTerm] = useState('')
+  const [filters, setFilters] = useState({
+    minPrice: '',
+    maxPrice: '',
+    province: '',
+    city: '',
+    duration: '',
+    startDate: '',
+    roomType: '',
+    allowPet: false,
+    allowSmoke: false,
+    allowParty: false,
+    allowWeed: false,
+  })
+
   useEffect(() => {
     if (getPropertiesStatus === 'IDLE') {
       dispatch(getPropertiesAsync())
     }
   }, [getPropertiesStatus, dispatch])
+  // }, [getPropertiesStatus, properties, dispatch]) // TODO RESOLVE
 
   const likedProperty = (id) => {
     const likedProperty = properties.find((property) => property.HouseID === id)
@@ -121,6 +147,51 @@ function PropertyCardList() {
     },
   })
 
+  const filteredProperties = properties.filter((property) => {
+    const matchesSearchTerm = property.title
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+    const matchesMaxPrice =
+      filters.maxPrice === '' || property.price <= parseFloat(filters.maxPrice)
+    const matchesProvince =
+      filters.province === '' ||
+      property.province.toLowerCase() === filters.province.toLowerCase()
+    const matchesCity =
+      filters.city === '' ||
+      property.city.toLowerCase() === filters.city.toLowerCase()
+    const matchesStartDate =
+      filters.startDate === '' || property.startDate === filters.startDate
+    const matchesDuration =
+      filters.duration === '' ||
+      property.duration.toLowerCase() === filters.duration.toLowerCase()
+    const matchesRoomType =
+      filters.roomType === '' ||
+      property.roomType.toLowerCase() === filters.roomType.toLowerCase()
+    const matchesAllowPet = !filters.allowPet || property.allowPet
+    const matchesAllowSmoke = !filters.allowSmoke || property.allowSmoke
+    const matchesAllowParty = !filters.allowParty || property.allowParty
+    const matchesAllowWeed = !filters.allowWeed || property.allowWeed
+
+    return (
+      matchesSearchTerm &&
+      matchesMaxPrice &&
+      matchesProvince &&
+      matchesCity &&
+      matchesStartDate &&
+      matchesDuration &&
+      matchesRoomType &&
+      matchesAllowPet &&
+      matchesAllowSmoke &&
+      matchesAllowParty &&
+      matchesAllowWeed
+    )
+  })
+
+  // The code below was written with the help of ChatGPT 3.5 on Jun 8th
+  // Prompt: Give me some examples of dragging and dropping using the dnd kit. Then, use the
+  // dnd toolkit to incorporate drag and drop functionality on the miniProperty card + "this file".
+  // The generated code was adapted: I added place holders for dropzones and cards to be
+  // conditionally displayed. I also wrote css myself tp suit my own needs
   const handleNotificationClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
@@ -130,6 +201,12 @@ function PropertyCardList() {
 
   return (
     <>
+      {/*<SearchBar*/}
+      {/*  searchTerm={searchTerm}*/}
+      {/*  setSearchTerm={setSearchTerm}*/}
+      {/*  filters={filters}*/}
+      {/*  setFilters={setFilters}*/}
+      {/*/>{' '}*/}
       <DndContext
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}
@@ -146,7 +223,10 @@ function PropertyCardList() {
           ) : (
             <div className="dropzone-placeholder"></div>
           )}
-          <SortableContext items={properties} strategy={rectSortingStrategy}>
+          <SortableContext items={properties}
+            // items={filteredProperties}
+            strategy={rectSortingStrategy}
+          >
             <ul id="property-list" className="property-list">
               {properties.map((property) =>
                 property.HouseID === activeId ? (
@@ -154,6 +234,12 @@ function PropertyCardList() {
                     key={property.HouseID}
                     className="placeholder-card"
                   ></div>
+              // {filteredProperties.map((property) =>
+              //   property.houseID === activeId ? (
+              //     <div
+              //       key={property.houseID}
+              //       className="placeholder-card"
+              //     ></div>
                 ) : (
                   <MiniPropertyCard
                     key={property.HouseID}
