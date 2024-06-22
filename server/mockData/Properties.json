@@ -17,12 +17,20 @@
     "RoomType": "1B1B",
     "Title": "Cozy Downtown Condo",
     "Description": "A modern condo in the heart of Toronto with stunning city views.",
-    "HouseImg1": "https://www.bhg.com/thmb/H9VV9JNnKl-H1faFXnPlQfNprYw=/1799x0/filters:no_upscale():strip_icc()/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
-    "HouseImg2": "https://static3.bigstockphoto.com/9/9/3/large1500/399770192.jpg",
-    "HouseImg3": "https://media.architecturaldigest.com/photos/60075367a621dfddeaab7e0b/2:1/w_1280%2Cc_limit/Spencer%2520House%2520Exterior%25202%25C2%25A9Jarrold%2520PublishingSpencer%2520House.jpg",
-    "HouseImg4": null,
-    "HouseImg5": null,
-    "HouseImg6": null
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
   },
   {
     "LandlordID": "b5a3e8f9-6d8b-4a1e-9b56-1d8c3a6f4b9c",
@@ -42,12 +50,20 @@
     "RoomType": "2B2B",
     "Title": "Luxury Apartment near Downtown",
     "Description": "Spacious apartment with top-notch amenities and a view of the mountains.",
-    "HouseImg1": "https://www.bhg.com/thmb/H9VV9JNnKl-H1faFXnPlQfNprYw=/1799x0/filters:no_upscale():strip_icc()/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
-    "HouseImg2": "https://static3.bigstockphoto.com/9/9/3/large1500/399770192.jpg",
-    "HouseImg3": "https://media.architecturaldigest.com/photos/60075367a621dfddeaab7e0b/2:1/w_1280%2Cc_limit/Spencer%2520House%2520Exterior%25202%25C2%25A9Jarrold%2520PublishingSpencer%2520House.jpg",
-    "HouseImg4": null,
-    "HouseImg5": null,
-    "HouseImg6": null
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
   },
   {
     "LandlordID": "f2d3e8b6-9b8c-4a1e-9d6b-1e8c3a6f5b7a",
@@ -67,12 +83,20 @@
     "RoomType": "1B1B",
     "Title": "Charming Studio Apartment",
     "Description": "Cozy studio apartment perfect for a single person or couple.",
-    "HouseImg1": "https://www.bhg.com/thmb/H9VV9JNnKl-H1faFXnPlQfNprYw=/1799x0/filters:no_upscale():strip_icc()/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
-    "HouseImg2": "https://static3.bigstockphoto.com/9/9/3/large1500/399770192.jpg",
-    "HouseImg3": "https://media.architecturaldigest.com/photos/60075367a621dfddeaab7e0b/2:1/w_1280%2Cc_limit/Spencer%2520House%2520Exterior%25202%25C2%25A9Jarrold%2520PublishingSpencer%2520House.jpg",
-    "HouseImg4": null,
-    "HouseImg5": null,
-    "HouseImg6": null
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
   },
   {
     "LandlordID": "d2b9e8a6-7c8b-4a3e-9d6b-3e8a1f5c7d9f",
@@ -92,12 +116,20 @@
     "RoomType": "2B1B",
     "Title": "Modern Townhouse with Garden",
     "Description": "Beautiful townhouse with a private garden, ideal for families.",
-    "HouseImg1": "https://www.bhg.com/thmb/H9VV9JNnKl-H1faFXnPlQfNprYw=/1799x0/filters:no_upscale():strip_icc()/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
-    "HouseImg2": "https://static3.bigstockphoto.com/9/9/3/large1500/399770192.jpg",
-    "HouseImg3": "https://media.architecturaldigest.com/photos/60075367a621dfddeaab7e0b/2:1/w_1280%2Cc_limit/Spencer%2520House%2520Exterior%25202%25C2%25A9Jarrold%2520PublishingSpencer%2520House.jpg",
-    "HouseImg4": null,
-    "HouseImg5": null,
-    "HouseImg6": null
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
   },
   {
     "LandlordID": "b7a9e8d6-4c3e-4d1e-9f2b-3e8a1d5c7f9d",
@@ -117,11 +149,19 @@
     "RoomType": "3B1B",
     "Title": "Spacious Penthouse with Terrace",
     "Description": "Luxurious penthouse with a large terrace offering panoramic views of the city.",
-    "HouseImg1": "https://www.bhg.com/thmb/H9VV9JNnKl-H1faFXnPlQfNprYw=/1799x0/filters:no_upscale():strip_icc()/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
-    "HouseImg2": "https://static3.bigstockphoto.com/9/9/3/large1500/399770192.jpg",
-    "HouseImg3": "https://media.architecturaldigest.com/photos/60075367a621dfddeaab7e0b/2:1/w_1280%2Cc_limit/Spencer%2520House%2520Exterior%25202%25C2%25A9Jarrold%2520PublishingSpencer%2520House.jpg",
-    "HouseImg4": null,
-    "HouseImg5": null,
-    "HouseImg6": null
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
   }
 ]

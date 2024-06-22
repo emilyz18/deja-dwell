@@ -1,24 +1,17 @@
-// useNavigate : from tutorial https://dev.to/salehmubashar/usenavigate-tutorial-react-js-aop
-
-/*
-  June 6,  useEffect() and useLocation() is guided by Chatgpt 4.0o for state management, with prompt code in this file +
-  "When I am at /tenantAccount/matches then refresh the page, I  get a screen with the landlord sidebar and blank page"
-*/
-
 import './css/App.css'
-import * as React from 'react'
-import { useEffect, useState } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 import LandlordPropertyCard from './components/landlordPropertyCard/LandlordPropertyCard'
 import PropertyCardList from './components/propertyCardList/PropertyCardList'
-import { LandLordSideBar } from './components/sideBars/LandLordSideBar.jsx'
-import { TenantSideBar } from './components/sideBars/TenantSideBar.jsx'
-import { LandlordInputForm } from './InputForms/landlordInputForm/LandlordInputForm.jsx'
-import { TenantInputForm } from './InputForms/tenantInputForm/TenantInputForm.jsx'
+import { LandLordSideBar } from './components/sideBars/LandLordSideBar'
+import { TenantSideBar } from './components/sideBars/TenantSideBar'
+import { TenantInputForm } from './InputForms/TenantInputForm.jsx'
+import { GeneralInputForm } from './InputForms/generalInputForm'
 
-import { mockUser, propertyList, postingData } from './mockData/mockUser' //TODO Clean this? after we use proper API
-import { GeneralInputForm } from './InputForms/generalInputForm.jsx'
+import { getUserAsync } from './redux/user/thunks'
 
 const LANDLORD = 'landlord'
 const TENANT = 'tenant'
@@ -28,7 +21,22 @@ function App() {
   const navigate = useNavigate()
   const location = useLocation()
 
-  // useEffect Hook to set Initial State Based on the URL:
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.user)
+
+  const userId = user.UserID
+
+  useEffect(() => {
+    if (user) {
+      if (userId) {
+        dispatch(getUserAsync(userId))
+      }
+    }
+  }, []) // FYI: if I add dispatch and user in here it will infinitely call the GET request
+
+  const landlordId = user.LandlordID
+
+  // useEffect Hook to set Initial State Based on the URL
   useEffect(() => {
     if (location.pathname.startsWith('/landlordAccount')) {
       setAccountType(LANDLORD)
@@ -45,77 +53,62 @@ function App() {
       setAccountType(LANDLORD)
       navigate('/landlordAccount/applicants')
     }
-
   }
 
   return (
-    <>
-      <div className="root">
-        <div id="main-sidebar-container">
+    <div className="root">
+      <div id="main-sidebar-container">
+        {accountType === LANDLORD ? (
+          <LandLordSideBar
+            accountType={accountType}
+            profile={user}
+            onSwitchAcc={handleSwitchAcc}
+          />
+        ) : (
+          <TenantSideBar
+            accountType={accountType}
+            profile={user}
+            onSwitchAcc={handleSwitchAcc}
+          />
+        )}
+      </div>
+      <div className="main-content">
+        <Routes>
           {accountType === LANDLORD ? (
             <>
-              <LandLordSideBar
-                accountType={accountType}
-                profile={mockUser}
-                onSwitchAcc={handleSwitchAcc}
+              <Route
+                path="/"
+                element={<LandlordPropertyCard landlordId={landlordId} />}
+              />
+              <Route
+                path="/landlordAccount/applicants"
+                element={<LandlordPropertyCard landlordId={landlordId} />}
+              />
+              <Route
+                path="/landlordAccount/profile"
+                element={<GeneralInputForm />}
               />
             </>
           ) : (
-            <TenantSideBar
-              accountType={accountType}
-              profile={mockUser}
-              onSwitchAcc={handleSwitchAcc}
-            />
+            <>
+              <Route path="/" element={<PropertyCardList />} />
+              <Route
+                path="/tenantAccount/matches"
+                element={<PropertyCardList />}
+              />
+              <Route
+                path="/tenantAccount/profile"
+                element={<GeneralInputForm />}
+              />
+              <Route
+                path="/tenantAccount/preference"
+                element={<TenantInputForm />}
+              />
+            </>
           )}
-        </div>
-        <div className="main-content">
-          <Routes>
-            {accountType === LANDLORD ? (
-              <>
-                {/* for now the home page is the applicants */}
-                <Route
-                  path="/"
-                  element={<LandlordPropertyCard postingData={postingData} />}
-                />
-                <Route
-                  path="/landlordAccount/applicants"
-                  element={<LandlordPropertyCard postingData={postingData} />}
-                />
-                <Route
-                  path="/landlordAccount/profile"
-                  element={<GeneralInputForm />}
-                />
-              </>
-            ) : (
-              <>
-                <Route
-                  path="/"
-                  element={
-                    <PropertyCardList propList={propertyList.properties} />
-                  }
-                />
-                <Route
-                  path="/tenantAccount/matches"
-                  element={
-                    <PropertyCardList propList={propertyList.properties} />
-                  }
-                  />
-
-                  <Route
-                    path="/tenantAccount/profile"
-                    element={<GeneralInputForm />}
-                  />
-
-                <Route
-                  path="/tenantAccount/preference"
-                  element={<TenantInputForm />}
-                />
-              </>
-            )}
-          </Routes>
-        </div>
+        </Routes>
       </div>
-    </>
+    </div>
   )
 }
 

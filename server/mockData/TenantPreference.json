@@ -88,5 +88,42 @@
     "isWeed": true,
     "NumOfParking": 1,
     "NumOfResident": 4
+  },
+  {
+    "TenantPreferenceID": "40417192-b119-4b9f-9c05-025b71bd62d3",
+    "TenantID": "c4cc585e-e7de-4737-9356-af4ae2317112",
+    "Province": null,
+    "City": null,
+    "Street": null,
+    "ExpectedPrice": null,
+    "MaxPrice": null,
+    "StartDate": null,
+    "EndDate": null,
+    "Duration": null,
+    "RoomType": null,
+    "isOwnPet": false,
+    "isSmoke": false,
+    "isParty": false,
+    "isWeed": false,
+    "NumOfParking": null,
+    "NumOfResident": null
+  },
+  {
+    "TenantPreferenceID": "f3d2a8b4-6e7c-4a1e-9b8d-3c8a1f7d6b9e",
+    "Province": "Quebec",
+    "City": "Montreal",
+    "Street": "Rue Sainte-Catherine",
+    "ExpectedPrice": 2700,
+    "MaxPrice": 3500,
+    "StartDate": "2024-11-15",
+    "EndDate": null,
+    "Duration": "12month",
+    "RoomType": "3BsB+",
+    "isOwnPet": true,
+    "isSmoke": true,
+    "isParty": true,
+    "isWeed": true,
+    "NumOfParking": 1,
+    "NumOfResident": 4
   }
 ]

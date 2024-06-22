@@ -1,0 +1,43 @@
+.expanded-property-popup {
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: left;
+  font-family: 'Arial', sans-serif;
+}
+
+.expanded-property-popup h1 {
+  font-size: 28px;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.carousel-container {
+  margin: 20px 0;
+}
+
+.expanded-property-popup p {
+  font-size: 18px;
+  color: #555;
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.expanded-property-popup p span {
+  font-weight: bold;
+  color: #333;
+}
+
+.expanded-property-popup p:first-of-type {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.expanded-property-popup p:nth-of-type(2) {
+  margin-bottom: 20px;
+}
+
+.expanded-property-popup p:last-of-type {
+  margin-top: 20px;
+}

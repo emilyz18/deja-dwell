@@ -19,29 +19,36 @@ const saveTenantJson = (file, data) => {
     fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
 };
 
-router.get('/:tenantPreferenceID', (req, res) => {
-    const { tenantPreferenceID } = req.params;
-    // console.log('Received request for tenantPreferenceID:', tenantPreferenceID); 
+// Get all tenant preferences
+router.get('/', (req, res) => {
     const tenantPrefs = loadTenantJson(tenantsPrefFilePath);
     if (!tenantPrefs) {
-        return res.status(500).send("Error loading tenant preferene data from JSON file");
+        return res.status(500).send("Error loading tenant preference data from JSON file");
+    }
+    return res.status(200).json(tenantPrefs);
+});
+
+// Get tenant preference by ID
+router.get('/:tenantPreferenceID', (req, res) => {
+    const { tenantPreferenceID } = req.params;
+    console.log('Received request for tenantPreferenceID:', tenantPreferenceID);
+    const tenantPrefs = loadTenantJson(tenantsPrefFilePath);
+    if (!tenantPrefs) {
+        return res.status(500).send("Error loading tenant preference data from JSON file");
     }
 
     const tenantPref = tenantPrefs.find(t => t.TenantPreferenceID === tenantPreferenceID);
     if (tenantPref) {
-        // console.log("in server, tenant pref, ", res.json(tenantPref));
         return res.status(200).json(tenantPref);
     } else {
         return res.status(404).send('Tenant preference data not found');
     }
 });
 
-
-// update
+// Update tenant preference
 router.patch('/:tenantPreferenceID', (req, res) => {
     const { tenantPreferenceID } = req.params;
     const tenantPrefData = req.body;
-
 
     const tenantPrefs = loadTenantJson(tenantsPrefFilePath);
     if (!tenantPrefs) {
@@ -50,17 +57,13 @@ router.patch('/:tenantPreferenceID', (req, res) => {
 
     const tenantPrefIndex = tenantPrefs.findIndex(t => t.TenantPreferenceID === tenantPreferenceID);
     if (tenantPrefIndex >= 0) {
-        // creat a copy of object of tenants[tenantIndex],
-        // then overide with identical names field in tenantData
         tenantPrefs[tenantPrefIndex] = { ...tenantPrefs[tenantPrefIndex], ...tenantPrefData };
 
         saveTenantJson(tenantsPrefFilePath, tenantPrefs);
-        // return res.status(200).send('Tenant preference data updated successfully');
         return res.status(200).json(tenantPrefs[tenantPrefIndex]);
     } else {
-        return res.status(404).send('Tenant preferene data not found');
+        return res.status(404).send('Tenant preference data not found');
     }
-
 });
 
 module.exports = router;

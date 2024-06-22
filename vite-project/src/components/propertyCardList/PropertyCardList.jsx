@@ -10,24 +10,28 @@ import { SortableContext, rectSortingStrategy } from '@dnd-kit/sortable'
 import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './PropertyCardList.css'
-import { getPropertiesAsync } from '../../redux/properties/thunks.js'
 import SearchBar from '../searchBar/SearchBar.jsx'
+import { getPropertiesAsync } from '../../redux/properties/thunks'
+import { createMatchAsync } from '../../redux/matches/matchThunks'
+import { Snackbar, Alert } from '@mui/material'
+import { v4 as uuidv4 } from 'uuid'
 
-function PropertyCardList(props) {
+function PropertyCardList() {
   const dispatch = useDispatch()
-  const propertiesList = useSelector((state) => state.properties.list)
+  const properties = useSelector((state) => state.properties.list)
   const getPropertiesStatus = useSelector(
     (state) => state.properties.getProperties
   )
-
-  const { propList } = props
-  const [properties, setProperties] = useState(propList)
+  const user = useSelector((state) => state.user.user)
   const [activeId, setActiveId] = useState(null)
-
   const [popupPVisible, setPopupPVisible] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
-
   const [isDragging, setIsDragging] = useState(false)
+  const [notification, setNotification] = useState({
+    open: false,
+    message: '',
+    severity: '',
+  })
 
   const [searchTerm, setSearchTerm] = useState('')
   const [filters, setFilters] = useState({
@@ -43,34 +47,52 @@ function PropertyCardList(props) {
     allowParty: false,
     allowWeed: false,
   })
-
+  
   useEffect(() => {
     if (getPropertiesStatus === 'IDLE') {
       dispatch(getPropertiesAsync())
     }
-  }, [getPropertiesStatus, properties, dispatch])
+  }, [getPropertiesStatus, dispatch])
+  // }, [getPropertiesStatus, properties, dispatch]) // TODO RESOLVE
 
-  console.log(propertiesList)
-
-  // TODO: to be implemented logic
   const likedProperty = (id) => {
-    console.log('house ' + id + ' was liked!')
-
-    const updatedProperties = properties.filter(
-      (property) => property.houseID !== id
+    const likedProperty = properties.find((property) => property.HouseID === id)
+    dispatch(
+      createMatchAsync({
+        MatchID: uuidv4(),
+        TenantID: user.TenantID,
+        LandlordID: likedProperty.LandlordID,
+        HouseID: likedProperty.HouseID,
+        MatchStatus: 'Applied',
+      })
     )
-    setProperties(updatedProperties)
-    console.log(properties)
+    setNotification({
+      open: true,
+      message: `Liked property: ${likedProperty.Title}`,
+      severity: 'success',
+    })
+    dispatch({ type: 'properties/removeProperty', payload: id })
   }
 
-  // TODO: to be implemented logic
   const dislikedProperty = (id) => {
-    console.log('house ' + id + ' was rejected!')
-    const updatedProperties = properties.filter(
-      (property) => property.houseID !== id
+    const dislikedProperty = properties.find(
+      (property) => property.HouseID === id
     )
-    setProperties(updatedProperties)
-    console.log(properties)
+    dispatch(
+      createMatchAsync({
+        MatchID: uuidv4(),
+        TenantID: user.TenantID,
+        LandlordID: dislikedProperty.LandlordID,
+        HouseID: dislikedProperty.HouseID,
+        MatchStatus: 'Disliked',
+      })
+    )
+    setNotification({
+      open: true,
+      message: `Disliked property: ${dislikedProperty.Title}`,
+      severity: 'info',
+    })
+    dispatch({ type: 'properties/removeProperty', payload: id })
   }
 
   const displayPopup = (property) => {
@@ -93,7 +115,6 @@ function PropertyCardList(props) {
     const { delta } = event
 
     if (delta.x > 200) {
-      // determines the x coord to be dragged
       likedProperty(activeId)
     } else if (delta.x < -200) {
       dislikedProperty(activeId)
@@ -118,29 +139,30 @@ function PropertyCardList(props) {
   })
 
   const filteredProperties = properties.filter((property) => {
-    const matchesSearchTerm = property.title
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
+    const matchesSearchTerm = property.Title.toLowerCase().includes(
+      searchTerm.toLowerCase()
+    )
     const matchesMaxPrice =
-      filters.maxPrice === '' || property.price <= parseFloat(filters.maxPrice)
+      filters.maxPrice === '' ||
+      property.ExpectedPrice <= parseFloat(filters.maxPrice)
     const matchesProvince =
       filters.province === '' ||
-      property.province.toLowerCase() === filters.province.toLowerCase()
+      property.Province.toLowerCase() === filters.province.toLowerCase()
     const matchesCity =
       filters.city === '' ||
-      property.city.toLowerCase() === filters.city.toLowerCase()
+      property.City.toLowerCase() === filters.city.toLowerCase()
     const matchesStartDate =
-      filters.startDate === '' || property.startDate === filters.startDate
+      filters.startDate === '' || property.StartDate === filters.startDate
     const matchesDuration =
       filters.duration === '' ||
-      property.duration.toLowerCase() === filters.duration.toLowerCase()
+      property.Duration.toLowerCase() === filters.duration.toLowerCase()
     const matchesRoomType =
       filters.roomType === '' ||
-      property.roomType.toLowerCase() === filters.roomType.toLowerCase()
-    const matchesAllowPet = !filters.allowPet || property.allowPet
-    const matchesAllowSmoke = !filters.allowSmoke || property.allowSmoke
-    const matchesAllowParty = !filters.allowParty || property.allowParty
-    const matchesAllowWeed = !filters.allowWeed || property.allowWeed
+      property.RoomType.toLowerCase() === filters.roomType.toLowerCase()
+    const matchesAllowPet = !filters.allowPet || property.AllowPet
+    const matchesAllowSmoke = !filters.allowSmoke || property.AllowSmoke
+    const matchesAllowParty = !filters.allowParty || property.AllowParty
+    const matchesAllowWeed = !filters.allowWeed || property.AllowWeed
 
     return (
       matchesSearchTerm &&
@@ -162,6 +184,13 @@ function PropertyCardList(props) {
   // dnd toolkit to incorporate drag and drop functionality on the miniProperty card + "this file".
   // The generated code was adapted: I added place holders for dropzones and cards to be
   // conditionally displayed. I also wrote css myself tp suit my own needs
+  const handleNotificationClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setNotification({ ...notification, open: false })
+  }
+
   return (
     <>
       <SearchBar
@@ -199,7 +228,7 @@ function PropertyCardList(props) {
                   ></div>
                 ) : (
                   <MiniPropertyCard
-                    key={property.houseID}
+                    key={property.HouseID}
                     propertyInfo={property}
                     likedFn={likedProperty}
                     dislikedFn={dislikedProperty}
@@ -224,27 +253,39 @@ function PropertyCardList(props) {
           {activeId ? (
             <MiniPropertyCard
               propertyInfo={properties.find(
-                (property) => property.houseID === activeId
+                (property) => property.HouseID === activeId
               )}
               likedFn={likedProperty}
               dislikedFn={dislikedProperty}
               displayPopup={() =>
                 displayPopup(
-                  properties.find((property) => property.houseID === activeId)
+                  properties.find((property) => property.HouseID === activeId)
                 )
               }
             />
           ) : null}
         </DragOverlay>
       </DndContext>
-      <div>
-        {popupPVisible && (
-          <ExpandedPropertyCard
-            propertyInfo={selectedProperty}
-            closePopup={closePopup}
-          />
-        )}
-      </div>
+      {popupPVisible && (
+        <div className="property-popup-background" onClick={closePopup}>
+          <div className="property-popup" onClick={(e) => e.stopPropagation()}>
+            <ExpandedPropertyCard propertyInfo={selectedProperty} />
+          </div>
+        </div>
+      )}
+      <Snackbar
+        open={notification.open}
+        autoHideDuration={3000}
+        onClose={handleNotificationClose}
+      >
+        <Alert
+          onClose={handleNotificationClose}
+          severity={notification.severity}
+          sx={{ width: '100%' }}
+        >
+          {notification.message}
+        </Alert>
+      </Snackbar>
     </>
   )
 }
