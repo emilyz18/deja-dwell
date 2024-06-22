@@ -53,9 +53,11 @@
 
   select[name="duration"],
   select[name="roomType"],
-
-  input[type="text"],
-  input[type="number"]
+  input[name="maxPrice"],
+  input[name="province"],
+  input[name="city"],
+  input[name="province"],
+  input[name="startDate"]
    {
     padding: 0.25em;
     display: block;
