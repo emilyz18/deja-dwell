@@ -6,19 +6,19 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 ## Team Members
 - Derek: one sentence about you!
 - Emily: Hi, I am a 4th year computer science student. I like to draw and play chess.
-- Jackson: Hello, I am a 4th year comp-sci student. I like being on airplanes and'm scared of big bodies of water.
+- Jackson: Hello, I am a 4th year comp-sci student. I like being on airplanes and I'm scared of big bodies of water.
 - Xinyue: Hi. I am a 4th year computer science student. I love coffee.
 
 ## Minimal Requirements
-1. Create/modify a user profile (user information and housing preference)
+1. [ ] Create/modify a user profile (user information and housing preference)
     - Each user can have one of:
         - Landlord account
         - Tenant account
     - Functionality to swap between the two accounts (only if the user has both accounts, i.e. no option to swap if the user has 1 account only)
-2. Matching
+2. [ ] Matching
     - Stable matching algorithm between tenant property preference and property, tailored to our data
     - Display matching score between user preference & housing post on both the landlord and tenant’s dashboard (only shows in console log)
-3. Dashboard
+3. [ ] Dashboard
     - Landlord: Display list of applicants
         - Profile picture
         - Name
@@ -32,30 +32,30 @@ Our project is a platform designed for tenants and landlords to facilitate findi
         - Property properties
 
 ## Standard Requirements
-1. User Login page
+1. [ ] User Login page
     - Allows user to store data in their account
     - User can log in and log out
-2. Application status
+2. [ ] Application status
     - For Tenant account: Store history of applied post 
     - For the landlord: Store history of matched applicants(Tenants) along with their applied post
-3. Two types of rent match:
+3. [ ] Two types of rent match:
    - tight match (search bar)
    - loose match (profile/preference match by system)
-5. Make the matching algorithm more robust
+4. [ ] Make the matching algorithm more robust
     - Add weightings to scores 
     - Add additional sorting for the list of applicants ( tenant profile <-> landlord preference matching)
-6. For landlord account:  A Landlord dashboard page that shows the current list of applicants with accept/reject buttons for each applicant.
+5. [ ] For landlord account:  A Landlord dashboard page that shows the current list of applicants with accept/reject buttons for each applicant.
     - the landlord will reach out to the list of tenants matched by the system  (externally, interview/in-person house tour), once the landlord and tenant sign the contract (externally), the landlord will press accept and other tenants on the list will be automatically rejected.
     - Landlord will only see contact info of tenant after they apply, tenant will only see landlord's contact info after they apply 
 
 ## Stretch Requirements
-1. On-demand feedback
+1. [ ] On-demand feedback
     - As the user looks through options we ask them why they did not choose this specific option
-2. Profile reviews of the tenant/landlord profiles, from a rating between 1 - 5
-3. Preference updating based on swap and feedback demand
-4. Actual swiping of each selection
-5. Allow the landlord to list multiple properties
-6. Once matched, enable the landlord and tenant to interact
+2. [ ] Profile reviews of the tenant/landlord profiles, from a rating between 1 - 5
+3. [ ] Preference updating based on swap and feedback demand
+4. [ ] Actual swiping of each selection
+5. [ ] Allow the landlord to list multiple properties
+6. [ ] Once matched, enable the landlord and tenant to interact
     - Chat message
     - Contact exchange
     - Interview process
