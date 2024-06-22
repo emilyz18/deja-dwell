@@ -9,6 +9,13 @@ export const getUsersAsync = createAsyncThunk(
     }
 );
 
+export const getUserByIdAsync = createAsyncThunk(
+    actionTypes.GET_USERSBYID,
+    async () => {
+        return await userService.getUserById();
+    }
+);
+
 export const addUserAsync = createAsyncThunk(
     actionTypes.ADD_USER,
     async (user) => {

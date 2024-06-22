@@ -5,8 +5,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -17,7 +15,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { signUpAsync } from '../../redux/user/thunks';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 // COPY RIGHT: THIS PAGE CONTENT IS COPY AND MODIFY FROM https://github.com/mui/material-ui/blob/v5.15.20/docs/data/material/getting-started/templates/sign-up/SignUp.js 
@@ -51,7 +48,7 @@ export default function SignUp() {
       Password: data.get('password'),
       accountType: accountType
     }
-    if( !user.UserName || !user.Email ||!user.Password ||!user.accountType ) {
+    if (!user.UserName || !user.Email || !user.Password || !user.accountType) {
       console.log("not allow for empty field");
     } else {
       dispatch(signUpAsync(user));
@@ -62,9 +59,14 @@ export default function SignUp() {
   useEffect(() => {
     if (isAuth == true) {
       console.log("Auth!!");
-      navigate('/');
+      // fromSignUp state is for displaying the warning after sign up
+      if (accountType === 'Landlord') {
+        navigate('/landlordAccount/profile', { state: { fromSignUp: 'Landlord' } });
+      } else if (accountType === 'Tenant') {
+        navigate('/tenantAccount/profile', { state: { fromSignUp: 'Tenant' } });
+      }
     }
-  }, [isAuth, dispatch]);
+  }, [isAuth, dispatch, navigate, accountType]);
 
 
   return (

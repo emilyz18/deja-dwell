@@ -16,3 +16,19 @@ export const signUpAsync = createAsyncThunk(
     }
 );
 
+export const getUserAsync = createAsyncThunk(
+    actionTypes.GET_USER,
+    async (userID) => {
+        return await userService.getUser(userID);
+    }
+);
+
+export const editUserAsync = createAsyncThunk(
+    actionTypes.EDIT_PROFILE,
+    async (user) => {
+        return await userService.editProfile(user);
+    }
+);
+
+
+

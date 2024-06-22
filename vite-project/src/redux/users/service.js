@@ -23,12 +23,17 @@ const getUsers = async () => {
     return handleResponse(() => axios.get(URL_PATH));
 };
 
+// get user by id for now, might be email if we have log in functionality
+const getUserById = async (id) => {
+    return handleResponse(() => axios.get(`${URL_PATH}/${id}`));
+};
+
 const deleteUser = async (userId) => {
     await handleResponse(() => axios.delete(`${URL_PATH}/${userId}`));
     return userId;
 };
 
-const patchUser = async (user) => {
+const patchUser = async (id, user) => {
     return handleResponse(() => axios.patch(`${URL_PATH}/${user.id}`, user));
 };
 
@@ -42,4 +47,5 @@ export default {
     deleteUser,
     patchUser,
     putUser,
+    getUserById
 };
