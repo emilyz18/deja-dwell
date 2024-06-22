@@ -23,15 +23,6 @@ function PropertyCardList() {
     (state) => state.properties.getProperties
   )
   const user = useSelector((state) => state.user.user)
-// function PropertyCardList(props) {
-//   const dispatch = useDispatch()
-//   const propertiesList = useSelector((state) => state.properties.list)
-//   const getPropertiesStatus = useSelector(
-//     (state) => state.properties.getProperties
-//   )
-//
-//   const { propList } = props
-//   const [properties, setProperties] = useState(propList)
   const [activeId, setActiveId] = useState(null)
   const [popupPVisible, setPopupPVisible] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
@@ -56,7 +47,7 @@ function PropertyCardList() {
     allowParty: false,
     allowWeed: false,
   })
-
+  
   useEffect(() => {
     if (getPropertiesStatus === 'IDLE') {
       dispatch(getPropertiesAsync())
@@ -147,45 +138,46 @@ function PropertyCardList() {
     },
   })
 
-  // const filteredProperties = properties.filter((property) => {
-  //   const matchesSearchTerm = property.title
-  //     .toLowerCase()
-  //     .includes(searchTerm.toLowerCase())
-  //   const matchesMaxPrice =
-  //     filters.maxPrice === '' || property.price <= parseFloat(filters.maxPrice)
-  //   const matchesProvince =
-  //     filters.province === '' ||
-  //     property.province.toLowerCase() === filters.province.toLowerCase()
-  //   const matchesCity =
-  //     filters.city === '' ||
-  //     property.city.toLowerCase() === filters.city.toLowerCase()
-  //   const matchesStartDate =
-  //     filters.startDate === '' || property.startDate === filters.startDate
-  //   const matchesDuration =
-  //     filters.duration === '' ||
-  //     property.duration.toLowerCase() === filters.duration.toLowerCase()
-  //   const matchesRoomType =
-  //     filters.roomType === '' ||
-  //     property.roomType.toLowerCase() === filters.roomType.toLowerCase()
-  //   const matchesAllowPet = !filters.allowPet || property.allowPet
-  //   const matchesAllowSmoke = !filters.allowSmoke || property.allowSmoke
-  //   const matchesAllowParty = !filters.allowParty || property.allowParty
-  //   const matchesAllowWeed = !filters.allowWeed || property.allowWeed
-  //
-  //   return (
-  //     matchesSearchTerm &&
-  //     matchesMaxPrice &&
-  //     matchesProvince &&
-  //     matchesCity &&
-  //     matchesStartDate &&
-  //     matchesDuration &&
-  //     matchesRoomType &&
-  //     matchesAllowPet &&
-  //     matchesAllowSmoke &&
-  //     matchesAllowParty &&
-  //     matchesAllowWeed
-  //   )
-  // })
+  const filteredProperties = properties.filter((property) => {
+    const matchesSearchTerm = property.Title.toLowerCase().includes(
+      searchTerm.toLowerCase()
+    )
+    const matchesMaxPrice =
+      filters.maxPrice === '' ||
+      property.ExpectedPrice <= parseFloat(filters.maxPrice)
+    const matchesProvince =
+      filters.province === '' ||
+      property.Province.toLowerCase() === filters.province.toLowerCase()
+    const matchesCity =
+      filters.city === '' ||
+      property.City.toLowerCase() === filters.city.toLowerCase()
+    const matchesStartDate =
+      filters.startDate === '' || property.StartDate === filters.startDate
+    const matchesDuration =
+      filters.duration === '' ||
+      property.Duration.toLowerCase() === filters.duration.toLowerCase()
+    const matchesRoomType =
+      filters.roomType === '' ||
+      property.RoomType.toLowerCase() === filters.roomType.toLowerCase()
+    const matchesAllowPet = !filters.allowPet || property.AllowPet
+    const matchesAllowSmoke = !filters.allowSmoke || property.AllowSmoke
+    const matchesAllowParty = !filters.allowParty || property.AllowParty
+    const matchesAllowWeed = !filters.allowWeed || property.AllowWeed
+
+    return (
+      matchesSearchTerm &&
+      matchesMaxPrice &&
+      matchesProvince &&
+      matchesCity &&
+      matchesStartDate &&
+      matchesDuration &&
+      matchesRoomType &&
+      matchesAllowPet &&
+      matchesAllowSmoke &&
+      matchesAllowParty &&
+      matchesAllowWeed
+    )
+  })
 
   // The code below was written with the help of ChatGPT 3.5 on Jun 8th
   // Prompt: Give me some examples of dragging and dropping using the dnd kit. Then, use the
@@ -201,12 +193,12 @@ function PropertyCardList() {
 
   return (
     <>
-      {/*<SearchBar*/}
-      {/*  searchTerm={searchTerm}*/}
-      {/*  setSearchTerm={setSearchTerm}*/}
-      {/*  filters={filters}*/}
-      {/*  setFilters={setFilters}*/}
-      {/*/>{' '}*/}
+      <SearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        filters={filters}
+        setFilters={setFilters}
+      />{' '}
       <DndContext
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}
@@ -223,23 +215,17 @@ function PropertyCardList() {
           ) : (
             <div className="dropzone-placeholder"></div>
           )}
-          <SortableContext items={properties}
-            // items={filteredProperties}
+          <SortableContext
+            items={filteredProperties}
             strategy={rectSortingStrategy}
           >
             <ul id="property-list" className="property-list">
-              {properties.map((property) =>
-                property.HouseID === activeId ? (
+              {filteredProperties.map((property) =>
+                property.houseID === activeId ? (
                   <div
-                    key={property.HouseID}
+                    key={property.houseID}
                     className="placeholder-card"
                   ></div>
-              // {filteredProperties.map((property) =>
-              //   property.houseID === activeId ? (
-              //     <div
-              //       key={property.houseID}
-              //       className="placeholder-card"
-              //     ></div>
                 ) : (
                   <MiniPropertyCard
                     key={property.HouseID}
