@@ -81,12 +81,11 @@ const Filters = ({ filters, handleFilterChange }) => {
           >
             <option value="">Select Room Type</option>
             <option value="Studio">Studio</option>
-            <option value="1 Bedroom 1 Bathroom">1 Bedroom 1 Bathroom</option>
-            <option value="2 Bedrooms 2 Bathrooms">2 Bedrooms 2 Bathrooms</option>
-            <option value="2 Bedrooms 1 Bathroom">2 Bedrooms 1 Bathroom</option>
-            <option value="3 Bedrooms Shared Bathroom">3 Bedrooms Shared Bathroom</option>
-            <option value="3+ Bedrooms 3+ Bathrooms">3+ Bedrooms 3+ Bathrooms</option>
-
+            <option value="1B1B">1 Bedroom 1 Bathroom</option>
+            <option value="2B2B">2 Bedrooms 2 Bathrooms</option>
+            <option value="2B1B">2 Bedrooms 1 Bathroom</option>
+            <option value="3B+sB">3 Bedrooms Shared Bathroom</option>
+            <option value="3B+3B+">3+ Bedrooms 3+ Bathrooms</option>
           </select>
         </label>
         <label>

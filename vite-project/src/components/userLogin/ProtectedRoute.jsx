@@ -6,9 +6,7 @@ import App from '../../App.jsx';
 const ProtectedRoute = ({ element: Element, ...rest }) => {
     const isAuthenticated = useSelector(state => state.user.isAuthenticated);
     console.log(isAuthenticated);
-    // return isAuthenticated ? <App /> : <Navigate to="/login" />;
-    // todo ezhang: revert
-    return <App />
+    return isAuthenticated ? <App /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
