@@ -1,22 +1,23 @@
 .property-list {
-  gap: 16px; /* Space between cards */
-  justify-content: center; /* Center the cards horizontally */
-  padding: 16px; /* Add some padding around the list */
-  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 20px;
+  width: 80%;
+  margin: 0 auto;
 }
-
 
 .placeholder-card {
-  /* width: 300px; */
-  height: 410px; /* When a property card is being dragged, the next card takes over its position. This sets the height of the blank placeholder*/
+  height: 410px;
 }
+
 .dropzone-container {
   display: flex;
 }
 
 .dropzone {
   width: 50%;
-  /* height: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +30,6 @@
 
 .dropzone-placeholder {
   width: 50%;
-  /* height: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,4 +52,29 @@
 
 .dropzone-icon {
   font-size: 2em;
+}
+
+.property-popup-background {
+  position: fixed;
+  top: 0;
+  left: 300px;
+  width: calc(100% - 300px);
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.property-popup {
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1000;
+  position: relative;
+}
+
+.carousel-container {
+  margin-bottom: 20px;
 }

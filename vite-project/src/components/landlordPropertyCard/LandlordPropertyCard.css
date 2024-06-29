@@ -1,9 +1,16 @@
 .landlord-dashboard-display {
   width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .landlord-property-card {
   display: flex;
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .landlord-carousel-container {
@@ -13,18 +20,37 @@
 
 .property-information {
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  height: 240px; /* Height must match carousel*/
+  flex-direction: column;
+  height: 240px;
   margin-left: 20px;
 }
 
 .property-description {
-  margin: 0 10px 0 0;
-  flex-grow: 1; /* Allow content container to grow vertically */
-  overflow: auto; /* Enable scrolling for long content */
+  margin: 10px 0 0 0;
+  flex-grow: 1;
+  overflow: auto;
   scrollbar-width: thin;
 }
 
 .property-information h3 {
   margin: 0;
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #333;
+}
+
+.applicant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.no-applicants {
+  padding: 20px;
+  text-align: center;
+  font-size: 18px;
+  color: #999;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }

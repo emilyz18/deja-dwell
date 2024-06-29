@@ -1,7 +1,6 @@
 import './ExpandedApplicantCard.css'
-import Button from '@mui/material/Button'
 
-const ExpandedApplicantCard = ({ applicant, onClose }) => {
+const ExpandedApplicantCard = ({ applicant }) => {
   const {
     name,
     image,
@@ -18,24 +17,21 @@ const ExpandedApplicantCard = ({ applicant, onClose }) => {
 
   return (
     <div className="member-popup">
-      <img src={image} alt={`${name}'s profile`} />
+      <img src={image} alt={`${name}'s profile`} className="profile-image" />
       <div className="expanded-name">
         <h2>{name}</h2>
       </div>
       <div className="expanded-information">
-        <p>Gender: {gender} </p>
-        <p>Phone #: {phoneNumber} </p>
-        <p>Email: {email} </p>
-        <p>Age {age}</p>
-        <p>Family Size: {familySize} </p>
+        <p>Gender: {gender}</p>
+        <p>Phone #: {phoneNumber}</p>
+        <p>Email: {email}</p>
+        <p>Age: {age}</p>
+        <p>Family Size: {familySize}</p>
         <p>Occupation: {occupation}</p>
         <p>Length of Lease: {lengthOfLease}</p>
-        <p>Habbit: {earlyBirdNightOut}</p>
+        <p>Habit: {earlyBirdNightOut}</p>
         <p>Financial Situation: {financialSituation}</p>
       </div>
-      <Button variant="contained" size="small" onClick={onClose} color="error">
-        Close
-      </Button>
     </div>
   )
 }

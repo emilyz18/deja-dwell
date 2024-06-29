@@ -4,13 +4,12 @@ import Carousel from '../carousel/Carousel'
 import { Button } from '@mui/material'
 
 function MiniPropertyCard(props) {
-  const { propertyInfo, likedFn, dislikedFn, displayPopup } =
-    props
+  const { propertyInfo, likedFn, dislikedFn, displayPopup } = props
 
-    if (!propertyInfo) return null
+  if (!propertyInfo) return null
 
   // useSortable was written with the help of ChatGPT 3.5 on Jun 8th
-  // Prompt: Give me some examples of dragging and dropping using the dnd kit. Then, use the 
+  // Prompt: Give me some examples of dragging and dropping using the dnd kit. Then, use the
   // dnd toolkit to incorporate drag and drop functionality on the miniProperty card + "code in this file".
   // The generated code was adapted: I changed div organization to exclude some elements from being draggable
 
@@ -18,19 +17,19 @@ function MiniPropertyCard(props) {
   // improvements in the future
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
-      id: propertyInfo.houseID,
+      id: propertyInfo.HouseID,
     })
 
   const likeProperty = () => {
-    likedFn(propertyInfo.houseID)
+    likedFn(propertyInfo.HouseID)
   }
 
   const dislikeProperty = () => {
-    dislikedFn(propertyInfo.houseID)
+    dislikedFn(propertyInfo.HouseID)
   }
 
   const expandProperty = () => {
-    console.log('house ' + propertyInfo.houseID + ' was expanded!')
+    console.log('house ' + propertyInfo.HouseID + ' was expanded!')
     displayPopup()
   }
 
@@ -39,16 +38,22 @@ function MiniPropertyCard(props) {
       <div className="property-card" ref={setNodeRef}>
         <Carousel
           className="carousel-container"
-          data={propertyInfo.images}
+          data={propertyInfo.HouseImgs}
           size={{ width: 450, height: 250 }}
         />
         <div {...attributes} {...listeners}>
           <div className="card-details">
-            <h3 className="house-title">{propertyInfo.title}</h3>
+            <h3 className="house-title">{propertyInfo.Title}</h3>
             <div className="details-row">
-              <span className="rent">${propertyInfo.price}</span>
-              <span className="address">{propertyInfo.address}</span>
-              <span className="house-type">{propertyInfo.roomType}</span>
+              <span className="rent">${propertyInfo.ExpectedPrice}</span>
+              <span className="address">
+                {propertyInfo.Street +
+                  ', ' +
+                  propertyInfo.City +
+                  ', ' +
+                  propertyInfo.Province}
+              </span>
+              <span className="house-type">{propertyInfo.RoomType}</span>
             </div>
           </div>
         </div>

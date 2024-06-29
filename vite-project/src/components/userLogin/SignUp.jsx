@@ -1,71 +1,73 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { signUpAsync } from '../../redux/user/thunks';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { useSelector, useDispatch } from 'react-redux'
+import Avatar from '@mui/material/Avatar'
+import Button from '@mui/material/Button'
+import CssBaseline from '@mui/material/CssBaseline'
+import TextField from '@mui/material/TextField'
+import Link from '@mui/material/Link'
+import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { signUpAsync } from '../../redux/user/thunks'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
 
-// COPY RIGHT: THIS PAGE CONTENT IS COPY AND MODIFY FROM https://github.com/mui/material-ui/blob/v5.15.20/docs/data/material/getting-started/templates/sign-up/SignUp.js 
+// COPY RIGHT: THIS PAGE CONTENT IS COPY AND MODIFY FROM https://github.com/mui/material-ui/blob/v5.15.20/docs/data/material/getting-started/templates/sign-up/SignUp.js
 // TODO remove, this demo shouldn't need to reset the theme.
 
-const defaultTheme = createTheme();
+const defaultTheme = createTheme()
 
 export default function SignUp() {
   const navigate = useNavigate()
-  const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.user.isAuthenticated);
+  const dispatch = useDispatch()
+  const isAuth = useSelector((state) => state.user.isAuthenticated)
 
-  const [accountType, setAccountType] = React.useState('');
+  const [accountType, setAccountType] = React.useState('')
 
   const handleChange = (event) => {
-    setAccountType(event.target.value);
-  };
+    setAccountType(event.target.value)
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
     console.log({
       userName: data.get('userName'),
       email: data.get('email'),
       password: data.get('password'),
-      accountType: accountType
-    });
+      accountType: accountType,
+    })
     const user = {
       UserName: data.get('userName'),
       Email: data.get('email'),
       Password: data.get('password'),
-      accountType: accountType
+      accountType: accountType,
     }
-    if( !user.UserName || !user.Email ||!user.Password ||!user.accountType ) {
-      console.log("not allow for empty field");
+    if (!user.UserName || !user.Email || !user.Password || !user.accountType) {
+      console.log('not allow for empty field')
     } else {
-      dispatch(signUpAsync(user));
+      dispatch(signUpAsync(user))
     }
-  };
-
+  }
 
   useEffect(() => {
     if (isAuth == true) {
-      console.log("Auth!!");
-      navigate('/');
+      console.log('Auth!!')
+      // fromSignUp state is for displaying the warning after sign up
+      if (accountType === 'Landlord') {
+        navigate('/landlordAccount/profile', {
+          state: { fromSignUp: 'Landlord' },
+        })
+      } else if (accountType === 'Tenant') {
+        navigate('/tenantAccount/profile', { state: { fromSignUp: 'Tenant' } })
+      }
     }
-  }, [isAuth, dispatch]);
-
+  }, [isAuth, dispatch, navigate, accountType])
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -85,7 +87,12 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -129,8 +136,8 @@ export default function SignUp() {
                   label="Account Type"
                   onChange={handleChange}
                 >
-                  <MenuItem value={"Landlord"}>Landlord</MenuItem>
-                  <MenuItem value={"Tenant"}>Tenant</MenuItem>
+                  <MenuItem value={'Landlord'}>Landlord</MenuItem>
+                  <MenuItem value={'Tenant'}>Tenant</MenuItem>
                 </Select>
               </Grid>
             </Grid>
@@ -153,5 +160,5 @@ export default function SignUp() {
         </Box>
       </Container>
     </ThemeProvider>
-  );
+  )
 }

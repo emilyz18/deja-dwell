@@ -1,0 +1,65 @@
+.filters {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    border: 1px solid #ccc;
+    margin-top: 0.5em;
+    background-color: #f9f9f9;
+  }
+  
+  .filter-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .filter-checkboxes {
+    margin-left: 1em;
+  }
+
+  .filter-inputs {
+    margin-left: 1em;
+    display: flex;
+    flex-direction: column;
+
+  }
+  
+  label {
+    margin-bottom: 0.5em;
+  }
+  
+  label input[type="text"] {
+    margin-left: 0;
+    padding: 0.25em;
+  }
+  
+  label input[type="checkbox"] {
+    margin-left: 0.5em;
+  }
+  
+
+  .filter-inputs {
+    margin-left: 1em;
+  }
+  
+  .filter-group {
+    margin-bottom: 0.5em;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.25em;
+  }
+
+  select[name="duration"],
+  select[name="roomType"],
+  input[name="maxPrice"],
+  input[name="province"],
+  input[name="city"],
+  input[name="province"],
+  input[name="startDate"]
+   {
+    padding: 0.25em;
+    display: block;
+  }
+  

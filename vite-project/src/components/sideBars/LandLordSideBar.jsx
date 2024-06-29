@@ -2,7 +2,7 @@ import { BaseSideBar } from './BaseSideBar.jsx'
 
 const landlordLinks = [
   { path: '/landlordAccount/profile', label: 'Edit Profile' },
-  { path: '#', label: 'Edit Preference' },
+  // { path: '#', label: 'Edit Preference' },
   { path: '/landlordAccount/applicants', label: 'View Applicants' },
 ]
 
