@@ -1,8 +1,8 @@
 import { BaseSideBar } from './BaseSideBar.jsx'
 
 const tenantLinks = [
-  { path: '/tenantAccount/applicants', label: 'Edit Profile' },
-  { path: '#', label: 'Edit Preference' },
+  { path: '/tenantAccount/profile', label: 'Edit Profile' },
+  { path: '/tenantAccount/preference', label: 'Edit Preference' },
   { path: '/tenantAccount/matches', label: 'See Matches' },
   { path: '#', label: 'View Applied History' },
 ]

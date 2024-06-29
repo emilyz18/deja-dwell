@@ -6,8 +6,9 @@ var path = require('path');
 const propertiesFilePath = path.join(__dirname, '../mockData/Properties.json');
 
 router.get('/getProperties', (req, res) => {
-    let readError = null;
-    let properties = null;
+    let readError;
+    let properties;
+
     try {
         const data = fs.readFileSync(propertiesFilePath, 'utf8');
         properties = JSON.parse(data);

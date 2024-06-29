@@ -1,0 +1,86 @@
+.general-input-form {
+  background-color: #efefef;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.general-input-form h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.general-input-form .header {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.general-input-form .info-list {
+  padding: 0;
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.general-input-form .list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.general-input-form .list-item .label {
+  font-weight: bold;
+  color: #333;
+}
+
+.general-input-form .list-item .value {
+  color: #555;
+}
+
+.general-input-form .button-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.MuiAvatar-root {
+  margin: 20px auto;
+  width: 150px;
+  height: 150px;
+}
+
+.MuiAlert-root {
+  margin-bottom: 20px;
+}
+
+.MuiAlert-action {
+  align-items: center;
+}
+
+.MuiButton-containedPrimary {
+  background-color: #1976d2;
+  color: white;
+}
+
+.MuiButton-containedPrimary:hover {
+  background-color: #115293;
+}
+
+.MuiButton-containedSecondary {
+  background-color: #e57373;
+  color: white;
+}
+
+.MuiButton-containedSecondary:hover {
+  background-color: #d32f2f;
+}
+
+.upload-button {
+  margin-top: 10px;
+}
