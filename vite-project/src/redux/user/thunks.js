@@ -31,9 +31,9 @@ export const editUserAsync = createAsyncThunk(
 )
 
 // Add this new thunk for getting all users
-export const getAllUsersAsync = createAsyncThunk(
-  actionTypes.GET_ALL_USERS,
+export const getUsersAsync = createAsyncThunk(
+  actionTypes.GET_USERS,
   async () => {
-    return await userService.getAllUsers()
+    return await userService.getUsers()
   }
 )

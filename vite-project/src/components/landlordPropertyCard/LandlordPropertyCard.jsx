@@ -14,7 +14,7 @@ import {
   getMatchesAsync,
   updateMatchAsync,
 } from '../../redux/matches/matchThunks'
-import { getAllUsersAsync } from '../../redux/user/thunks'
+import { getUsersAsync } from '../../redux/user/thunks'
 
 const LandlordPropertyCard = ({ landlordId }) => {
   const dispatch = useDispatch()
@@ -39,7 +39,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
     dispatch(getPropertiesAsync())
     dispatch(getAllTenantProfileAsync())
     dispatch(getAllTenantPrefAsync())
-    dispatch(getAllUsersAsync())
+    dispatch(getUsersAsync())
   }, [dispatch])
 
   useEffect(() => {

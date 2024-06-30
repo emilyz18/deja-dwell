@@ -4,6 +4,8 @@ var crypto = require('crypto');
 var path = require('path');
 var fs = require('fs');
 const { v4: uuid } = require('uuid');
+const { db } = require("../db");
+
 
 var router = express.Router();
 
