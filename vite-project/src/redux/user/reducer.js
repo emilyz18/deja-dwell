@@ -5,7 +5,7 @@ import {
   signUpAsync,
   editUserAsync,
   getUserAsync,
-  getAllUsersAsync,
+  getUsersAsync,
 } from './thunks'
 
 const INITIAL_STATE = {
@@ -87,15 +87,15 @@ const userSlice = createSlice({
         state.requestState = REQUEST_STATE.REJECTED
       })
       // Get All Users
-      .addCase(getAllUsersAsync.pending, (state) => {
+      .addCase(getUsersAsync.pending, (state) => {
         state.error = null
         state.requestState = REQUEST_STATE.PENDING
       })
-      .addCase(getAllUsersAsync.fulfilled, (state, action) => {
+      .addCase(getUsersAsync.fulfilled, (state, action) => {
         state.users = action.payload
         state.requestState = REQUEST_STATE.FULFILLED
       })
-      .addCase(getAllUsersAsync.rejected, (state, action) => {
+      .addCase(getUsersAsync.rejected, (state, action) => {
         state.error = action.error
         state.requestState = REQUEST_STATE.REJECTED
       })
