@@ -1,10 +1,6 @@
-import React from 'react'
 import './Filters.css'
 
-const Filters = ({ filters, handleFilterChange }) => {
-    console.log("start date")
-    console.log(filters.startDate)
-
+const Filters = ({ tempFilters, handleTempFilterChange, applyFilters }) => {
   return (
     <div className="filters">
       <div className="filter-section filter-inputs">
@@ -14,8 +10,8 @@ const Filters = ({ filters, handleFilterChange }) => {
             type="number"
             id="maxPrice"
             name="maxPrice"
-            value={filters.maxPrice}
-            onChange={handleFilterChange}
+            value={tempFilters.maxPrice}
+            onChange={handleTempFilterChange}
           />
         </label>
         <label>
@@ -24,8 +20,8 @@ const Filters = ({ filters, handleFilterChange }) => {
             type="text"
             name="province"
             placeholder="ex. BC"
-            value={filters.province}
-            onChange={handleFilterChange}
+            value={tempFilters.province}
+            onChange={handleTempFilterChange}
           />
         </label>
         <label>
@@ -34,50 +30,46 @@ const Filters = ({ filters, handleFilterChange }) => {
             type="text"
             name="city"
             placeholder="ex. Vancouver"
-            value={filters.city}
-            onChange={handleFilterChange}
+            value={tempFilters.city}
+            onChange={handleTempFilterChange}
           />
         </label>
-
         <label>
           Start Date:
           <input
             type="text"
             name="startDate"
             placeholder="YYYY-MM-DD"
-            value={filters.startDate}
-            onChange={handleFilterChange}
+            value={tempFilters.startDate}
+            onChange={handleTempFilterChange}
           />
         </label>
-        
       </div>
-
       <div className="filter-section filter-checkboxes">
-      <label>
+        
+        <label>
           Duration:
           <select
             name="duration"
-            value={filters.duration}
-            onChange={handleFilterChange}
+            value={tempFilters.duration}
+            onChange={handleTempFilterChange}
           >
             <option value="">Select Duration</option>
             <option value="less than 3 months">less than 3 months</option>
-            <option value="4 months">4 months</option>
-            <option value="6 months">6 months</option>
-            <option value="8 months">8 months</option>
-            <option value="10 months">10 months</option>
-            <option value="12 months">12 months</option>
-            <option value="long term">long term</option>
-
+            <option value="4month">4 months</option>
+            <option value="6month">6 months</option>
+            <option value="8month">8 months</option>
+            <option value="10month">10 months</option>
+            <option value="12month">12 months</option>
+            <option value="longterm">long term</option>
           </select>
         </label>
-
         <label>
           Room Type:
           <select
             name="roomType"
-            value={filters.roomType}
-            onChange={handleFilterChange}
+            value={tempFilters.roomType}
+            onChange={handleTempFilterChange}
           >
             <option value="">Select Room Type</option>
             <option value="Studio">Studio</option>
@@ -92,8 +84,8 @@ const Filters = ({ filters, handleFilterChange }) => {
           <input
             type="checkbox"
             name="allowPet"
-            checked={filters.allowPet}
-            onChange={handleFilterChange}
+            checked={tempFilters.allowPet}
+            onChange={handleTempFilterChange}
           />
           Allow Pet
         </label>
@@ -101,8 +93,8 @@ const Filters = ({ filters, handleFilterChange }) => {
           <input
             type="checkbox"
             name="allowSmoke"
-            checked={filters.allowSmoke}
-            onChange={handleFilterChange}
+            checked={tempFilters.allowSmoke}
+            onChange={handleTempFilterChange}
           />
           Allow Smoke
         </label>
@@ -110,8 +102,8 @@ const Filters = ({ filters, handleFilterChange }) => {
           <input
             type="checkbox"
             name="allowParty"
-            checked={filters.allowParty}
-            onChange={handleFilterChange}
+            checked={tempFilters.allowParty}
+            onChange={handleTempFilterChange}
           />
           Allow Party
         </label>
@@ -119,12 +111,13 @@ const Filters = ({ filters, handleFilterChange }) => {
           <input
             type="checkbox"
             name="allowWeed"
-            checked={filters.allowWeed}
-            onChange={handleFilterChange}
+            checked={tempFilters.allowWeed}
+            onChange={handleTempFilterChange}
           />
           Allow Weed
         </label>
       </div>
+      <button onClick={applyFilters}>Apply Filters</button>
     </div>
   )
 }

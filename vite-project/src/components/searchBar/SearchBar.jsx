@@ -4,17 +4,17 @@ import './SearchBar.css'
 
 const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
   const [filtersVisible, setFiltersVisible] = useState(false)
-  const [searchQuery, setSearchQuery] = useState(searchTerm);
-
+  const [searchQuery, setSearchQuery] = useState(searchTerm)
+  const [tempFilters, setTempFilters] = useState(filters) // Temporary state for filters
 
   const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
+    setSearchQuery(e.target.value)
   }
 
-  const handleFilterChange = (e) => {
+  const handleTempFilterChange = (e) => {
     const { name, value, type, checked } = e.target
-    setFilters({
-      ...filters,
+    setTempFilters({
+      ...tempFilters,
       [name]: type === 'checkbox' ? checked : value,
     })
   }
@@ -24,8 +24,12 @@ const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
   }
 
   const performSearch = () => {
-    setSearchTerm(searchQuery);
-  };
+    setSearchTerm(searchQuery)
+  }
+
+  const applyFilters = () => {
+    setFilters(tempFilters) // Apply temporary filters to the main filters state
+  }
 
   return (
     <div className="search-bar">
@@ -40,7 +44,11 @@ const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
         <button onClick={toggleFilters}>Filters</button>
       </div>
       {filtersVisible && (
-        <Filters filters={filters} handleFilterChange={handleFilterChange} />
+        <Filters
+          tempFilters={tempFilters}
+          handleTempFilterChange={handleTempFilterChange}
+          applyFilters={applyFilters}
+        />
       )}
     </div>
   )
