@@ -191,6 +191,11 @@ function PropertyCardList() {
     setNotification({ ...notification, open: false })
   }
 
+  console.log("active id " + activeId)
+  filteredProperties.map((property) => {
+    if (activeId == property.HouseID)
+      console.log("equal " + property.HouseID)
+  })
   return (
     <>
       <SearchBar
