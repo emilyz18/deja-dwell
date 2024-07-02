@@ -22,14 +22,19 @@ function MatchItem({ match }) {
 
   const getStatusColor = (status) => {
     switch (status) {
+        
       case 'Applied':
         return 'applied'
+
       case 'Disliked':
         return 'disliked'
+
       case 'Rejected':
         return 'disliked'
+
       case 'Accepted':
         return 'accepted'
+
       default:
         return ''
     }

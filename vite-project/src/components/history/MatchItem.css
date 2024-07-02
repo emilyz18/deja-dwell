@@ -1,10 +1,11 @@
 /* MatchItem.css */
 .match-item {
-    padding: 10px;
-    margin: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    /* background-color: red; */
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
   }
   
   .match-item.applied {
@@ -13,7 +14,7 @@
   }
   
   .match-item.disliked {
-    background-color: rgb(63, 21, 21);
+    background-color: lightcoral;
     /* color: white; */
   }
   
