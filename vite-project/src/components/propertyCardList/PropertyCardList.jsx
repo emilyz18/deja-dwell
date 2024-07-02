@@ -1,28 +1,32 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
+  closestCenter,
   DndContext,
   DragOverlay,
-  closestCenter,
   useDroppable,
 } from '@dnd-kit/core'
-import { SortableContext, rectSortingStrategy } from '@dnd-kit/sortable'
+import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable'
 import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './PropertyCardList.css'
 import SearchBar from '../searchBar/SearchBar.jsx'
 import { getPropertiesAsync } from '../../redux/properties/thunks'
-import { createMatchAsync } from '../../redux/matches/matchThunks'
-import { Snackbar, Alert } from '@mui/material'
+import {
+  getMatchesAsync,
+  createMatchAsync,
+} from '../../redux/matches/matchThunks'
+import { Alert, Snackbar } from '@mui/material'
 import { v4 as uuidv4 } from 'uuid'
 
 function PropertyCardList() {
   const dispatch = useDispatch()
-  const properties = useSelector((state) => state.properties.list)
+  const matches = useSelector((state) => state.matches.list)
+  const user = useSelector((state) => state.user.user)
+  const allProperties = useSelector((state) => state.properties.list)
   const getPropertiesStatus = useSelector(
     (state) => state.properties.getProperties
   )
-  const user = useSelector((state) => state.user.user)
   const [activeId, setActiveId] = useState(null)
   const [popupPVisible, setPopupPVisible] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
@@ -47,13 +51,22 @@ function PropertyCardList() {
     allowParty: false,
     allowWeed: false,
   })
-  
+
   useEffect(() => {
     if (getPropertiesStatus === 'IDLE') {
       dispatch(getPropertiesAsync())
     }
+    dispatch(getMatchesAsync())
   }, [getPropertiesStatus, dispatch])
-  // }, [getPropertiesStatus, properties, dispatch]) // TODO RESOLVE
+
+  // Filter properties that the user has not interacted with
+  const properties = allProperties.filter(
+    (property) =>
+      !matches.some(
+        (match) =>
+          match.HouseID === property.HouseID && match.TenantID === user.TenantID
+      )
+  )
 
   const likedProperty = (id) => {
     const likedProperty = properties.find((property) => property.HouseID === id)
@@ -65,13 +78,14 @@ function PropertyCardList() {
         HouseID: likedProperty.HouseID,
         MatchStatus: 'Applied',
       })
-    )
-    setNotification({
-      open: true,
-      message: `Liked property: ${likedProperty.Title}`,
-      severity: 'success',
+    ).then(() => {
+      dispatch(getMatchesAsync())
+      setNotification({
+        open: true,
+        message: `Liked property: ${likedProperty.Title}`,
+        severity: 'success',
+      })
     })
-    dispatch({ type: 'properties/removeProperty', payload: id })
   }
 
   const dislikedProperty = (id) => {
@@ -86,13 +100,14 @@ function PropertyCardList() {
         HouseID: dislikedProperty.HouseID,
         MatchStatus: 'Disliked',
       })
-    )
-    setNotification({
-      open: true,
-      message: `Disliked property: ${dislikedProperty.Title}`,
-      severity: 'info',
+    ).then(() => {
+      dispatch(getMatchesAsync())
+      setNotification({
+        open: true,
+        message: `Disliked property: ${dislikedProperty.Title}`,
+        severity: 'error',
+      })
     })
-    dispatch({ type: 'properties/removeProperty', payload: id })
   }
 
   const displayPopup = (property) => {
@@ -179,11 +194,6 @@ function PropertyCardList() {
     )
   })
 
-  // The code below was written with the help of ChatGPT 3.5 on Jun 8th
-  // Prompt: Give me some examples of dragging and dropping using the dnd kit. Then, use the
-  // dnd toolkit to incorporate drag and drop functionality on the miniProperty card + "this file".
-  // The generated code was adapted: I added place holders for dropzones and cards to be
-  // conditionally displayed. I also wrote css myself tp suit my own needs
   const handleNotificationClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
@@ -225,20 +235,26 @@ function PropertyCardList() {
             strategy={rectSortingStrategy}
           >
             <ul id="property-list" className="property-list">
-              {filteredProperties.map((property) =>
-                property.houseID === activeId ? (
-                  <div
-                    key={property.houseID}
-                    className="placeholder-card"
-                  ></div>
-                ) : (
-                  <MiniPropertyCard
-                    key={property.HouseID}
-                    propertyInfo={property}
-                    likedFn={likedProperty}
-                    dislikedFn={dislikedProperty}
-                    displayPopup={() => displayPopup(property)}
-                  />
+              {filteredProperties.length === 0 ? (
+                <li className="no-properties-message">
+                  No more properties to show
+                </li>
+              ) : (
+                filteredProperties.map((property) =>
+                  property.HouseID === activeId ? (
+                    <div
+                      key={property.HouseID}
+                      className="placeholder-card"
+                    ></div>
+                  ) : (
+                    <MiniPropertyCard
+                      key={property.HouseID}
+                      propertyInfo={property}
+                      likedFn={likedProperty}
+                      dislikedFn={dislikedProperty}
+                      displayPopup={() => displayPopup(property)}
+                    />
+                  )
                 )
               )}
             </ul>

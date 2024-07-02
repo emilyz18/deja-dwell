@@ -78,3 +78,19 @@
 .carousel-container {
   margin-bottom: 20px;
 }
+
+.no-properties-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  font-family: 'Mulish', sans-serif;
+  color: #555;
+  height: 100px;
+  width: 100%;
+  text-align: center;
+  background-color: #f8f8f8;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  margin: 20px 0;
+}
