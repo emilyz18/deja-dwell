@@ -1,0 +1,23 @@
+/* MatchItem.css */
+.match-item {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* background-color: red; */
+  }
+  
+  .match-item.applied {
+    background-color: rgb(237, 247, 237);
+    /* color: white; */
+  }
+  
+  .match-item.disliked {
+    background-color: rgb(63, 21, 21);
+    /* color: white; */
+  }
+  
+  .match-item.accepted {
+    background-color: rgb(70, 161, 86);
+    /* color: white; */
+  }

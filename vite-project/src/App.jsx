@@ -107,7 +107,7 @@ function App() {
               />
               <Route
                 path="/tenantAccount/history"
-                element={<History />}
+                element={<History tenantId={user.TenantID}/>}
               />
             </>
           )}

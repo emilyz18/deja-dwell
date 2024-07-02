@@ -1,0 +1,43 @@
+.history-container {
+    padding: 20px;
+  }
+  
+  .matches-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .match-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .match-item.liked {
+    background-color: lightgreen;
+  }
+  
+  .match-item.disliked {
+    background-color: lightcoral;
+  }
+  
+  .house-details {
+    flex: 1;
+  }
+  
+  .status-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .like-button,
+  .reject-button {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  /* Add more styles as needed */
+  
