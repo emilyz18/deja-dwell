@@ -13,13 +13,8 @@ export const createMatch = async (matchData) => {
 }
 
 export const updateMatch = async (matchId, matchData) => {
-  try {
-    const response = await axios.patch(`http://localhost:3000/matches/${matchId}`, matchData);
-    return response.data;
-  } catch (error) {
-    console.error('Error updating match:', error);
-    throw error; // Ensure to handle errors appropriately in your component
-  }
+  const response = await axios.patch(`${API_URL}/${matchId}`, matchData)
+  return response.data
 }
 
 export const deleteMatch = async (matchId) => {

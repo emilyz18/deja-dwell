@@ -1,10 +1,6 @@
-// History.jsx
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getMatchesAsync } from '../../redux/matches/matchThunks';
+import React, { useState } from 'react';
 import MatchItem from './MatchItem';
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard';
-import { getPropertiesAsync } from '../../redux/properties/thunks';
 
 import './History.css';
 
