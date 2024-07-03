@@ -18,7 +18,6 @@ function History({ tenantId }) {
 
   return (
     <div className="history-container">
-      <h1>History Page</h1>
       <div className="match-list">
         {filteredMatches.map((match) => (
           <MatchItem key={match.MatchID} match={match} />

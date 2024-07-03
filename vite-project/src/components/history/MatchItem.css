@@ -1,24 +1,42 @@
-/* MatchItem.css */
 .match-item {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 16px 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .match-item.applied {
+  .carousel-container-mi {
+    padding-right: 20px;
+  }
+  
+  .house-details h2 {
+    margin: 0;
+    font-size: 1.25em;
+  }
+  
+  .house-details p {
+    margin: 4px 0;
+  }
+  
+  .match-status {
+    padding: 20px;
+    border-radius: 90px;
+    margin-left: auto;
+  }
+  
+  .match-status.applied {
     background-color: rgb(237, 247, 237);
-    /* color: white; */
   }
   
-  .match-item.disliked {
+  .match-status.disliked {
     background-color: lightcoral;
-    /* color: white; */
   }
   
-  .match-item.accepted {
+  .match-status.accepted {
     background-color: rgb(70, 161, 86);
-    /* color: white; */
   }
+  

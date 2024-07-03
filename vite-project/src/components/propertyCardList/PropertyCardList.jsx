@@ -28,7 +28,7 @@ function PropertyCardList() {
     (state) => state.properties.getProperties
   )
   const [activeId, setActiveId] = useState(null)
-  const [popupPVisible, setPopupPVisible] = useState(false)
+  const [popupVisible, setPopupVisible] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
   const [isDragging, setIsDragging] = useState(false)
   const [notification, setNotification] = useState({
@@ -112,11 +112,11 @@ function PropertyCardList() {
 
   const displayPopup = (property) => {
     setSelectedProperty(property)
-    setPopupPVisible(true)
+    setPopupVisible(true)
   }
 
   const closePopup = () => {
-    setPopupPVisible(false)
+    setPopupVisible(false)
     setSelectedProperty(null)
   }
 
@@ -281,7 +281,7 @@ function PropertyCardList() {
           ) : null}
         </DragOverlay>
       </DndContext>
-      {popupPVisible && (
+      {popupVisible && (
         <div className="property-popup-background" onClick={closePopup}>
           <div className="property-popup" onClick={(e) => e.stopPropagation()}>
             <ExpandedPropertyCard propertyInfo={selectedProperty} />
