@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import MatchItem from './MatchItem';
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard';
+import { useSelector } from 'react-redux'
 
 import './History.css';
 
