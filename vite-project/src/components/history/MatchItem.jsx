@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import Carousel from '../carousel/Carousel'
 import './MatchItem.css' // Ensure you have this file for styling
@@ -7,9 +7,7 @@ import {
   updateMatchAsync,
 } from '../../redux/matches/matchThunks'
 import { Alert, Snackbar } from '@mui/material'
-
 import { useDispatch } from 'react-redux'
-import { v4 as uuidv4 } from 'uuid'
 
 function MatchItem({ match, displayPopup }) {
   const dispatch = useDispatch()
@@ -41,7 +39,7 @@ function MatchItem({ match, displayPopup }) {
   }
 
   const likedProperty = (id, event) => {
-    event.stopPropagation() // Prevents the click event from bubbling up to the parent div
+    event.stopPropagation()
     console.log('match id ' + match.MatchID)
     const likedProperty = allProperties.find(
       (property) => property.HouseID === id
@@ -68,7 +66,7 @@ function MatchItem({ match, displayPopup }) {
   }
 
   const dislikedProperty = (id, event) => {
-    event.stopPropagation() // Prevents the click event from bubbling up to the parent div
+    event.stopPropagation()
 
     const dislikedProperty = allProperties.find(
       (property) => property.HouseID === id
@@ -117,24 +115,30 @@ function MatchItem({ match, displayPopup }) {
             <p>Room Type: {currentProperty.RoomType}</p>
           </div>
         )}
-        <div className={`match-status ${getStatusColor(match.MatchStatus)}`}>
-          <p>Status: {match.MatchStatus}</p>
+        <div>
+          <div className={`match-status ${getStatusColor(match.MatchStatus)}`}>
+            <p>Status: {match.MatchStatus}</p>
+          </div>
+          <div className="action-buttons">
+            {match.MatchStatus === 'Applied' ? (
+              <button
+                onClick={(event) =>
+                  dislikedProperty(currentProperty.HouseID, event)
+                }
+              >
+                Dislike
+              </button>
+            ) : match.MatchStatus === 'Disliked' ? (
+              <button
+                onClick={(event) =>
+                  likedProperty(currentProperty.HouseID, event)
+                }
+              >
+                Apply
+              </button>
+            ) : null}{' '}
+          </div>
         </div>
-        {match.MatchStatus === 'Applied' ? (
-          <button
-            onClick={(event) =>
-              dislikedProperty(currentProperty.HouseID, event)
-            }
-          >
-            Dislike
-          </button>
-        ) : match.MatchStatus === 'Disliked' ? (
-          <button
-            onClick={(event) => likedProperty(currentProperty.HouseID, event)}
-          >
-            Apply
-          </button>
-        ) : null}{' '}
       </div>
       <Snackbar
         open={notification.open}
