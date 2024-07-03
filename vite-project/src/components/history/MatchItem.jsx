@@ -40,11 +40,9 @@ function MatchItem({ match, displayPopup }) {
 
   const likedProperty = (id, event) => {
     event.stopPropagation()
-    console.log('match id ' + match.MatchID)
     const likedProperty = allProperties.find(
       (property) => property.HouseID === id
     )
-    console.log('liked property ' + likedProperty.LandlordID)
     dispatch(
       updateMatchAsync({
         matchId: match.MatchID,

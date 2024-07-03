@@ -16,7 +16,6 @@ function History({ tenantId }) {
   const filteredMatches = matches.filter((match) => match.TenantID === tenantId);
 
   const displayPopup = (match) => {
-    console.log("click popup")
     const currentProperty = allProperties.find((property) => property.HouseID == match.HouseID);
 
     setSelectedProperty(currentProperty)
@@ -28,7 +27,6 @@ function History({ tenantId }) {
     setSelectedProperty(null)
   }
 
-  console.log(selectedProperty)
   return (
     <div className="history-container">
       <div className="match-list">
