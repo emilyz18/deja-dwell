@@ -7,6 +7,8 @@
   margin: 16px 0;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: auto; /* Enable scrolling for long content */
+
 }
 
 .carousel-container-mi {
@@ -25,7 +27,9 @@
 .match-status {
   padding: 20px;
   border-radius: 90px;
-  margin-left: auto;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .match-status.applied {
@@ -47,8 +51,14 @@
 }
 
 .action-buttons button {
-    font-size: 18px;
+    font-size: 16px;
     background-color: rgb(162, 181, 187);
     border-radius: 20px;
     padding: 10px;
+}
+
+.right-side {
+    display: flex;
+  flex-direction: column;
+  align-items: center;
 }

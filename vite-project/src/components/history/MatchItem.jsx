@@ -113,7 +113,7 @@ function MatchItem({ match, displayPopup }) {
             <p>Room Type: {currentProperty.RoomType}</p>
           </div>
         )}
-        <div>
+        <div className='right-side'>
           <div className={`match-status ${getStatusColor(match.MatchStatus)}`}>
             <p>Status: {match.MatchStatus}</p>
           </div>
@@ -124,7 +124,7 @@ function MatchItem({ match, displayPopup }) {
                   dislikedProperty(currentProperty.HouseID, event)
                 }
               >
-                Dislike
+                Withdraw Application
               </button>
             ) : match.MatchStatus === 'Disliked' ? (
               <button
@@ -132,7 +132,7 @@ function MatchItem({ match, displayPopup }) {
                   likedProperty(currentProperty.HouseID, event)
                 }
               >
-                Apply
+                Change to Applied
               </button>
             ) : null}{' '}
           </div>
