@@ -31,6 +31,8 @@ function History({ tenantId }) {
     setPopupVisible(false)
     setSelectedProperty(null)
   }
+
+  console.log(selectedProperty)
   return (
     <div className="history-container">
       <div className="match-list">
