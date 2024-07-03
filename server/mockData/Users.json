@@ -9,10 +9,8 @@
     "UserName": "JohnDoe",
     "UserEmail": "johndoe@example.com",
     "PhoneNumber": "55555",
-    "Gender": "Male",
     "ProfileImg": "https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg",
-    "Password": "password123",
-    "": "JohnDoej"
+    "Password": "password123"
   },
   {
     "UserID": "98adf0d9-8c3d-49c4-9b56-e8893a679b9c",
@@ -24,7 +22,6 @@
     "UserName": "JaneSmith",
     "UserEmail": "janesmith@example.com",
     "PhoneNumber": "555-5678",
-    "Gender": "Female",
     "ProfileImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXGPVZv-HQ-CYzQzs-TM4aSh3ICOGVlakbmA&s",
     "Password": "securepassword"
   },

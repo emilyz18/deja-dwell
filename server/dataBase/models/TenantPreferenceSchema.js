@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const TenantPreferenceSchema = new mongoose.Schema({
-    TenantPreferenceID: { type: String, required: true, unique: true },
+    TenantPreferenceID: { type: String, ref: 'Tenant', unique: true, required: true },
     Province: { type: String },
     City: { type: String },
     Street: { type: String },

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const PropertySchema = new mongoose.Schema({
     HouseID: { type: String, required: true, unique: true },
-    LandlordID: { type: String },
+    LandlordID: { type: String, ref: 'User', required: true, unique: true },
     AllowPet: { type: Boolean },
     AllowSmoke: { type: Boolean },
     AllowParty: { type: Boolean },
@@ -10,7 +10,7 @@ const PropertySchema = new mongoose.Schema({
     isAC: { type: Boolean },
     isFurnished: { type: Boolean },
     isHeater: { type: Boolean },
-    Price: { type: Number },
+    ExpectedPrice: { type: Number },
     Province: { type: String },
     City: { type: String },
     Street: { type: String },
