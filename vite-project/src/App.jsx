@@ -10,6 +10,7 @@ import { LandLordSideBar } from './components/sideBars/LandLordSideBar'
 import { TenantSideBar } from './components/sideBars/TenantSideBar'
 import { TenantInputForm } from './InputForms/TenantInputForm.jsx'
 import { GeneralInputForm } from './InputForms/generalInputForm'
+import History  from './components/history/History'
 
 import { getUserAsync } from './redux/user/thunks'
 
@@ -91,7 +92,6 @@ function App() {
             </>
           ) : (
             <>
-              <Route path="/" element={<PropertyCardList />} />
               <Route
                 path="/tenantAccount/matches"
                 element={<PropertyCardList />}
@@ -103,6 +103,10 @@ function App() {
               <Route
                 path="/tenantAccount/preference"
                 element={<TenantInputForm />}
+              />
+              <Route
+                path="/tenantAccount/history"
+                element={<History tenantId={user.TenantID}/>}
               />
             </>
           )}

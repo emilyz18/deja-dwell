@@ -90,7 +90,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
             }
           }
           return null
-        })
+        }).filter((applicant) => applicant.matchStatus != 'Disliked')
         .filter((applicant) => applicant !== null)
       setApplicants(newApplicants)
     }
