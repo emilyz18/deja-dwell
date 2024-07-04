@@ -92,7 +92,6 @@ function App() {
             </>
           ) : (
             <>
-              {/* <Route path="/" element={<PropertyCardList />} /> */}
               <Route
                 path="/tenantAccount/matches"
                 element={<PropertyCardList />}
