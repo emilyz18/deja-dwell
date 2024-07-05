@@ -1,17 +1,25 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import MatchItem from './MatchItem'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
-import { useSelector } from 'react-redux'
 
 import './History.css'
+import { getPropertiesAsync } from '../../redux/properties/thunks'
+import { getMatchesAsync } from '../../redux/matches/matchThunks'
 
 function History({ tenantId }) {
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.user)
   const [popupVisible, setPopupVisible] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
+
+
+  //TODO: API Improvement: need to change to getUserMatches(tenantID) and getProperty(propertyID)
+  dispatch(getPropertiesAsync());
+  dispatch(getMatchesAsync());
   const allProperties = useSelector((state) => state.properties.list)
-
   const matches = useSelector((state) => state.matches.list)
-
+  
   // Filter matches based on tenantId
   const filteredMatches = matches.filter((match) => match.TenantID === tenantId)
 
