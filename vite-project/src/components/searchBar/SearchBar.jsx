@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import Filters from './Filters'
 import './SearchBar.css'
+import Button from '@mui/material/Button'
+import { ThemeProvider } from '@mui/material/styles'
+import { theme } from '../themes.jsx'
 
 const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
   const [filtersVisible, setFiltersVisible] = useState(false)
@@ -40,8 +43,14 @@ const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
           onChange={handleSearchChange}
           placeholder="Search..."
         />
-        <button onClick={performSearch}>Search</button>
-        <button onClick={toggleFilters}>Filters</button>
+        <ThemeProvider theme={theme}>
+          <Button color="jet" variant="contained" onClick={performSearch}>
+            Search
+          </Button>
+          <Button color="jet" variant="contained" onClick={toggleFilters}>
+            Filters
+          </Button>
+        </ThemeProvider>
       </div>
       {filtersVisible && (
         <Filters

@@ -1,17 +1,17 @@
 .history-container {
-    padding: 20px;
-  }
-  
-  .matches-list {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .house-details {
-    flex: 1;
-  }
-  
-  .status-buttons {
-    display: flex;
-    gap: 10px;
-  }  
+  padding: 20px;
+}
+
+.matches-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.house-details {
+  flex: 1;
+}
+
+.status-buttons {
+  display: flex;
+  gap: 10px;
+}
