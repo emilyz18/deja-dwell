@@ -1,0 +1,66 @@
+.match-item {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 16px 0;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: auto; /* Enable scrolling for long content */
+}
+
+.carousel-container-mi {
+  padding-right: 20px;
+}
+
+.house-details h2 {
+  margin: 0;
+  font-size: 1.25em;
+}
+
+.house-details p {
+  margin: 4px 0;
+}
+
+.match-status {
+  padding: 10px;
+  border-radius: 90px;
+  justify-content: center;
+  align-items: center;
+}
+
+.match-status.applied {
+  background-color: rgb(237, 247, 237);
+}
+
+.match-status.disliked {
+  background-color: lightcoral;
+}
+
+.match-status.accepted {
+  background-color: rgb(70, 161, 86);
+}
+
+.action-buttons {
+  margin: 10px 50px 0;
+  border-radius: 20px;
+}
+
+.action-buttons :hover {
+  cursor: pointer;
+  background-color: rgb(121, 137, 142);
+}
+
+.action-buttons button {
+  font-size: 16px;
+  background-color: rgb(162, 181, 187);
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

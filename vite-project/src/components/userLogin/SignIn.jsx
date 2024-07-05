@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useSelector, useDispatch } from 'react-redux'
 import { signInAsync } from '../../redux/user/thunks'
 import { useNavigate } from 'react-router-dom'
+import { theme } from '../themes.jsx'
 
 // COPY RIGHT: THIS PAGE CONTENT IS COPY AND MODIFY FROM https://github.com/mui/material-ui/blob/v5.15.20/docs/data/material/getting-started/templates/sign-in/SignIn.js
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -49,7 +50,7 @@ export default function SignIn() {
   }, [isAuth, dispatch, isLandlord, isTenant, navigate])
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -73,6 +74,7 @@ export default function SignIn() {
             sx={{ mt: 1 }}
           >
             <TextField
+              color="jet"
               margin="normal"
               required
               fullWidth
@@ -83,6 +85,7 @@ export default function SignIn() {
               autoFocus
             />
             <TextField
+              color="jet"
               margin="normal"
               required
               fullWidth
@@ -93,17 +96,18 @@ export default function SignIn() {
               autoComplete="current-password"
             />
             <Button
+              color="jet"
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              <span>Sign In</span>
             </Button>
             <Grid container>
               <Grid item>
                 <Link href="/register" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  <span>Don't have an account? Sign Up</span>
                 </Link>
               </Grid>
             </Grid>

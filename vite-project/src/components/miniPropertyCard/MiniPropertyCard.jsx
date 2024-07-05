@@ -2,6 +2,8 @@ import { useSortable } from '@dnd-kit/sortable'
 import './MiniPropertyCard.css'
 import Carousel from '../carousel/Carousel'
 import { Button } from '@mui/material'
+import { ThemeProvider } from '@mui/material/styles'
+import { theme } from '../themes.jsx'
 
 function MiniPropertyCard(props) {
   const { propertyInfo, likedFn, dislikedFn, displayPopup } = props
@@ -64,13 +66,16 @@ function MiniPropertyCard(props) {
           >
             ✖
           </button>
-          <Button
-            variant="contained"
-            onClick={expandProperty}
-            className="expand-info-button"
-          >
-            Expand Info
-          </Button>
+          <ThemeProvider theme={theme}>
+            <Button
+              color="jet"
+              variant="contained"
+              onClick={expandProperty}
+              className="expand-info-button"
+            >
+              Expand Info
+            </Button>
+          </ThemeProvider>
           <button
             className="circle-button checkmark-button"
             onClick={likeProperty}
