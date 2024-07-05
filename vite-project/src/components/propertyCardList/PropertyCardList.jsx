@@ -11,22 +11,22 @@ import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './PropertyCardList.css'
 import SearchBar from '../searchBar/SearchBar.jsx'
-import { getPropertiesAsync } from '../../redux/properties/thunks'
+import { getUnmatchedPropertiesAsync } from '../../redux/properties/thunks'
 import {
-  getMatchesAsync,
   createMatchAsync,
 } from '../../redux/matches/matchThunks'
 import { Alert, Snackbar } from '@mui/material'
 import { v4 as uuidv4 } from 'uuid'
 
-function PropertyCardList() {
+function PropertyCardList({ searchMode }) {
   const dispatch = useDispatch()
-  const matches = useSelector((state) => state.matches.list)
   const user = useSelector((state) => state.user.user)
-  const allProperties = useSelector((state) => state.properties.list)
-  const getPropertiesStatus = useSelector(
-    (state) => state.properties.getProperties
+
+  const getUnMatchedPropertiesStatus = useSelector(
+    (state) => state.properties.getUnmatchedProperties
   )
+  const properties = useSelector((state) => state.properties.unmatchProperties)
+
   const [activeId, setActiveId] = useState(null)
   const [popupVisible, setPopupVisible] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
@@ -53,20 +53,11 @@ function PropertyCardList() {
   })
 
   useEffect(() => {
-    if (getPropertiesStatus === 'IDLE') {
-      dispatch(getPropertiesAsync())
+    if (getUnMatchedPropertiesStatus === 'IDLE') {
+      dispatch(getUnmatchedPropertiesAsync(user.TenantID))
     }
-    dispatch(getMatchesAsync())
-  }, [getPropertiesStatus, dispatch])
+  }, [getUnMatchedPropertiesStatus, searchMode, dispatch])
 
-  // Filter properties that the user has not interacted with
-  const properties = allProperties.filter(
-    (property) =>
-      !matches.some(
-        (match) =>
-          match.HouseID === property.HouseID && match.TenantID === user.TenantID
-      )
-  )
 
   const likedProperty = (id) => {
     const likedProperty = properties.find((property) => property.HouseID === id)
@@ -79,7 +70,8 @@ function PropertyCardList() {
         MatchStatus: 'Applied',
       })
     ).then(() => {
-      dispatch(getMatchesAsync())
+      //dispatch(getMatchesAsync())
+      dispatch(getUnmatchedPropertiesAsync(user.TenantID))
       setNotification({
         open: true,
         message: `Liked property: ${likedProperty.Title}`,
@@ -101,7 +93,8 @@ function PropertyCardList() {
         MatchStatus: 'Disliked',
       })
     ).then(() => {
-      dispatch(getMatchesAsync())
+      //dispatch(getMatchesAsync())
+      dispatch(getUnmatchedPropertiesAsync(user.TenantID))
       setNotification({
         open: true,
         message: `Disliked property: ${dislikedProperty.Title}`,
@@ -194,20 +187,25 @@ function PropertyCardList() {
     )
   })
 
+  const displayedProperties = searchMode? filteredProperties : properties;
+
   const handleNotificationClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
     }
     setNotification({ ...notification, open: false })
   }
+
   return (
     <>
-      <SearchBar
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        filters={filters}
-        setFilters={setFilters}
-      />{' '}
+      {searchMode && <>
+        <SearchBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          filters={filters}
+          setFilters={setFilters}
+        />{' '}
+      </>}
       <DndContext
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}
@@ -225,16 +223,16 @@ function PropertyCardList() {
             <div className="dropzone-placeholder"></div>
           )}
           <SortableContext
-            items={filteredProperties}
+            items={displayedProperties}
             strategy={rectSortingStrategy}
           >
             <ul id="property-list" className="property-list">
-              {filteredProperties.length === 0 ? (
+              {displayedProperties.length === 0 ? (
                 <li className="no-properties-message">
                   No more properties to show
                 </li>
               ) : (
-                filteredProperties.map((property) =>
+                displayedProperties.map((property) =>
                   property.HouseID === activeId ? (
                     <div
                       key={property.HouseID}

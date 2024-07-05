@@ -5,21 +5,58 @@ var path = require('path');
 
 const propertiesFilePath = path.join(__dirname, '../mockData/Properties.json');
 
+const loadPropertiesJson = () => {
+    try {
+        const data = fs.readFileSync(propertiesFilePath, 'utf8');
+        return JSON.parse(data);
+    } catch (err) {
+        console.error('Error reading properties data:', err);
+        return null;
+    }
+};
+
+//TODO: in future this need to be moved to another class? so that it can be used in other place
+const matchesFilePath = path.join(__dirname, '../mockData/Match.json');
+
+const loadMatchesJson = () => {
+    try {
+        const data = fs.readFileSync(matchesFilePath, 'utf8');
+        return JSON.parse(data);
+    } catch (err) {
+        console.error('Error reading matches data:', err);
+        return null;
+    }
+};
+
 router.get('/getProperties', (req, res) => {
     let readError;
     let properties;
 
-    try {
-        const data = fs.readFileSync(propertiesFilePath, 'utf8');
-        properties = JSON.parse(data);
-    } catch (err) {
-        readError = err.message;
-    }
+    properties = loadPropertiesJson();
     if (!properties) {
         res.status(500).send({ error: readError });
     } else {
         res.status(200).json(properties);
     }
+});
+
+router.get('/unmatchedProperties/:tenantID', (req, res) => {
+    let readError;
+    let properties;
+    const { tenantID } = req.params;
+    //TODO: After using DB, these steps should be changed to use querey to fetch from DB directly
+    const matches = loadMatchesJson();
+    properties = loadPropertiesJson();
+    if (!matches) {
+        return res.status(500).send('Error loading matches data');
+    }
+    if (!properties) {
+        return res.status(500).send('Error loading properties data');
+    }
+    const unmatchedProperties = properties.filter(property => {
+        return !matches.some(match => match.TenantID === tenantID && match.HouseID === property.HouseID);
+    });
+    res.status(200).json(unmatchedProperties);
 });
 
 module.exports = router;

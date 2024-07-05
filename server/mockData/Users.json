@@ -142,5 +142,15 @@
     "isTenant": true,
     "ProfileImg": "https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg",
     "TenantID": "c4cc585e-e7de-4737-9356-af4ae2317112"
+  },
+  {
+    "UserID": "d107123a-2574-42a7-89bb-09a43e31bb1e",
+    "UserName": "d",
+    "Password": "123",
+    "UserEmail": "d@d.d",
+    "HashKey": "f3b45ee101800a07d9812665e744245c",
+    "isLandlord": false,
+    "isTenant": true,
+    "TenantID": "3ff1d1ef-4354-47f1-9bba-1f01afb52b4d"
   }
 ]

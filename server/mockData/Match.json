@@ -26,5 +26,12 @@
     "LandlordID": "d2b9e8a6-7c8b-4a3e-9d6b-3e8a1f5c7d9f",
     "HouseID": "9e8a2b5f-2d6e-4c1d-8f9a-1e7a2d3b5c9f",
     "MatchStatus": "Applied"
+  },
+  {
+    "MatchID": "9e3ef357-523e-4574-b3b9-524e2d983a3d",
+    "TenantID": "3ff1d1ef-4354-47f1-9bba-1f01afb52b4d",
+    "LandlordID": "b5a3e8f9-6d8b-4a1e-9b56-1d8c3a6f4b9c",
+    "HouseID": "1b4f6e8a-7d2e-4c3d-9f6a-4e8c1d3b5f9c",
+    "MatchStatus": "Disliked"
   }
 ]
