@@ -11,30 +11,37 @@ import ListItemText from '@mui/material/ListItemText'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 
-export function BaseSideBar({
-  accountType,
-  navBarLinks,
-  profile,
-  onSwitchAcc,
-}) {
-  const handleSwitchAcc = () => {
-    if (accountType === 'landlord' && !profile.TenantID) {
-      alert("You don't have a tenant account")
-    } else if (accountType === 'tenant' && !profile.LandlordID) {
-      alert("You don't have a landlord account")
-    } else {
-      onSwitchAcc()
-    }
+export function BaseSideBar({ navBarLinks, profile, accountType }) {
+  const onLogout = () => {
+    // TODO - for now we are only reloading to log out since we dont store the user session
+    // TODO - if we ever choose to store the user session we must update the log out function
+    location.reload()
   }
 
   return (
     <div className="sidebar-container">
       <Drawer className="sidebar-drawer" variant="permanent" anchor="left">
         <div className="sidebar-content">
+            <ListItemText
+                disableTypography
+                sx={{
+                    fontFamily: 'Mulish, sans-serif',
+                    fontSize: '1.2em',
+                    fontWeight: 200,
+                    textAlign: 'center',
+                }}
+                primary={`${accountType.toUpperCase()} DASHBOARD`}
+            />
           <div className="sidebar-avatar">
             <Avatar src={profile.ProfileImg} className="MuiAvatar-root" />
             <ListItemText
-              style={{ margin: '5px', textAlign: 'center' }}
+              disableTypography
+              sx={{
+                fontFamily: 'Mulish, sans-serif',
+                fontSize: '1.1em',
+                margin: '5px',
+                textAlign: 'center',
+              }}
               primary={profile.UserName}
             />
           </div>
@@ -43,7 +50,11 @@ export function BaseSideBar({
             {navBarLinks.map((linkPair, index) => (
               <ListItem key={index} className="sidebar-list-item">
                 <ListItemButton component={Link} to={linkPair.path}>
-                  <ListItemText primary={linkPair.label} />
+                  <ListItemText
+                    disableTypography
+                    sx={{ fontFamily: 'Mulish, sans-serif', fontSize: '1.1em' }}
+                    primary={linkPair.label}
+                  />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -51,11 +62,8 @@ export function BaseSideBar({
           <Divider />
         </div>
         <div className="sidebar-bottom-content">
-          <Button className="sidebar-button" onClick={handleSwitchAcc}>
-            <span>
-              Switch to {accountType === 'landlord' ? 'Tenant' : 'Landlord'}{' '}
-              Account
-            </span>
+          <Button className="sidebar-button" onClick={onLogout}>
+            <span>Logout</span>
           </Button>
         </div>
       </Drawer>

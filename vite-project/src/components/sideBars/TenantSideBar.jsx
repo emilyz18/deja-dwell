@@ -1,4 +1,5 @@
 import { BaseSideBar } from './BaseSideBar.jsx'
+import { TENANT } from '../../const.jsx'
 
 const tenantLinks = [
   { path: '/tenantAccount/profile', label: 'Edit Profile' },
@@ -8,15 +9,14 @@ const tenantLinks = [
   { path: '/tenantAccount/history', label: 'View Applied History' },
 ]
 
-export function TenantSideBar({ accountType, profile, onSwitchAcc }) {
+export function TenantSideBar({ profile }) {
   return (
     <>
       <div>
         <BaseSideBar
-          accountType={accountType}
           navBarLinks={tenantLinks}
           profile={profile}
-          onSwitchAcc={onSwitchAcc}
+          accountType={TENANT}
         />
       </div>
     </>

@@ -46,7 +46,6 @@ const Filters = ({ tempFilters, handleTempFilterChange, applyFilters }) => {
         </label>
       </div>
       <div className="filter-section filter-checkboxes">
-        
         <label>
           Duration:
           <select
