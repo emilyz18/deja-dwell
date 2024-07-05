@@ -113,7 +113,7 @@ function MatchItem({ match, displayPopup }) {
             <p>Room Type: {currentProperty.RoomType}</p>
           </div>
         )}
-        <div className='right-side'>
+        <div className="right-side">
           <div className={`match-status ${getStatusColor(match.MatchStatus)}`}>
             <p>Status: {match.MatchStatus}</p>
           </div>

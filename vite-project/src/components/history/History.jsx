@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import MatchItem from './MatchItem';
-import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard';
+import React, { useState } from 'react'
+import MatchItem from './MatchItem'
+import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import { useSelector } from 'react-redux'
 
-import './History.css';
+import './History.css'
 
 function History({ tenantId }) {
+  const [popupVisible, setPopupVisible] = useState(false)
+  const [selectedProperty, setSelectedProperty] = useState(null)
+  const allProperties = useSelector((state) => state.properties.list)
 
-    const [popupVisible, setPopupVisible] = useState(false)
-    const [selectedProperty, setSelectedProperty] = useState(null)
-    const allProperties = useSelector((state) => state.properties.list);
-
-  const matches = useSelector((state) => state.matches.list);
+  const matches = useSelector((state) => state.matches.list)
 
   // Filter matches based on tenantId
-  const filteredMatches = matches.filter((match) => match.TenantID === tenantId);
+  const filteredMatches = matches.filter((match) => match.TenantID === tenantId)
 
   const displayPopup = (match) => {
-    const currentProperty = allProperties.find((property) => property.HouseID == match.HouseID);
+    const currentProperty = allProperties.find(
+      (property) => property.HouseID == match.HouseID
+    )
 
     setSelectedProperty(currentProperty)
     setPopupVisible(true)
@@ -32,7 +33,11 @@ function History({ tenantId }) {
     <div className="history-container">
       <div className="match-list">
         {filteredMatches.map((match) => (
-          <MatchItem key={match.MatchID} match={match} displayPopup={() => displayPopup(match)} />
+          <MatchItem
+            key={match.MatchID}
+            match={match}
+            displayPopup={() => displayPopup(match)}
+          />
         ))}
       </div>
 
@@ -44,7 +49,7 @@ function History({ tenantId }) {
         </div>
       )}
     </div>
-  );
+  )
 }
 
-export default History;
+export default History
