@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import MatchItem from './MatchItem'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
@@ -12,14 +12,19 @@ function History({ tenantId }) {
   const user = useSelector((state) => state.user.user)
   const [popupVisible, setPopupVisible] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
-
+  const getPropertiesStatus = useSelector((state) => state.properties.getProperties)
+  const getMatchStatus = useSelector((state) => state.matches.getMatches)
 
   //TODO: API Improvement: need to change to getUserMatches(tenantID) and getProperty(propertyID)
-  dispatch(getPropertiesAsync());
-  dispatch(getMatchesAsync());
+  useEffect(() => {
+    if (getPropertiesStatus === 'IDLE' || getMatchStatus === 'IDLE') {
+      dispatch(getPropertiesAsync());
+      dispatch(getMatchesAsync());
+    }
+  }, [getPropertiesStatus, getMatchStatus, dispatch])
   const allProperties = useSelector((state) => state.properties.list)
   const matches = useSelector((state) => state.matches.list)
-  
+
   // Filter matches based on tenantId
   const filteredMatches = matches.filter((match) => match.TenantID === tenantId)
 
