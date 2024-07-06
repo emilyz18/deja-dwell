@@ -23,6 +23,10 @@ const getProperties = async () => {
   return handleResponse(() => axios.get(URL_PATH + '/getProperties'))
 }
 
+const getUnMatchedProperties = async (tenantId) => {
+  return handleResponse(() => axios.get(URL_PATH + `/unmatchedProperties/${tenantId}`))
+}
+
 const deleteProperty = async (propertyId) => {
   await handleResponse(() => axios.delete(`${URL_PATH}/${propertyId}`))
 
@@ -45,4 +49,5 @@ export default {
   deleteProperty,
   patchProperty,
   putProperty,
+  getUnMatchedProperties
 }

@@ -76,7 +76,11 @@ function App() {
             <>
               <Route
                 path="/tenantAccount/matches"
-                element={<PropertyCardList />}
+                element={<PropertyCardList searchMode={false}/>}
+              />
+              <Route
+                path="/tenantAccount/search"
+                element={<PropertyCardList searchMode={true}/>}
               />
               <Route
                 path="/tenantAccount/profile"

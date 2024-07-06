@@ -59,5 +59,16 @@
     "Income": null,
     "Company": null,
     "Habit": null
+  },
+  {
+    "TenantID": "3ff1d1ef-4354-47f1-9bba-1f01afb52b4d",
+    "UserID": "d107123a-2574-42a7-89bb-09a43e31bb1e",
+    "TenantPreferenceID": "46f4c6a2-2102-4eb6-8fbe-f338cb9a4f59",
+    "Age": null,
+    "Gender": null,
+    "Occupation": null,
+    "Income": null,
+    "Company": null,
+    "Habit": null
   }
 ]
