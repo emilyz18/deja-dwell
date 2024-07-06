@@ -4,4 +4,5 @@ export const actionTypes = {
   DELETE_PROPERTY: 'properties/deleteProperty',
   PUT_PROPERTY: 'properties/putProperty',
   PATCH_PROPERTY: 'properties/patchProperty',
+  GET_UNMATCHED_PROPERTIES: 'properties/unmatchedProperties',
 }
