@@ -4,16 +4,17 @@ const tenantPrefQueries = {
     editTenantPref: async function (preferenceID, data) {
         try {
 
-            const newTenantPref = await TenantPreference.findOneAndUpdate({ preferenceID }, data, { new: true });
+   
+            const newTenantPref = await TenantPreference.findOneAndUpdate({ TenantPreferenceID: preferenceID }, data, { new: true });
             return newTenantPref;
 
         } catch (error) {
-            throw new Error('Failed updating tenant preference to mongoDB' + error.messages);
+            throw new Error('Failed updating tenant preference to mongoDB' + error.message);
         }
     },
     getOneTenantPref: async function (preferenceID) {
         try {
-            return await TenantPreference.findOne({ preferenceID });
+            return await TenantPreference.findOne({ TenantPreferenceID: preferenceID });
         } catch (err) {
             throw new Error('Failed to find tenant prefernece using ID, ' + err.message);
         }
@@ -30,11 +31,11 @@ const tenantPrefQueries = {
             const tenantPref = new TenantPreference(data);
             return await tenantPref.save();
         } catch (error) {
-            throw new Error('Failed create tenant preference when sign up' + error.messages);
+            throw new Error('Failed create tenant preference when sign up' + error.message);
         }
         
     }
 
 }
 
-module.export = tenantPrefQueries;
+module.exports = tenantPrefQueries;

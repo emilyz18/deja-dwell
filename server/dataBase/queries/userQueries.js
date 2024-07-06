@@ -1,11 +1,15 @@
+
 const User = require('../models/UserSchema');
+const bcrypt = require('bcrypt'); 
 
 const userQueries = {
-    signIn: async function (email) {
+    // Credit: compare password followed method in : https://stackoverflow.com/questions/40076638/compare-passwords-bcryptjs 
+    signIn: async function (email,password) {
         try {
-            return await User.findOne({ email });
+            const user = await User.findOne({ UserEmail: email, Password: password });
+            return user;
         } catch (err) {
-            throw new Error('Failed to find user using email and password, Error sign in user: ' + err.message);
+            throw new Error('Error signing in user: ' + err.message);
         }
     }, 
     
@@ -15,23 +19,23 @@ const userQueries = {
             return await user.save();
 
         } catch (error) {
-            throw new Error('Failed sign up user' + error.messages);
+            throw new Error('Failed sign up user ' + error.message);
+            
         }
     },
-    editProfile: async function (id, data) {
+    editProfile: async function (userID, data) {
         try {
 
-            const newUserProfile = await User.findOneAndUpdate({ id }, data, { new: true });
-            // console.log(newUserProfile);
+            const newUserProfile = await User.findOneAndUpdate({ UserID: userID }, data, { new: true });
             return newUserProfile;
 
         } catch (error) {
-            throw new Error('Failed updating user profile to mongoDB' + error.messages);
+            throw new Error('Failed updating user profile to mongoDB' + error.message);
         }
     },
-    getUser: async function (userID) {
+    getUserByID: async function (userID) {
         try {
-            return await User.findOne({ userID });
+            return await User.findOne({ UserID: userID });
         } catch (err) {
             throw new Error('Failed to find user using ID, ' + err.message);
         }
@@ -42,9 +46,16 @@ const userQueries = {
         } catch (err) {
             throw new Error('Failed to find all users, ' + err.message);
         }
+    },
+    findUserByEmail: async function (email) {
+        try {
+            return await User.findOne({ UserEmail: email });
+        } catch (err) {
+            throw new Error('Failed to find user by email: ' + err.message);
+        }
     }
 
 }
 
-module.export = userQueries;
+module.exports = userQueries;
 

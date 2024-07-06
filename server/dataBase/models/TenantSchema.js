@@ -7,7 +7,7 @@ const TenantSchema = new mongoose.Schema({
     Income: { type: Number },
     Habit: { type: String },
     TenantPreferenceID: { type: String, required: true, unique: true },
-    Gender: { type: String, required: true },
+    Gender: { type: String},
     Age: { type: Number },
 });
 

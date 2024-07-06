@@ -267,23 +267,11 @@ export function TenantInputForm() {
                 margin="normal"
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                className="expected-price-field"
-                label="Expected Price"
-                variant="filled"
-                type="number"
-                name="ExpectedPrice"
-                value={tenantPref.ExpectedPrice || ''}
-                onChange={handleChange}
-                fullWidth
-                margin="normal"
-              />
-            </Grid>
+            
             <Grid item xs={12}>
               <TextField
                 className="max-price-field"
-                label="Max Price"
+                label="Maximum Price"
                 variant="filled"
                 type="number"
                 name="MaxPrice"
@@ -321,45 +309,34 @@ export function TenantInputForm() {
                 InputLabelProps={{ shrink: true }}
               />
             </Grid>
+
             <Grid item xs={12}>
-              <FormControl margin="normal">
-                <InputLabel id="duration-select-label">Duration</InputLabel>
-                <Select
-                  labelId="duration-select-label"
-                  id="duration-select"
-                  name="Duration"
-                  value={tenantPref.Duration || ''}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="<3month">Less than 3 month</MenuItem>
-                  <MenuItem value="4months">4 months</MenuItem>
-                  <MenuItem value="6months">6 months</MenuItem>
-                  <MenuItem value="8months">8 months</MenuItem>
-                  <MenuItem value="10months">10 months</MenuItem>
-                  <MenuItem value="12months">12 months</MenuItem>
-                  <MenuItem value="long-term">Long term</MenuItem>
-                </Select>
-              </FormControl>
+              <TextField
+                className="num-of-bedroom"
+                label="Number of Bedroom"
+                variant="filled"
+                type="number"
+                name="NumBedroom"
+                value={tenantPref.NumBedroom || ''}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+              />
+        
+              <TextField
+                className="num-of-bathroom"
+                label="Number of Bathroom"
+                variant="filled"
+                type="number"
+                name="NumBathroom"
+                value={tenantPref.NumBathroom || ''}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+              />
             </Grid>
-            <Grid item xs={12}>
-              <FormControl margin="normal">
-                <InputLabel id="room-type-select-label">Room Type</InputLabel>
-                <Select
-                  labelId="room-type-select-label"
-                  id="room-type-select"
-                  name="RoomType"
-                  value={tenantPref.RoomType || ''}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="Studio">Studio</MenuItem>
-                  <MenuItem value="1B1B">1 Bedroom 1 Bathroom</MenuItem>
-                  <MenuItem value="2B2B">2 Bedrooms 2 Bathrooms</MenuItem>
-                  <MenuItem value="2B1B">2 Bedrooms 1 Bathrooms</MenuItem>
-                  <MenuItem value="3B+sB">3 Bedrooms Shared Bathroom</MenuItem>
-                  <MenuItem value="3B+3B+">3+ Bedrooms 3+Bathrooms</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
+            
+            
             <Grid item xs={12}>
               <FormControlLabel
                 control={
@@ -371,6 +348,7 @@ export function TenantInputForm() {
                 }
                 label="Allow Pet"
               />
+
               <FormControlLabel
                 control={
                   <Checkbox
@@ -401,7 +379,30 @@ export function TenantInputForm() {
                 }
                 label="Allow Weed"
               />
+
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={tenantPref.isAC || false}
+                    onChange={handleChange}
+                    name="isAC"
+                  />
+                }
+                label="AC included"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={tenantPref.isFurnished || false}
+                    onChange={handleChange}
+                    name="isFurnished"
+                  />
+                }
+                label="Furnished"
+              />
             </Grid>
+
+
             <Grid item xs={12}>
               <TextField
                 className="num-of-parking-field"
@@ -486,10 +487,7 @@ export function TenantInputForm() {
             <Typography className="value">
               {tenantPref.Street || 'N/A'}
             </Typography>
-            <Typography className="label">Expected Price</Typography>
-            <Typography className="value">
-              {tenantPref.ExpectedPrice || 'N/A'}
-            </Typography>
+            
             <Typography className="label">Max Price</Typography>
             <Typography className="value">
               {tenantPref.MaxPrice || 'N/A'}
@@ -502,14 +500,15 @@ export function TenantInputForm() {
             <Typography className="value">
               {tenantPref.EndDate || 'N/A'}
             </Typography>
-            <Typography className="label">Duration</Typography>
+            
+            <Typography className="label">Number of Bedroom</Typography>
             <Typography className="value">
-              {tenantPref.Duration || 'N/A'}
-            </Typography>
-            <Typography className="label">Room Type</Typography>
-            <Typography className="value">
-              {tenantPref.RoomType || 'N/A'}
-            </Typography>
+                {tenantPref.NumBedroom || 'N/A'}
+              </Typography>
+              <Typography className="label">Number of Bathroom</Typography>
+              <Typography className="value">
+                {tenantPref.NumBathroom || 'N/A'}
+              </Typography>
             <Typography className="label">Own Pet</Typography>
             <Typography className="value">
               {tenantPref.isOwnPet ? 'Yes' : 'No'}
@@ -525,7 +524,15 @@ export function TenantInputForm() {
             <Typography className="label">Weed</Typography>
             <Typography className="value">
               {tenantPref.isWeed ? 'Yes' : 'No'}
-            </Typography>
+              </Typography>
+              <Typography className="label">AC included</Typography>
+              <Typography className="value">
+                {tenantPref.isAC ? 'Yes' : 'No'}
+              </Typography>
+              <Typography className="label">Furnished</Typography>
+              <Typography className="value">
+                {tenantPref.isFurnished ? 'Yes' : 'No'}
+              </Typography>
             <Typography className="label">Number of Parking</Typography>
             <Typography className="value">
               {tenantPref.NumOfParking || 'N/A'}

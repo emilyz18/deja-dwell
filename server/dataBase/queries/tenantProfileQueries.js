@@ -1,19 +1,18 @@
 const Tenant = require('../models/TenantSchema');
-const Tenant = require('../models/TenantSchema');
 
 const tenantProfileQueries = {
     editTenantProfile: async function (tenantID, data) {
         try {
 
-            const newTenantProfile = await Tenant.findOneAndUpdate({ tenantID }, data, { new: true });
+            const newTenantProfile = await Tenant.findOneAndUpdate({ TenantID:tenantID }, data, { new: true });
             return newTenantProfile;
         } catch (error) {
-            throw new Error('Failed updating tenant profile to mongoDB' + error.messages);
+            throw new Error('Failed updating tenant profile to mongoDB' + error.message);
         }
     },
     getOneTenantProfile: async function (tenantID) {
         try {
-            return await Tenant.findOne({ tenantID });
+            return await Tenant.findOne({ TenantID:tenantID });
         } catch (err) {
             throw new Error('Failed to find tenant profile using ID, ' + err.message);
         }
@@ -30,10 +29,10 @@ const tenantProfileQueries = {
             const tenant = new Tenant(data);
             return await tenant.save();
         } catch (error) {
-            throw new Error('Failed create tenant profile when sign up' + error.messages);
+            throw new Error('Failed create tenant profile when sign up' + error.message);
         }
     }
 }
 
-module.export = tenantProfileQueries;
+module.exports = tenantProfileQueries;
 

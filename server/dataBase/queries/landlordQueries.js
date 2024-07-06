@@ -20,4 +20,4 @@ const landlordQueries = {
 
 }
 
-module.export = tenantPrefQueries;
+module.exports = landlordQueries;
