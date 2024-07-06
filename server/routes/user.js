@@ -5,6 +5,7 @@ var path = require('path');
 var fs = require('fs');
 const { v4: uuid } = require('uuid');
 const { db } = require("../db");
+const userQueries = require('../dataBase/queries')
 
 
 var router = express.Router();
@@ -72,7 +73,8 @@ router.post('/register', (req, res) => {
     res.status(402).json({ message: 'No email!!' });
   }
 
-  const user = users.find((u) => u.UserEmail === email);
+  // const user = users.find((u) => u.UserEmail === email);
+  const user = userQueries.signIn(email);
   if (user) {
     res.status(401).json({ message: 'Email Already have account!' });
   } else {
