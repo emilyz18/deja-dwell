@@ -40,7 +40,7 @@ const userQueries = {
         try {
             return await User.find();
         } catch (err) {
-            throw new Error('Failed to find user using ID, ' + err.message);
+            throw new Error('Failed to find all users, ' + err.message);
         }
     }
 

@@ -15,15 +15,15 @@ const tenantsFilePath = path.join(__dirname, '../mockData/Tenant.json');
 const tenantsPrefFilePath = path.join(__dirname, '../mockData/TenantPreference.json');
 const landlordFilePath = path.join(__dirname, '../mockData/Landlord.json');
 
-const loadJsonFile = (filepath) => JSON.parse(fs.readFileSync(filepath, 'utf8'));
-users = loadJsonFile(usersFilePath);
-tenants = loadJsonFile(tenantsFilePath);
-tenantsPrefs = loadJsonFile(tenantsPrefFilePath);
-landlords = loadJsonFile(landlordFilePath);
+// const loadJsonFile = (filepath) => JSON.parse(fs.readFileSync(filepath, 'utf8'));
+// users = loadJsonFile(usersFilePath);
+// tenants = loadJsonFile(tenantsFilePath);
+// tenantsPrefs = loadJsonFile(tenantsPrefFilePath);
+// landlords = loadJsonFile(landlordFilePath);
 
-const writeFile = (path, data) => {
-  fs.writeFileSync(path, JSON.stringify(data, null, 2));
-};
+// const writeFile = (path, data) => {
+//   fs.writeFileSync(path, JSON.stringify(data, null, 2));
+// };
 
 const newTenantProfile = (userId, tenantID, tenantPreferenceID) => ({
   TenantID: tenantID,
@@ -62,7 +62,7 @@ const newLandlord = (landlordId, houseID) => ({
   HouseID: houseID,
 });
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
   const userdata = req.body.user;
   const email = userdata.Email;
   const password = userdata.Password;
@@ -87,8 +87,10 @@ router.post('/register', (req, res) => {
       newUser.isTenant = false;
       const landlordId = uuid();
       newUser.LandlordID = landlordId;
-      const houseID = uuid(); // this might need to change to be consistent with properties
-      landlords.push(newLandlord(landlordId, houseID));
+      const houseID = uuid();
+      // TODO: create landlord
+      // this might need to change to be consistent with properties
+      // landlords.push(newLandlord(landlordId, houseID));
     } else {
       newUser.isLandlord = false;
       newUser.isTenant = true;
@@ -96,16 +98,17 @@ router.post('/register', (req, res) => {
       newUser.TenantID = tenantId;
       const tenantPrefID = uuid();
 
-      tenants.push(newTenantProfile(userId, tenantId, tenantPrefID));
-      tenantsPrefs.push(newTenantPref(tenantId, tenantPrefID));
+      // TODO: create new tenants
+      
+      //tenants.push(newTenantProfile(userId, tenantId, tenantPrefID));
+      //tenantsPrefs.push(newTenantPref(tenantId, tenantPrefID));
     }
 
-    console.log(newUser);
-    users.push(newUser);
-    writeFile(usersFilePath, users);
-    writeFile(tenantsFilePath, tenants);
-    writeFile(tenantsPrefFilePath, tenantsPrefs);
-    writeFile(landlordFilePath, landlords);
+    // console.log(newUser);
+    //users.push(newUser);
+    
+    // Create the new user
+    const createdUser = await userQueries.createUser(newUser);  // Updated line
     res.status(201).json({ message: 'User registered', Auth: true, User: newUser });
   }
 });
