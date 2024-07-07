@@ -34,6 +34,22 @@ const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
     setFilters(tempFilters) // Apply temporary filters to the main filters state
   }
 
+  const clearFilters = () => {
+    setTempFilters({
+      maxPrice: '',
+      province: '',
+      city: '',
+      startDate: '',
+      endDate: '',
+      bedroomNum: '',
+      bathroomNum: '',
+      allowPet: false,
+      allowSmoke: false,
+      allowParty: false,
+      allowWeed: false,
+    });
+  };
+
   return (
     <div className="search-bar">
       <div className="search-input">
@@ -57,6 +73,7 @@ const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
           tempFilters={tempFilters}
           handleTempFilterChange={handleTempFilterChange}
           applyFilters={applyFilters}
+          clearFilters={clearFilters}
         />
       )}
     </div>

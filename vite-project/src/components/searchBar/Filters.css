@@ -55,7 +55,11 @@ input[name='maxPrice'],
 input[name='province'],
 input[name='city'],
 input[name='province'],
-input[name='startDate'] {
+input[name='startDate'],
+input[name='endDate'],
+input[name='bedroomNum'],
+input[name='bathroomNum']
+{
   padding: 0.25em;
   display: block;
 }
