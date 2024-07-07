@@ -16,6 +16,7 @@ const Filters = ({ tempFilters, handleTempFilterChange, applyFilters, clearFilte
               type="number"
               id="maxPrice"
               name="maxPrice"
+              min={0}
               value={tempFilters.maxPrice}
               onChange={handleTempFilterChange}
             />
@@ -68,6 +69,7 @@ const Filters = ({ tempFilters, handleTempFilterChange, applyFilters, clearFilte
               type="number"
               id="bedroomNum"
               name="bedroomNum"
+              min={0}
               value={tempFilters.bedroomNum}
               onChange={handleTempFilterChange}
             />
@@ -79,6 +81,7 @@ const Filters = ({ tempFilters, handleTempFilterChange, applyFilters, clearFilte
               type="number"
               id="bathroomNum"
               name="bathroomNum"
+              min={0}
               value={tempFilters.bathroomNum}
               onChange={handleTempFilterChange}
             />

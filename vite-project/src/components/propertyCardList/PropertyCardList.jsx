@@ -144,9 +144,7 @@ function PropertyCardList({ searchMode }) {
       console.log('Draggable card left the dislike dropzone')
     },
   })
-
-  console.log(properties)
-
+  
   const filteredProperties = properties.filter((property) => {
     const matchesSearchTerm = property.Title.toLowerCase().includes(
       searchTerm.toLowerCase()
@@ -160,22 +158,16 @@ function PropertyCardList({ searchMode }) {
     const matchesCity =
       filters.city === '' ||
       property.City.toLowerCase() === filters.city.toLowerCase()
-
     const matchesStartDate =
       filters.startDate === '' || property.StartDate === filters.startDate
-
     const matchesEndDate =
       filters.endDate === '' || property.EndDate === filters.endDate
-
     const matchesBedroomNum =
       filters.bedroomNum === '' ||
       property.NumBedroom === parseFloat(filters.bedroomNum)
-
     const matchesBathroomNum =
       filters.bathroomNum === '' ||
       property.NumBathroom === parseFloat(filters.bathroomNum)
-
-
     const matchesAllowPet = !filters.allowPet || property.AllowPet
     const matchesAllowSmoke = !filters.allowSmoke || property.AllowSmoke
     const matchesAllowParty = !filters.allowParty || property.AllowParty
@@ -196,8 +188,6 @@ function PropertyCardList({ searchMode }) {
       matchesAllowWeed
     )
   })
-
-  console.log(filteredProperties)
 
   const displayedProperties = searchMode ? filteredProperties : properties
 
