@@ -69,9 +69,9 @@ router.post('/register', async (req, res) => {
   } else {
     const userId = uuid();
     const hashKey = crypto.randomBytes(16).toString('hex');
-    const newUser = { UserID: userId, UserName: userName, Password: password, UserEmail: email, HashKey: hashKey };
+    const newUser = {
+      UserID: userId, UserName: userName, Password: password, UserEmail: email, HashKey: hashKey, ProfileImg: 'http://localhost:3000/default_profile_pic.png' };
 
-     
 
     if (accountType == 'Landlord') {
       newUser.isLandlord = true;

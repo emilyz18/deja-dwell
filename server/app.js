@@ -18,6 +18,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+console.log(`Serving static files from: ${path.join(__dirname, 'public')}`);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
@@ -32,5 +34,7 @@ app.use('/matches', matchesRouter);
 // for payload to large
 app.use(bodyParser.json({ limit: '50mb' })); // Increase payload limit
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
+
 
 module.exports = app;
