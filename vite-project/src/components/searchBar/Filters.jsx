@@ -127,10 +127,10 @@ const Filters = ({ tempFilters, handleTempFilterChange, applyFilters, clearFilte
           <ThemeProvider theme={theme}>
           <div className="button-group">
 
-          <Button color="jet" variant="contained" onClick={clearFilters}>
+          <Button color="jet" variant="contained" onClick={clearFilters} sx={{ fontSize: '11px' }}>
             Clear filters
           </Button>
-          <Button color="jet" variant="contained" onClick={applyFilters}>
+          <Button color="jet" variant="contained" onClick={applyFilters} sx={{ fontSize: '11px' }}>
             Apply filters
           </Button>
           </div>
