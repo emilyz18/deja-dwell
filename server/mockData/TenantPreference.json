@@ -21,48 +21,6 @@
     "NumOfResident": 1
   },
   {
-    "TenantPreferenceID": "223e4567-e89b-12d3-a456-426614174001", // not used
-    "Province": "British Columbia",
-    "City": "Vancouver",
-    "Street": "Granville Street",
-    "ExpectedPrice": 1800,
-    "MaxPrice": 2500,
-    "StartDate": "2024-08-01",
-    "EndDate": null,
-    "NumBedroom": 2,
-    "NumBathroom": 2,
-    "isOwnPet": false,
-    "isSmoke": true,
-    "isParty": false,
-    "isWeed": true,
-    "isAC": false,
-    "isFurnished": true,
-    "isHeater": true,
-    "NumOfParking": 2,
-    "NumOfResident": 2
-  },
-  {
-    "TenantPreferenceID": "323e4567-e89b-12d3-a456-426614174002", // not used
-    "Province": "Alberta",
-    "City": "Calgary",
-    "Street": "8th Avenue",
-    "ExpectedPrice": 1300,
-    "MaxPrice": 1700,
-    "StartDate": "2024-09-01",
-    "EndDate": "2025-08-31",
-    "NumBedroom": 1,
-    "NumBathroom": 1,
-    "isOwnPet": true,
-    "isSmoke": false,
-    "isParty": true,
-    "isWeed": false,
-    "isAC": false,
-    "isFurnished": false,
-    "isHeater": true,
-    "NumOfParking": 1,
-    "NumOfResident": 1
-  },
-  {
     "TenantPreferenceID": "423e4567-e89b-12d3-a456-426614174003",
     "Province": "Ontario",
     "City": "Ottawa",
