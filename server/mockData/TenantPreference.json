@@ -21,7 +21,7 @@
     "NumOfResident": 1
   },
   {
-    "TenantPreferenceID": "223e4567-e89b-12d3-a456-426614174001",
+    "TenantPreferenceID": "223e4567-e89b-12d3-a456-426614174001", // not used
     "Province": "British Columbia",
     "City": "Vancouver",
     "Street": "Granville Street",
@@ -42,7 +42,7 @@
     "NumOfResident": 2
   },
   {
-    "TenantPreferenceID": "323e4567-e89b-12d3-a456-426614174002",
+    "TenantPreferenceID": "323e4567-e89b-12d3-a456-426614174002", // not used
     "Province": "Alberta",
     "City": "Calgary",
     "Street": "8th Avenue",
@@ -84,7 +84,7 @@
     "NumOfResident": 2
   },
   {
-    "TenantPreferenceID": "523e4567-e89b-12d3-a456-426614174004",
+    "TenantPreferenceID": "523e4567-e89b-12d3-a456-426614174004", // not used
     "Province": "Quebec",
     "City": "Montreal",
     "Street": "Rue Sainte-Catherine",
