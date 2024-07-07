@@ -529,10 +529,15 @@ export function TenantInputForm() {
               <Typography className="value">
                 {tenantPref.isAC ? 'Yes' : 'No'}
               </Typography>
+              <Typography className="label">Heater included</Typography>
+              <Typography className="value">
+                {tenantPref.isHeater ? 'Yes' : 'No'}
+              </Typography>
               <Typography className="label">Furnished</Typography>
               <Typography className="value">
                 {tenantPref.isFurnished ? 'Yes' : 'No'}
               </Typography>
+              
             <Typography className="label">Number of Parking</Typography>
             <Typography className="value">
               {tenantPref.NumOfParking || 'N/A'}

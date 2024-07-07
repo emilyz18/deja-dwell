@@ -61,5 +61,26 @@
     "isHeater": true,
     "NumOfParking": 1,
     "NumOfResident": 2
+  },
+  {
+    "TenantPreferenceID": "40417192-b119-4b9f-9c05-025b71bd62d3",
+    "Province": "NS",
+    "City": "White Horse",
+    "Street": "Doctor pepper st",
+    "ExpectedPrice": 2700,
+    "MaxPrice": 3500,
+    "StartDate": "2024-11-15",
+    "EndDate": null,
+    "NumBedroom": 3,
+    "NumBathroom": 1,
+    "isOwnPet": false,
+    "isSmoke": true,
+    "isParty": true,
+    "isWeed": true,
+    "isAC": true,
+    "isFurnished": true,
+    "isHeater": true,
+    "NumOfParking": 1,
+    "NumOfResident": 3
   }
 ]
