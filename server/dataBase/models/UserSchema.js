@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
     UserEmail: { type: String, required: true, unique: true },
     PhoneNumber: { type: String },
     ProfileImg: {
-        type: String, default: 'http://localhost:3000/default_profile_pic.png' },
+        type: String, default: 'http://localhost:3000/default_profile_pic.jpg' },
     Password: { type: String, required: true }
 });
 

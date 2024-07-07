@@ -390,6 +390,17 @@ export function TenantInputForm() {
                 }
                 label="AC included"
               />
+
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={tenantPref.isHeater || false}
+                    onChange={handleChange}
+                    name="isHeater"
+                  />
+                }
+                label="Heater included"
+              /> 
               <FormControlLabel
                 control={
                   <Checkbox
