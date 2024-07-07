@@ -69,5 +69,5 @@ input[name='bathroomNum']
   display: flex;
   flex-direction: column;
   gap: 13px; 
-  width: 45%;
+  width: 40%;
 }
