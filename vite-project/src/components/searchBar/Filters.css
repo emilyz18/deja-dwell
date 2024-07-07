@@ -1,5 +1,6 @@
 .filters {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 1em;
   border: 1px solid #ccc;
@@ -8,66 +9,30 @@
 }
 
 .filter-section {
-  display: flex;
-  flex-direction: column;
   flex: 1;
+  min-width: 200px;
+  margin-right: 1em;
 }
 
 .filter-checkboxes {
-  margin-left: 1em;
-}
-
-.filter-inputs {
-  margin-left: 1em;
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  margin-bottom: 0.5em;
-}
-
-label input[type='text'] {
-  margin-left: 0;
-  padding: 0.25em;
-}
-
-label input[type='checkbox'] {
-  margin-left: 0.5em;
-}
-
-.filter-inputs {
-  margin-left: 1em;
-}
-
-.filter-group {
-  margin-bottom: 0.5em;
+  margin-top: 1em;
 }
 
 label {
   display: block;
-  margin-bottom: 0.25em;
+  margin-bottom: 0.5em;
 }
 
-select[name='duration'],
-select[name='roomType'],
-input[name='maxPrice'],
-input[name='province'],
-input[name='city'],
-input[name='province'],
-input[name='startDate'],
-input[name='endDate'],
-input[name='bedroomNum'],
-input[name='bathroomNum']
-{
-  padding: 0.25em;
+label input[type='text'],
+label input[type='number'] {
   display: block;
+  margin-top: 0.25em;
 }
 
 .button-group {
-  margin-top: 5px;
   display: flex;
-  flex-direction: column;
-  gap: 13px; 
-  width: 40%;
+  justify-content: flex-end;
+  margin-top: 1em;
+  width: 210%;
+  gap: 10px;
 }

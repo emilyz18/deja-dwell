@@ -3,9 +3,12 @@ import { ThemeProvider } from '@mui/material/styles'
 import { theme } from '../themes.jsx'
 import Button from '@mui/material/Button'
 
-const Filters = ({ tempFilters, handleTempFilterChange, applyFilters, clearFilters }) => {
-
-
+const Filters = ({
+  tempFilters,
+  handleTempFilterChange,
+  applyFilters,
+  clearFilters,
+}) => {
   return (
     <>
       <div className="filters">
@@ -74,7 +77,6 @@ const Filters = ({ tempFilters, handleTempFilterChange, applyFilters, clearFilte
               onChange={handleTempFilterChange}
             />
           </label>
-
           <label>
             Number of Bathrooms:
             <input
@@ -124,18 +126,57 @@ const Filters = ({ tempFilters, handleTempFilterChange, applyFilters, clearFilte
             />
             Allow Weed
           </label>
+          
           <ThemeProvider theme={theme}>
-          <div className="button-group">
-
-          <Button color="jet" variant="contained" onClick={clearFilters} sx={{ fontSize: '11px' }}>
-            Clear filters
-          </Button>
-          <Button color="jet" variant="contained" onClick={applyFilters} sx={{ fontSize: '11px' }}>
-            Apply filters
-          </Button>
-          </div>
-        </ThemeProvider>
+            <div className="button-group">
+              <Button
+                color="jet"
+                variant="contained"
+                onClick={clearFilters}
+                sx={{ fontSize: '11px' }}
+              >
+                Clear filters
+              </Button>
+              <Button
+                color="jet"
+                variant="contained"
+                onClick={applyFilters}
+                sx={{ fontSize: '11px' }}
+              >
+                Apply filters
+              </Button>
+            </div>
+          </ThemeProvider>
         </div>
+        <div className="filter-section filter-checkboxes">
+            <label>
+              <input
+                type="checkbox"
+                name="furnished"
+                checked={tempFilters.furnished}
+                onChange={handleTempFilterChange}
+              />
+              Furnished
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="ac"
+                checked={tempFilters.ac}
+                onChange={handleTempFilterChange}
+              />
+              AC
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="heater"
+                checked={tempFilters.heater}
+                onChange={handleTempFilterChange}
+              />
+              Heater
+            </label>
+          </div>
       </div>
     </>
   )

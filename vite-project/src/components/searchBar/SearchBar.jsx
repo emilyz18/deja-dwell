@@ -47,6 +47,9 @@ const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
       allowSmoke: false,
       allowParty: false,
       allowWeed: false,
+      furnished: false,
+      ac: false,
+      heater: false
     });
   };
 
