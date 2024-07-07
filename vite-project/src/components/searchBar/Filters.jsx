@@ -122,12 +122,15 @@ const Filters = ({ tempFilters, handleTempFilterChange, applyFilters, clearFilte
             Allow Weed
           </label>
           <ThemeProvider theme={theme}>
+          <div className="button-group">
+
           <Button color="jet" variant="contained" onClick={clearFilters}>
             Clear filters
           </Button>
           <Button color="jet" variant="contained" onClick={applyFilters}>
             Apply filters
           </Button>
+          </div>
         </ThemeProvider>
         </div>
       </div>

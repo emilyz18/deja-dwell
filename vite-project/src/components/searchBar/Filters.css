@@ -63,3 +63,11 @@ input[name='bathroomNum']
   padding: 0.25em;
   display: block;
 }
+
+.button-group {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px; 
+  width: 55%;
+}
