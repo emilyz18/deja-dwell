@@ -1,9 +1,6 @@
 
 const User = require('../models/UserSchema');
-const bcrypt = require('bcrypt'); 
-
 const userQueries = {
-    // Credit: compare password followed method in : https://stackoverflow.com/questions/40076638/compare-passwords-bcryptjs 
     signIn: async function (email,password) {
         try {
             const user = await User.findOne({ UserEmail: email, Password: password });
