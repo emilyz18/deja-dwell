@@ -23,13 +23,16 @@ const getProperties = async () => {
   return handleResponse(() => axios.get(URL_PATH + '/getProperties'))
 }
 
+const getPropertyById = async (propertyId) => {
+  return handleResponse(() => axios.get(`${URL_PATH}/getPropertyById/${propertyId}`))
+}
+
 const getUnMatchedProperties = async (tenantId) => {
   return handleResponse(() => axios.get(URL_PATH + `/unmatchedProperties/${tenantId}`))
 }
 
 const deleteProperty = async (propertyId) => {
   await handleResponse(() => axios.delete(`${URL_PATH}/${propertyId}`))
-
   return propertyId
 }
 
@@ -42,12 +45,12 @@ const patchProperty = async (property) => {
 const putProperty = async (property) => {
   return handleResponse(() => axios.put(`${URL_PATH}/${property.id}`, property))
 }
-
 export default {
   addProperty,
   getProperties,
   deleteProperty,
   patchProperty,
   putProperty,
-  getUnMatchedProperties
+  getUnMatchedProperties,
+  getPropertyById
 }

@@ -6,14 +6,17 @@ import {
   putPropertyAsync,
   patchPropertyAsync,
   getUnmatchedPropertiesAsync,
+  getPropertyByIdAsync
 } from './thunks'
 
 const INITIAL_STATE = {
   list: [],
   unmatchProperties: [],
+  property: null,
   error: null,
   getUnmatchedProperties: 'IDLE',
   getProperties: 'IDLE',
+  getPropertyById: 'IDLE',
   addProperty: 'IDLE',
   deleteProperty: 'IDLE',
   putProperty: 'IDLE',
@@ -54,6 +57,18 @@ const propertiesSlice = createSlice({
       })
       .addCase(getUnmatchedPropertiesAsync.rejected, (state, action) => {
         state.getUnmatchedProperties = 'REJECTED'
+        state.error = action.error.message
+      })
+      .addCase(getPropertyByIdAsync.pending, (state) => {
+        state.getPropertyById = 'PENDING'
+        state.error = null
+      })
+      .addCase(getPropertyByIdAsync.fulfilled, (state, action) => {
+        state.getPropertyById = 'FULFILLED'
+        state.unmatchProperties = action.payload
+      })
+      .addCase(getPropertyByIdAsync.rejected, (state, action) => {
+        state.getPropertyById = 'REJECTED'
         state.error = action.error.message
       })
       .addCase(addPropertyAsync.pending, (state) => {

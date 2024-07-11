@@ -16,6 +16,13 @@ export const getUnmatchedPropertiesAsync = createAsyncThunk(
   }
 )
 
+export const getPropertyByIdAsync = createAsyncThunk(
+  actionTypes.GET_PROPERTY_BYID,
+  async (propertyId) => {
+    return await propertiesService.getPropertyById(propertyId)
+  }
+)
+
 export const addPropertyAsync = createAsyncThunk(
   actionTypes.ADD_PROPERTIES,
   async (property) => {
