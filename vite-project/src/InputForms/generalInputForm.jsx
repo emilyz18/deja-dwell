@@ -13,8 +13,6 @@ import { getUserAsync, editUserAsync } from '../redux/user/thunks.js'
 import { updateUser } from '../redux/user/reducer.js'
 import './generalInputForm.css'
 
-export const defaultProfilePath = '../../public/images/default_profile_pic.jpg'
-
 export function GeneralInputForm() {
   const [isEditing, setIsEditing] = useState(false)
   const [warning, setWarning] = useState(false)
@@ -197,7 +195,7 @@ export function GeneralInputForm() {
         <Box className="general-input-form">
           <Avatar
             alt="user profile"
-            src={user.ProfileImg || defaultProfilePath}
+            src={user.ProfileImg}
             sx={{ marginTop: 10, width: 200, height: 200 }}
           />
           <Typography variant="h4" className="header">

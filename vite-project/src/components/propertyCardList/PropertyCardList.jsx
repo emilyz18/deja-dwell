@@ -12,9 +12,7 @@ import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCa
 import './PropertyCardList.css'
 import SearchBar from '../searchBar/SearchBar.jsx'
 import { getUnmatchedPropertiesAsync } from '../../redux/properties/thunks'
-import {
-  createMatchAsync,
-} from '../../redux/matches/matchThunks'
+import { createMatchAsync } from '../../redux/matches/matchThunks'
 import { Alert, Snackbar } from '@mui/material'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -45,11 +43,16 @@ function PropertyCardList({ searchMode }) {
     city: '',
     duration: '',
     startDate: '',
-    roomType: '',
+    endDate: '',
+    bedroomNum: '',
+    bathroomNum: '',
     allowPet: false,
     allowSmoke: false,
     allowParty: false,
     allowWeed: false,
+    furnished: false,
+    ac: false,
+    heater: false
   })
 
   useEffect(() => {
@@ -57,7 +60,6 @@ function PropertyCardList({ searchMode }) {
       dispatch(getUnmatchedPropertiesAsync(user.TenantID))
     }
   }, [getUnMatchedPropertiesStatus, searchMode, dispatch])
-
 
   const likedProperty = (id) => {
     const likedProperty = properties.find((property) => property.HouseID === id)
@@ -159,18 +161,28 @@ function PropertyCardList({ searchMode }) {
     const matchesCity =
       filters.city === '' ||
       property.City.toLowerCase() === filters.city.toLowerCase()
+      
     const matchesStartDate =
       filters.startDate === '' || property.StartDate === filters.startDate
-    const matchesDuration =
-      filters.duration === '' ||
-      property.Duration.toLowerCase() === filters.duration.toLowerCase()
-    const matchesRoomType =
-      filters.roomType === '' ||
-      property.RoomType.toLowerCase() === filters.roomType.toLowerCase()
+    const matchesEndDate =
+      filters.endDate === '' || property.EndDate === filters.endDate
+    const matchesBedroomNum =
+      filters.bedroomNum === '' ||
+      property.NumBedroom === parseFloat(filters.bedroomNum)
+    const matchesBathroomNum =
+      filters.bathroomNum === '' ||
+      property.NumBathroom === parseFloat(filters.bathroomNum)
+
     const matchesAllowPet = !filters.allowPet || property.AllowPet
     const matchesAllowSmoke = !filters.allowSmoke || property.AllowSmoke
     const matchesAllowParty = !filters.allowParty || property.AllowParty
     const matchesAllowWeed = !filters.allowWeed || property.AllowWeed
+
+    const isFurnished = !filters.furnished || property.isFurnished
+    const hasAC = !filters.ac || property.isAC
+    const hasHeater = !filters.heater || property.isHeater
+
+
 
     return (
       matchesSearchTerm &&
@@ -178,16 +190,20 @@ function PropertyCardList({ searchMode }) {
       matchesProvince &&
       matchesCity &&
       matchesStartDate &&
-      matchesDuration &&
-      matchesRoomType &&
+      matchesEndDate &&
+      matchesBedroomNum &&
+      matchesBathroomNum &&
       matchesAllowPet &&
       matchesAllowSmoke &&
       matchesAllowParty &&
-      matchesAllowWeed
+      matchesAllowWeed &&
+      isFurnished &&
+      hasAC &&
+      hasHeater
     )
   })
 
-  const displayedProperties = searchMode? filteredProperties : properties;
+  const displayedProperties = searchMode ? filteredProperties : properties
 
   const handleNotificationClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -198,14 +214,16 @@ function PropertyCardList({ searchMode }) {
 
   return (
     <>
-      {searchMode && <>
-        <SearchBar
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          filters={filters}
-          setFilters={setFilters}
-        />{' '}
-      </>}
+      {searchMode && (
+        <>
+          <SearchBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            filters={filters}
+            setFilters={setFilters}
+          />{' '}
+        </>
+      )}
       <DndContext
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}

@@ -8,7 +8,6 @@ const TenantPreferenceSchema = new mongoose.Schema({
     MaxPrice: { type: Number },
     StartDate: { type: Date },
     EndDate: { type: Date },
-    Duration: { type: String },
     NumBedroom: { type: Number },
     NumBathroom: { type: Number },
     isOwnPet: { type: Boolean },
