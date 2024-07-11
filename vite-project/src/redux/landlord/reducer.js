@@ -5,7 +5,7 @@ import {
 } from './thunks'
 
 const INITIAL_STATE = {
-  landlord: null,
+  landlord: {},
 }
 
 const landlordSlice = createSlice({
@@ -30,5 +30,4 @@ const landlordSlice = createSlice({
   },
 })
 
-// export const { updateUser } = userSlice.actions
 export default landlordSlice.reducer

@@ -12,7 +12,7 @@ import {
 const INITIAL_STATE = {
   list: [],
   unmatchProperties: [],
-  property: null,
+  property: {},
   error: null,
   getUnmatchedProperties: 'IDLE',
   getProperties: 'IDLE',
@@ -32,6 +32,9 @@ const propertiesSlice = createSlice({
         (property) => property.HouseID !== action.payload
       )
     },
+    updateProperty: (state, action) => {
+      state.property = {...state.property, ...action.payload}
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -65,7 +68,7 @@ const propertiesSlice = createSlice({
       })
       .addCase(getPropertyByIdAsync.fulfilled, (state, action) => {
         state.getPropertyById = 'FULFILLED'
-        state.unmatchProperties = action.payload
+        state.property = action.payload
       })
       .addCase(getPropertyByIdAsync.rejected, (state, action) => {
         state.getPropertyById = 'REJECTED'
@@ -134,5 +137,5 @@ const propertiesSlice = createSlice({
   },
 })
 
-export const { removeProperty } = propertiesSlice.actions
+export const { removeProperty, updateProperty} = propertiesSlice.actions
 export default propertiesSlice.reducer

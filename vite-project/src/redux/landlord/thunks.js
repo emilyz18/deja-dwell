@@ -4,8 +4,8 @@ import userService from './service'
 
 
 export const getLandlordAsync = createAsyncThunk(
-  actionTypes.GET_USER,
+  actionTypes.GET_LANDLORD,
   async (landlordID) => {
-    return await userService.getUser(landlordID)
+    return await userService.getLandlord(landlordID)
   }
 )

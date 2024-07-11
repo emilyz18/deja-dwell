@@ -3,6 +3,7 @@ import { LANDLORD } from '../../const.jsx'
 
 const landlordLinks = [
   { path: '/landlordAccount/profile', label: 'Edit Profile' },
+  { path: '/landlordAccount/property', label: 'Edit Property Post' },
   { path: '/landlordAccount/applicants', label: 'View Applicants' },
 ]
 

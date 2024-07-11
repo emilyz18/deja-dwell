@@ -36,15 +36,16 @@ const deleteProperty = async (propertyId) => {
   return propertyId
 }
 
-const patchProperty = async (property) => {
+const patchProperty = async (propertyId, property) => {
   return handleResponse(() =>
-    axios.patch(`${URL_PATH}/${property.id}`, property)
+    axios.patch(`${URL_PATH}/${propertyId}`, property)
   )
 }
 
 const putProperty = async (property) => {
   return handleResponse(() => axios.put(`${URL_PATH}/${property.id}`, property))
 }
+
 export default {
   addProperty,
   getProperties,

@@ -40,6 +40,24 @@ router.get('/getProperties', (req, res) => {
     }
 });
 
+router.get('/getPropertyById/:HouseID', async (req, res) => {
+
+    try {
+        const properties = loadPropertiesJson(); 
+        // console.log(req.params);
+        const property = properties.find(p => p.HouseID === req.params.HouseID); 
+
+        if (!property) {
+            return res.status(404).json({ message: 'Property not found' });
+        }
+
+        res.json(property);
+    } catch (error) {
+        console.error('Error fetching property:', error.message); 
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    }
+});
+
 router.get('/unmatchedProperties/:tenantID', (req, res) => {
     let readError;
     let properties;
@@ -58,5 +76,7 @@ router.get('/unmatchedProperties/:tenantID', (req, res) => {
     });
     res.status(200).json(unmatchedProperties);
 });
+
+// TODO patch and post
 
 module.exports = router;

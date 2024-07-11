@@ -11,6 +11,7 @@ var userRouter = require('./routes/user');
 var tenantProfileRouter = require('./routes/tenantsprofile');
 var tenantPrefRouter = require('./routes/tenantspref');
 var matchesRouter = require('./routes/matches');
+var landlordRouter = require('./routes/landlord')
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/user', userRouter);
 app.use('/tenantsprofile', tenantProfileRouter);
 app.use('/tenantspref', tenantPrefRouter);
 app.use('/matches', matchesRouter);
+app.use('/landlord', landlordRouter);
 
 
 // for payload to large
