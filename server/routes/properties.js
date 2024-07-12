@@ -77,6 +77,7 @@ router.get('/unmatchedProperties/:tenantID', (req, res) => {
     res.status(200).json(unmatchedProperties);
 });
 
-// TODO patch and post
+
+// TODO: PATCH
 
 module.exports = router;

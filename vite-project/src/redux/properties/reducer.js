@@ -12,7 +12,13 @@ import {
 const INITIAL_STATE = {
   list: [],
   unmatchProperties: [],
-  property: {},
+  property: {
+    HouseImgs: [
+      { src: '', alt: '' },
+      { src: '', alt: '' },
+      { src: '', alt: '' },
+    ],
+  },
   error: null,
   getUnmatchedProperties: 'IDLE',
   getProperties: 'IDLE',

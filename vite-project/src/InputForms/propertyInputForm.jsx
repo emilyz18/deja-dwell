@@ -1,4 +1,4 @@
-// t
+// image preview method guided by chaptgpt 4o with prompt: how to create image preview for each URL input textfield, generated code applied to handleImageChange() 
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -11,13 +11,19 @@ import {
     Checkbox,
     FormControlLabel,
 } from '@mui/material'
+
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import { getLandlordAsync } from '../redux/landlord/thunks'
 import { getPropertyByIdAsync, patchPropertyAsync } from '../redux/properties/thunks'
-import {updateProperty} from '../redux/properties/reducer.js'
+import { updateProperty } from '../redux/properties/reducer.js'
+import Carousel from '../components/carousel/Carousel'
+
 
 
 export function PropertyInputForm() {
-
+    const [isCreating, setIsCreating] = useState(false);
     const [isEditing, setIsEditing] = useState(false)
 
     const dispatch = useDispatch();
@@ -26,7 +32,7 @@ export function PropertyInputForm() {
     const landlordID = useSelector((state) => state.user.user.LandlordID)
     // console.log("landlord id: ", landlordID); //ok
     const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
-    const landlord= useSelector((state) => state.landlord.landlord)
+    const landlord = useSelector((state) => state.landlord.landlord)
     const property = useSelector((state) => state.properties.property)
 
     // get object in landlord collection
@@ -35,8 +41,6 @@ export function PropertyInputForm() {
             dispatch(getLandlordAsync(landlordID))
         }
     }, [dispatch, isAuthenticated, landlordID])
-
-    console.log("landlord object:", landlord);
 
     // get house 
     useEffect(() => {
@@ -72,6 +76,13 @@ export function PropertyInputForm() {
         setIsEditing(false)
     }
 
+    const handleImageChange = (index, field, event) => {
+        const newImages = [...property.HouseImgs];
+        newImages[index] = { ...newImages[index], [field]: event.target.value };
+        dispatch(updateProperty({ HouseImgs: newImages }));
+    };
+
+
     if (!landlord || !property) {
         return <div>Loading... It is definatly not broken</div>;
     }
@@ -106,6 +117,32 @@ export function PropertyInputForm() {
                             margin="normal"
                         />
                     </Grid>
+
+                    <Grid container spacing={4}>
+                        {(property.HouseImgs || [{ src: '', alt: '' }, { src: '', alt: '' }, { src: '', alt: '' }]).map((image, index) => (
+                            <Grid item xs={12} key={index}>
+                                <TextField
+                                    label={`Image URL ${index + 1}`}
+                                    value={image.src}
+                                    onChange={(e) => handleImageChange(index, 'src', e)}
+                                    fullWidth
+                                />
+                                <TextField
+                                    label={`Image Alt Text ${index + 1}`}
+                                    value={image.alt}
+                                    onChange={(e) => handleImageChange(index, 'alt', e)}
+                                    fullWidth
+                                />
+                                {image.src && (
+                                    <Box position="relative" marginTop={2}>
+                                        <img src={image.src} alt={image.alt} width="100%" height="100%" style={{ objectFit: 'cover' }} />
+                                    </Box>
+                                )}
+                            </Grid>
+                        ))}
+                    </Grid>
+
+
                     <Grid item xs={12}>
                         <TextField
                             className="province-field"
@@ -355,87 +392,92 @@ export function PropertyInputForm() {
                     </Grid>
                 </Box>
             ) : (
+                    
                 <Box className="tenant-input-form">
                     <Typography variant="h4" className="header">
                         Your Property Information
                     </Typography>
                     <div className="info-grid">
                         <Typography className="label">Title</Typography>
-                        
-                            <Typography className="value">{property.Title}</Typography>
+
+                        <Typography className="value">{property.Title}</Typography>
 
                         <Typography className="label">Province</Typography>
                         <Typography className="value">
-                                {property.Province || 'N/A'}
+                            {property.Province || 'N/A'}
                         </Typography>
                         <Typography className="label">City</Typography>
                         <Typography className="value">
-                                {property.City || 'N/A'}
+                            {property.City || 'N/A'}
                         </Typography>
                         <Typography className="label">Street</Typography>
                         <Typography className="value">
-                                {property.Street || 'N/A'}
-                        </Typography>
-
-
+                            {property.Street || 'N/A'}
+                            </Typography>
+                            
+                        <Typography className="label">Images</Typography>
+                        <Carousel
+                            data={property.HouseImgs}
+                            size={{ width: '400px', height: '240px' }}
+                        />
 
                         <Typography className="label">Rent Per Month</Typography>
                         <Typography className="value">
-                                {property.ExpectedPrice || 'N/A'}
+                            {property.ExpectedPrice || 'N/A'}
                         </Typography>
                         <Typography className="label">Start Date</Typography>
                         <Typography className="value">
-                                {property.StartDate || 'N/A'}
+                            {property.StartDate || 'N/A'}
                         </Typography>
                         <Typography className="label">End Date</Typography>
                         <Typography className="value">
-                                {property.EndDate || 'N/A'}
+                            {property.EndDate || 'N/A'}
                         </Typography>
 
                         <Typography className="label">Number of Bedroom</Typography>
                         <Typography className="value">
-                                {property.NumBedroom || 'N/A'}
+                            {property.NumBedroom || 'N/A'}
                         </Typography>
                         <Typography className="label">Number of Bathroom</Typography>
                         <Typography className="value">
-                                {property.NumBathroom || 'N/A'}
+                            {property.NumBathroom || 'N/A'}
                         </Typography>
                         <Typography className="label">Own Pet</Typography>
                         <Typography className="value">
-                                {property.isOwnPet ? 'Yes' : 'No'}
+                            {property.isOwnPet ? 'Yes' : 'No'}
                         </Typography>
                         <Typography className="label">Smoke</Typography>
                         <Typography className="value">
-                                {property.isSmoke ? 'Yes' : 'No'}
+                            {property.isSmoke ? 'Yes' : 'No'}
                         </Typography>
                         <Typography className="label">Party</Typography>
                         <Typography className="value">
-                                {property.isParty ? 'Yes' : 'No'}
+                            {property.isParty ? 'Yes' : 'No'}
                         </Typography>
                         <Typography className="label">Weed</Typography>
                         <Typography className="value">
-                                {property.isWeed ? 'Yes' : 'No'}
+                            {property.isWeed ? 'Yes' : 'No'}
                         </Typography>
                         <Typography className="label">AC included</Typography>
                         <Typography className="value">
-                                {property.isAC ? 'Yes' : 'No'}
+                            {property.isAC ? 'Yes' : 'No'}
                         </Typography>
                         <Typography className="label">Heater included</Typography>
                         <Typography className="value">
-                                {property.isHeater ? 'Yes' : 'No'}
+                            {property.isHeater ? 'Yes' : 'No'}
                         </Typography>
                         <Typography className="label">Furnished</Typography>
                         <Typography className="value">
-                                {property.isFurnished ? 'Yes' : 'No'}
+                            {property.isFurnished ? 'Yes' : 'No'}
                         </Typography>
 
                         <Typography className="label">Number of Parking</Typography>
                         <Typography className="value">
-                                {property.NumOfParking || 'N/A'}
+                            {property.NumOfParking || 'N/A'}
                         </Typography>
                         <Typography className="label">Number of Resident</Typography>
                         <Typography className="value">
-                                {property.NumOfResident || 'N/A'}
+                            {property.NumOfResident || 'N/A'}
                         </Typography>
 
                     </div>
