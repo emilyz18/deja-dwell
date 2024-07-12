@@ -41,7 +41,7 @@ export function PropertyInputForm() {
             LandlordID: LandlordID,
             HouseID: landlord.HouseID,
             ...property,
-        }; 
+        };
         // console.log('Request Data in hanfle sumit in property input:', requestData); // Debugging line
 
         if (property.HouseID) {
@@ -178,6 +178,30 @@ export function PropertyInputForm() {
                             fullWidth
                             multiline
                             rows={4}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Number of Bedrooms"
+                            variant="filled"
+                            type="number"
+                            name="NumBedroom"
+                            value={property.NumBedroom || ''}
+                            onChange={handleChange}
+                            fullWidth
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Number of Bathrooms"
+                            variant="filled"
+                            type="number"
+                            name="NumBathroom"
+                            value={property.NumBathroom || ''}
+                            onChange={handleChange}
+                            fullWidth
                         />
                     </Grid>
 
