@@ -11,7 +11,7 @@ import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './PropertyCardList.css'
 import SearchBar from '../searchBar/SearchBar.jsx'
-import { getUnmatchedPropertiesAsync } from '../../redux/properties/thunks'
+import { getPreferPropertiesAsync, getUnmatchedPropertiesAsync } from '../../redux/properties/thunks'
 import { createMatchAsync } from '../../redux/matches/matchThunks'
 import { Alert, Snackbar } from '@mui/material'
 import { v4 as uuidv4 } from 'uuid'
@@ -23,7 +23,11 @@ function PropertyCardList({ searchMode }) {
   const getUnMatchedPropertiesStatus = useSelector(
     (state) => state.properties.getUnmatchedProperties
   )
-  const properties = useSelector((state) => state.properties.unmatchProperties)
+  const getPreferPropertiesStatus = useSelector(
+    (state) => state.properties.getPreferProperties
+  )
+
+  const properties = searchMode ? useSelector((state) => state.properties.unmatchProperties) : useSelector((state) => state.properties.preferProperties);
 
   const [activeId, setActiveId] = useState(null)
   const [popupVisible, setPopupVisible] = useState(false)
@@ -56,10 +60,15 @@ function PropertyCardList({ searchMode }) {
   })
 
   useEffect(() => {
-    if (getUnMatchedPropertiesStatus === 'IDLE') {
-      dispatch(getUnmatchedPropertiesAsync(user.TenantID))
+    if (getPreferPropertiesStatus === 'IDLE' || getUnMatchedPropertiesStatus === 'IDLE') {
+      reloadProperties();
     }
-  }, [getUnMatchedPropertiesStatus, searchMode, dispatch])
+  }, [getUnMatchedPropertiesStatus, getPreferPropertiesStatus, searchMode, dispatch])
+
+  const reloadProperties = () => {
+    dispatch(getUnmatchedPropertiesAsync(user.TenantID))
+    dispatch(getPreferPropertiesAsync(user.TenantID))
+  }
 
   const likedProperty = (id) => {
     const likedProperty = properties.find((property) => property.HouseID === id)
@@ -73,7 +82,7 @@ function PropertyCardList({ searchMode }) {
       })
     ).then(() => {
       //dispatch(getMatchesAsync())
-      dispatch(getUnmatchedPropertiesAsync(user.TenantID))
+      reloadProperties();
       setNotification({
         open: true,
         message: `Liked property: ${likedProperty.Title}`,
@@ -96,7 +105,7 @@ function PropertyCardList({ searchMode }) {
       })
     ).then(() => {
       //dispatch(getMatchesAsync())
-      dispatch(getUnmatchedPropertiesAsync(user.TenantID))
+      reloadProperties();
       setNotification({
         open: true,
         message: `Disliked property: ${dislikedProperty.Title}`,
@@ -204,6 +213,8 @@ function PropertyCardList({ searchMode }) {
   })
 
   const displayedProperties = searchMode ? filteredProperties : properties
+  console.log('displayedProperties');
+  console.log(displayedProperties);
 
   const handleNotificationClose = (event, reason) => {
     if (reason === 'clickaway') {
