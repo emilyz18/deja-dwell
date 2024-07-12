@@ -6,7 +6,7 @@ import {
   putPropertyAsync,
   patchPropertyAsync,
   getUnmatchedPropertiesAsync,
-  getPropertyByIdAsync
+  getPropertyByIdAsync,
   getPreferPropertiesAsync,
 } from './thunks'
 
@@ -14,6 +14,13 @@ const INITIAL_STATE = {
   list: [],
   unmatchProperties: [],
   error: null,
+  property: {
+    HouseImgs: [
+      { src: '', alt: '' },
+      { src: '', alt: '' },
+      { src: '', alt: '' },
+    ],
+  },
   getPreferProperties: 'IDLE',
   getUnmatchedProperties: 'IDLE',
   getProperties: 'IDLE',
@@ -75,7 +82,23 @@ const propertiesSlice = createSlice({
         state.getPreferProperties = 'REJECTED'
         state.error = action.error.message
       })
-      
+      .addCase(getPropertyByIdAsync.pending, (state) => {
+        state.getPropertyById = 'PENDING'
+        state.error = null
+      })
+      .addCase(getPropertyByIdAsync.fulfilled, (state, action) => {
+        state.getPropertyById = 'FULFILLED'
+        state.property = action.payload
+      })
+      .addCase(getPropertyByIdAsync.rejected, (state, action) => {
+        state.getPropertyById = 'REJECTED'
+        state.error = action.error.message
+      })
+
+      .addCase(createPropertyAsync.pending, (state) => {
+        state.createProperty = 'PENDING'
+        state.error = null
+      })
       .addCase(createPropertyAsync.fulfilled, (state, action) => {
         state.createProperty = 'FULFILLED'
         state.list.push(action.payload)
@@ -84,6 +107,7 @@ const propertiesSlice = createSlice({
         state.createProperty = 'REJECTED'
         state.error = action.error.message
       })
+      
       .addCase(deletePropertyAsync.pending, (state) => {
         state.deleteProperty = 'PENDING'
         state.error = null

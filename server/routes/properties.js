@@ -55,16 +55,6 @@ router.get('/getPropertyById/:HouseID', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
 });
-
-router.get('/getProperties', async (req, res) => {
-    try {
-        const properties = await loadPropertiesJson();
-        res.status(200).json(properties);
-    } catch (err) {
-        res.status(500).send({ error: 'Error loading properties data' });
-    }
-});
-
 router.get('/unmatchedProperties/:tenantID', async (req, res) => {
     const { tenantID } = req.params;
     try {
