@@ -17,6 +17,12 @@ const handleResponse = async (request) => {
 const getLandlord = async (landlordID) => {
   return handleResponse(() => axios.get(URL_PATH + `/${landlordID}`))
 }
+
+export const createLandlord = async (landlordData) => {
+  const response = await axios.post(`${URL_PATH}/createLandlord`, landlordData);
+  return response.data;
+};
+
 export default {
-  getLandlord,
+  getLandlord, createLandlord
 }

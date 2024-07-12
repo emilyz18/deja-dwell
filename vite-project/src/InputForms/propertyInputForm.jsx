@@ -1,78 +1,72 @@
-// image preview method guided by chaptgpt 4o with prompt: how to create image preview for each URL input textfield, generated code applied to handleImageChange() 
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import {
-    Box,
-    Grid,
-    Typography,
-    Checkbox,
-    FormControlLabel,
-} from '@mui/material'
-
-
-import { getLandlordAsync } from '../redux/landlord/thunks'
-import { getPropertyByIdAsync, patchPropertyAsync } from '../redux/properties/thunks'
-import { updateProperty } from '../redux/properties/reducer.js'
-import Carousel from '../components/carousel/Carousel'
-
-
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { Box, Grid, Typography, Checkbox, FormControlLabel } from '@mui/material';
+import { getLandlordAsync } from '../redux/landlord/thunks';
+import { getPropertyByIdAsync, patchPropertyAsync, createPropertyAsync } from '../redux/properties/thunks';
+import { updateProperty } from '../redux/properties/reducer.js';
+import Carousel from '../components/carousel/Carousel';
 
 export function PropertyInputForm() {
+    const [isEditing, setIsEditing] = useState(false);
     const [isCreating, setIsCreating] = useState(false);
-    const [isEditing, setIsEditing] = useState(false)
 
     const dispatch = useDispatch();
+    const landlordID = useSelector((state) => state.user.user.LandlordID);
+    const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+    const landlord = useSelector((state) => state.landlord.landlord);
+    const property = useSelector((state) => state.properties.property);
 
-    // for user reducer
-    const landlordID = useSelector((state) => state.user.user.LandlordID)
-    // console.log("landlord id: ", landlordID); //ok
-    const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
-    const landlord = useSelector((state) => state.landlord.landlord)
-    const property = useSelector((state) => state.properties.property)
-
-    // get object in landlord collection
     useEffect(() => {
         if (isAuthenticated && landlordID) {
-            dispatch(getLandlordAsync(landlordID))
+            dispatch(getLandlordAsync(landlordID));
         }
-    }, [dispatch, isAuthenticated, landlordID])
+    }, [dispatch, isAuthenticated, landlordID]);
 
-    // get house 
     useEffect(() => {
-        if (isAuthenticated && landlord && landlord.HouseID) {
-            dispatch(getPropertyByIdAsync(landlord.HouseID))
+        if (isAuthenticated && landlord.HouseID) {
+            dispatch(getPropertyByIdAsync(landlord.HouseID));
         }
-    }, [dispatch, isAuthenticated, landlord])
+    }, [dispatch, isAuthenticated, landlord.HouseID]);
 
-    // update property in reducer
     const handleChange = (e) => {
-        const { name, value, type, checked } = e.target
-        if (name in property) {
-            dispatch(updateProperty({ [name]: type === 'checkbox' ? checked : value }))
-        }
-    }
+        const { name, value, type, checked } = e.target;
+        dispatch(updateProperty({ [name]: type === 'checkbox' ? checked : value }));
+    };
 
-    // update property in DB
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        if (landlord && landlord.HouseID) {
-            dispatch(patchPropertyAsync({ HouseID: landlord.HouseID, property }));
-            setIsEditing(false);
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const requestData = {
+            landlordID,
+            HouseID: landlord.HouseID,
+            ...property,
+        };
+
+        if (property.id) {
+            dispatch(patchPropertyAsync({ HouseID: landlord.HouseID, property: requestData }));
         } else {
-            console.error('Landlord or HouseID is undefined. Cannot patch property');
+            await dispatch(createPropertyAsync(requestData));
+            dispatch(getPropertyByIdAsync(landlord.HouseID));
         }
-    }
+        setIsEditing(false);
+        setIsCreating(false);
+    };
+
+
+    const handleCreateNewPost = () => {
+        setIsEditing(true);
+        setIsCreating(true);
+    };
 
     const handleEdit = () => {
-        setIsEditing(true)
-    }
+        setIsEditing(true);
+    };
 
     const handleCancel = () => {
-        setIsEditing(false)
-    }
+        setIsEditing(false);
+        setIsCreating(false);
+    };
 
     const handleImageChange = (index, field, event) => {
         const newImages = [...property.HouseImgs];
@@ -80,44 +74,44 @@ export function PropertyInputForm() {
         dispatch(updateProperty({ HouseImgs: newImages }));
     };
 
-
-    if (!landlord || !property) {
-        return <div>Loading... It is definatly not broken</div>;
+    if (!landlord) {
+        return <div>Loading... It is definitely not broken</div>;
     }
-
-
 
     return (
         <>
-            {isEditing ? (
+            {(!property || !property.HouseID || isCreating) ? (
+                <Button variant="contained" color="primary" onClick={handleCreateNewPost}>
+                    Create New Post
+                </Button>
+            ) : null}
+
+            {(isEditing || isCreating) && (
                 <Box
                     component="form"
-                    sx={{
-                        '& .MuiTextField-root': { m: 1, width: '80ch' },
-                    }}
+                    sx={{ '& .MuiTextField-root': { m: 1, width: '80ch' } }}
                     noValidate
                     autoComplete="off"
                     onSubmit={handleSubmit}
-                    className="general-input-form"
                 >
-                    <h1>Input Your Property Information </h1>
+                    <Typography variant="h4" gutterBottom>
+                        Input Your Property Information
+                    </Typography>
+
                     <Grid item xs={12}>
                         <TextField
-                            className="title-field"
                             label="Title"
                             variant="filled"
                             required
                             name="Title"
                             value={property.Title || ''}
                             onChange={handleChange}
-                            placeholder="Please be specific"
                             fullWidth
-                            margin="normal"
                         />
                     </Grid>
 
                     <Grid container spacing={4}>
-                        {(property.HouseImgs || [{ src: '', alt: '' }, { src: '', alt: '' }, { src: '', alt: '' }]).map((image, index) => (
+                        {(property.HouseImgs || [{ src: '', alt: '' }]).map((image, index) => (
                             <Grid item xs={12} key={index}>
                                 <TextField
                                     label={`Image URL ${index + 1}`}
@@ -140,52 +134,40 @@ export function PropertyInputForm() {
                         ))}
                     </Grid>
 
-
                     <Grid item xs={12}>
                         <TextField
-                            className="province-field"
                             label="Province"
                             variant="filled"
                             required
                             name="Province"
                             value={property.Province || ''}
                             onChange={handleChange}
-                            placeholder="ex: Ontario"
                             fullWidth
-                            margin="normal"
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            className="city-field"
                             label="City"
                             variant="filled"
                             required
                             name="City"
                             value={property.City || ''}
                             onChange={handleChange}
-                            placeholder="ex: Toronto"
                             fullWidth
-                            margin="normal"
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            className="street-field"
                             label="Street"
                             variant="filled"
                             name="Street"
                             value={property.Street || ''}
                             onChange={handleChange}
                             fullWidth
-                            margin="normal"
                         />
                     </Grid>
-
                     <Grid item xs={12}>
                         <TextField
-                            id="filled-multiline-static"
-                            className="description-field"
                             label="Description"
                             variant="filled"
                             name="Description"
@@ -193,27 +175,23 @@ export function PropertyInputForm() {
                             onChange={handleChange}
                             fullWidth
                             multiline
-                            maxRows={4}
-                            margin="normal" minRows={4} />
-
+                            rows={4}
+                        />
                     </Grid>
 
                     <Grid item xs={12}>
                         <TextField
-                            className="price-field"
                             label="Rent Per Month"
                             variant="filled"
                             type="number"
-                            name="Price"
+                            name="ExpectedPrice"
                             value={property.ExpectedPrice || ''}
                             onChange={handleChange}
                             fullWidth
-                            margin="normal"
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            className="start-date-field"
                             label="Start Date"
                             variant="filled"
                             type="date"
@@ -221,13 +199,11 @@ export function PropertyInputForm() {
                             value={property.StartDate || ''}
                             onChange={handleChange}
                             fullWidth
-                            margin="normal"
                             InputLabelProps={{ shrink: true }}
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            className="end-date-field"
                             label="End Date"
                             variant="filled"
                             type="date"
@@ -235,56 +211,27 @@ export function PropertyInputForm() {
                             value={property.EndDate || ''}
                             onChange={handleChange}
                             fullWidth
-                            margin="normal"
                             InputLabelProps={{ shrink: true }}
                         />
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField
-                            className="num-of-bedroom"
-                            label="Number of Bedroom"
-                            variant="filled"
-                            type="number"
-                            name="NumBedroom"
-                            value={property.NumBedroom || ''}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                        />
-
-                        <TextField
-                            className="num-of-bathroom"
-                            label="Number of Bathroom"
-                            variant="filled"
-                            type="number"
-                            name="NumBathroom"
-                            value={property.NumBathroom || ''}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                        />
-                    </Grid>
-
-
-                    <Grid item xs={12}>
                         <FormControlLabel
                             control={
                                 <Checkbox
-                                    checked={property.isOwnPet || false}
+                                    checked={property.AllowPet || false}
                                     onChange={handleChange}
-                                    name="isOwnPet"
+                                    name="AllowPet"
                                 />
                             }
                             label="Allow Pet"
                         />
-
                         <FormControlLabel
                             control={
                                 <Checkbox
-                                    checked={property.isSmoke || false}
+                                    checked={property.AllowSmoke || false}
                                     onChange={handleChange}
-                                    name="isSmoke"
+                                    name="AllowSmoke"
                                 />
                             }
                             label="Allow Smoke"
@@ -292,9 +239,9 @@ export function PropertyInputForm() {
                         <FormControlLabel
                             control={
                                 <Checkbox
-                                    checked={property.isParty || false}
+                                    checked={property.AllowParty || false}
                                     onChange={handleChange}
-                                    name="isParty"
+                                    name="AllowParty"
                                 />
                             }
                             label="Allow Party"
@@ -302,14 +249,13 @@ export function PropertyInputForm() {
                         <FormControlLabel
                             control={
                                 <Checkbox
-                                    checked={property.isWeed || false}
+                                    checked={property.AllowWeed || false}
                                     onChange={handleChange}
-                                    name="isWeed"
+                                    name="AllowWeed"
                                 />
                             }
                             label="Allow Weed"
                         />
-
                         <FormControlLabel
                             control={
                                 <Checkbox
@@ -320,7 +266,6 @@ export function PropertyInputForm() {
                             }
                             label="AC included"
                         />
-
                         <FormControlLabel
                             control={
                                 <Checkbox
@@ -343,10 +288,8 @@ export function PropertyInputForm() {
                         />
                     </Grid>
 
-
                     <Grid item xs={12}>
                         <TextField
-                            className="num-of-parking-field"
                             label="Number of Parking"
                             variant="filled"
                             type="number"
@@ -354,12 +297,10 @@ export function PropertyInputForm() {
                             value={property.NumOfParking || ''}
                             onChange={handleChange}
                             fullWidth
-                            margin="normal"
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            className="num-of-resident-field"
                             label="Number of Resident"
                             variant="filled"
                             type="number"
@@ -367,12 +308,10 @@ export function PropertyInputForm() {
                             value={property.NumOfResident || ''}
                             onChange={handleChange}
                             fullWidth
-                            margin="normal"
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <Button
-                            className="button"
                             type="submit"
                             variant="contained"
                             color="primary"
@@ -380,7 +319,6 @@ export function PropertyInputForm() {
                             Publish
                         </Button>
                         <Button
-                            className="button"
                             variant="contained"
                             color="secondary"
                             onClick={handleCancel}
@@ -389,30 +327,24 @@ export function PropertyInputForm() {
                         </Button>
                     </Grid>
                 </Box>
-            ) : (
-                    
+            )}
+
+            {!isEditing && !isCreating && property.HouseID && (
                 <Box className="tenant-input-form">
                     <Typography variant="h4" className="header">
                         Your Property Information
                     </Typography>
                     <div className="info-grid">
                         <Typography className="label">Title</Typography>
-
                         <Typography className="value">{property.Title}</Typography>
 
                         <Typography className="label">Province</Typography>
-                        <Typography className="value">
-                            {property.Province || 'N/A'}
-                        </Typography>
+                        <Typography className="value">{property.Province || 'N/A'}</Typography>
                         <Typography className="label">City</Typography>
-                        <Typography className="value">
-                            {property.City || 'N/A'}
-                        </Typography>
+                        <Typography className="value">{property.City || 'N/A'}</Typography>
                         <Typography className="label">Street</Typography>
-                        <Typography className="value">
-                            {property.Street || 'N/A'}
-                            </Typography>
-                            
+                        <Typography className="value">{property.Street || 'N/A'}</Typography>
+
                         <Typography className="label">Images</Typography>
                         <Carousel
                             data={property.HouseImgs}
@@ -420,64 +352,35 @@ export function PropertyInputForm() {
                         />
 
                         <Typography className="label">Rent Per Month</Typography>
-                        <Typography className="value">
-                            {property.ExpectedPrice || 'N/A'}
-                        </Typography>
+                        <Typography className="value">{property.ExpectedPrice || 'N/A'}</Typography>
                         <Typography className="label">Start Date</Typography>
-                        <Typography className="value">
-                            {property.StartDate || 'N/A'}
-                        </Typography>
+                        <Typography className="value">{property.StartDate || 'N/A'}</Typography>
                         <Typography className="label">End Date</Typography>
-                        <Typography className="value">
-                            {property.EndDate || 'N/A'}
-                        </Typography>
+                        <Typography className="value">{property.EndDate || 'N/A'}</Typography>
 
                         <Typography className="label">Number of Bedroom</Typography>
-                        <Typography className="value">
-                            {property.NumBedroom || 'N/A'}
-                        </Typography>
+                        <Typography className="value">{property.NumBedroom || 'N/A'}</Typography>
                         <Typography className="label">Number of Bathroom</Typography>
-                        <Typography className="value">
-                            {property.NumBathroom || 'N/A'}
-                        </Typography>
+                        <Typography className="value">{property.NumBathroom || 'N/A'}</Typography>
                         <Typography className="label">Own Pet</Typography>
-                        <Typography className="value">
-                            {property.AllowPet ? 'Yes' : 'No'}
-                        </Typography>
+                        <Typography className="value">{property.AllowPet ? 'Yes' : 'No'}</Typography>
                         <Typography className="label">Smoke</Typography>
-                        <Typography className="value">
-                            {property.AllowSmoke ? 'Yes' : 'No'}
-                        </Typography>
+                        <Typography className="value">{property.AllowSmoke ? 'Yes' : 'No'}</Typography>
                         <Typography className="label">Party</Typography>
-                        <Typography className="value">
-                            {property.AllowParty ? 'Yes' : 'No'}
-                        </Typography>
+                        <Typography className="value">{property.AllowParty ? 'Yes' : 'No'}</Typography>
                         <Typography className="label">Weed</Typography>
-                        <Typography className="value">
-                            {property.AllowWeed ? 'Yes' : 'No'}
-                        </Typography>
+                        <Typography className="value">{property.AllowWeed ? 'Yes' : 'No'}</Typography>
                         <Typography className="label">AC included</Typography>
-                        <Typography className="value">
-                            {property.isAC ? 'Yes' : 'No'}
-                        </Typography>
+                        <Typography className="value">{property.isAC ? 'Yes' : 'No'}</Typography>
                         <Typography className="label">Heater included</Typography>
-                        <Typography className="value">
-                            {property.isHeater ? 'Yes' : 'No'}
-                        </Typography>
+                        <Typography className="value">{property.isHeater ? 'Yes' : 'No'}</Typography>
                         <Typography className="label">Furnished</Typography>
-                        <Typography className="value">
-                            {property.isFurnished ? 'Yes' : 'No'}
-                        </Typography>
+                        <Typography className="value">{property.isFurnished ? 'Yes' : 'No'}</Typography>
 
                         <Typography className="label">Number of Parking</Typography>
-                        <Typography className="value">
-                            {property.NumOfParking || 'N/A'}
-                        </Typography>
+                        <Typography className="value">{property.NumOfParking || 'N/A'}</Typography>
                         <Typography className="label">Number of Resident</Typography>
-                        <Typography className="value">
-                            {property.NumOfResident || 'N/A'}
-                        </Typography>
-
+                        <Typography className="value">{property.NumOfResident || 'N/A'}</Typography>
                     </div>
 
                     <Button
@@ -491,5 +394,5 @@ export function PropertyInputForm() {
                 </Box>
             )}
         </>
-    )
+    );
 }

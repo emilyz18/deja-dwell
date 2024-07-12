@@ -15,8 +15,8 @@ const handleResponse = async (request) => {
   }
 }
 
-const addProperty = async (property) => {
-  return handleResponse(() => axios.post(URL_PATH, property))
+const createProperty = async (property) => {
+  return handleResponse(() => axios.post(URL_PATH + '/createProperty', property))
 }
 
 const getProperties = async () => {
@@ -47,7 +47,7 @@ const putProperty = async (property) => {
 }
 
 export default {
-  addProperty,
+  createProperty,
   getProperties,
   deleteProperty,
   patchProperty,

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {
   getPropertiesAsync,
-  addPropertyAsync,
+  createPropertyAsync,
   deletePropertyAsync,
   putPropertyAsync,
   patchPropertyAsync,
@@ -23,7 +23,7 @@ const INITIAL_STATE = {
   getUnmatchedProperties: 'IDLE',
   getProperties: 'IDLE',
   getPropertyById: 'IDLE',
-  addProperty: 'IDLE',
+  createProperty: 'IDLE',
   deleteProperty: 'IDLE',
   putProperty: 'IDLE',
   patchProperty: 'IDLE',
@@ -80,16 +80,16 @@ const propertiesSlice = createSlice({
         state.getPropertyById = 'REJECTED'
         state.error = action.error.message
       })
-      .addCase(addPropertyAsync.pending, (state) => {
-        state.addProperty = 'PENDING'
+      .addCase(createPropertyAsync.pending, (state) => {
+        state.createProperty = 'PENDING'
         state.error = null
       })
-      .addCase(addPropertyAsync.fulfilled, (state, action) => {
-        state.addProperty = 'FULFILLED'
+      .addCase(createPropertyAsync.fulfilled, (state, action) => {
+        state.createProperty = 'FULFILLED'
         state.list.push(action.payload)
       })
-      .addCase(addPropertyAsync.rejected, (state, action) => {
-        state.addProperty = 'REJECTED'
+      .addCase(createPropertyAsync.rejected, (state, action) => {
+        state.createProperty = 'REJECTED'
         state.error = action.error.message
       })
       .addCase(deletePropertyAsync.pending, (state) => {

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { REQUEST_STATE } from '../utils'
 import {
-  getLandlordAsync,
+  getLandlordAsync, createLandlordAsync
 } from './thunks'
 
 const INITIAL_STATE = {
@@ -27,6 +27,18 @@ const landlordSlice = createSlice({
         state.landlord = action.error
         state.requestState = REQUEST_STATE.REJECTED
       })
+      .addCase(createLandlordAsync.pending, (state) => {
+        state.error = null;
+        state.requestState = REQUEST_STATE.PENDING;
+      })
+      .addCase(createLandlordAsync.fulfilled, (state, action) => {
+        state.landlord = action.payload;
+        state.requestState = REQUEST_STATE.FULFILLED;
+      })
+      .addCase(createLandlordAsync.rejected, (state, action) => {
+        state.error = action.payload;
+        state.requestState = REQUEST_STATE.REJECTED;
+      });
   },
 })
 

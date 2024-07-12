@@ -5,6 +5,7 @@ var path = require('path');
 
 const propertiesFilePath = path.join(__dirname, '../mockData/Properties.json');
 
+
 const loadPropertiesJson = () => {
     try {
         const data = fs.readFileSync(propertiesFilePath, 'utf8');
@@ -81,7 +82,7 @@ router.get('/unmatchedProperties/:tenantID', (req, res) => {
     res.status(200).json(unmatchedProperties);
 });
 
-
+// patch existing proper
 router.patch('/patchProperty/:HouseID', async (req, res) => {
     try {
         const properties = loadPropertiesJson();
@@ -103,26 +104,22 @@ router.patch('/patchProperty/:HouseID', async (req, res) => {
     }
 });
 
-router.post('/properties', async (req, res) => {
+// using the landlordID and houseID in landlord colloection 
+router.post('/createProperty', async (req, res) => {
     try {
         const properties = loadPropertiesJson();
-        const newProperty = req.body;
+        const { LandlordID, HouseID, ...propertyData } = req.body;
 
-        if (properties.some(p => p.HouseID === newProperty.HouseID)) {
-            return res.status(400).json({ message: 'Property with this HouseID already exists' });
-        }
-
+        const newProperty = { HouseID, LandlordID, ...propertyData };
         properties.push(newProperty);
-
         savePropertiesJson(properties);
 
-        return res.status(201).json(newProperty);
+        res.json(newProperty);
     } catch (error) {
-        console.error('Error adding property:', error.message);
-        return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+        console.error('Error creating property:', error.message);
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
 });
-
 
 
 module.exports = router;
