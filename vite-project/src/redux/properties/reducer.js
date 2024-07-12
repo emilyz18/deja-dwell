@@ -29,7 +29,7 @@ const INITIAL_STATE = {
   deleteProperty: 'IDLE',
   putProperty: 'IDLE',
   patchProperty: 'IDLE',
-  preferProperties: 'IDLE'
+  preferProperties: []
 }
 
 const propertiesSlice = createSlice({
