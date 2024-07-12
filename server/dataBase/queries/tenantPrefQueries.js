@@ -3,10 +3,7 @@ const TenantPreference = require('../models/TenantPreferenceSchema');
 const tenantPrefQueries = {
     editTenantPref: async function (preferenceID, data) {
         try {
-
-   
-            const newTenantPref = await TenantPreference.findOneAndUpdate({ TenantPreferenceID: preferenceID }, data, { new: true });
-            return newTenantPref;
+            return await TenantPreference.findOneAndUpdate({TenantPreferenceID: preferenceID}, data, {new: true});
 
         } catch (error) {
             throw new Error('Failed updating tenant preference to mongoDB' + error.message);
