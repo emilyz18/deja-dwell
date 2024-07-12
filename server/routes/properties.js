@@ -126,9 +126,8 @@ router.patch('/patchProperty/:HouseID', async (req, res) => {
 // using the landlordID and houseID in landlord colloection 
 router.post('/createProperty', async (req, res) => {
     try {
-        console.log('Request Body in server route createProp:', req.body);
+        //console.log('Request Body in server route createProp:', req.body);
         const { LandlordID, HouseID, ...propertyData } = req.body;
-        console.log(LandlordID);
         if (!LandlordID) {
             return res.status(400).json({ message: 'LandlordID is undefined' });
         }
