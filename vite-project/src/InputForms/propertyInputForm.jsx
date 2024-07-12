@@ -13,22 +13,22 @@ export function PropertyInputForm() {
     const [isCreating, setIsCreating] = useState(false);
 
     const dispatch = useDispatch();
-    const landlordID = useSelector((state) => state.user.user.LandlordID);
+    const LandlordID = useSelector((state) => state.user.user.LandlordID);
     const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
     const landlord = useSelector((state) => state.landlord.landlord);
     const property = useSelector((state) => state.properties.property);
 
     useEffect(() => {
-        if (isAuthenticated && landlordID) {
-            dispatch(getLandlordAsync(landlordID));
+        if (isAuthenticated && LandlordID) {
+            dispatch(getLandlordAsync(LandlordID));
         }
-    }, [dispatch, isAuthenticated, landlordID]);
+    }, [dispatch, isAuthenticated, LandlordID]);
 
     useEffect(() => {
-        if (isAuthenticated && landlord.HouseID) {
+        if (landlord.LandlordID && landlord.HouseID) {
             dispatch(getPropertyByIdAsync(landlord.HouseID));
         }
-    }, [dispatch, isAuthenticated, landlord.HouseID]);
+    }, [dispatch, landlord.LandlordID, landlord.HouseID]);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -38,17 +38,19 @@ export function PropertyInputForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const requestData = {
-            landlordID,
+            LandlordID: LandlordID,
             HouseID: landlord.HouseID,
             ...property,
-        };
+        }; 
+        // console.log('Request Data in hanfle sumit in property input:', requestData); // Debugging line
 
-        if (property.id) {
+        if (property.HouseID) {
             dispatch(patchPropertyAsync({ HouseID: landlord.HouseID, property: requestData }));
         } else {
             await dispatch(createPropertyAsync(requestData));
-            dispatch(getPropertyByIdAsync(landlord.HouseID));
+            await dispatch(getPropertyByIdAsync(landlord.HouseID));
         }
+
         setIsEditing(false);
         setIsCreating(false);
     };
@@ -80,7 +82,7 @@ export function PropertyInputForm() {
 
     return (
         <>
-            {(!property || !property.HouseID || isCreating) ? (
+            {(!property.HouseID || isCreating) ? (
                 <Button variant="contained" color="primary" onClick={handleCreateNewPost}>
                     Create New Post
                 </Button>
@@ -111,7 +113,7 @@ export function PropertyInputForm() {
                     </Grid>
 
                     <Grid container spacing={4}>
-                        {(property.HouseImgs || [{ src: '', alt: '' }]).map((image, index) => (
+                        {(property.HouseImgs || [{ src: '', alt: '' }, { src: '', alt: '' }, { src: '', alt: '' }]).map((image, index) => (
                             <Grid item xs={12} key={index}>
                                 <TextField
                                     label={`Image URL ${index + 1}`}

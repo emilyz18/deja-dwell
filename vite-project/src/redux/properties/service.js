@@ -24,7 +24,10 @@ const getProperties = async () => {
 }
 
 const getPropertyById = async (propertyId) => {
-  return handleResponse(() => axios.get(`${URL_PATH}/getPropertyById/${propertyId}`))
+  // console.log('Fetching property with ID:', propertyId); // Debugging line
+  const response = handleResponse(() => axios.get(`${URL_PATH}/getPropertyById/${propertyId}`));
+  // console.log('Property response:', response); // Debugging line
+  return response;
 }
 
 const getUnMatchedProperties = async (tenantId) => {

@@ -8,6 +8,16 @@ const propertyQueries = {
             throw new Error('Failed to find all Properties, ' + err.message);
         }
     },
+
+    getOneProperty: async (houseID) => {
+        try {
+            return await Property.findOne({ HouseID: houseID });
+        } catch (err) {
+            throw new Error('Failed to find one property, ' + houseID + err.message);
+        }
+        
+    },
+    
     createProperty: async (propertyData) => {
         try {
             const newProperty = new Property(propertyData);
@@ -22,7 +32,7 @@ const propertyQueries = {
         } catch (err) {
             throw new Error('Failed to update property, ' + err.message);
         }
-    }
+    },
 }
 
 module.exports = propertyQueries;

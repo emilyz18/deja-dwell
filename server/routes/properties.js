@@ -16,10 +16,6 @@ const loadPropertiesJson = async () => {
     }
 };
 
-const savePropertiesJson = (data) => {
-    fs.writeFileSync(propertiesFilePath, JSON.stringify(data, null, 2), 'utf8');
-};
-
 const loadMatchesJson = async () => {
     try {
         return await matchQueries.getAllMatches();
@@ -38,23 +34,25 @@ router.get('/getProperties', async (req, res) => {
     }
 });
 
+// routes/properties.js
 router.get('/getPropertyById/:HouseID', async (req, res) => {
-
     try {
-        const properties = loadPropertiesJson(); 
-        // console.log(req.params);
-        const property = properties.find(p => p.HouseID === req.params.HouseID); 
+        const { HouseID } = req.params;
+        const property = await propertyQueries.getOneProperty(HouseID);
+        // console.log('Property fetched in server:', property); 
 
         if (!property) {
             return res.status(404).json({ message: 'Property not found' });
         }
 
-        res.json(property);
+        return res.status(200).json(property);
     } catch (error) {
-        console.error('Error fetching property:', error.message); 
+        console.error('Error fetching property:', error.message);
         res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
 });
+
+
 router.get('/unmatchedProperties/:tenantID', async (req, res) => {
     const { tenantID } = req.params;
     try {
@@ -108,19 +106,17 @@ router.get('/preferProperties/:tenantID', async (req, res) => {
 // patch existing proper
 router.patch('/patchProperty/:HouseID', async (req, res) => {
     try {
-        const properties = loadPropertiesJson();
-        const propertyIndex = properties.findIndex(p => p.HouseID === req.params.HouseID);
 
-        if (propertyIndex === -1) {
+        const { HouseID } = req.params;
+        const updatedData = req.body;
+
+        const updatedProperty = await propertyQueries.editProperty(HouseID, updatedData);
+
+        if (!updatedProperty) {
             return res.status(404).json({ message: 'Property not found' });
         }
 
-        const updatedProperty = { ...properties[propertyIndex], ...req.body };
-        properties[propertyIndex] = updatedProperty;
-
-        savePropertiesJson(properties);
-
-        res.json(updatedProperty);
+        return res.json(updatedProperty);
     } catch (error) {
         console.error('Error updating property:', error.message);
         res.status(500).json({ message: 'Internal Server Error', error: error.message });
@@ -130,14 +126,16 @@ router.patch('/patchProperty/:HouseID', async (req, res) => {
 // using the landlordID and houseID in landlord colloection 
 router.post('/createProperty', async (req, res) => {
     try {
-        const properties = loadPropertiesJson();
+        console.log('Request Body in server route createProp:', req.body);
         const { LandlordID, HouseID, ...propertyData } = req.body;
+        console.log(LandlordID);
+        if (!LandlordID) {
+            return res.status(400).json({ message: 'LandlordID is undefined' });
+        }
 
-        const newProperty = { HouseID, LandlordID, ...propertyData };
-        properties.push(newProperty);
-        savePropertiesJson(properties);
-
-        res.json(newProperty);
+        const newProperty = { LandlordID, HouseID, ...propertyData };
+        const createdProperty = await propertyQueries.createProperty(newProperty);
+        return res.json(createdProperty);
     } catch (error) {
         console.error('Error creating property:', error.message);
         res.status(500).json({ message: 'Internal Server Error', error: error.message });

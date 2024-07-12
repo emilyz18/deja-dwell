@@ -29,6 +29,7 @@ const INITIAL_STATE = {
   deleteProperty: 'IDLE',
   putProperty: 'IDLE',
   patchProperty: 'IDLE',
+  preferProperties: 'IDLE'
 }
 
 const propertiesSlice = createSlice({
@@ -102,6 +103,7 @@ const propertiesSlice = createSlice({
       .addCase(createPropertyAsync.fulfilled, (state, action) => {
         state.createProperty = 'FULFILLED'
         state.list.push(action.payload)
+        state.property = { ...INITIAL_STATE.property, ...action.payload } 
       })
       .addCase(createPropertyAsync.rejected, (state, action) => {
         state.createProperty = 'REJECTED'
@@ -146,10 +148,11 @@ const propertiesSlice = createSlice({
       .addCase(patchPropertyAsync.fulfilled, (state, action) => {
         state.patchProperty = 'FULFILLED'
         const index = state.list.findIndex(
-          (property) => property.id === action.payload.id
+          (property) => property.HouseID === action.payload.HouseID
         )
         if (index !== -1) {
           state.list[index] = action.payload
+          state.property = { ...INITIAL_STATE.property, ...action.payload } 
         }
       })
       .addCase(patchPropertyAsync.rejected, (state, action) => {
