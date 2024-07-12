@@ -36,9 +36,9 @@ const deleteProperty = async (propertyId) => {
   return propertyId
 }
 
-const patchProperty = async (propertyId, property) => {
+const patchProperty = async ({ HouseID, property }) => {
   return handleResponse(() =>
-    axios.patch(`${URL_PATH}/${propertyId}`, property)
+    axios.patch(`${URL_PATH}/patchProperty/${HouseID}`, property)
   )
 }
 

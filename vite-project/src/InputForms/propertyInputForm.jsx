@@ -12,8 +12,6 @@ import {
     FormControlLabel,
 } from '@mui/material'
 
-import { IconButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 import { getLandlordAsync } from '../redux/landlord/thunks'
 import { getPropertyByIdAsync, patchPropertyAsync } from '../redux/properties/thunks'
@@ -444,19 +442,19 @@ export function PropertyInputForm() {
                         </Typography>
                         <Typography className="label">Own Pet</Typography>
                         <Typography className="value">
-                            {property.isOwnPet ? 'Yes' : 'No'}
+                            {property.AllowPet ? 'Yes' : 'No'}
                         </Typography>
                         <Typography className="label">Smoke</Typography>
                         <Typography className="value">
-                            {property.isSmoke ? 'Yes' : 'No'}
+                            {property.AllowSmoke ? 'Yes' : 'No'}
                         </Typography>
                         <Typography className="label">Party</Typography>
                         <Typography className="value">
-                            {property.isParty ? 'Yes' : 'No'}
+                            {property.AllowParty ? 'Yes' : 'No'}
                         </Typography>
                         <Typography className="label">Weed</Typography>
                         <Typography className="value">
-                            {property.isWeed ? 'Yes' : 'No'}
+                            {property.AllowWeed ? 'Yes' : 'No'}
                         </Typography>
                         <Typography className="label">AC included</Typography>
                         <Typography className="value">

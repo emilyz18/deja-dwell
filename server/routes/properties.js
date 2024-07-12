@@ -15,6 +15,10 @@ const loadPropertiesJson = () => {
     }
 };
 
+const savePropertiesJson = (data) => {
+    fs.writeFileSync(propertiesFilePath, JSON.stringify(data, null, 2), 'utf8');
+};
+
 //TODO: in future this need to be moved to another class? so that it can be used in other place
 const matchesFilePath = path.join(__dirname, '../mockData/Match.json');
 
@@ -78,6 +82,47 @@ router.get('/unmatchedProperties/:tenantID', (req, res) => {
 });
 
 
-// TODO: PATCH
+router.patch('/patchProperty/:HouseID', async (req, res) => {
+    try {
+        const properties = loadPropertiesJson();
+        const propertyIndex = properties.findIndex(p => p.HouseID === req.params.HouseID);
+
+        if (propertyIndex === -1) {
+            return res.status(404).json({ message: 'Property not found' });
+        }
+
+        const updatedProperty = { ...properties[propertyIndex], ...req.body };
+        properties[propertyIndex] = updatedProperty;
+
+        savePropertiesJson(properties);
+
+        res.json(updatedProperty);
+    } catch (error) {
+        console.error('Error updating property:', error.message);
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    }
+});
+
+router.post('/properties', async (req, res) => {
+    try {
+        const properties = loadPropertiesJson();
+        const newProperty = req.body;
+
+        if (properties.some(p => p.HouseID === newProperty.HouseID)) {
+            return res.status(400).json({ message: 'Property with this HouseID already exists' });
+        }
+
+        properties.push(newProperty);
+
+        savePropertiesJson(properties);
+
+        return res.status(201).json(newProperty);
+    } catch (error) {
+        console.error('Error adding property:', error.message);
+        return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    }
+});
+
+
 
 module.exports = router;
