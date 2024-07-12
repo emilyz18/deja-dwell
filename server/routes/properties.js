@@ -1,15 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var fs = require('fs');
-var path = require('path');
 
-const propertiesFilePath = path.join(__dirname, '../mockData/Properties.json');
+const tenantProfileQueries = require('../dataBase/queries/tenantProfileQueries');
+const tenantPrefQueries = require('../dataBase/queries/tenantPrefQueries');
+const propertyQueries = require('../dataBase/queries/propertyQueries');
+const matchQueries = require('../dataBase/queries/matchQueries');
+const { randomInt } = require('crypto');
 
-
-const loadPropertiesJson = () => {
+const loadPropertiesJson = async () => {
     try {
-        const data = fs.readFileSync(propertiesFilePath, 'utf8');
-        return JSON.parse(data);
+        return await propertyQueries.getAllProperties();
     } catch (err) {
         console.error('Error reading properties data:', err);
         return null;
@@ -20,28 +20,21 @@ const savePropertiesJson = (data) => {
     fs.writeFileSync(propertiesFilePath, JSON.stringify(data, null, 2), 'utf8');
 };
 
-//TODO: in future this need to be moved to another class? so that it can be used in other place
-const matchesFilePath = path.join(__dirname, '../mockData/Match.json');
-
-const loadMatchesJson = () => {
+const loadMatchesJson = async () => {
     try {
-        const data = fs.readFileSync(matchesFilePath, 'utf8');
-        return JSON.parse(data);
+        return await matchQueries.getAllMatches();
     } catch (err) {
         console.error('Error reading matches data:', err);
         return null;
     }
 };
 
-router.get('/getProperties', (req, res) => {
-    let readError;
-    let properties;
-
-    properties = loadPropertiesJson();
-    if (!properties) {
-        res.status(500).send({ error: readError });
-    } else {
+router.get('/getProperties', async (req, res) => {
+    try {
+        const properties = await loadPropertiesJson();
         res.status(200).json(properties);
+    } catch (err) {
+        res.status(500).send({ error: 'Error loading properties data' });
     }
 });
 
@@ -63,23 +56,63 @@ router.get('/getPropertyById/:HouseID', async (req, res) => {
     }
 });
 
-router.get('/unmatchedProperties/:tenantID', (req, res) => {
-    let readError;
-    let properties;
+router.get('/getProperties', async (req, res) => {
+    try {
+        const properties = await loadPropertiesJson();
+        res.status(200).json(properties);
+    } catch (err) {
+        res.status(500).send({ error: 'Error loading properties data' });
+    }
+});
+
+router.get('/unmatchedProperties/:tenantID', async (req, res) => {
     const { tenantID } = req.params;
-    //TODO: After using DB, these steps should be changed to use querey to fetch from DB directly
-    const matches = loadMatchesJson();
-    properties = loadPropertiesJson();
-    if (!matches) {
-        return res.status(500).send('Error loading matches data');
+    try {
+        const matches = await loadMatchesJson();
+        const properties = await loadPropertiesJson();
+        const unmatchedProperties = properties.filter(property => {
+            return !matches.some(match => match.TenantID === tenantID && match.HouseID === property.HouseID);
+        });
+        res.status(200).json(unmatchedProperties);
+    } catch (err) {
+        res.status(500).send('Error loading data');
     }
-    if (!properties) {
-        return res.status(500).send('Error loading properties data');
+});
+
+router.get('/preferProperties/:tenantID', async (req, res) => {
+    const { tenantID } = req.params;
+    try {
+        const matches = await loadMatchesJson();
+        const properties = await loadPropertiesJson();
+        const unmatchedProperties = properties.filter(property => {
+            return !matches.some(match => match.TenantID === tenantID && match.HouseID === property.HouseID);
+        });
+
+        const tenantInfo = await tenantProfileQueries.getOneTenantProfile(tenantID);
+        if (!tenantInfo) {
+            return res.status(500).send(`Error loading tenantInfo data for user: ${tenantID} from DB`);
+        }
+
+        const tenantPrefID = tenantInfo.TenantPreferenceID;
+        if (!tenantPrefID) {
+            return res.status(200).json(unmatchedProperties);
+        }
+
+        const tenantPrefs = await tenantPrefQueries.getOneTenantPref(tenantPrefID);
+        if (!tenantPrefs) {
+            return res.status(200).json(unmatchedProperties);
+        }
+
+        unmatchedProperties.forEach(property => {
+            property.prefScore = randomInt(1, 101);
+        });
+
+        unmatchedProperties.sort((a, b) => b.prefScore - a.prefScore);
+
+        res.json(unmatchedProperties);
+    } catch (err) {
+        res.status(500).send(`Error loading prefer property for user: ${tenantID} from DB: ${err.message}`);
     }
-    const unmatchedProperties = properties.filter(property => {
-        return !matches.some(match => match.TenantID === tenantID && match.HouseID === property.HouseID);
-    });
-    res.status(200).json(unmatchedProperties);
 });
 
 // patch existing proper

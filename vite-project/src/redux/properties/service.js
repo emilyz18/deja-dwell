@@ -31,6 +31,10 @@ const getUnMatchedProperties = async (tenantId) => {
   return handleResponse(() => axios.get(URL_PATH + `/unmatchedProperties/${tenantId}`))
 }
 
+const getPreferProperties = async (tenantId) => {
+  return handleResponse(() => axios.get(URL_PATH + `/preferProperties/${tenantId}`))
+}
+
 const deleteProperty = async (propertyId) => {
   await handleResponse(() => axios.delete(`${URL_PATH}/${propertyId}`))
   return propertyId
@@ -53,5 +57,6 @@ export default {
   patchProperty,
   putProperty,
   getUnMatchedProperties,
+  getPreferProperties,
   getPropertyById
 }
