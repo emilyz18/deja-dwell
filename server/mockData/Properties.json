@@ -6,7 +6,7 @@
     "AllowSmoke": false,
     "AllowParty": true,
     "AllowWeed": false,
-    "isAC" : true,
+    "isAC": true,
     "isFurnished": true,
     "isHeater": true,
     "ExpectedPrice": 2000,
@@ -17,7 +17,7 @@
     "EndDate": "2024-12-31",
     "NumOfParking": 1,
     "NumOfResident": 1,
-    "NumBedroom" : 1,
+    "NumBedroom": 1,
     "NumBathroom": 1,
     "Title": "Cozy Downtown Condo",
     "Description": "A modern condo in the heart of Toronto with stunning city views.",
@@ -167,7 +167,7 @@
     "NumOfResident": 3,
     "NumBedroom": 3,
     "NumBathroom": 1,
-    "Title": "Spacious Penthouse with Terrace",
+    "Title": "Spacious Penthouse with Terrace123",
     "Description": "Luxurious penthouse with a large terrace offering panoramic views of the city.",
     "HouseImgs": [
       {
@@ -176,7 +176,7 @@
       },
       {
         "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
-        "alt": "Image 2 for carousel"
+        "alt": "Image 2 for carouselkk"
       },
       {
         "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",

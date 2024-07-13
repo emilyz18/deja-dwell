@@ -5,6 +5,7 @@
   margin-bottom: 24px;
   justify-content: center;
   max-width: 450px;
+  padding: 10px;
 }
 
 .carousel-container {
@@ -39,10 +40,23 @@
 }
 
 .details-row {
+  /* margin: 3px; */
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
-  margin-top: 8px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.details-row-amenity {
+  /* margin: 3px; */
+  display: flex;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  margin-top: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .details-row span {
@@ -55,12 +69,25 @@
   border-radius: 12px;
 }
 
+.amenity {
+  background-color: #dee8dd;
+  padding: 2px 8px;
+  border-radius: 12px;
+
+}
+
+
+
 .buttons-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 6px;
   background-color: white;
+}
+
+.price{
+  font-size: larger;
 }
 
 .circle-button {

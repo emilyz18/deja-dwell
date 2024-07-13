@@ -1,73 +1,62 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
-const path = require('path');
+const matchQueries = require('../dataBase/queries/matchQueries');
 
-const matchesFilePath = path.join(__dirname, '../mockData/Match.json');
-
-const loadMatchesJson = () => {
+// Get all matches
+router.get('/', async (req, res) => {
     try {
-        const data = fs.readFileSync(matchesFilePath, 'utf8');
-        return JSON.parse(data);
+        const matches = await matchQueries.getAllMatches();
+        res.json(matches);
     } catch (err) {
-        console.error('Error reading matches data:', err);
-        return null;
+        res.status(500).send('Error loading matches data: ' + err.message);
     }
-};
-
-const saveMatchesJson = (data) => {
-    fs.writeFileSync(matchesFilePath, JSON.stringify(data, null, 2), 'utf8');
-};
-
-router.get('/', (req, res) => {
-    const matches = loadMatchesJson();
-    if (!matches) {
-        return res.status(500).send('Error loading matches data');
-    }
-    res.json(matches);
 });
 
-router.post('/', (req, res) => {
+// Create a new match
+router.post('/', async (req, res) => {
     const newMatch = req.body;
-    const matches = loadMatchesJson();
-    if (!matches) {
-        return res.status(500).send('Error loading matches data');
+
+    try {
+        const createdMatch = await matchQueries.createMatch(newMatch);
+        res.status(201).json(createdMatch);
+    } catch (err) {
+        res.status(500).send('Error creating match: ' + err.message);
     }
-    matches.push(newMatch);
-    saveMatchesJson(matches);
-    res.status(201).json(newMatch);
 });
 
-router.patch('/:matchId', (req, res) => {
+// Update match status
+router.patch('/:matchId', async (req, res) => {
     const { matchId } = req.params;
-    const matchUpdates = req.body;
+    const { MatchStatus } = req.body;
 
-    const matches = loadMatchesJson();
-    if (!matches) {
-        return res.status(500).send('Error loading matches data');
+    if (!MatchStatus) {
+        return res.status(400).send('Missing MatchStatus');
     }
 
-    const matchIndex = matches.findIndex((match) => match.MatchID === matchId);
-    if (matchIndex === -1) {
-        return res.status(404).send('Match not found');
+    try {
+        const updatedMatch = await matchQueries.updateMatchStatus(matchId, MatchStatus);
+        if (!updatedMatch) {
+            return res.status(404).send('Match not found');
+        }
+        res.json(updatedMatch);
+    } catch (err) {
+        res.status(500).send('Error updating match: ' + err.message);
     }
-
-    matches[matchIndex] = { ...matches[matchIndex], ...matchUpdates };
-    saveMatchesJson(matches);
-    res.json(matches[matchIndex]);
 });
 
-router.delete('/:matchId', (req, res) => {
+// Delete a match
+router.delete('/:matchId', async (req, res) => {
     const { matchId } = req.params;
 
-    const matches = loadMatchesJson();
-    if (!matches) {
-        return res.status(500).send('Error loading matches data');
+    try {
+        const deletedMatch = await matchQueries.deleteMatch(matchId);
+        if (!deletedMatch) {
+            return res.status(404).send('Match not found');
+        }
+        res.status(204).send();
+    } catch (err) {
+        res.status(500).send('Error deleting match: ' + err.message);
     }
-
-    const updatedMatches = matches.filter((match) => match.MatchID !== matchId);
-    saveMatchesJson(updatedMatches);
-    res.status(204).send();
 });
 
 module.exports = router;

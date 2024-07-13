@@ -15,12 +15,19 @@ const handleResponse = async (request) => {
   }
 }
 
-const addProperty = async (property) => {
-  return handleResponse(() => axios.post(URL_PATH, property))
+const createProperty = async (property) => {
+  return handleResponse(() => axios.post(URL_PATH + '/createProperty', property))
 }
 
 const getProperties = async () => {
   return handleResponse(() => axios.get(URL_PATH + '/getProperties'))
+}
+
+const getPropertyById = async (propertyId) => {
+  // console.log('Fetching property with ID:', propertyId); // Debugging line
+  const response = handleResponse(() => axios.get(`${URL_PATH}/getPropertyById/${propertyId}`));
+  // console.log('Property response:', response); // Debugging line
+  return response;
 }
 
 const getUnMatchedProperties = async (tenantId) => {
@@ -33,13 +40,12 @@ const getPreferProperties = async (tenantId) => {
 
 const deleteProperty = async (propertyId) => {
   await handleResponse(() => axios.delete(`${URL_PATH}/${propertyId}`))
-
   return propertyId
 }
 
-const patchProperty = async (property) => {
+const patchProperty = async ({ HouseID, property }) => {
   return handleResponse(() =>
-    axios.patch(`${URL_PATH}/${property.id}`, property)
+    axios.patch(`${URL_PATH}/patchProperty/${HouseID}`, property)
   )
 }
 
@@ -48,11 +54,12 @@ const putProperty = async (property) => {
 }
 
 export default {
-  addProperty,
+  createProperty,
   getProperties,
   deleteProperty,
   patchProperty,
   putProperty,
   getUnMatchedProperties,
-  getPreferProperties
+  getPreferProperties,
+  getPropertyById
 }

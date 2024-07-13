@@ -23,10 +23,17 @@ export const getPreferPropertiesAsync = createAsyncThunk(
   }
 )
 
-export const addPropertyAsync = createAsyncThunk(
-  actionTypes.ADD_PROPERTIES,
+export const getPropertyByIdAsync = createAsyncThunk(
+  actionTypes.GET_PROPERTY_BYID,
+  async (propertyId) => {
+    return await propertiesService.getPropertyById(propertyId)
+  }
+)
+
+export const createPropertyAsync = createAsyncThunk(
+  actionTypes.CREATE_PROPERTY,
   async (property) => {
-    return await propertiesService.addProperty(property)
+    return await propertiesService.createProperty(property)
   }
 )
 

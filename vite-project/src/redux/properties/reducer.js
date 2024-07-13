@@ -1,26 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {
   getPropertiesAsync,
-  addPropertyAsync,
+  createPropertyAsync,
   deletePropertyAsync,
   putPropertyAsync,
   patchPropertyAsync,
   getUnmatchedPropertiesAsync,
+  getPropertyByIdAsync,
   getPreferPropertiesAsync,
 } from './thunks'
 
 const INITIAL_STATE = {
   list: [],
   unmatchProperties: [],
-  preferProperties: [],
   error: null,
+  property: {
+    HouseImgs: [
+      { src: '', alt: '' },
+      { src: '', alt: '' },
+      { src: '', alt: '' },
+    ],
+  },
   getPreferProperties: 'IDLE',
   getUnmatchedProperties: 'IDLE',
   getProperties: 'IDLE',
-  addProperty: 'IDLE',
+  getPropertyById: 'IDLE',
+  createProperty: 'IDLE',
   deleteProperty: 'IDLE',
   putProperty: 'IDLE',
   patchProperty: 'IDLE',
+  preferProperties: []
 }
 
 const propertiesSlice = createSlice({
@@ -32,6 +41,9 @@ const propertiesSlice = createSlice({
         (property) => property.HouseID !== action.payload
       )
     },
+    updateProperty: (state, action) => {
+      state.property = {...state.property, ...action.payload}
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -71,18 +83,33 @@ const propertiesSlice = createSlice({
         state.getPreferProperties = 'REJECTED'
         state.error = action.error.message
       })
-      .addCase(addPropertyAsync.pending, (state) => {
-        state.addProperty = 'PENDING'
+      .addCase(getPropertyByIdAsync.pending, (state) => {
+        state.getPropertyById = 'PENDING'
         state.error = null
       })
-      .addCase(addPropertyAsync.fulfilled, (state, action) => {
-        state.addProperty = 'FULFILLED'
-        state.list.push(action.payload)
+      .addCase(getPropertyByIdAsync.fulfilled, (state, action) => {
+        state.getPropertyById = 'FULFILLED'
+        state.property = action.payload
       })
-      .addCase(addPropertyAsync.rejected, (state, action) => {
-        state.addProperty = 'REJECTED'
+      .addCase(getPropertyByIdAsync.rejected, (state, action) => {
+        state.getPropertyById = 'REJECTED'
         state.error = action.error.message
       })
+
+      .addCase(createPropertyAsync.pending, (state) => {
+        state.createProperty = 'PENDING'
+        state.error = null
+      })
+      .addCase(createPropertyAsync.fulfilled, (state, action) => {
+        state.createProperty = 'FULFILLED'
+        state.list.push(action.payload)
+        state.property = { ...INITIAL_STATE.property, ...action.payload } 
+      })
+      .addCase(createPropertyAsync.rejected, (state, action) => {
+        state.createProperty = 'REJECTED'
+        state.error = action.error.message
+      })
+      
       .addCase(deletePropertyAsync.pending, (state) => {
         state.deleteProperty = 'PENDING'
         state.error = null
@@ -121,10 +148,11 @@ const propertiesSlice = createSlice({
       .addCase(patchPropertyAsync.fulfilled, (state, action) => {
         state.patchProperty = 'FULFILLED'
         const index = state.list.findIndex(
-          (property) => property.id === action.payload.id
+          (property) => property.HouseID === action.payload.HouseID
         )
         if (index !== -1) {
           state.list[index] = action.payload
+          state.property = { ...INITIAL_STATE.property, ...action.payload } 
         }
       })
       .addCase(patchPropertyAsync.rejected, (state, action) => {
@@ -134,5 +162,5 @@ const propertiesSlice = createSlice({
   },
 })
 
-export const { removeProperty } = propertiesSlice.actions
+export const { removeProperty, updateProperty} = propertiesSlice.actions
 export default propertiesSlice.reducer

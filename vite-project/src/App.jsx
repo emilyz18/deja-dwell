@@ -9,6 +9,7 @@ import PropertyCardList from './components/propertyCardList/PropertyCardList'
 import { LandLordSideBar } from './components/sideBars/LandLordSideBar'
 import { TenantSideBar } from './components/sideBars/TenantSideBar'
 import { TenantInputForm } from './InputForms/TenantInputForm.jsx'
+import { PropertyInputForm } from './InputForms/propertyInputForm.jsx'
 import { GeneralInputForm } from './InputForms/generalInputForm'
 import History from './components/history/History'
 
@@ -70,6 +71,10 @@ function App() {
               <Route
                 path="/landlordAccount/profile"
                 element={<GeneralInputForm />}
+              />
+              <Route
+                path="/landlordAccount/property"
+                element={<PropertyInputForm/>}
               />
             </>
           ) : (
