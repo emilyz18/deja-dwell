@@ -10,7 +10,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 - Xinyue: Hi. I am a 4th year computer science student. I love coffee.
 
 ## Minimal Requirements
-1. [.] Create/modify a user profile (user information and housing preference)
+1. [ ] Create/modify a user profile (user information and housing preference)
     - Each user can have one of:
         - Landlord account
         - Tenant account
@@ -18,7 +18,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 2. [ ] Matching
     - Stable matching algorithm between tenant property preference and property, tailored to our data
     - Display matching score between user preference & housing post on both the landlord and tenant’s dashboard (only shows in console log)
-3. [.] Dashboard
+3. [ ] Dashboard
     - Landlord: Display list of applicants
         - Profile picture
         - Name
@@ -32,10 +32,10 @@ Our project is a platform designed for tenants and landlords to facilitate findi
         - Property properties
 
 ## Standard Requirements
-1. [.] User Login page
+1. [ ] User Login page
     - Allows user to store data in their account
     - User can log in and log out
-2. [.] Application status
+2. [ ] Application status
     - For Tenant account: Store history of applied post 
     - For the landlord: Store history of matched applicants(Tenants) along with their applied post
 3. [ ] Two types of rent match:
@@ -44,7 +44,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 4. [ ] Make the matching algorithm more robust
     - Add weightings to scores 
     - Add additional sorting for the list of applicants ( tenant profile <-> landlord preference matching)
-5. [.] For landlord account:  A Landlord dashboard page that shows the current list of applicants with accept/reject buttons for each applicant.
+5. [ ] For landlord account:  A Landlord dashboard page that shows the current list of applicants with accept/reject buttons for each applicant.
     - the landlord will reach out to the list of tenants matched by the system  (externally, interview/in-person house tour), once the landlord and tenant sign the contract (externally), the landlord will press accept and other tenants on the list will be automatically rejected.
     - Landlord will only see contact info of tenant after they apply, tenant will only see landlord's contact info after they apply 
 
