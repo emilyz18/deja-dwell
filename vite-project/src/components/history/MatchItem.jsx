@@ -110,7 +110,8 @@ function MatchItem({ match, displayPopup }) {
           <div className="house-details" onClick={displayPopup}>
             <h2>{currentProperty.Title}</h2>
             <p>Price: {currentProperty.ExpectedPrice}</p>
-            <p>Room Type: {currentProperty.RoomType}</p>
+            <p>Number of Bedrooms: {currentProperty.NumBedroom}</p>
+            <p>Number of Bathroom: {currentProperty.NumBathroom}</p>
           </div>
         )}
         <div className="right-side">
