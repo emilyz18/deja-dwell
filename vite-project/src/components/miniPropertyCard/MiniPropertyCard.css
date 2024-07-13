@@ -42,7 +42,7 @@
 .details-row {
   /* margin: 3px; */
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   margin-top: 15px;
   flex-wrap: wrap;

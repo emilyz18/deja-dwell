@@ -55,8 +55,11 @@ function MiniPropertyCard(props) {
             </span>
             <div className="details-row">
               
-              {propertyInfo.NumBedroom && propertyInfo.NumBathroom && (
-                <span className="house-type">{propertyInfo.NumBedroom}Bed {propertyInfo.NumBathroom}Bath</span>
+              {propertyInfo.NumBedroom && (
+                <span className="house-type">{propertyInfo.NumBedroom}Bed</span>
+              )}
+               {propertyInfo.NumBathroom && (
+                <span className="house-type">{propertyInfo.NumBathroom}Bath</span>
               )}
               
             </div>
