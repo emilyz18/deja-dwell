@@ -8,6 +8,8 @@ import { theme } from '../themes.jsx'
 function MiniPropertyCard(props) {
   const { propertyInfo, likedFn, dislikedFn, displayPopup } = props
 
+  const { NumBedroom, NumBathroom, isAC, isHeater, isFurnished, AllowPet, AllowSmoke, AllowParty, AllowWeed, ExpectedPrice, Street, City, Province } = propertyInfo;
+
   if (!propertyInfo) return null
 
   // useSortable was written with the help of ChatGPT 3.5 on Jun 8th
@@ -46,16 +48,31 @@ function MiniPropertyCard(props) {
         <div {...attributes} {...listeners}>
           <div className="card-details">
             <h3 className="house-title">{propertyInfo.Title}</h3>
+            <span className="address">
+              {Street && `  ${Street}, `}
+              {City && `${City}, `}
+              {Province && `${Province} `}
+            </span>
             <div className="details-row">
-              <span className="rent">${propertyInfo.ExpectedPrice}</span>
-              <span className="address">
-                {propertyInfo.Street +
-                  ', ' +
-                  propertyInfo.City +
-                  ', ' +
-                  propertyInfo.Province}
-              </span>
-              <span className="house-type">{propertyInfo.RoomType}</span>
+              
+              {propertyInfo.NumBedroom && propertyInfo.NumBathroom && (
+                <span className="house-type">{propertyInfo.NumBedroom}Bed {propertyInfo.NumBathroom}Bath</span>
+              )}
+              
+            </div>
+            <div className='details-row-amenity'>
+              {isAC && <span className="amenity">AC</span>}
+              {isHeater && <span className="amenity">Heater</span>}
+              {isFurnished && <span className="amenity">Furnished</span>}
+              {AllowPet && <span className="amenity">Pet Allowed</span>}
+              {AllowSmoke && <span className="amenity">Smoke Allowed</span>}
+              {AllowParty && <span className="amenity">Party Allowed</span>}
+              {AllowWeed && <span className="amenity">Weed Allowed</span>}
+            </div>
+            <div className='details-row'>
+              {ExpectedPrice && (
+                <h5 className="price">${ExpectedPrice}</h5>
+              )}
             </div>
           </div>
         </div>

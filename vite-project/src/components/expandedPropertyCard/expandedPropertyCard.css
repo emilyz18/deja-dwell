@@ -5,6 +5,7 @@
   border-radius: 8px;
   text-align: left;
   font-family: 'Arial', sans-serif;
+  overflow: auto;
 }
 
 .expanded-property-popup h1 {
@@ -40,4 +41,14 @@
 
 .expanded-property-popup p:last-of-type {
   margin-top: 20px;
+}
+
+.details-row-expand {
+  /* margin: 3px; */
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
