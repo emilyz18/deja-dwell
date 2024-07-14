@@ -67,6 +67,10 @@ router.get('/unmatchedProperties/:tenantID', async (req, res) => {
     }
 });
 
+const getScore = (property, preference) => {
+    return randomInt(1, 101);
+}
+
 router.get('/preferProperties/:tenantID', async (req, res) => {
     const { tenantID } = req.params;
     try {
@@ -91,17 +95,22 @@ router.get('/preferProperties/:tenantID', async (req, res) => {
             return res.status(200).json(unmatchedProperties);
         }
 
-        unmatchedProperties.forEach(property => {
-            property.prefScore = randomInt(1, 101);
+        const prefProperties = unmatchedProperties.map(property => {
+            return {
+                ...property._doc,
+                prefScore: getScore(property, tenantPrefs)
+            };
         });
-
-        unmatchedProperties.sort((a, b) => b.prefScore - a.prefScore);
-
-        res.json(unmatchedProperties);
+        prefProperties.sort((a, b) => b.prefScore - a.prefScore);
+        
+        return res.status(200).send(prefProperties);
     } catch (err) {
+        console.log(err);
         res.status(500).send(`Error loading prefer property for user: ${tenantID} from DB: ${err.message}`);
     }
 });
+
+
 
 // patch existing proper
 router.patch('/patchProperty/:HouseID', async (req, res) => {
