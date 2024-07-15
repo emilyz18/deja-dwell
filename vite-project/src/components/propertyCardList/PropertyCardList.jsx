@@ -70,6 +70,8 @@ function PropertyCardList({ searchMode }) {
     dispatch(getPreferPropertiesAsync(user.TenantID))
   }
 
+  //TODO: need to trigger reload Pref properties after preference updated
+
   const likedProperty = (id) => {
     const likedProperty = properties.find((property) => property.HouseID === id)
     dispatch(
