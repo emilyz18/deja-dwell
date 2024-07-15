@@ -103,7 +103,9 @@ function PropertyCardList({ searchMode }) {
         message: `Liked property: ${likedProperty.Title}`,
         severity: 'success',
       })
-      setActiveId(activeIndex + 1) // move on to next property
+      if (!searchMode) {
+        setActiveIndex(activeIndex + 1) // move on to next property
+      }
     })
   }
 
@@ -127,7 +129,9 @@ function PropertyCardList({ searchMode }) {
         message: `Disliked property: ${dislikedProperty.Title}`,
         severity: 'error',
       })
-      setActiveId(activeIndex + 1) // move on to next property
+      if (!searchMode) {
+        setActiveIndex(activeIndex + 1) // move on to next property
+      }
     })
   }
 
@@ -228,15 +232,13 @@ function PropertyCardList({ searchMode }) {
   })
 
   const displayedRecommendationProperty = properties[activeIndex]
-
+  const displaySearchProperties = filteredProperties
   const handleNotificationClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
     }
     setNotification({ ...notification, open: false })
   }
-
-  // const displayedProperty = filteredProperties[activeIndex] || null;
 
   return (
     <>
@@ -248,6 +250,77 @@ function PropertyCardList({ searchMode }) {
             filters={filters}
             setFilters={setFilters}
           />
+
+          <div className="dropzone-container">
+            {isDragging ? (
+              <div
+                className={`dropzone left-dropzone ${isOverDislike ? 'active' : ''}`}
+                ref={setDislikeRef}
+              >
+                <span className="dropzone-icon">✖</span>
+              </div>
+            ) : (
+              <div className="dropzone-placeholder"></div>
+            )}
+            <ul id="property-list" className="property-list">
+              {displaySearchProperties.length === 0 ? (
+                <li className="no-properties-message">
+                  No more properties to show
+                </li>
+              ) : (
+                displaySearchProperties.map((property) =>
+                  property.HouseID === activeId ? (
+                    <div
+                      key={property.HouseID}
+                      className="placeholder-card"
+                    ></div>
+                  ) : (
+                    <MiniPropertyCard
+                      key={property.HouseID}
+                      propertyInfo={property}
+                      likedFn={likedProperty}
+                      dislikedFn={dislikedProperty}
+                      displayPopup={() => displayPopup(property)}
+                    />
+                  )
+                )
+              )}
+            </ul>
+            {isDragging ? (
+              <div
+                className={`dropzone right-dropzone ${isOverLike ? 'active' : ''}`}
+                ref={setLikeRef}
+              >
+                <span className="dropzone-icon">✔</span>
+              </div>
+            ) : (
+              <div className="dropzone-placeholder"></div>
+            )}
+          </div>
+          {activeId ? (
+            <MiniPropertyCard
+              propertyInfo={properties.find(
+                (property) => property.HouseID === activeId
+              )}
+              likedFn={likedProperty}
+              dislikedFn={dislikedProperty}
+              displayPopup={() =>
+                displayPopup(
+                  properties.find((property) => property.HouseID === activeId)
+                )
+              }
+            />
+          ) : null}
+          {popupVisible && (
+            <div className="property-popup-background" onClick={closePopup}>
+              <div
+                className="property-popup"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ExpandedPropertyCard propertyInfo={selectedProperty} />
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <div>
@@ -426,20 +499,7 @@ function PropertyCardList({ searchMode }) {
             <ExpandedPropertyCard propertyInfo={selectedProperty} />
           </div>
         </div>
-      )}
-      <Snackbar
-        open={notification.open}
-        autoHideDuration={3000}
-        onClose={handleNotificationClose}
-      >
-        <Alert
-          onClose={handleNotificationClose}
-          severity={notification.severity}
-          sx={{ width: '100%' }}
-        >
-          {notification.message}
-        </Alert>
-      </Snackbar> */}
+      )} */}
     </>
   )
 }
