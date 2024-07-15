@@ -94,3 +94,13 @@
   border-radius: 10px;
   margin: 20px 0;
 }
+
+.search-display {
+  display: flex;
+  height: 535px;
+}
+
+.cards-container {
+  overflow-y: auto;
+
+}

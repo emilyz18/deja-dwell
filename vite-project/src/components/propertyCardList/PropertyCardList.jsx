@@ -11,6 +11,7 @@ import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './PropertyCardList.css'
 import SearchBar from '../searchBar/SearchBar.jsx'
+import Map from '../map/Map.jsx'
 import {
   getPreferPropertiesAsync,
   getUnmatchedPropertiesAsync,
@@ -240,139 +241,143 @@ function PropertyCardList({ searchMode }) {
   return (
     <>
       {searchMode ? (
-         <div>
-         <SearchBar
-           searchTerm={searchTerm}
-           setSearchTerm={setSearchTerm}
-           filters={filters}
-           setFilters={setFilters}
-         />
-
-         <div className="dropzone-container">
-           <ul id="property-list" className="property-list">
-             {displaySearchProperties.length === 0 ? (
-               <li className="no-properties-message">
-                 No more properties to show
-               </li>
-             ) : (
-               displaySearchProperties.map((property) =>
-                   <MiniPropertyCard
-                     key={property.HouseID}
-                     propertyInfo={property}
-                     likedFn={likedProperty}
-                     dislikedFn={dislikedProperty}
-                     displayPopup={() => displayPopup(property)}
-                   />
-               )
-             )}
-           </ul>
-         </div>
-         {popupVisible && (
-           <div className="property-popup-background" onClick={closePopup}>
-             <div
-               className="property-popup"
-               onClick={(e) => e.stopPropagation()}
-             >
-               <ExpandedPropertyCard propertyInfo={selectedProperty} />
-             </div>
-           </div>
-         )}
-       </div>
-      ) : (
         <div>
-        <DndContext
-          collisionDetection={closestCenter}
-          onDragStart={handleDragStart}
-          onDragEnd={handleDragEnd}
-        >
-          <div className="dropzone-container">
-            {isDragging ? (
-              <div
-                className={`dropzone left-dropzone ${
-                  isOverDislike ? 'active' : ''
-                }`}
-                ref={setDislikeRef}
-              >
-                <span className="dropzone-icon">✖</span>
-              </div>
-            ) : (
-              <div className="dropzone-placeholder"></div>
-            )}
-            <SortableContext
-              items={[displayedRecommendationProperty]} // Display only the active property
-              strategy={rectSortingStrategy}
-            >
-              <ul id="property-list" className="property-list">
-                {displayedRecommendationProperty ? (
-                  isDragging && nextRecommendationProperty ? (
-                    <>
-                      <MiniPropertyCard
-                        key={nextRecommendationProperty.HouseID}
-                        propertyInfo={nextRecommendationProperty}
-                        likedFn={likedProperty}
-                        dislikedFn={dislikedProperty}
-                        displayPopup={() =>
-                          displayPopup(nextRecommendationProperty)
-                        }
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <MiniPropertyCard
-                        key={displayedRecommendationProperty.HouseID}
-                        propertyInfo={displayedRecommendationProperty}
-                        likedFn={likedProperty}
-                        dislikedFn={dislikedProperty}
-                        displayPopup={() =>
-                          displayPopup(displayedRecommendationProperty)
-                        }
-                      />
-                    </>
-                  )
-                ) : (
+          <SearchBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            filters={filters}
+            setFilters={setFilters}
+          />
+          <div className="search-display">
+            <Map />
+
+            <div className='cards-container'>
+                {displaySearchProperties.length === 0 ? (
                   <li className="no-properties-message">
                     No more properties to show
                   </li>
+                ) : (
+                  
+                  displaySearchProperties.map((property) => (
+                    <MiniPropertyCard
+                      key={property.HouseID}
+                      propertyInfo={property}
+                      likedFn={likedProperty}
+                      dislikedFn={dislikedProperty}
+                      displayPopup={() => displayPopup(property)}
+                      searchMode
+                    />
+                  ))
+                  
                 )}
-              </ul>
-            </SortableContext>
-            {isDragging ? (
-              <div
-                className={`dropzone right-dropzone ${
-                  isOverLike ? 'active' : ''
-                }`}
-                ref={setLikeRef}
-              >
-                <span className="dropzone-icon">✔</span>
-              </div>
-            ) : (
-              <div className="dropzone-placeholder"></div>
-            )}
-          </div>
-          <DragOverlay>
-            {displayedRecommendationProperty !== null && (
-              <MiniPropertyCard
-                propertyInfo={displayedRecommendationProperty}
-                likedFn={likedProperty}
-                dislikedFn={dislikedProperty}
-                displayPopup={() =>
-                  displayPopup(displayedRecommendationProperty)
-                }
-              />
-            )}
-          </DragOverlay>
-        </DndContext>
-        {popupVisible && (
-          <div className="property-popup-background" onClick={closePopup}>
-            <div
-              className="property-popup"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ExpandedPropertyCard propertyInfo={selectedProperty} />
             </div>
+            {popupVisible && (
+              <div className="property-popup-background" onClick={closePopup}>
+                <div
+                  className="property-popup"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ExpandedPropertyCard propertyInfo={selectedProperty} />
+                </div>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div>
+          <DndContext
+            collisionDetection={closestCenter}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+          >
+            <div className="dropzone-container">
+              {isDragging ? (
+                <div
+                  className={`dropzone left-dropzone ${
+                    isOverDislike ? 'active' : ''
+                  }`}
+                  ref={setDislikeRef}
+                >
+                  <span className="dropzone-icon">✖</span>
+                </div>
+              ) : (
+                <div className="dropzone-placeholder"></div>
+              )}
+              <SortableContext
+                items={[displayedRecommendationProperty]} // Display only the active property
+                strategy={rectSortingStrategy}
+              >
+                <ul id="property-list" className="property-list">
+                  {displayedRecommendationProperty ? (
+                    isDragging && nextRecommendationProperty ? (
+                      <>
+                        <MiniPropertyCard
+                          key={nextRecommendationProperty.HouseID}
+                          propertyInfo={nextRecommendationProperty}
+                          likedFn={likedProperty}
+                          dislikedFn={dislikedProperty}
+                          displayPopup={() =>
+                            displayPopup(nextRecommendationProperty)
+                          }
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <MiniPropertyCard
+                          key={displayedRecommendationProperty.HouseID}
+                          propertyInfo={displayedRecommendationProperty}
+                          likedFn={likedProperty}
+                          dislikedFn={dislikedProperty}
+                          displayPopup={() =>
+                            displayPopup(displayedRecommendationProperty)
+                          }
+                        />
+                      </>
+                    )
+                  ) : (
+                    <li className="no-properties-message">
+                      No more properties to show
+                    </li>
+                  )}
+                </ul>
+              </SortableContext>
+              {isDragging ? (
+                <div
+                  className={`dropzone right-dropzone ${
+                    isOverLike ? 'active' : ''
+                  }`}
+                  ref={setLikeRef}
+                >
+                  <span className="dropzone-icon">✔</span>
+                </div>
+              ) : (
+                <div className="dropzone-placeholder"></div>
+              )}
+            </div>
+            <DragOverlay>
+              {displayedRecommendationProperty !== null && (
+                <MiniPropertyCard
+                  propertyInfo={displayedRecommendationProperty}
+                  likedFn={likedProperty}
+                  dislikedFn={dislikedProperty}
+                  displayPopup={() =>
+                    displayPopup(displayedRecommendationProperty)
+                  }
+                />
+              )}
+            </DragOverlay>
+          </DndContext>
+          {popupVisible && (
+            <div className="property-popup-background" onClick={closePopup}>
+              <div
+                className="property-popup"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ExpandedPropertyCard propertyInfo={selectedProperty} />
+              </div>
+            </div>
+          )}
+        </div>
       )}
 
       <Snackbar
