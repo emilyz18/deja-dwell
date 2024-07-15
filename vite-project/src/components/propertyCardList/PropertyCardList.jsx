@@ -34,7 +34,6 @@ function PropertyCardList({ searchMode }) {
     ? useSelector((state) => state.properties.unmatchProperties)
     : useSelector((state) => state.properties.preferProperties)
 
-  const [activeIndex, setActiveIndex] = useState(0)
 
   const [activeId, setActiveId] = useState(null)
   const [popupVisible, setPopupVisible] = useState(false)
@@ -96,16 +95,12 @@ function PropertyCardList({ searchMode }) {
         MatchStatus: 'Applied',
       })
     ).then(() => {
-      //dispatch(getMatchesAsync())
       reloadProperties()
       setNotification({
         open: true,
         message: `Liked property: ${likedProperty.Title}`,
         severity: 'success',
       })
-      if (!searchMode) {
-        setActiveIndex(activeIndex + 1) // move on to next property
-      }
     })
   }
 
@@ -122,16 +117,12 @@ function PropertyCardList({ searchMode }) {
         MatchStatus: 'Disliked',
       })
     ).then(() => {
-      //dispatch(getMatchesAsync())
       reloadProperties()
       setNotification({
         open: true,
         message: `Disliked property: ${dislikedProperty.Title}`,
         severity: 'error',
       })
-      if (!searchMode) {
-        setActiveIndex(activeIndex + 1) // move on to next property
-      }
     })
   }
 
@@ -231,8 +222,13 @@ function PropertyCardList({ searchMode }) {
     )
   })
 
-  const displayedRecommendationProperty = properties[activeIndex]
-  const displaySearchProperties = filteredProperties
+  const displayedRecommendationProperty = properties[0] // property length decreases with each like/dislike
+  var nextRecommendationProperty = properties[1]
+
+  if (properties.length == 1) {
+    nextRecommendationProperty = properties[0]
+  }
+
   const handleNotificationClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
@@ -242,19 +238,18 @@ function PropertyCardList({ searchMode }) {
 
   return (
     <>
-      {searchMode ? (
-        <div>
-          <SearchBar
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            filters={filters}
-            setFilters={setFilters}
-          />
-
+      <div>
+        <DndContext
+          collisionDetection={closestCenter}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+        >
           <div className="dropzone-container">
             {isDragging ? (
               <div
-                className={`dropzone left-dropzone ${isOverDislike ? 'active' : ''}`}
+                className={`dropzone left-dropzone ${
+                  isOverDislike ? 'active' : ''
+                }`}
                 ref={setDislikeRef}
               >
                 <span className="dropzone-icon">✖</span>
@@ -262,33 +257,49 @@ function PropertyCardList({ searchMode }) {
             ) : (
               <div className="dropzone-placeholder"></div>
             )}
-            <ul id="property-list" className="property-list">
-              {displaySearchProperties.length === 0 ? (
-                <li className="no-properties-message">
-                  No more properties to show
-                </li>
-              ) : (
-                displaySearchProperties.map((property) =>
-                  property.HouseID === activeId ? (
-                    <div
-                      key={property.HouseID}
-                      className="placeholder-card"
-                    ></div>
+            <SortableContext
+              items={[displayedRecommendationProperty]} // Display only the active property
+              strategy={rectSortingStrategy}
+            >
+              <ul id="property-list" className="property-list">
+                {displayedRecommendationProperty ? (
+                  isDragging && nextRecommendationProperty ? (
+                    <>
+                      <MiniPropertyCard
+                        key={nextRecommendationProperty.HouseID}
+                        propertyInfo={nextRecommendationProperty}
+                        likedFn={likedProperty}
+                        dislikedFn={dislikedProperty}
+                        displayPopup={() =>
+                          displayPopup(nextRecommendationProperty)
+                        }
+                      />
+                    </>
                   ) : (
-                    <MiniPropertyCard
-                      key={property.HouseID}
-                      propertyInfo={property}
-                      likedFn={likedProperty}
-                      dislikedFn={dislikedProperty}
-                      displayPopup={() => displayPopup(property)}
-                    />
+                    <>
+                      <MiniPropertyCard
+                        key={displayedRecommendationProperty.HouseID}
+                        propertyInfo={displayedRecommendationProperty}
+                        likedFn={likedProperty}
+                        dislikedFn={dislikedProperty}
+                        displayPopup={() =>
+                          displayPopup(displayedRecommendationProperty)
+                        }
+                      />
+                    </>
                   )
-                )
-              )}
-            </ul>
+                ) :  (
+                  <li className="no-properties-message">
+                    No more properties to show
+                  </li>
+                )}
+              </ul>
+            </SortableContext>
             {isDragging ? (
               <div
-                className={`dropzone right-dropzone ${isOverLike ? 'active' : ''}`}
+                className={`dropzone right-dropzone ${
+                  isOverLike ? 'active' : ''
+                }`}
                 ref={setLikeRef}
               >
                 <span className="dropzone-icon">✔</span>
@@ -297,105 +308,28 @@ function PropertyCardList({ searchMode }) {
               <div className="dropzone-placeholder"></div>
             )}
           </div>
-          {activeId ? (
-            <MiniPropertyCard
-              propertyInfo={properties.find(
-                (property) => property.HouseID === activeId
-              )}
-              likedFn={likedProperty}
-              dislikedFn={dislikedProperty}
-              displayPopup={() =>
-                displayPopup(
-                  properties.find((property) => property.HouseID === activeId)
-                )
-              }
-            />
-          ) : null}
-          {popupVisible && (
-            <div className="property-popup-background" onClick={closePopup}>
-              <div
-                className="property-popup"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ExpandedPropertyCard propertyInfo={selectedProperty} />
-              </div>
+          <DragOverlay>
+            {displayedRecommendationProperty !== null && (
+              <MiniPropertyCard
+                propertyInfo={displayedRecommendationProperty}
+                likedFn={likedProperty}
+                dislikedFn={dislikedProperty}
+                displayPopup={() => displayPopup(displayedRecommendationProperty)}
+              />
+            )}
+          </DragOverlay>
+        </DndContext>
+        {popupVisible && (
+          <div className="property-popup-background" onClick={closePopup}>
+            <div
+              className="property-popup"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ExpandedPropertyCard propertyInfo={selectedProperty} />
             </div>
-          )}
-        </div>
-      ) : (
-        <div>
-          <DndContext
-            collisionDetection={closestCenter}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-          >
-            <div className="dropzone-container">
-              {isDragging ? (
-                <div
-                  className={`dropzone left-dropzone ${isOverDislike ? 'active' : ''}`}
-                  ref={setDislikeRef}
-                >
-                  <span className="dropzone-icon">✖</span>
-                </div>
-              ) : (
-                <div className="dropzone-placeholder"></div>
-              )}
-              <SortableContext
-                items={[displayedRecommendationProperty]} // Display only the active property
-                strategy={rectSortingStrategy}
-              >
-                <ul id="property-list" className="property-list">
-                  {displayedRecommendationProperty ? (
-                    <MiniPropertyCard
-                      key={displayedRecommendationProperty.HouseID}
-                      propertyInfo={displayedRecommendationProperty}
-                      likedFn={likedProperty}
-                      dislikedFn={dislikedProperty}
-                      displayPopup={() =>
-                        displayPopup(displayedRecommendationProperty)
-                      }
-                    />
-                  ) : (
-                    <li className="no-properties-message">
-                      No more properties to show
-                    </li>
-                  )}
-                </ul>
-              </SortableContext>
-              {isDragging ? (
-                <div
-                  className={`dropzone right-dropzone ${isOverLike ? 'active' : ''}`}
-                  ref={setLikeRef}
-                >
-                  <span className="dropzone-icon">✔</span>
-                </div>
-              ) : (
-                <div className="dropzone-placeholder"></div>
-              )}
-            </div>
-            <DragOverlay>
-              {activeIndex !== null && (
-                <MiniPropertyCard
-                  propertyInfo={properties[activeIndex]}
-                  likedFn={likedProperty}
-                  dislikedFn={dislikedProperty}
-                  displayPopup={() => displayPopup(properties[activeIndex])}
-                />
-              )}
-            </DragOverlay>
-          </DndContext>
-          {popupVisible && (
-            <div className="property-popup-background" onClick={closePopup}>
-              <div
-                className="property-popup"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ExpandedPropertyCard propertyInfo={selectedProperty} />
-              </div>
-            </div>
-          )}
-        </div>
-      )}
+          </div>
+        )}
+      </div>
 
       <Snackbar
         open={notification.open}
@@ -410,96 +344,6 @@ function PropertyCardList({ searchMode }) {
           {notification.message}
         </Alert>
       </Snackbar>
-      {/* {searchMode && (
-        <>
-          <SearchBar
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            filters={filters}
-            setFilters={setFilters}
-          />{' '}
-        </>
-      )}
-      <DndContext
-        collisionDetection={closestCenter}
-        onDragStart={handleDragStart}
-        onDragEnd={handleDragEnd}
-      >
-        <div className="dropzone-container">
-          {isDragging ? (
-            <div
-              className={`dropzone left-dropzone ${isOverDislike ? 'active' : ''}`}
-              ref={setDislikeRef}
-            >
-              <span className="dropzone-icon">✖</span>
-            </div>
-          ) : (
-            <div className="dropzone-placeholder"></div>
-          )}
-          <SortableContext
-            items={displayedProperties}
-            strategy={rectSortingStrategy}
-          >
-            <ul id="property-list" className="property-list">
-              {displayedProperties.length === 0 ? (
-                <li className="no-properties-message">
-                  No more properties to show
-                </li>
-              ) : (
-                displayedProperties.map((property) =>
-                  property.HouseID === activeId ? (
-                    <div
-                      key={property.HouseID}
-                      className="placeholder-card"
-                    ></div>
-                  ) : (
-                    <MiniPropertyCard
-                      key={property.HouseID}
-                      propertyInfo={property}
-                      likedFn={likedProperty}
-                      dislikedFn={dislikedProperty}
-                      displayPopup={() => displayPopup(property)}
-                    />
-                  )
-                )
-              )}
-            </ul>
-          </SortableContext>
-          {isDragging ? (
-            <div
-              className={`dropzone right-dropzone ${isOverLike ? 'active' : ''}`}
-              ref={setLikeRef}
-            >
-              <span className="dropzone-icon">✔</span>
-            </div>
-          ) : (
-            <div className="dropzone-placeholder"></div>
-          )}
-        </div>
-        <DragOverlay>
-          {activeId ? (
-            <MiniPropertyCard
-              propertyInfo={properties.find(
-                (property) => property.HouseID === activeId
-              )}
-              likedFn={likedProperty}
-              dislikedFn={dislikedProperty}
-              displayPopup={() =>
-                displayPopup(
-                  properties.find((property) => property.HouseID === activeId)
-                )
-              }
-            />
-          ) : null}
-        </DragOverlay>
-      </DndContext>
-      {popupVisible && (
-        <div className="property-popup-background" onClick={closePopup}>
-          <div className="property-popup" onClick={(e) => e.stopPropagation()}>
-            <ExpandedPropertyCard propertyInfo={selectedProperty} />
-          </div>
-        </div>
-      )} */}
     </>
   )
 }
