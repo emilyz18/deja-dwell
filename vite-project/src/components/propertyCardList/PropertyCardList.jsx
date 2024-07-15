@@ -11,7 +11,10 @@ import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './PropertyCardList.css'
 import SearchBar from '../searchBar/SearchBar.jsx'
-import { getPreferPropertiesAsync, getUnmatchedPropertiesAsync } from '../../redux/properties/thunks'
+import {
+  getPreferPropertiesAsync,
+  getUnmatchedPropertiesAsync,
+} from '../../redux/properties/thunks'
 import { createMatchAsync } from '../../redux/matches/matchThunks'
 import { Alert, Snackbar } from '@mui/material'
 import { v4 as uuidv4 } from 'uuid'
@@ -27,7 +30,11 @@ function PropertyCardList({ searchMode }) {
     (state) => state.properties.getPreferProperties
   )
 
-  const properties = searchMode ? useSelector((state) => state.properties.unmatchProperties) : useSelector((state) => state.properties.preferProperties);
+  const properties = searchMode
+    ? useSelector((state) => state.properties.unmatchProperties)
+    : useSelector((state) => state.properties.preferProperties)
+
+  const [activeIndex, setActiveIndex] = useState(0)
 
   const [activeId, setActiveId] = useState(null)
   const [popupVisible, setPopupVisible] = useState(false)
@@ -56,14 +63,22 @@ function PropertyCardList({ searchMode }) {
     allowWeed: false,
     furnished: false,
     ac: false,
-    heater: false
+    heater: false,
   })
 
   useEffect(() => {
-    if (getPreferPropertiesStatus === 'IDLE' || getUnMatchedPropertiesStatus === 'IDLE') {
-      reloadProperties();
+    if (
+      getPreferPropertiesStatus === 'IDLE' ||
+      getUnMatchedPropertiesStatus === 'IDLE'
+    ) {
+      reloadProperties()
     }
-  }, [getUnMatchedPropertiesStatus, getPreferPropertiesStatus, searchMode, dispatch])
+  }, [
+    getUnMatchedPropertiesStatus,
+    getPreferPropertiesStatus,
+    searchMode,
+    dispatch,
+  ])
 
   const reloadProperties = () => {
     dispatch(getUnmatchedPropertiesAsync(user.TenantID))
@@ -82,12 +97,13 @@ function PropertyCardList({ searchMode }) {
       })
     ).then(() => {
       //dispatch(getMatchesAsync())
-      reloadProperties();
+      reloadProperties()
       setNotification({
         open: true,
         message: `Liked property: ${likedProperty.Title}`,
         severity: 'success',
       })
+      setActiveId(activeIndex + 1) // move on to next property
     })
   }
 
@@ -105,12 +121,13 @@ function PropertyCardList({ searchMode }) {
       })
     ).then(() => {
       //dispatch(getMatchesAsync())
-      reloadProperties();
+      reloadProperties()
       setNotification({
         open: true,
         message: `Disliked property: ${dislikedProperty.Title}`,
         severity: 'error',
       })
+      setActiveId(activeIndex + 1) // move on to next property
     })
   }
 
@@ -170,7 +187,7 @@ function PropertyCardList({ searchMode }) {
     const matchesCity =
       filters.city === '' ||
       property.City.toLowerCase() === filters.city.toLowerCase()
-      
+
     const matchesStartDate =
       filters.startDate === '' || property.StartDate === filters.startDate
     const matchesEndDate =
@@ -191,8 +208,6 @@ function PropertyCardList({ searchMode }) {
     const hasAC = !filters.ac || property.isAC
     const hasHeater = !filters.heater || property.isHeater
 
-
-
     return (
       matchesSearchTerm &&
       matchesMaxPrice &&
@@ -212,9 +227,7 @@ function PropertyCardList({ searchMode }) {
     )
   })
 
-  const displayedProperties = searchMode ? filteredProperties : properties
-  console.log('displayedProperties');
-  console.log(displayedProperties);
+  const displayedRecommendationProperty = properties[activeIndex]
 
   const handleNotificationClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -223,9 +236,108 @@ function PropertyCardList({ searchMode }) {
     setNotification({ ...notification, open: false })
   }
 
+  // const displayedProperty = filteredProperties[activeIndex] || null;
+
   return (
     <>
-      {searchMode && (
+      {searchMode ? (
+        <div>
+          <SearchBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            filters={filters}
+            setFilters={setFilters}
+          />
+        </div>
+      ) : (
+        <div>
+          <DndContext
+            collisionDetection={closestCenter}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+          >
+            <div className="dropzone-container">
+              {isDragging ? (
+                <div
+                  className={`dropzone left-dropzone ${isOverDislike ? 'active' : ''}`}
+                  ref={setDislikeRef}
+                >
+                  <span className="dropzone-icon">✖</span>
+                </div>
+              ) : (
+                <div className="dropzone-placeholder"></div>
+              )}
+              <SortableContext
+                items={[displayedRecommendationProperty]} // Display only the active property
+                strategy={rectSortingStrategy}
+              >
+                <ul id="property-list" className="property-list">
+                  {displayedRecommendationProperty ? (
+                    <MiniPropertyCard
+                      key={displayedRecommendationProperty.HouseID}
+                      propertyInfo={displayedRecommendationProperty}
+                      likedFn={likedProperty}
+                      dislikedFn={dislikedProperty}
+                      displayPopup={() =>
+                        displayPopup(displayedRecommendationProperty)
+                      }
+                    />
+                  ) : (
+                    <li className="no-properties-message">
+                      No more properties to show
+                    </li>
+                  )}
+                </ul>
+              </SortableContext>
+              {isDragging ? (
+                <div
+                  className={`dropzone right-dropzone ${isOverLike ? 'active' : ''}`}
+                  ref={setLikeRef}
+                >
+                  <span className="dropzone-icon">✔</span>
+                </div>
+              ) : (
+                <div className="dropzone-placeholder"></div>
+              )}
+            </div>
+            <DragOverlay>
+              {activeIndex !== null && (
+                <MiniPropertyCard
+                  propertyInfo={properties[activeIndex]}
+                  likedFn={likedProperty}
+                  dislikedFn={dislikedProperty}
+                  displayPopup={() => displayPopup(properties[activeIndex])}
+                />
+              )}
+            </DragOverlay>
+          </DndContext>
+          {popupVisible && (
+            <div className="property-popup-background" onClick={closePopup}>
+              <div
+                className="property-popup"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ExpandedPropertyCard propertyInfo={selectedProperty} />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      <Snackbar
+        open={notification.open}
+        autoHideDuration={3000}
+        onClose={handleNotificationClose}
+      >
+        <Alert
+          onClose={handleNotificationClose}
+          severity={notification.severity}
+          sx={{ width: '100%' }}
+        >
+          {notification.message}
+        </Alert>
+      </Snackbar>
+      {/* {searchMode && (
         <>
           <SearchBar
             searchTerm={searchTerm}
@@ -327,7 +439,7 @@ function PropertyCardList({ searchMode }) {
         >
           {notification.message}
         </Alert>
-      </Snackbar>
+      </Snackbar> */}
     </>
   )
 }
