@@ -34,8 +34,7 @@ function PropertyCardList({ searchMode }) {
     ? useSelector((state) => state.properties.unmatchProperties)
     : useSelector((state) => state.properties.preferProperties)
 
-
-  const [activeId, setActiveId] = useState(null)
+  const [activeId, setActiveId] = useState(null) // activeId only used when dragging
   const [popupVisible, setPopupVisible] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
   const [isDragging, setIsDragging] = useState(false)
@@ -222,6 +221,8 @@ function PropertyCardList({ searchMode }) {
     )
   })
 
+  const displaySearchProperties = filteredProperties
+
   const displayedRecommendationProperty = properties[0] // property length decreases with each like/dislike
   var nextRecommendationProperty = properties[1]
 
@@ -238,7 +239,47 @@ function PropertyCardList({ searchMode }) {
 
   return (
     <>
-      <div>
+      {searchMode ? (
+         <div>
+         <SearchBar
+           searchTerm={searchTerm}
+           setSearchTerm={setSearchTerm}
+           filters={filters}
+           setFilters={setFilters}
+         />
+
+         <div className="dropzone-container">
+           <ul id="property-list" className="property-list">
+             {displaySearchProperties.length === 0 ? (
+               <li className="no-properties-message">
+                 No more properties to show
+               </li>
+             ) : (
+               displaySearchProperties.map((property) =>
+                   <MiniPropertyCard
+                     key={property.HouseID}
+                     propertyInfo={property}
+                     likedFn={likedProperty}
+                     dislikedFn={dislikedProperty}
+                     displayPopup={() => displayPopup(property)}
+                   />
+               )
+             )}
+           </ul>
+         </div>
+         {popupVisible && (
+           <div className="property-popup-background" onClick={closePopup}>
+             <div
+               className="property-popup"
+               onClick={(e) => e.stopPropagation()}
+             >
+               <ExpandedPropertyCard propertyInfo={selectedProperty} />
+             </div>
+           </div>
+         )}
+       </div>
+      ) : (
+        <div>
         <DndContext
           collisionDetection={closestCenter}
           onDragStart={handleDragStart}
@@ -288,7 +329,7 @@ function PropertyCardList({ searchMode }) {
                       />
                     </>
                   )
-                ) :  (
+                ) : (
                   <li className="no-properties-message">
                     No more properties to show
                   </li>
@@ -314,7 +355,9 @@ function PropertyCardList({ searchMode }) {
                 propertyInfo={displayedRecommendationProperty}
                 likedFn={likedProperty}
                 dislikedFn={dislikedProperty}
-                displayPopup={() => displayPopup(displayedRecommendationProperty)}
+                displayPopup={() =>
+                  displayPopup(displayedRecommendationProperty)
+                }
               />
             )}
           </DragOverlay>
@@ -330,6 +373,7 @@ function PropertyCardList({ searchMode }) {
           </div>
         )}
       </div>
+      )}
 
       <Snackbar
         open={notification.open}
