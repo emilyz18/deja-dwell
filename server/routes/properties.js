@@ -127,7 +127,7 @@ const getScore = (property, preference) => {
             if(property.ExpectedPrice <= preference.MaxPrice) {
                 score += weights.underMaxPriceW;
                 //Each 1% decrease in price will increase 1 point
-                let diffPercent = (preference.MaxPrice - property.ExpectedPrice) / preference.MaxPrice;
+                let diffPercent = 100 * (preference.MaxPrice - property.ExpectedPrice) / preference.MaxPrice;
                 score += diffPercent;
             } else {
                 score -= weights.underMaxPriceW;
