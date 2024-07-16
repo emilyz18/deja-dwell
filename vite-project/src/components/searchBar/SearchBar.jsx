@@ -1,24 +1,56 @@
-import React, { useState } from 'react';
-import Filters from './Filters';
-import './SearchBar.css';
+import React, { useState } from 'react'
+import Filters from './Filters'
+import './SearchBar.css'
+import Button from '@mui/material/Button'
+import { ThemeProvider } from '@mui/material/styles'
+import { theme } from '../themes.jsx'
 
 const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
-  const [filtersVisible, setFiltersVisible] = useState(false);
+  const [filtersVisible, setFiltersVisible] = useState(false)
+  const [searchQuery, setSearchQuery] = useState(searchTerm)
+  const [tempFilters, setTempFilters] = useState(filters) // Temporary state for filters
 
   const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+    setSearchQuery(e.target.value)
+  }
 
-  const handleFilterChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFilters({
-      ...filters,
-      [name]: type === 'checkbox' ? checked : value
-    });
-  };
+  const handleTempFilterChange = (e) => {
+    const { name, value, type, checked } = e.target
+    setTempFilters({
+      ...tempFilters,
+      [name]: type === 'checkbox' ? checked : value,
+    })
+  }
 
   const toggleFilters = () => {
-    setFiltersVisible(!filtersVisible);
+    setFiltersVisible(!filtersVisible)
+  }
+
+  const performSearch = () => {
+    setSearchTerm(searchQuery)
+  }
+
+  const applyFilters = () => {
+    setFilters(tempFilters) // Apply temporary filters to the main filters state
+  }
+
+  const clearFilters = () => {
+    setTempFilters({
+      maxPrice: '',
+      province: '',
+      city: '',
+      startDate: '',
+      endDate: '',
+      bedroomNum: '',
+      bathroomNum: '',
+      allowPet: false,
+      allowSmoke: false,
+      allowParty: false,
+      allowWeed: false,
+      furnished: false,
+      ac: false,
+      heater: false
+    });
   };
 
   return (
@@ -26,20 +58,29 @@ const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
       <div className="search-input">
         <input
           type="text"
-          value={searchTerm}
+          value={searchQuery}
           onChange={handleSearchChange}
           placeholder="Search..."
         />
-        <button onClick={toggleFilters}>Filters</button>
+        <ThemeProvider theme={theme}>
+          <Button color="jet" variant="contained" onClick={performSearch}>
+            Search
+          </Button>
+          <Button color="jet" variant="contained" onClick={toggleFilters}>
+            Filters
+          </Button>
+        </ThemeProvider>
       </div>
       {filtersVisible && (
         <Filters
-          filters={filters}
-          handleFilterChange={handleFilterChange}
+          tempFilters={tempFilters}
+          handleTempFilterChange={handleTempFilterChange}
+          applyFilters={applyFilters}
+          clearFilters={clearFilters}
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar

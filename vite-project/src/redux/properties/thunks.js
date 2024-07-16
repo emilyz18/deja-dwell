@@ -9,10 +9,31 @@ export const getPropertiesAsync = createAsyncThunk(
   }
 )
 
-export const addPropertyAsync = createAsyncThunk(
-  actionTypes.ADD_PROPERTIES,
+export const getUnmatchedPropertiesAsync = createAsyncThunk(
+  actionTypes.GET_UNMATCHED_PROPERTIES,
+  async (tenantID) => {
+    return await propertiesService.getUnMatchedProperties(tenantID)
+  }
+)
+
+export const getPreferPropertiesAsync = createAsyncThunk(
+  actionTypes.GET_PREFER_PROPERTIES,
+  async (tenantID) => {
+    return await propertiesService.getPreferProperties(tenantID)
+  }
+)
+
+export const getPropertyByIdAsync = createAsyncThunk(
+  actionTypes.GET_PROPERTY_BYID,
+  async (propertyId) => {
+    return await propertiesService.getPropertyById(propertyId)
+  }
+)
+
+export const createPropertyAsync = createAsyncThunk(
+  actionTypes.CREATE_PROPERTY,
   async (property) => {
-    return await propertiesService.addProperty(property)
+    return await propertiesService.createProperty(property)
   }
 )
 

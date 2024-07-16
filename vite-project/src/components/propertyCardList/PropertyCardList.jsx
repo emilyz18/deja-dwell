@@ -1,30 +1,36 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
+  closestCenter,
   DndContext,
   DragOverlay,
-  closestCenter,
   useDroppable,
 } from '@dnd-kit/core'
-import { SortableContext, rectSortingStrategy } from '@dnd-kit/sortable'
+import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable'
 import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './PropertyCardList.css'
 import SearchBar from '../searchBar/SearchBar.jsx'
-import { getPropertiesAsync } from '../../redux/properties/thunks'
+import { getPreferPropertiesAsync, getUnmatchedPropertiesAsync } from '../../redux/properties/thunks'
 import { createMatchAsync } from '../../redux/matches/matchThunks'
-import { Snackbar, Alert } from '@mui/material'
+import { Alert, Snackbar } from '@mui/material'
 import { v4 as uuidv4 } from 'uuid'
 
-function PropertyCardList() {
+function PropertyCardList({ searchMode }) {
   const dispatch = useDispatch()
-  const properties = useSelector((state) => state.properties.list)
-  const getPropertiesStatus = useSelector(
-    (state) => state.properties.getProperties
-  )
   const user = useSelector((state) => state.user.user)
+
+  const getUnMatchedPropertiesStatus = useSelector(
+    (state) => state.properties.getUnmatchedProperties
+  )
+  const getPreferPropertiesStatus = useSelector(
+    (state) => state.properties.getPreferProperties
+  )
+
+  const properties = searchMode ? useSelector((state) => state.properties.unmatchProperties) : useSelector((state) => state.properties.preferProperties);
+
   const [activeId, setActiveId] = useState(null)
-  const [popupPVisible, setPopupPVisible] = useState(false)
+  const [popupVisible, setPopupVisible] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
   const [isDragging, setIsDragging] = useState(false)
   const [notification, setNotification] = useState({
@@ -41,19 +47,28 @@ function PropertyCardList() {
     city: '',
     duration: '',
     startDate: '',
-    roomType: '',
+    endDate: '',
+    bedroomNum: '',
+    bathroomNum: '',
     allowPet: false,
     allowSmoke: false,
     allowParty: false,
     allowWeed: false,
+    furnished: false,
+    ac: false,
+    heater: false
   })
-  
+
   useEffect(() => {
-    if (getPropertiesStatus === 'IDLE') {
-      dispatch(getPropertiesAsync())
+    if (getPreferPropertiesStatus === 'IDLE' || getUnMatchedPropertiesStatus === 'IDLE') {
+      reloadProperties();
     }
-  }, [getPropertiesStatus, dispatch])
-  // }, [getPropertiesStatus, properties, dispatch]) // TODO RESOLVE
+  }, [getUnMatchedPropertiesStatus, getPreferPropertiesStatus, searchMode, dispatch])
+
+  const reloadProperties = () => {
+    dispatch(getUnmatchedPropertiesAsync(user.TenantID))
+    dispatch(getPreferPropertiesAsync(user.TenantID))
+  }
 
   const likedProperty = (id) => {
     const likedProperty = properties.find((property) => property.HouseID === id)
@@ -65,13 +80,15 @@ function PropertyCardList() {
         HouseID: likedProperty.HouseID,
         MatchStatus: 'Applied',
       })
-    )
-    setNotification({
-      open: true,
-      message: `Liked property: ${likedProperty.Title}`,
-      severity: 'success',
+    ).then(() => {
+      //dispatch(getMatchesAsync())
+      reloadProperties();
+      setNotification({
+        open: true,
+        message: `Liked property: ${likedProperty.Title}`,
+        severity: 'success',
+      })
     })
-    dispatch({ type: 'properties/removeProperty', payload: id })
   }
 
   const dislikedProperty = (id) => {
@@ -86,22 +103,24 @@ function PropertyCardList() {
         HouseID: dislikedProperty.HouseID,
         MatchStatus: 'Disliked',
       })
-    )
-    setNotification({
-      open: true,
-      message: `Disliked property: ${dislikedProperty.Title}`,
-      severity: 'info',
+    ).then(() => {
+      //dispatch(getMatchesAsync())
+      reloadProperties();
+      setNotification({
+        open: true,
+        message: `Disliked property: ${dislikedProperty.Title}`,
+        severity: 'error',
+      })
     })
-    dispatch({ type: 'properties/removeProperty', payload: id })
   }
 
   const displayPopup = (property) => {
     setSelectedProperty(property)
-    setPopupPVisible(true)
+    setPopupVisible(true)
   }
 
   const closePopup = () => {
-    setPopupPVisible(false)
+    setPopupVisible(false)
     setSelectedProperty(null)
   }
 
@@ -151,18 +170,28 @@ function PropertyCardList() {
     const matchesCity =
       filters.city === '' ||
       property.City.toLowerCase() === filters.city.toLowerCase()
+      
     const matchesStartDate =
       filters.startDate === '' || property.StartDate === filters.startDate
-    const matchesDuration =
-      filters.duration === '' ||
-      property.Duration.toLowerCase() === filters.duration.toLowerCase()
-    const matchesRoomType =
-      filters.roomType === '' ||
-      property.RoomType.toLowerCase() === filters.roomType.toLowerCase()
+    const matchesEndDate =
+      filters.endDate === '' || property.EndDate === filters.endDate
+    const matchesBedroomNum =
+      filters.bedroomNum === '' ||
+      property.NumBedroom === parseFloat(filters.bedroomNum)
+    const matchesBathroomNum =
+      filters.bathroomNum === '' ||
+      property.NumBathroom === parseFloat(filters.bathroomNum)
+
     const matchesAllowPet = !filters.allowPet || property.AllowPet
     const matchesAllowSmoke = !filters.allowSmoke || property.AllowSmoke
     const matchesAllowParty = !filters.allowParty || property.AllowParty
     const matchesAllowWeed = !filters.allowWeed || property.AllowWeed
+
+    const isFurnished = !filters.furnished || property.isFurnished
+    const hasAC = !filters.ac || property.isAC
+    const hasHeater = !filters.heater || property.isHeater
+
+
 
     return (
       matchesSearchTerm &&
@@ -170,20 +199,23 @@ function PropertyCardList() {
       matchesProvince &&
       matchesCity &&
       matchesStartDate &&
-      matchesDuration &&
-      matchesRoomType &&
+      matchesEndDate &&
+      matchesBedroomNum &&
+      matchesBathroomNum &&
       matchesAllowPet &&
       matchesAllowSmoke &&
       matchesAllowParty &&
-      matchesAllowWeed
+      matchesAllowWeed &&
+      isFurnished &&
+      hasAC &&
+      hasHeater
     )
   })
 
-  // The code below was written with the help of ChatGPT 3.5 on Jun 8th
-  // Prompt: Give me some examples of dragging and dropping using the dnd kit. Then, use the
-  // dnd toolkit to incorporate drag and drop functionality on the miniProperty card + "this file".
-  // The generated code was adapted: I added place holders for dropzones and cards to be
-  // conditionally displayed. I also wrote css myself tp suit my own needs
+  const displayedProperties = searchMode ? filteredProperties : properties
+  console.log('displayedProperties');
+  console.log(displayedProperties);
+
   const handleNotificationClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
@@ -193,12 +225,16 @@ function PropertyCardList() {
 
   return (
     <>
-      <SearchBar
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        filters={filters}
-        setFilters={setFilters}
-      />{' '}
+      {searchMode && (
+        <>
+          <SearchBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            filters={filters}
+            setFilters={setFilters}
+          />{' '}
+        </>
+      )}
       <DndContext
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}
@@ -216,24 +252,30 @@ function PropertyCardList() {
             <div className="dropzone-placeholder"></div>
           )}
           <SortableContext
-            items={filteredProperties}
+            items={displayedProperties}
             strategy={rectSortingStrategy}
           >
             <ul id="property-list" className="property-list">
-              {filteredProperties.map((property) =>
-                property.houseID === activeId ? (
-                  <div
-                    key={property.houseID}
-                    className="placeholder-card"
-                  ></div>
-                ) : (
-                  <MiniPropertyCard
-                    key={property.HouseID}
-                    propertyInfo={property}
-                    likedFn={likedProperty}
-                    dislikedFn={dislikedProperty}
-                    displayPopup={() => displayPopup(property)}
-                  />
+              {displayedProperties.length === 0 ? (
+                <li className="no-properties-message">
+                  No more properties to show
+                </li>
+              ) : (
+                displayedProperties.map((property) =>
+                  property.HouseID === activeId ? (
+                    <div
+                      key={property.HouseID}
+                      className="placeholder-card"
+                    ></div>
+                  ) : (
+                    <MiniPropertyCard
+                      key={property.HouseID}
+                      propertyInfo={property}
+                      likedFn={likedProperty}
+                      dislikedFn={dislikedProperty}
+                      displayPopup={() => displayPopup(property)}
+                    />
+                  )
                 )
               )}
             </ul>
@@ -266,7 +308,7 @@ function PropertyCardList() {
           ) : null}
         </DragOverlay>
       </DndContext>
-      {popupPVisible && (
+      {popupVisible && (
         <div className="property-popup-background" onClick={closePopup}>
           <div className="property-popup" onClick={(e) => e.stopPropagation()}>
             <ExpandedPropertyCard propertyInfo={selectedProperty} />

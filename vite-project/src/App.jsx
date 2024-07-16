@@ -9,7 +9,9 @@ import PropertyCardList from './components/propertyCardList/PropertyCardList'
 import { LandLordSideBar } from './components/sideBars/LandLordSideBar'
 import { TenantSideBar } from './components/sideBars/TenantSideBar'
 import { TenantInputForm } from './InputForms/TenantInputForm.jsx'
+import { PropertyInputForm } from './InputForms/propertyInputForm.jsx'
 import { GeneralInputForm } from './InputForms/generalInputForm'
+import History from './components/history/History'
 
 import { getUserAsync } from './redux/user/thunks'
 
@@ -45,31 +47,13 @@ function App() {
     }
   }, [location.pathname])
 
-  function handleSwitchAcc() {
-    if (accountType === LANDLORD) {
-      setAccountType(TENANT)
-      navigate('/tenantAccount/matches')
-    } else {
-      setAccountType(LANDLORD)
-      navigate('/landlordAccount/applicants')
-    }
-  }
-
   return (
     <div className="root">
       <div id="main-sidebar-container">
         {accountType === LANDLORD ? (
-          <LandLordSideBar
-            accountType={accountType}
-            profile={user}
-            onSwitchAcc={handleSwitchAcc}
-          />
+          <LandLordSideBar accountType={accountType} profile={user} />
         ) : (
-          <TenantSideBar
-            accountType={accountType}
-            profile={user}
-            onSwitchAcc={handleSwitchAcc}
-          />
+          <TenantSideBar accountType={accountType} profile={user} />
         )}
       </div>
       <div className="main-content">
@@ -88,13 +72,20 @@ function App() {
                 path="/landlordAccount/profile"
                 element={<GeneralInputForm />}
               />
+              <Route
+                path="/landlordAccount/property"
+                element={<PropertyInputForm/>}
+              />
             </>
           ) : (
             <>
-              <Route path="/" element={<PropertyCardList />} />
               <Route
                 path="/tenantAccount/matches"
-                element={<PropertyCardList />}
+                element={<PropertyCardList searchMode={false}/>}
+              />
+              <Route
+                path="/tenantAccount/search"
+                element={<PropertyCardList searchMode={true}/>}
               />
               <Route
                 path="/tenantAccount/profile"
@@ -103,6 +94,10 @@ function App() {
               <Route
                 path="/tenantAccount/preference"
                 element={<TenantInputForm />}
+              />
+              <Route
+                path="/tenantAccount/history"
+                element={<History tenantId={user.TenantID} />}
               />
             </>
           )}

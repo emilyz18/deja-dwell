@@ -1,20 +1,20 @@
 import { BaseSideBar } from './BaseSideBar.jsx'
+import { LANDLORD } from '../../const.jsx'
 
 const landlordLinks = [
   { path: '/landlordAccount/profile', label: 'Edit Profile' },
-  // { path: '#', label: 'Edit Preference' },
+  { path: '/landlordAccount/property', label: 'Edit Property Post' },
   { path: '/landlordAccount/applicants', label: 'View Applicants' },
 ]
 
-export function LandLordSideBar({ accountType, profile, onSwitchAcc }) {
+export function LandLordSideBar({ profile }) {
   return (
     <>
       <div>
         <BaseSideBar
-          accountType={accountType}
           navBarLinks={landlordLinks}
           profile={profile}
-          onSwitchAcc={onSwitchAcc}
+          accountType={LANDLORD}
         />
       </div>
     </>

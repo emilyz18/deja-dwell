@@ -7,8 +7,7 @@
     "Habit": "Early-bird",
     "Gender": "Non-binary",
     "Age": 30,
-    "TenantPreferenceID": "e1f3a2b4-5d6c-4a8f-9e7d-3c8b1f6e5d9a",
-    "gender": "jdnjdndnfdj"
+    "TenantPreferenceID": "e1f3a2b4-5d6c-4a8f-9e7d-3c8b1f6e5d9a"
   },
   {
     "TenantID": "d6c9f3a2-8b7e-4d3f-9a87-5b8d2a3c6f9d",
@@ -54,6 +53,17 @@
     "TenantID": "c4cc585e-e7de-4737-9356-af4ae2317112",
     "UserID": "160f80ca-0e17-4394-bfaa-c1cbf78ef314",
     "TenantPreferenceID": "40417192-b119-4b9f-9c05-025b71bd62d3",
+    "Age": null,
+    "Gender": "Male",
+    "Occupation": null,
+    "Income": null,
+    "Company": null,
+    "Habit": null
+  },
+  {
+    "TenantID": "3ff1d1ef-4354-47f1-9bba-1f01afb52b4d",
+    "UserID": "d107123a-2574-42a7-89bb-09a43e31bb1e",
+    "TenantPreferenceID": "46f4c6a2-2102-4eb6-8fbe-f338cb9a4f59",
     "Age": null,
     "Gender": null,
     "Occupation": null,

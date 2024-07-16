@@ -1,23 +1,22 @@
 .search-bar {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .search-input {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5em;
-  }
-  
-  .search-input input[type="text"] {
-    flex: 1;
-    padding: 0.5em;
-    margin-right: 0.5em;
-  }
-  
-  .search-input button {
-    padding: 0.5em;
-    margin-right: 0.5em;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.search-input input[type='text'] {
+  flex: 1;
+  padding: 0.5em;
+  margin-right: 0.5em;
+}
+
+.search-input button {
+  padding: 0.5em;
+  margin-right: 0.5em;
+}

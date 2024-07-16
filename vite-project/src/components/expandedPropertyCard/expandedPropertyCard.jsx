@@ -2,9 +2,10 @@ import Carousel from '../carousel/Carousel'
 import './expandedPropertyCard.css'
 
 export function ExpandedPropertyCard({ propertyInfo }) {
+  const { NumBedroom, NumBathroom, isAC, isHeater, isFurnished, AllowPet, AllowSmoke, AllowParty, AllowWeed, ExpectedPrice, Street, City, Province } = propertyInfo;
   return (
     <div className="expanded-property-popup">
-      <h1>{propertyInfo.title}</h1>
+      <h1>{propertyInfo.Title}</h1>
       <div className="carousel-container">
         <Carousel
           data={propertyInfo.HouseImgs}
@@ -16,9 +17,19 @@ export function ExpandedPropertyCard({ propertyInfo }) {
         Address: {propertyInfo.Street}, {propertyInfo.City},{' '}
         {propertyInfo.Province}
       </p>
-      <p>Room Type: {propertyInfo.RoomType}</p>
+      <p>Number of Bedroom: {propertyInfo.NumBedroom}</p>
+      <p>Number of Bathroom: {propertyInfo.NumBathroom}</p>
       <p>Parking Availability: {propertyInfo.NumOfParking}</p>
       <p>Description: {propertyInfo.Description}</p>
+      <div className='details-row-expand'>
+        {isAC && <span className="amenity">AC</span>}
+        {isHeater && <span className="amenity">Heater</span>}
+        {isFurnished && <span className="amenity">Furnished</span>}
+        {AllowPet && <span className="amenity">Pet Allowed</span>}
+        {AllowSmoke && <span className="amenity">Smoke Allowed</span>}
+        {AllowParty && <span className="amenity">Party Allowed</span>}
+        {AllowWeed && <span className="amenity">Weed Allowed</span>}
+      </div>
     </div>
   )
 }
