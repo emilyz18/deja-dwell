@@ -1,8 +1,10 @@
 import Carousel from '../carousel/Carousel'
 import './expandedPropertyCard.css'
+import Map from '../map/Map';
 
 export function ExpandedPropertyCard({ propertyInfo }) {
   const { NumBedroom, NumBathroom, isAC, isHeater, isFurnished, AllowPet, AllowSmoke, AllowParty, AllowWeed, ExpectedPrice, Street, City, Province } = propertyInfo;
+  const address = [{street: Street, city: City, province: Province}]
   return (
     <div className="expanded-property-popup">
       <h1>{propertyInfo.Title}</h1>
@@ -30,6 +32,7 @@ export function ExpandedPropertyCard({ propertyInfo }) {
         {AllowParty && <span className="amenity">Party Allowed</span>}
         {AllowWeed && <span className="amenity">Weed Allowed</span>}
       </div>
+      <Map propertyAddresses={address}/>
     </div>
   )
 }

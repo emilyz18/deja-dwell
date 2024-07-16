@@ -6,11 +6,11 @@
   text-align: left;
   font-family: 'Arial', sans-serif;
   overflow: auto;
-  max-height: 800px;
+  max-height: 520px;
 }
 
 .expanded-property-popup h1 {
-  font-size: 28px;
+  font-size: 23px;
   margin-bottom: 16px;
   color: #333;
 }

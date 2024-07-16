@@ -8,6 +8,7 @@ const vancouver = {
 }
 
 function Map({ propertyAddresses }) {
+    console.log(propertyAddresses)
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: 'AIzaSyBLFCLKvngrnl7PBEZczkzLJbObWvJDScM',
@@ -15,6 +16,8 @@ function Map({ propertyAddresses }) {
 
   const [markers, setMarkers] = useState([])
   const mapRef = useRef()
+  const [center, setCenter] = useState(vancouver)
+
 
   useEffect(() => {
     if (isLoaded) {
@@ -29,11 +32,12 @@ function Map({ propertyAddresses }) {
       if (!province) province = ''
 
       const address = `${street}, ${city}, ${province}`
-
       geocoder.geocode({ address }, (results, status) => {
         if (status === 'OK') {
           const position = results[0].geometry.location
           const newMarker = { lat: position.lat(), lng: position.lng() }
+          setCenter(newMarker)
+
           setMarkers((prevMarkers) => [...prevMarkers, newMarker])
         } else {
           console.log('Geocode was not successful for the following reason: ' + status)
@@ -50,7 +54,7 @@ function Map({ propertyAddresses }) {
   return isLoaded ? (
     <GoogleMap
       mapContainerClassName="map-container"
-      center={vancouver}
+      center={center}
       zoom={10}
       onLoad={onLoad}
       options={{
