@@ -131,7 +131,7 @@ const getScore = (property, preference) => {
                 score += diffPercent;
             } else {
                 score -= weights.underMaxPriceW;
-                let diffPercent = (property.ExpectedPrice - preference.MaxPrice) / preference.MaxPrice;
+                let diffPercent = 100 * (property.ExpectedPrice - preference.MaxPrice) / preference.MaxPrice;
                 score -= diffPercent;
             }
         }
