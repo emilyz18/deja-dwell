@@ -25,6 +25,21 @@ const loadMatchesJson = async () => {
     }
 };
 
+getUnmatchedProperties = async (tenantID) => {
+    const matches = await loadMatchesJson();
+    const properties = await loadPropertiesJson();
+
+    const acceptedMatches = matches.filter(match => match.MatchStatus === 'Accepted');
+    const acceptedHouseIDs = new Set(acceptedMatches.map(match => match.HouseID));
+    unAcceptedProperties =  properties.filter(property => !acceptedHouseIDs.has(property.HouseID));
+
+    const unmatchedProperties = unAcceptedProperties.filter(property => {
+        return !matches.some(match => match.TenantID === tenantID && match.HouseID === property.HouseID);
+    });
+
+    return unmatchedProperties;
+}
+
 router.get('/getProperties', async (req, res) => {
     try {
         const properties = await loadPropertiesJson();
@@ -56,11 +71,7 @@ router.get('/getPropertyById/:HouseID', async (req, res) => {
 router.get('/unmatchedProperties/:tenantID', async (req, res) => {
     const { tenantID } = req.params;
     try {
-        const matches = await loadMatchesJson();
-        const properties = await loadPropertiesJson();
-        const unmatchedProperties = properties.filter(property => {
-            return !matches.some(match => match.TenantID === tenantID && match.HouseID === property.HouseID);
-        });
+        unmatchedProperties = await getUnmatchedProperties(tenantID);
         res.status(200).json(unmatchedProperties);
     } catch (err) {
         res.status(500).send('Error loading data');
@@ -74,11 +85,7 @@ const getScore = (property, preference) => {
 router.get('/preferProperties/:tenantID', async (req, res) => {
     const { tenantID } = req.params;
     try {
-        const matches = await loadMatchesJson();
-        const properties = await loadPropertiesJson();
-        const unmatchedProperties = properties.filter(property => {
-            return !matches.some(match => match.TenantID === tenantID && match.HouseID === property.HouseID);
-        });
+        unmatchedProperties = await getUnmatchedProperties(tenantID);
 
         const tenantInfo = await tenantProfileQueries.getOneTenantProfile(tenantID);
         if (!tenantInfo) {
