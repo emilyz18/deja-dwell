@@ -8,21 +8,15 @@ const vancouver = {
   lng: -123.116226,
 }
 
-const burnaby = {
-  lat: 49.2,
-  lng: -123,
-}
-
 const libraries = ['places']
 
-function Map() {
+function Map({ propertyAddresses }) {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: 'AIzaSyBLFCLKvngrnl7PBEZczkzLJbObWvJDScM', // Ensure to replace with your actual API key
     libraries,
   })
 
-  const [map, setMap] = useState(null)
   const [markers, setMarkers] = useState([])
   const mapRef = useRef()
 
@@ -38,21 +32,27 @@ function Map() {
     }
   }, [markers])
 
-  const addresses = ['Burnaby, BC', 'Vancouver, BC', 'Surrey, BC'] // Add your list of addresses here
+  const addresses = ['Burnaby, BC', 'Robson Street Vancouver, BC', 'Surrey, BC'] // Add your list of addresses here
 
   const onLoad = async (mapInstance) => {
     mapRef.current = mapInstance
 
     const geocoder = new window.google.maps.Geocoder()
 
-    addresses.forEach((address) => {
+    propertyAddresses.forEach((propertyAddress) => {
+        console.log(propertyAddress)
+      const { street, city, province } = propertyAddress
+      const address = `${street},  ${city}, ${province}`
+
       geocoder.geocode({ address: address }, (results, status) => {
+        console.log("address" + address)
         if (status === 'OK') {
           const position = results[0].geometry.location
           const newMarker = { lat: position.lat(), lng: position.lng() }
           setMarkers((prevMarkers) => [...prevMarkers, newMarker])
         } else {
-          alert(
+  
+          console.log(
             'Geocode was not successful for the following reason: ' + status
           )
         }
@@ -63,7 +63,7 @@ function Map() {
   return isLoaded ? (
     <GoogleMap
       mapContainerClassName="map-container"
-      center={burnaby}
+      center={vancouver}
       zoom={10}
       onLoad={onLoad}
       options={{

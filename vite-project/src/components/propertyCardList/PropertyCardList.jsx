@@ -238,6 +238,14 @@ function PropertyCardList({ searchMode }) {
     setNotification({ ...notification, open: false })
   }
 
+ const propertyAddresses = displaySearchProperties.map(property => {
+      return {
+        street: property.Street,
+        city: property.City,
+        province: property.Province,
+      };
+    });
+
   return (
     <>
       {searchMode ? (
@@ -249,7 +257,7 @@ function PropertyCardList({ searchMode }) {
             setFilters={setFilters}
           />
           <div className="search-display">
-            <Map />
+            <Map propertyAddresses={propertyAddresses}/>
 
             <div className='cards-container'>
                 {displaySearchProperties.length === 0 ? (
