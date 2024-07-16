@@ -13,8 +13,7 @@ const libraries = ['places']
 function Map({ propertyAddresses }) {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyBLFCLKvngrnl7PBEZczkzLJbObWvJDScM', // Ensure to replace with your actual API key
-    libraries,
+    googleMapsApiKey: 'AIzaSyBLFCLKvngrnl7PBEZczkzLJbObWvJDScM',
   })
 
   const [markers, setMarkers] = useState([])
@@ -32,8 +31,6 @@ function Map({ propertyAddresses }) {
     }
   }, [markers])
 
-  const addresses = ['Burnaby, BC', 'Robson Street Vancouver, BC', 'Surrey, BC'] // Add your list of addresses here
-
   const onLoad = async (mapInstance) => {
     mapRef.current = mapInstance
 
@@ -41,7 +38,16 @@ function Map({ propertyAddresses }) {
 
     propertyAddresses.forEach((propertyAddress) => {
         console.log(propertyAddress)
-      const { street, city, province } = propertyAddress
+      var { street, city, province } = propertyAddress
+      if (!street) {
+        street = ''
+      }
+      if (!city) {
+        city = ''
+      }
+      if (!province) {
+        province = ''
+      }
       const address = `${street},  ${city}, ${province}`
 
       geocoder.geocode({ address: address }, (results, status) => {
@@ -51,7 +57,6 @@ function Map({ propertyAddresses }) {
           const newMarker = { lat: position.lat(), lng: position.lng() }
           setMarkers((prevMarkers) => [...prevMarkers, newMarker])
         } else {
-  
           console.log(
             'Geocode was not successful for the following reason: ' + status
           )
@@ -67,10 +72,9 @@ function Map({ propertyAddresses }) {
       zoom={10}
       onLoad={onLoad}
       options={{
-        mapId: 'id', // Replace with your Map ID for advanced markers
+        mapId: 'id',
       }}
     >
-      {/* No Marker component used here as we directly add markers in onLoad */}
     </GoogleMap>
   ) : (
     <></>
