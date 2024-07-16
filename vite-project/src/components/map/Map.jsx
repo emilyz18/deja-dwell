@@ -1,4 +1,4 @@
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
 import React, { useState, useRef, useEffect } from 'react'
 import './Map.css'
 
@@ -19,50 +19,48 @@ function Map({ propertyAddresses }) {
   const [markers, setMarkers] = useState([])
   const mapRef = useRef()
 
+//   useEffect(() => {
+//     if (mapRef.current && markers.length > 0) {
+//       markers.forEach((marker) => {
+//         new window.google.maps.Marker({
+//           map: mapRef.current,
+//           position: marker,
+//           title: 'Marker',
+//         })
+//       })
+//     }
+//   }, [markers])
+
   useEffect(() => {
-    if (mapRef.current && markers.length > 0) {
-      markers.forEach((marker) => {
-        new window.google.maps.Marker({
-          map: mapRef.current,
-          position: marker,
-          title: 'Marker',
-        })
-      })
-    }
-  }, [markers])
+    // Clear existing markers when propertyAddresses change
+    setMarkers([])
 
-  const onLoad = async (mapInstance) => {
-    mapRef.current = mapInstance
-
+    // Load new markers based on updated propertyAddresses
     const geocoder = new window.google.maps.Geocoder()
 
     propertyAddresses.forEach((propertyAddress) => {
-        console.log(propertyAddress)
-      var { street, city, province } = propertyAddress
-      if (!street) {
-        street = ''
-      }
-      if (!city) {
-        city = ''
-      }
-      if (!province) {
-        province = ''
-      }
-      const address = `${street},  ${city}, ${province}`
+      let { street, city, province } = propertyAddress
+      if (!street) street = ''
+      if (!city) city = ''
+      if (!province) province = ''
 
-      geocoder.geocode({ address: address }, (results, status) => {
-        console.log("address" + address)
+      const address = `${street}, ${city}, ${province}`
+
+      geocoder.geocode({ address }, (results, status) => {
         if (status === 'OK') {
           const position = results[0].geometry.location
           const newMarker = { lat: position.lat(), lng: position.lng() }
           setMarkers((prevMarkers) => [...prevMarkers, newMarker])
         } else {
-          console.log(
-            'Geocode was not successful for the following reason: ' + status
-          )
+          console.log('Geocode was not successful for the following reason: ' + status)
         }
       })
     })
+  }, [propertyAddresses]) // Update markers when propertyAddresses change
+
+
+  const onLoad = async (mapInstance) => {
+    mapRef.current = mapInstance
   }
 
   return isLoaded ? (
@@ -75,6 +73,9 @@ function Map({ propertyAddresses }) {
         mapId: 'id',
       }}
     >
+         {markers.map((marker, index) => (
+        <Marker key={index} position={marker} />
+      ))}
     </GoogleMap>
   ) : (
     <></>
