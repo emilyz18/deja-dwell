@@ -19,23 +19,13 @@ function Map({ propertyAddresses }) {
   const [markers, setMarkers] = useState([])
   const mapRef = useRef()
 
-//   useEffect(() => {
-//     if (mapRef.current && markers.length > 0) {
-//       markers.forEach((marker) => {
-//         new window.google.maps.Marker({
-//           map: mapRef.current,
-//           position: marker,
-//           title: 'Marker',
-//         })
-//       })
-//     }
-//   }, [markers])
-
   useEffect(() => {
+    if (isLoaded) {
     // Clear existing markers when propertyAddresses change
     setMarkers([])
 
     // Load new markers based on updated propertyAddresses
+    
     const geocoder = new window.google.maps.Geocoder()
 
     propertyAddresses.forEach((propertyAddress) => {
@@ -56,7 +46,8 @@ function Map({ propertyAddresses }) {
         }
       })
     })
-  }, [propertyAddresses]) // Update markers when propertyAddresses change
+}
+  }, [propertyAddresses, isLoaded]) // Update markers when propertyAddresses change
 
 
   const onLoad = async (mapInstance) => {
