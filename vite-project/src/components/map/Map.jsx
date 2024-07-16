@@ -2,13 +2,10 @@ import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
 import React, { useState, useRef, useEffect } from 'react'
 import './Map.css'
 
-// Define the location coordinates
 const vancouver = {
   lat: 49.246292,
   lng: -123.116226,
 }
-
-const libraries = ['places']
 
 function Map({ propertyAddresses }) {
   const { isLoaded } = useJsApiLoader({
@@ -21,10 +18,7 @@ function Map({ propertyAddresses }) {
 
   useEffect(() => {
     if (isLoaded) {
-    // Clear existing markers when propertyAddresses change
     setMarkers([])
-
-    // Load new markers based on updated propertyAddresses
     
     const geocoder = new window.google.maps.Geocoder()
 
@@ -47,8 +41,7 @@ function Map({ propertyAddresses }) {
       })
     })
 }
-  }, [propertyAddresses, isLoaded]) // Update markers when propertyAddresses change
-
+  }, [propertyAddresses, isLoaded]) 
 
   const onLoad = async (mapInstance) => {
     mapRef.current = mapInstance
