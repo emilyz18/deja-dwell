@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL_PATH = 'http://localhost:3000/landlord'
+const URL_PATH = '/api/landlord'
 
 const handleResponse = async (request) => {
   try {

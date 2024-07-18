@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL_PATH = 'http://localhost:3000/properties'
+const URL_PATH = '/api/properties'
 
 const handleResponse = async (request) => {
   try {
@@ -24,10 +24,7 @@ const getProperties = async () => {
 }
 
 const getPropertyById = async (propertyId) => {
-  // console.log('Fetching property with ID:', propertyId); // Debugging line
-  const response = handleResponse(() => axios.get(`${URL_PATH}/getPropertyById/${propertyId}`));
-  // console.log('Property response:', response); // Debugging line
-  return response;
+  return handleResponse(() => axios.get(`${URL_PATH}/getPropertyById/${propertyId}`));
 }
 
 const getUnMatchedProperties = async (tenantId) => {
