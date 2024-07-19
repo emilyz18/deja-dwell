@@ -1,5 +1,7 @@
 # Group 15 - Deja
 
+![CI](https://github.com/ubc-cpsc455-2024S/project-15_deja/actions/workflows/ci.yml/badge.svg)
+
 ## Project Description
 Our project is a platform designed for tenants and landlords to facilitate finding rental accommodations. It would allow tenants to post their profile data and preferences while enabling landlords to post details of their units. Users can access and review the opposing party’s profiles, and perform matching similar to the iconic dating platform, Tinder. Additional functionality, such as on-demand feedback and allowing landlords to post multiple properties, can be incorporated based on time constraints.
 
@@ -10,15 +12,16 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 - Xinyue: Hi. I am a 4th year computer science student. I love coffee.
 
 ## Minimal Requirements
-1. [ ] Create/modify a user profile (user information and housing preference)
+1. [x] Create/modify a user profile (user information and housing preference)
     - Each user can have one of:
         - Landlord account
         - Tenant account
-    - Functionality to swap between the two accounts (only if the user has both accounts, i.e. no option to swap if the user has 1 account only)
+    - ~~Functionality to swap between the two accounts (only if the user has both accounts, i.e. no option to swap if the user has 1 account only)~~
+    - We no longer support a user having both a landlord and tenant account because it is not a useful use-case
 2. [ ] Matching
     - Stable matching algorithm between tenant property preference and property, tailored to our data
     - Display matching score between user preference & housing post on both the landlord and tenant’s dashboard (only shows in console log)
-3. [ ] Dashboard
+3. [X] Dashboard
     - Landlord: Display list of applicants
         - Profile picture
         - Name
@@ -35,16 +38,17 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 1. [ ] User Login page
     - Allows user to store data in their account
     - User can log in and log out
-2. [ ] Application status
+2. [X] Application status
     - For Tenant account: Store history of applied post 
     - For the landlord: Store history of matched applicants(Tenants) along with their applied post
-3. [ ] Two types of rent match:
+3. [X] Two types of rent match:
    - tight match (search bar)
    - loose match (profile/preference match by system)
 4. [ ] Make the matching algorithm more robust
     - Add weightings to scores 
-    - Add additional sorting for the list of applicants ( tenant profile <-> landlord preference matching)
-5. [ ] For landlord account:  A Landlord dashboard page that shows the current list of applicants with accept/reject buttons for each applicant.
+    - ~~Add additional sorting for the list of applicants (tenant profile <-> landlord preference matching)~~
+    - NOTE: Matching is dependent on the property properties and tenant preferences only
+5. [X] For landlord account:  A Landlord dashboard page that shows the current list of applicants with accept/reject buttons for each applicant.
     - the landlord will reach out to the list of tenants matched by the system  (externally, interview/in-person house tour), once the landlord and tenant sign the contract (externally), the landlord will press accept and other tenants on the list will be automatically rejected.
     - Landlord will only see contact info of tenant after they apply, tenant will only see landlord's contact info after they apply 
 

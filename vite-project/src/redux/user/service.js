@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL_PATH = 'http://localhost:3000/user'
+const URL_PATH = '/api/user'
 
 const handleResponse = async (request) => {
   try {

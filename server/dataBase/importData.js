@@ -12,27 +12,39 @@ const Match = require('./models/MatchSchema');
 const { db } = require('../db'); // Ensure this path is correct
 
 const importData = async () => {
-
-    db.once('open', async () => {
-        try {
-
-            await Landlord.deleteMany({});
-            await Tenant.deleteMany({});
-            await TenantPreference.deleteMany({});
-            await Property.deleteMany({});
-            await Match.deleteMany({});
-            await User.deleteMany({});
-            
-            console.log('Existing data cleared successfully');
-            
-        
-            // Read JSON files
-            const users = JSON.parse(fs.readFileSync(path.join(__dirname, '../mockData/Users.json'), 'utf-8'));
-            const landlords = JSON.parse(fs.readFileSync(path.join(__dirname, '../mockData/Landlord.json'), 'utf-8'));
-            const tenants = JSON.parse(fs.readFileSync(path.join(__dirname, '../mockData/Tenant.json'), 'utf-8'));
-            const tenantPreferences = JSON.parse(fs.readFileSync(path.join(__dirname, '../mockData/TenantPreference.json'), 'utf-8'));
-            const properties = JSON.parse(fs.readFileSync(path.join(__dirname, '../mockData/Properties.json'), 'utf-8'));
-            const matches = JSON.parse(fs.readFileSync(path.join(__dirname, '../mockData/Match.json'), 'utf-8'));
+  db.once('open', async () => {
+    try {
+      // Read JSON files
+      const users = JSON.parse(
+        fs.readFileSync(path.join(__dirname, '../mockData/Users.json'), 'utf-8')
+      )
+      const landlords = JSON.parse(
+        fs.readFileSync(
+          path.join(__dirname, '../mockData/Landlord.json'),
+          'utf-8'
+        )
+      )
+      const tenants = JSON.parse(
+        fs.readFileSync(
+          path.join(__dirname, '../mockData/Tenant.json'),
+          'utf-8'
+        )
+      )
+      const tenantPreferences = JSON.parse(
+        fs.readFileSync(
+          path.join(__dirname, '../mockData/TenantPreference.json'),
+          'utf-8'
+        )
+      )
+      const properties = JSON.parse(
+        fs.readFileSync(
+          path.join(__dirname, '../mockData/Properties.json'),
+          'utf-8'
+        )
+      )
+      const matches = JSON.parse(
+        fs.readFileSync(path.join(__dirname, '../mockData/Match.json'), 'utf-8')
+      )
 
             // Import data to MongoDB
             await User.insertMany(users);
