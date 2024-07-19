@@ -1,5 +1,7 @@
 # Group 15 - Deja
 
+![CI](https://github.com/ubc-cpsc455-2024S/project-15_deja/actions/workflows/ci.yml/badge.svg)
+
 ## Project Description
 Our project is a platform designed for tenants and landlords to facilitate finding rental accommodations. It would allow tenants to post their profile data and preferences while enabling landlords to post details of their units. Users can access and review the opposing party’s profiles, and perform matching similar to the iconic dating platform, Tinder. Additional functionality, such as on-demand feedback and allowing landlords to post multiple properties, can be incorporated based on time constraints.
 
