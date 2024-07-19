@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
   PhoneNumber: { type: String },
   ProfileImg: {
     type: String,
-    default: 'http://localhost:3000/default_profile_pic.jpg',
+    default: '/images/default_profile_pic.jpg',
   },
   Password: { type: String, required: true },
 })

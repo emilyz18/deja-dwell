@@ -72,7 +72,7 @@ router.post('/register', async (req, res) => {
       Password: password,
       UserEmail: email,
       HashKey: hashKey,
-      ProfileImg: 'http://localhost:3000/default_profile_pic.jpg',
+      ProfileImg: '/images/default_profile_pic.jpg',
     }
 
     if (accountType === 'Landlord') {
