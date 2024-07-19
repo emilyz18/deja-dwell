@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const URL_PATH_PROFILE = 'http://localhost:3000/tenantsprofile'
-const URL_PATH_PREFERENCE = 'http://localhost:3000/tenantspref'
+const URL_PATH_PROFILE = '/api/tenantsprofile'
+const URL_PATH_PREFERENCE = '/api/tenantspref'
 
 const handleResponse = async (request) => {
   try {
