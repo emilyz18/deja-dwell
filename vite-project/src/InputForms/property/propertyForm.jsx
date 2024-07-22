@@ -1,8 +1,10 @@
+// image preview method guided by chaptgpt 4o with prompt: how to create image preview for each URL input textfield, generated code applied to handleImageChange() 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Box, Grid, Typography, Checkbox, FormControlLabel } from '@mui/material';
 import { useState } from 'react';
 export function PropertyForm({ property, handleSubmit, handleChange, handleCancel, handleImageChange }) {
+    const emptyImageArray = [{ src: '', alt: '' }, { src: '', alt: '' }, { src: '', alt: '' }]
     const [errors, setErrors] = useState({});
     const validate = () => {
         let tempErrors = {};
@@ -10,6 +12,9 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
         if (!property.Province) tempErrors.Province = "Province is required";
         if (!property.City) tempErrors.City = "City is required";
         if (!property.ExpectedPrice) tempErrors.ExpectedPrice = "Rent Per Month is required";
+
+        const validImages = (property.HouseImgs).filter(image => image.src !== '');
+        if (validImages.length < 3) tempErrors.HouseImgs = "At least 3 images are required so that tenant to get a detailed view of your property";
 
         setErrors(tempErrors);
         return Object.keys(tempErrors).length === 0;
@@ -21,6 +26,7 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
             handleSubmit(event);
         }
     };
+
     return (<Box
         component="form"
         sx={{ '& .MuiTextField-root': { m: 1, width: '80ch' } }}
@@ -48,13 +54,15 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
 
 
         <Grid container spacing={4}>
-            {(property.HouseImgs || [{ src: '', alt: '' }, { src: '', alt: '' }, { src: '', alt: '' }]).map((image, index) => (
+            {(property.HouseImgs || emptyImageArray).map((image, index) => (
                 <Grid item xs={12} key={index}>
                     <TextField
                         label={`Image URL ${index + 1}`}
                         value={image.src}
                         onChange={(e) => handleImageChange(index, 'src', e)}
                         fullWidth
+                        error={!!errors.HouseImgs}
+                        helperText={errors.HouseImgs}
                     />
                     <TextField
                         label={`Image Alt Text ${index + 1}`}
@@ -64,7 +72,7 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
                     />
                     {image.src && (
                         <Box position="relative" marginTop={2}>
-                            <img src={image.src} alt={image.alt} width="100%" height="100%" style={{ objectFit: 'cover' }} />
+                            <img src={image.src} alt={image.alt} width="50%" height="50%" style={{ objectFit: 'cover' }} />
                         </Box>
                     )}
                 </Grid>

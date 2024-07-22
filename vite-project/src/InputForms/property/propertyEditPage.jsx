@@ -1,15 +1,11 @@
-// image preview method guided by chaptgpt 4o with prompt: how to create image preview for each URL input textfield, generated code applied to handleImageChange() 
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-// import { Box, Grid, Typography, Checkbox, FormControlLabel } from '@mui/material';
 import { getLandlordAsync } from '../../redux/landlord/thunks.js';
 import { getPropertyByIdAsync, patchPropertyAsync, createPropertyAsync } from '../../redux/properties/thunks.js';
 import { updateProperty } from '../../redux/properties/reducer.js';
 import { PropertyForm } from './propertyForm.jsx';
 import { PropertyInputDisplay } from './propertyInputDisplay.jsx'
-// import Carousel from '../components/carousel/Carousel';
 
 export function PropertyEditPage() {
     const [isEditing, setIsEditing] = useState(false);

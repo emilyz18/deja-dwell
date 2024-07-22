@@ -21,6 +21,19 @@ export function GeneralInputForm() {
   const dispatch = useDispatch()
   const location = useLocation()
 
+  const [errors, setErrors] = useState({});
+  const validate = () => {
+    let tempErrors = {};
+    if (!user.UserName) tempErrors.UserName = "Name is required";
+    if (!user.UserEmail) tempErrors.UserEmail = "Email is required";
+    if (!user.PhoneNumber) tempErrors.PhoneNumber = "Phone number is required";
+
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
+  };
+
+  
+
   useEffect(() => {
     if (user && user.UserID) {
       dispatch(getUserAsync(user.UserID))
@@ -64,8 +77,10 @@ export function GeneralInputForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    dispatch(editUserAsync(user))
-    setIsEditing(false)
+      if (validate()) {
+        dispatch(editUserAsync(user))
+        setIsEditing(false)
+      }
   }
 
   const VisuallyHiddenInput = styled('input')({
@@ -114,6 +129,8 @@ export function GeneralInputForm() {
                 placeholder="Enter name here..."
                 fullWidth
                 margin="normal"
+                error={!!errors.UserName}
+                helperText={errors.UserName}
               />
             </Grid>
             <Grid item xs={12}>
@@ -127,6 +144,7 @@ export function GeneralInputForm() {
                 placeholder="Enter Image URL here..."
                 fullWidth
                 margin="normal"
+                
               />
               <Button
                 value={user.ProfileImg || ''}
@@ -154,6 +172,8 @@ export function GeneralInputForm() {
                 placeholder="Enter phone number here..."
                 fullWidth
                 margin="normal"
+                error={!!errors.PhoneNumber}
+                helperText={errors.PhoneNumber}
               />
             </Grid>
             <Grid item xs={12}>
@@ -169,6 +189,8 @@ export function GeneralInputForm() {
                 placeholder="Enter email here..."
                 fullWidth
                 margin="normal"
+                error={!!errors.UserEmail}
+                helperText={errors.UserEmail}
               />
             </Grid>
             <Grid item xs={12} className="button-container">
