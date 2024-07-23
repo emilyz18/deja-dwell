@@ -18,10 +18,17 @@ import {
 } from '@mui/material'
 import './TenantInputForm.css'
 export function TenantForm({ handleSubmit, tenant, tenantPref, handleChange, handleCancel }) {
-    
+
 
     const [customGender, setCustomGender] = useState('');
     const dispatch = useDispatch()
+
+    const formatDate = (date) => {
+        if (!date) return '';
+        const d = new Date(date);
+        return d.toISOString().split('T')[0];  
+    };
+
     const handleGenderChange = (e) => {
         const value = e.target.value
         if (value === 'self-describe') {
@@ -53,6 +60,13 @@ export function TenantForm({ handleSubmit, tenant, tenantPref, handleChange, han
         return Object.keys(tempErrors).length === 0;
     };
 
+    const onSubmit = (event) => {
+        event.preventDefault();
+        if (validate()) {
+            handleSubmit(event);
+        }
+    };
+
     return (<Box
         component="form"
         sx={{
@@ -60,7 +74,7 @@ export function TenantForm({ handleSubmit, tenant, tenantPref, handleChange, han
         }}
         noValidate
         autoComplete="off"
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
         className="general-input-form"
     >
         <h1>Landlords need to know your ... </h1>
@@ -79,7 +93,7 @@ export function TenantForm({ handleSubmit, tenant, tenantPref, handleChange, han
                     margin="normal"
 
                 />
-            </Grid> 
+            </Grid>
             <Grid>
                 <FormControl margin="normal" fullWidth>
                     <InputLabel id="demo-simple-select-autowidth-label">
@@ -173,7 +187,7 @@ export function TenantForm({ handleSubmit, tenant, tenantPref, handleChange, han
                     margin="normal"
                     error={!!errors.Habit}
                     helperText={errors.Habit}
-                    
+
                 />
             </Grid>
             <h1>You are looking for rent that ...</h1>
@@ -191,7 +205,7 @@ export function TenantForm({ handleSubmit, tenant, tenantPref, handleChange, han
                     margin="normal"
                     error={!!errors.Province}
                     helperText={errors.Province}
-                    
+
                 />
             </Grid>
             <Grid item xs={12}>
@@ -243,7 +257,7 @@ export function TenantForm({ handleSubmit, tenant, tenantPref, handleChange, han
                     variant="filled"
                     type="date"
                     name="StartDate"
-                    value={tenantPref.StartDate || ''}
+                    value={formatDate(tenantPref.StartDate) || ''}
                     onChange={handleChange}
                     fullWidth
                     margin="normal"
@@ -257,7 +271,7 @@ export function TenantForm({ handleSubmit, tenant, tenantPref, handleChange, han
                     variant="filled"
                     type="date"
                     name="EndDate"
-                    value={tenantPref.EndDate || ''}
+                    value={formatDate(tenantPref.EndDate) || ''}
                     onChange={handleChange}
                     fullWidth
                     margin="normal"

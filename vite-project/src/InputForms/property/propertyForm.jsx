@@ -6,6 +6,13 @@ import { useState } from 'react';
 export function PropertyForm({ property, handleSubmit, handleChange, handleCancel, handleImageChange }) {
     const emptyImageArray = [{ src: '', alt: '' }, { src: '', alt: '' }, { src: '', alt: '' }]
     const [errors, setErrors] = useState({});
+
+    const formatDate = (date) => {
+        if (!date) return '';
+        const d = new Date(date);
+        return d.toISOString().split('T')[0];
+    };
+
     const validate = () => {
         let tempErrors = {};
         if (!property.Title) tempErrors.Title = "Title is required";
@@ -173,7 +180,7 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
                 variant="filled"
                 type="date"
                 name="StartDate"
-                value={property.StartDate || ''}
+                value={formatDate(property.StartDate) || ''}
                 onChange={handleChange}
                 fullWidth
                 InputLabelProps={{ shrink: true }}
@@ -185,7 +192,7 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
                 variant="filled"
                 type="date"
                 name="EndDate"
-                value={property.EndDate || ''}
+                value={formatDate(property.EndDate) || ''}
                 onChange={handleChange}
                 fullWidth
                 InputLabelProps={{ shrink: true }}

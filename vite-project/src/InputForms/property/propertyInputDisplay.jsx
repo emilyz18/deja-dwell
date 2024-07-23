@@ -9,8 +9,6 @@ export function PropertyInputDisplay({ property, handleEdit }) {
     };
 
     
-
-    
     return (<Box className="tenant-input-form">
         <Typography variant="h4" className="header">
             Your Property Information

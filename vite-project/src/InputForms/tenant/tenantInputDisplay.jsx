@@ -3,7 +3,12 @@ import {
     Button,
     Typography,
 } from '@mui/material'
-export function TenantInputDisplay({ tenant, tenantPref, handleEdit}) {
+export function TenantInputDisplay({ tenant, tenantPref, handleEdit }) {
+    
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-CA');
+    };
     
     return (<Box className="tenant-input-form">
         <Typography variant="h4" className="header">
@@ -49,11 +54,11 @@ export function TenantInputDisplay({ tenant, tenantPref, handleEdit}) {
             </Typography>
             <Typography className="label">Start Date</Typography>
             <Typography className="value">
-                {tenantPref.StartDate || 'N/A'}
+                {tenantPref.StartDate ? formatDate(tenantPref.StartDate) : 'N/A'}
             </Typography>
             <Typography className="label">End Date</Typography>
             <Typography className="value">
-                {tenantPref.EndDate || 'N/A'}
+                {tenantPref.EndDate ? formatDate(tenantPref.EndDate) :'N/A'}
             </Typography>
 
             <Typography className="label">Number of Bedroom</Typography>
