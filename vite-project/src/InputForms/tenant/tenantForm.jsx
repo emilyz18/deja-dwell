@@ -26,7 +26,7 @@ export function TenantForm({ handleSubmit, tenant, tenantPref, handleChange, han
     const formatDate = (date) => {
         if (!date) return '';
         const d = new Date(date);
-        return d.toISOString().split('T')[0];  
+        return d.toISOString().split('T')[0];
     };
 
     const handleGenderChange = (e) => {
@@ -49,6 +49,7 @@ export function TenantForm({ handleSubmit, tenant, tenantPref, handleChange, han
     const [errors, setErrors] = useState({});
     const validate = () => {
         let tempErrors = {};
+        if (tenant.Age > 120) tempErrors.Age = "Age too big";
         if (!tenant.Gender) tempErrors.Gender = "Gender is required";
         if (!tenant.Habit) tempErrors.Habit = "Your daily habit is required to get a better match";
         if (!tenantPref.Province) tempErrors.Province = "Your preferred province is required to get a better match";
@@ -91,6 +92,8 @@ export function TenantForm({ handleSubmit, tenant, tenantPref, handleChange, han
                     onChange={handleChange}
                     fullWidth
                     margin="normal"
+                    error={!!errors.Age}
+                    helperText={errors.Age}
 
                 />
             </Grid>
@@ -102,12 +105,15 @@ export function TenantForm({ handleSubmit, tenant, tenantPref, handleChange, han
                     <Select
                         labelId="demo-simple-select-autowidth-label"
                         id="demo-simple-select-autowidth"
-                        name="Gender"
+                        //name="Gender"
                         value={
                             tenant.Gender === customGender
                                 ? 'self-describe'
                                 : tenant.Gender || ''
                         }
+                        onChange={handleGenderChange}
+                        required
+                        label="Gender"
                     >
                         <MenuItem value="">
                             <em>None</em>
