@@ -1,10 +1,10 @@
 .property-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
   justify-content: center;
   padding: 20px;
-  width: 80%;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -14,26 +14,31 @@
 
 .dropzone-container {
   display: flex;
+  width: 100%;
+  padding: 10px;
+  margin: 10px;
 }
 
 .dropzone {
-  width: 50%;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2em;
-  opacity: 0.5;
-  transition: opacity 0.2s ease-in-out;
+  opacity: 0.3; /* Less visible initially */
+  transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
   border-style: dashed;
   border-radius: 10px;
+  padding: 20px;
 }
 
 .dropzone-placeholder {
-  width: 50%;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2em;
+  padding: 20px;
 }
 
 .left-dropzone {
@@ -47,7 +52,7 @@
 }
 
 .dropzone.active {
-  opacity: 1;
+  opacity: 0.7; /* More visible when active */
 }
 
 .dropzone-icon {
@@ -64,15 +69,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999;
 }
 
 .property-popup {
   padding: 20px;
   border-radius: 10px;
-  max-width: 500px;
+  max-width: 600px;
   width: 100%;
   z-index: 1000;
   position: relative;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .carousel-container {
@@ -83,24 +91,45 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-family: 'Mulish', sans-serif;
   color: #555;
   height: 100px;
-  width: 100%;
+  width: 80%;
   text-align: center;
   background-color: #f8f8f8;
   border: 2px dashed #ccc;
   border-radius: 10px;
-  margin: 20px 0;
+  margin: 10px;
+  padding: 10px;
 }
 
 .search-display {
   display: flex;
-  height: 535px;
+  max-height: 545px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }
 
 .cards-container {
   overflow-y: auto;
+  padding: 20px;
+  flex: 1;
+  border-left: 1px solid #ddd;
+}
 
+.property-card {
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.property-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
