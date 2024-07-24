@@ -1,29 +1,42 @@
-import Carousel from '../carousel/Carousel'
-import './expandedPropertyCard.css'
+import React from 'react';
+import Carousel from '../carousel/Carousel';
+import './expandedPropertyCard.css';
 import Map from '../map/Map';
 
 export function ExpandedPropertyCard({ propertyInfo }) {
-  const { NumBedroom, NumBathroom, isAC, isHeater, isFurnished, AllowPet, AllowSmoke, AllowParty, AllowWeed, ExpectedPrice, Street, City, Province } = propertyInfo;
-  const address = [{street: Street, city: City, province: Province}]
+  const {
+    NumBedroom,
+    NumBathroom,
+    isAC,
+    isHeater,
+    isFurnished,
+    AllowPet,
+    AllowSmoke,
+    AllowParty,
+    AllowWeed,
+    ExpectedPrice,
+    Street,
+    City,
+    Province,
+  } = propertyInfo;
+
+  const address = [{ street: Street, city: City, province: Province }];
+
   return (
     <div className="expanded-property-popup">
       <h1>{propertyInfo.Title}</h1>
       <div className="carousel-container">
-        <Carousel
-          data={propertyInfo.HouseImgs}
-          size={{ width: null, height: null }}
-        />
+        <Carousel data={propertyInfo.HouseImgs} size={{ width: null, height: null }} />
       </div>
       <p>Price: ${propertyInfo.ExpectedPrice}</p>
       <p>
-        Address: {propertyInfo.Street}, {propertyInfo.City},{' '}
-        {propertyInfo.Province}
+        Address: {propertyInfo.Street}, {propertyInfo.City}, {propertyInfo.Province}
       </p>
       <p>Number of Bedroom: {propertyInfo.NumBedroom}</p>
       <p>Number of Bathroom: {propertyInfo.NumBathroom}</p>
       <p>Parking Availability: {propertyInfo.NumOfParking}</p>
       <p>Description: {propertyInfo.Description}</p>
-      <div className='details-row-expand'>
+      <div className="details-row-expand">
         {isAC && <span className="amenity">AC</span>}
         {isHeater && <span className="amenity">Heater</span>}
         {isFurnished && <span className="amenity">Furnished</span>}
@@ -32,7 +45,9 @@ export function ExpandedPropertyCard({ propertyInfo }) {
         {AllowParty && <span className="amenity">Party Allowed</span>}
         {AllowWeed && <span className="amenity">Weed Allowed</span>}
       </div>
-      <Map propertyAddresses={address}/>
+      <div>
+        <Map propertyAddresses={address} />
+      </div>
     </div>
-  )
+  );
 }

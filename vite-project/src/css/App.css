@@ -1,7 +1,6 @@
 /*
   Top-level styling or styling that should be propagated to all child components
  */
-
 .root {
   display: flex;
   flex-direction: column;
@@ -26,4 +25,8 @@ span {
   font-optical-sizing: auto;
   font-weight: normal;
   font-style: normal;
+}
+
+body {
+  margin: 0;
 }
