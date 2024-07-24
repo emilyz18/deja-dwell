@@ -36,6 +36,7 @@ export default function SignIn() {
       <div className="auth-wrapper">
         <div className="auth-black-block">
           <h1 className="auth-title">Renti.</h1>
+          <p className="auth-tagline">Find the perfect place.</p>
         </div>
         <div className="auth-form-container">
           <div className="auth-form-box">

@@ -101,3 +101,12 @@
 .auth-link a:hover {
     text-decoration: underline;
 }
+
+.auth-tagline {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-top: 10px;
+    text-align: center;
+    color: #f6f6f6;
+}
+
