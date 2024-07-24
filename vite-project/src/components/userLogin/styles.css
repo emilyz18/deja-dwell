@@ -1,10 +1,12 @@
 .auth-container {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f8f8f8;
     font-family: 'Mulish', sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .auth-wrapper {
@@ -15,6 +17,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
+    background-color: #ffffff;
 }
 
 .auth-black-block {
@@ -31,13 +34,14 @@
 .auth-form-container {
     width: 40%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     background-color: #ffffff;
     padding: 20px;
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .auth-form-box {
+    align-self: center;
     width: 100%;
     max-width: 400px;
 }
@@ -112,11 +116,3 @@ label {
     text-align: center;
     color: #f6f6f6;
 }
-
-.error-message {
-    color: red;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-
