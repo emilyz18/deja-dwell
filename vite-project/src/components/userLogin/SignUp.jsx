@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signUpAsync } from '../../redux/user/thunks';
+import { Snackbar, Alert } from '@mui/material';
 import './styles.css';
 
 export default function SignUp() {
@@ -10,9 +11,19 @@ export default function SignUp() {
   const isAuth = useSelector((state) => state.user.isAuthenticated);
 
   const [accountType, setAccountType] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    severity: '',
+  });
 
   const handleChange = (event) => {
-    setAccountType(event.target.value);
+    const { name, value } = event.target;
+    if (name === 'accountType') setAccountType(value);
+    if (name === 'password') setPassword(value);
+    if (name === 'confirmPassword') setConfirmPassword(value);
   };
 
   const handleSubmit = (event) => {
@@ -24,11 +35,28 @@ export default function SignUp() {
       Password: data.get('password'),
       accountType: accountType,
     };
-    if (!user.UserName || !user.Email || !user.Password || !user.accountType) {
-      console.log('Not allowed for empty field');
+    if (!user.UserName || !user.Email || !user.Password || !user.accountType || !confirmPassword) {
+      setSnackbar({
+        open: true,
+        message: 'All fields are required.',
+        severity: 'error',
+      });
+    } else if (user.Password !== confirmPassword) {
+      setSnackbar({
+        open: true,
+        message: 'Passwords do not match.',
+        severity: 'error',
+      });
     } else {
       dispatch(signUpAsync(user));
     }
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbar({ ...snackbar, open: false });
   };
 
   useEffect(() => {
@@ -64,11 +92,38 @@ export default function SignUp() {
               </div>
               <div className="auth-form-group">
                 <label htmlFor="password" className="auth-label">Password</label>
-                <input id="password" name="password" required className="auth-input" />
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  className="auth-input"
+                  value={password}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="auth-form-group">
+                <label htmlFor="confirmPassword" className="auth-label">Confirm Password</label>
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  required
+                  className="auth-input"
+                  value={confirmPassword}
+                  onChange={handleChange}
+                />
               </div>
               <div className="auth-form-group">
                 <label htmlFor="account-type" className="auth-label">Account Type</label>
-                <select id="account-type" value={accountType} onChange={handleChange} required className="auth-select">
+                <select
+                  id="account-type"
+                  name="accountType"
+                  value={accountType}
+                  onChange={handleChange}
+                  required
+                  className="auth-select"
+                >
                   <option value="" disabled>Select an account type</option>
                   <option value="Landlord">Landlord</option>
                   <option value="Tenant">Tenant</option>
@@ -82,6 +137,15 @@ export default function SignUp() {
           </div>
         </div>
       </div>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert onClose={handleSnackbarClose} severity={snackbar.severity} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

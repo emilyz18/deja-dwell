@@ -48,12 +48,12 @@ export default function SignIn() {
               </div>
               <div className="auth-form-group">
                 <label htmlFor="password" className="auth-label">Password</label>
-                <input id="password" name="password" required className="auth-input" />
+                <input id="password" name="password" type="password" required className="auth-input" />
               </div>
               <button type="submit" className="auth-button">Sign In</button>
             </form>
             <div className="auth-link">
-              <a href="/register">{`Don't have an account? Sign Up`}</a>
+              <a href="/register">{`Don't have an account? Sign up`}</a>
             </div>
           </div>
         </div>
