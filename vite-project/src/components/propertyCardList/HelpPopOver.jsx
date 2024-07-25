@@ -57,7 +57,7 @@ export default function MouseOverPopover() {
                         Drag the card <SwipeIcon sx={{ ml: 1 }} />
                     </Typography>
                     <Typography variant="body2" sx={{ mt: 1 }}>
-                        Or click the check or cross button
+                        Or click the cross or check mark button
                         <CancelIcon sx={{ color: 'red' }} />
                         <CheckCircleIcon sx={{ color: 'green' }} />
                     </Typography>
