@@ -288,8 +288,9 @@ function PropertyCardList({ searchMode }) {
         <div>
           <Box sx={{
             display: 'flex', alignItems: 'center',
-            marginLeft: 5,
+            marginLeft: 10,
             mt: 5,
+            mb: 2
           }}
           >
             <Typography

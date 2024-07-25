@@ -4,9 +4,10 @@ import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import SwipeIcon from '@mui/icons-material/Swipe';
 import CancelIcon from '@mui/icons-material/Cancel';
+import HelpIcon from '@mui/icons-material/Help';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+
 
 export default function MouseOverPopover() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -30,6 +31,7 @@ export default function MouseOverPopover() {
                 onMouseLeave={handlePopoverClose}
                 sx={{ color: 'purple' }}
             >
+                <HelpIcon fontSize="small"/>
                 How to apply?
             </Typography>
             <Popover
@@ -50,7 +52,7 @@ export default function MouseOverPopover() {
                 onClose={handlePopoverClose}
                 disableRestoreFocus
             >
-                <Box sx={{ p: 1 }}>
+                <Box sx={{ p: 1, margin:2 }}>
                     <Typography variant="body2" component="div" sx={{ display: 'flex', alignItems: 'center' }}>
                         Drag the card <SwipeIcon sx={{ ml: 1 }} />
                     </Typography>
