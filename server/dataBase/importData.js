@@ -14,6 +14,15 @@ const { db } = require('../db'); // Ensure this path is correct
 const importData = async () => {
   db.once('open', async () => {
     try {
+
+      await User.deleteMany({});
+      await Landlord.deleteMany({});
+      await Tenant.deleteMany({});
+      await TenantPreference.deleteMany({});
+      await Property.deleteMany({});
+      await Match.deleteMany({});
+
+      console.log('Existing data cleared successfully');
       // Read JSON files
       const users = JSON.parse(
         fs.readFileSync(path.join(__dirname, '../mockData/Users.json'), 'utf-8')
