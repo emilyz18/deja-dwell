@@ -7,9 +7,11 @@ import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCa
 import './PropertyCardList.css'
 import SearchBar from '../searchBar/SearchBar.jsx'
 import Map from '../map/Map.jsx'
+import HelpPopOver from './HelpPopOver.jsx'
 import { getPreferPropertiesAsync, getUnmatchedPropertiesAsync } from '../../redux/properties/thunks'
 import { createMatchAsync } from '../../redux/matches/matchThunks'
-import { Alert, Snackbar } from '@mui/material'
+import { Box, Typography, Fab, Snackbar, Alert } from '@mui/material';
+import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
 import { v4 as uuidv4 } from 'uuid'
 
 function PropertyCardList({ searchMode }) {
@@ -74,9 +76,8 @@ function PropertyCardList({ searchMode }) {
   const reloadProperties = () => {
     dispatch(getUnmatchedPropertiesAsync(user.TenantID));
     dispatch(getPreferPropertiesAsync(user.TenantID));
+    console.log("Properties Reloaded");
   };
-
-  //TODO: need to trigger reload Pref properties after preference updated
 
   const likedProperty = (id) => {
     const likedProperty = properties.find((property) => property.HouseID === id);
@@ -240,6 +241,8 @@ function PropertyCardList({ searchMode }) {
 
   return (
     <>
+
+
       {searchMode ? (
         <div>
           <SearchBar
@@ -283,6 +286,32 @@ function PropertyCardList({ searchMode }) {
         </div>
       ) : (
         <div>
+          <Box sx={{
+            display: 'flex', alignItems: 'center',
+            marginLeft: 5,
+            mt: 5,
+          }}
+          >
+            <Typography
+              variant="h4"
+              component="h1"
+              sx={{
+                flexGrow: 1,
+                fontWeight: 'bold',
+              }}
+            >
+              Your Recommendations
+            </Typography>
+            <Box
+              sx={{
+                marginRight: 10,
+                fontSize: '2.5rem',
+              }}
+            >
+              <HelpPopOver />
+            </Box>
+          </Box>
+
           <DndContext
             collisionDetection={closestCenter}
             onDragStart={handleDragStart}
@@ -291,9 +320,8 @@ function PropertyCardList({ searchMode }) {
             <div className="dropzone-container">
               {isDragging ? (
                 <div
-                  className={`dropzone left-dropzone ${
-                    isOverDislike ? 'active' : ''
-                  }`}
+                  className={`dropzone left-dropzone ${isOverDislike ? 'active' : ''
+                    }`}
                   ref={setDislikeRef}
                 >
                   <span className="dropzone-icon">✖</span>
@@ -341,9 +369,8 @@ function PropertyCardList({ searchMode }) {
               </SortableContext>
               {isDragging ? (
                 <div
-                  className={`dropzone right-dropzone ${
-                    isOverLike ? 'active' : ''
-                  }`}
+                  className={`dropzone right-dropzone ${isOverLike ? 'active' : ''
+                    }`}
                   ref={setLikeRef}
                 >
                   <span className="dropzone-icon">✔</span>
@@ -377,7 +404,6 @@ function PropertyCardList({ searchMode }) {
           )}
         </div>
       )}
-
       <Snackbar
         open={notification.open}
         autoHideDuration={3000}
@@ -391,6 +417,25 @@ function PropertyCardList({ searchMode }) {
           {notification.message}
         </Alert>
       </Snackbar>
+      <Box
+        sx={{
+          position: 'fixed',
+          bottom: 20,
+          right: 20,
+          zIndex: 1000,
+        }}
+      >
+        <Fab variant="extended" size="medium" sx={{
+          backgroundColor: 'black',
+          color: 'white',
+          '&:hover': {
+            backgroundColor: '#333',
+          },
+        }}>
+          <ReplayRoundedIcon sx={{ mr: 1 }} />
+          Reload Properties
+        </Fab>
+      </Box>
     </>
   );
 }
