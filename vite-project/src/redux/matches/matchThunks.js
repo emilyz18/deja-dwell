@@ -4,16 +4,10 @@ import {
   createMatch,
   updateMatch,
   deleteMatch,
+  getLandlordMatches,
+  getTenantMatches,
 } from './matchService'
 import { actionTypes } from './actionTypes'
-
-export const getMatchesAsync = createAsyncThunk(
-  actionTypes.GET_MATCHES,
-  async () => {
-    const response = await getMatches()
-    return response
-  }
-)
 
 export const createMatchAsync = createAsyncThunk(
   actionTypes.CREATE_MATCH,
@@ -35,6 +29,22 @@ export const deleteMatchAsync = createAsyncThunk(
   actionTypes.DELETE_MATCH,
   async (matchId) => {
     const response = await deleteMatch(matchId)
+    return response
+  }
+)
+
+export const getLandlordMatchesAsync = createAsyncThunk(
+  actionTypes.GET_LANDLORD_MATCHES,
+  async (landlordId) => {
+    const response = await getLandlordMatches(landlordId)
+    return response
+  }
+)
+
+export const getTenantMatchesAsync = createAsyncThunk(
+  actionTypes.GET_TENANT_MATCHES,
+  async (tenantId) => {
+    const response = await getTenantMatches(tenantId)
     return response
   }
 )

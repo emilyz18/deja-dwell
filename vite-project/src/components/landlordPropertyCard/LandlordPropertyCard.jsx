@@ -7,95 +7,42 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getPropertiesAsync } from '../../redux/properties/thunks'
 import { Snackbar, Alert } from '@mui/material'
 import {
-  getAllTenantProfileAsync,
-  getAllTenantPrefAsync,
-} from '../../redux/tenant/thunks'
-import {
-  getMatchesAsync,
+  getLandlordMatchesAsync,
   updateMatchAsync,
 } from '../../redux/matches/matchThunks'
-import { getUsersAsync } from '../../redux/user/thunks'
 
 const LandlordPropertyCard = ({ landlordId }) => {
-  const dispatch = useDispatch()
-  const properties = useSelector((state) => state.properties.list)
-  const matches = useSelector((state) => state.matches.list)
-  const tenants = useSelector((state) => state.tenant.tenants)
-  const tenantPrefs = useSelector((state) => state.tenant.tenantPrefs)
-  const users = useSelector((state) => state.user.users)
+  const dispatch = useDispatch();
+  const properties = useSelector((state) => state.properties.list);
+  const getLandlordMatchesStatus = useSelector((state) => state.matches.getLandlordMatches);
+  const landlordMatchesApplicants = useSelector((state) => state.matches.landlordMatches);
+  const landlordID = useSelector((state) => state.user.user.LandlordID);
 
-  const [selectedProperty, setSelectedProperty] = useState(null)
+  const [selectedProperty, setSelectedProperty] = useState(null);
   const [notification, setNotification] = useState({
     open: false,
     message: '',
     severity: '',
-  })
-  const [applicants, setApplicants] = useState([])
-  const [popupVisible, setPopupVisible] = useState(false)
-  const [selectedApplicant, setSelectedApplicant] = useState(null)
+  });
+  const [applicants, setApplicants] = useState([]);
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [selectedApplicant, setSelectedApplicant] = useState(null);
 
   useEffect(() => {
-    dispatch(getMatchesAsync())
-    dispatch(getPropertiesAsync())
-    dispatch(getAllTenantProfileAsync())
-    dispatch(getAllTenantPrefAsync())
-    dispatch(getUsersAsync())
-  }, [dispatch])
-
+    if(getLandlordMatchesStatus === 'IDLE') {
+      dispatch(getPropertiesAsync());
+      dispatch(getLandlordMatchesAsync(landlordID));
+    } else if (getLandlordMatchesStatus === 'FULFILLED') {
+      setApplicants(landlordMatchesApplicants);
+    }
+  }, [getLandlordMatchesStatus, dispatch])
+  
   useEffect(() => {
     if (properties.length > 0) {
       const property = properties.find((prop) => prop.LandlordID === landlordId)
       setSelectedProperty(property)
     }
   }, [properties, landlordId])
-
-  useEffect(() => {
-    if (
-      matches.length > 0 &&
-      tenants.length > 0 &&
-      tenantPrefs.length > 0 &&
-      users.length > 0
-    ) {
-      const newApplicants = matches
-        .filter(
-          (match) =>
-            match.LandlordID === landlordId && match.MatchStatus !== 'Rejected'
-        )
-        .map((match) => {
-          const tenantProfile = tenants.find(
-            (t) => t.TenantID === match.TenantID
-          )
-          const tenantPreference = tenantPrefs.find(
-            (p) => p.TenantPreferenceID === tenantProfile.TenantPreferenceID
-          )
-          const userProfile = users.find((u) => u.TenantID === match.TenantID)
-          if (tenantProfile && tenantPreference && userProfile) {
-            return {
-              name: userProfile.UserName,
-              image: userProfile.ProfileImg,
-              phoneNumber: userProfile.PhoneNumber,
-              email: userProfile.UserEmail,
-              gender: userProfile.Gender,
-              age: tenantProfile.Age,
-              familySize: tenantPreference.NumOfResident,
-              occupation: tenantProfile.Occupation,
-              lengthOfLease: tenantPreference.Duration,
-              earlyBirdNightOut: tenantPreference.Habit,
-              financialSituation: `Income: ${tenantProfile.Income}, Company: ${tenantProfile.Company}`,
-              matchID: match.MatchID,
-              landlordID: match.LandlordID,
-              houseID: match.HouseID,
-              tenantID: match.TenantID,
-              matchStatus: match.MatchStatus,
-            }
-          }
-          return null
-        })
-        .filter((applicant) => applicant.matchStatus != 'Disliked')
-        .filter((applicant) => applicant !== null)
-      setApplicants(newApplicants)
-    }
-  }, [matches, tenants, tenantPrefs, users, landlordId])
 
   const handleRejectApplicant = (name) => {
     const rejectedApplicant = applicants.find(
