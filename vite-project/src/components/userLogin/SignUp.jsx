@@ -75,8 +75,8 @@ export default function SignUp() {
     <div className="auth-container">
       <div className="auth-wrapper">
         <div className="auth-black-block">
-          <h1 className="auth-title">Renti.</h1>
-          <p className="auth-tagline">Find the perfect place.</p>
+          <h1 className="auth-title">DejaDwell.</h1>
+          <p className="auth-tagline">Dwell in Comfort, Like Deja Vu.</p>
         </div>
         <div className="auth-form-container">
           <div className="auth-form-box">
