@@ -18,7 +18,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
         - Tenant account
     - ~~Functionality to swap between the two accounts (only if the user has both accounts, i.e. no option to swap if the user has 1 account only)~~
     - We no longer support a user having both a landlord and tenant account because it is not a useful use-case
-2. [ ] Matching
+2. [X] Matching
     - Stable matching algorithm between tenant property preference and property, tailored to our data
     - Display matching score between user preference & housing post on both the landlord and tenant’s dashboard (only shows in console log)
 3. [X] Dashboard
@@ -35,7 +35,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
         - Property properties
 
 ## Standard Requirements
-1. [ ] User Login page
+1. [X] User Login page
     - Allows user to store data in their account
     - User can log in and log out
 2. [X] Application status
@@ -44,7 +44,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 3. [X] Two types of rent match:
    - tight match (search bar)
    - loose match (profile/preference match by system)
-4. [ ] Make the matching algorithm more robust
+4. [X] Make the matching algorithm more robust
     - Add weightings to scores 
     - ~~Add additional sorting for the list of applicants (tenant profile <-> landlord preference matching)~~
     - NOTE: Matching is dependent on the property properties and tenant preferences only
@@ -57,7 +57,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
     - As the user looks through options we ask them why they did not choose this specific option
 2. [ ] Profile reviews of the tenant/landlord profiles, from a rating between 1 - 5
 3. [ ] Preference updating based on swap and feedback demand
-4. [ ] Actual swiping of each selection
+4. [X] Actual swiping of each selection
 5. [ ] Allow the landlord to list multiple properties
 6. [ ] Once matched, enable the landlord and tenant to interact
     - Chat message
