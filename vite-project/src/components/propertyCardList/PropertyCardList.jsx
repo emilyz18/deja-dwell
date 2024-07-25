@@ -426,7 +426,7 @@ function PropertyCardList({ searchMode }) {
           zIndex: 1000,
         }}
       >
-        <Fab variant="extended" size="medium" sx={{
+        <Fab variant="extended" size="medium" onClick={reloadProperties} sx={{
           backgroundColor: 'black',
           color: 'white',
           '&:hover': {
