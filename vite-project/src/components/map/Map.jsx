@@ -1,5 +1,6 @@
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import './Map.css'
 
 const vancouver = {
@@ -7,67 +8,35 @@ const vancouver = {
   lng: -123.116226,
 }
 
-function Map({ propertyAddresses }) {
-    console.log(propertyAddresses)
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyBLFCLKvngrnl7PBEZczkzLJbObWvJDScM',
-  })
+const MapComponent = ({propertyAddresses}) => {
+  const mapContainerRef = useRef(null);
+  const [lat, setLat] = useState(vancouver.lat);
+  const [lng, setLng] = useState(vancouver.lng);
+  const [zoom, setZoom] = useState(10);
 
-  const [markers, setMarkers] = useState([])
-  const mapRef = useRef()
-  const [center, setCenter] = useState(vancouver)
-
+  mapboxgl.accessToken = 'pk.eyJ1IjoiZW1pbHl6MTgiLCJhIjoiY2x6MHh1bm02MWIwODJrb3I0aDl0dWxpYyJ9.sNVwa6RZKijr8TQtEmIPdA';
 
   useEffect(() => {
-    if (isLoaded) {
-    setMarkers([])
+    const map = new mapboxgl.Map({
+      container: mapContainerRef.current,
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [lng, lat],
+      zoom: zoom,
+    });
+
+    // Add navigation control (the +/- zoom buttons)
+    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
     
-    const geocoder = new window.google.maps.Geocoder()
 
-    propertyAddresses.forEach((propertyAddress) => {
-      let { street, city, province } = propertyAddress
-      if (!street) street = ''
-      if (!city) city = ''
-      if (!province) province = ''
+    return () => map.remove();
+  }, []);
 
-      const address = `${street}, ${city}, ${province}`
-      geocoder.geocode({ address }, (results, status) => {
-        if (status === 'OK') {
-          const position = results[0].geometry.location
-          const newMarker = { lat: position.lat(), lng: position.lng() }
-          setCenter(newMarker)
+  return (
+    <div>
+      <div className="map-container" ref={mapContainerRef} />
+    </div>
+  );
+};
 
-          setMarkers((prevMarkers) => [...prevMarkers, newMarker])
-        } else {
-          console.log('Geocode was not successful for the following reason: ' + status)
-        }
-      })
-    })
-}
-  }, [propertyAddresses, isLoaded]) 
-
-  const onLoad = async (mapInstance) => {
-    mapRef.current = mapInstance
-  }
-
-  return isLoaded ? (
-    <GoogleMap
-      mapContainerClassName="map-container"
-      center={center}
-      zoom={10}
-      onLoad={onLoad}
-      options={{
-        mapId: 'id',
-      }}
-    >
-         {markers.map((marker, index) => (
-        <Marker key={index} position={marker} />
-      ))}
-    </GoogleMap>
-  ) : (
-    <></>
-  )
-}
-
-export default Map
+export default MapComponent;
