@@ -42,14 +42,14 @@ function MiniPropertyCard(props) {
 
   return (
     <>
-      <div className="property-card" ref={setNodeRef} onClick={zoomMap}>
+      <div className="property-card" ref={setNodeRef}>
         <Carousel
           className="carousel-container"
           data={propertyInfo.HouseImgs}
           size= {carouselSize}
         />
         <div {...attributes} {...listeners}>
-          <div className="card-details">
+          <div className="card-details" onClick={zoomMap}>
             <h3 className="house-title">{propertyInfo.Title}</h3>
             <span className="address">
               {Street && `  ${Street}, `}

@@ -36,6 +36,8 @@ function Map({ propertyAddresses,  zoomMapProperty, isRecommendation}) {
   const [markers, setMarkers] = useState([]);
   const [isZoom, setIsZoom] = useState(false);
 
+  const [isZoomHelper, setIsZoomHelper] = useState(false); // will zoom on every map load if true; set to true on card click
+
 
   const mapRef = useRef();
   const [center, setCenter] = useState(vancouver);
@@ -87,6 +89,7 @@ function Map({ propertyAddresses,  zoomMapProperty, isRecommendation}) {
       zoomCenter().then((position) => {
         setCenter(position);
         setIsZoom(true) //  // triggered when clicking a card, clicking the expand button does not count
+        setIsZoomHelper(true) // set to true to prevent zooming out after clicking expand
         console.log("card clicked")
       }).catch((error) => {
         console.error(error);
@@ -158,7 +161,9 @@ function Map({ propertyAddresses,  zoomMapProperty, isRecommendation}) {
         return markerInstance;
       });
 
-      mapRef.current.setZoom(15); // this fixes the issue where user clicks expand, and the map zooms out
+      if (isZoomHelper) {
+        mapRef.current.setZoom(15); // this fixes the issue where user clicks expand, and the map zooms out, but now just zoomed in from the start
+      }
 
       markersRef.current = newMarkers;
 
@@ -175,7 +180,7 @@ function Map({ propertyAddresses,  zoomMapProperty, isRecommendation}) {
     mapRef.current = mapInstance;
   };
 
-  // console.log("is Zoom " + isZoom)
+  console.log("is Zoom " + isZoom)
 
   return isLoaded ? (
     <GoogleMap
