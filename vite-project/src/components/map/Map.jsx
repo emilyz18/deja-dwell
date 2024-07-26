@@ -1,5 +1,6 @@
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import React, { useState, useRef, useEffect } from 'react';
+import { MarkerClusterer } from '@googlemaps/markerclusterer';
 import './Map.css';
 
 const vancouver = {
@@ -17,6 +18,7 @@ function Map({ propertyAddresses }) {
   const mapRef = useRef();
   const [center, setCenter] = useState(vancouver);
   const markersRef = useRef([]);
+  const markerClusterRef = useRef();
 
   useEffect(() => {
     if (isLoaded) {
@@ -43,11 +45,8 @@ function Map({ propertyAddresses }) {
         });
       });
 
-
-      // need this so that markers load as user
       Promise.all(geocodePromises)
         .then((geocodedMarkers) => {
-
           setMarkers(geocodedMarkers); // geomarker is lat and long;
           if (geocodedMarkers.length > 0) {
             setCenter(geocodedMarkers[0]); // TODO: set center to user location?
@@ -70,7 +69,6 @@ function Map({ propertyAddresses }) {
       // Add new markers
       const newMarkers = markers.map((marker) => {
         const markerInstance = new window.google.maps.Marker({
-          map: mapRef.current,
           position: marker,
           title: 'Marker',
         });
@@ -78,6 +76,13 @@ function Map({ propertyAddresses }) {
       });
 
       markersRef.current = newMarkers; // Update markersRef with new markers
+
+      // Initialize marker clusterer
+      if (markerClusterRef.current) {
+        markerClusterRef.current.clearMarkers();
+      }
+
+      markerClusterRef.current = new MarkerClusterer({ map: mapRef.current, markers: newMarkers });
     }
   }, [markers, isLoaded]);
 

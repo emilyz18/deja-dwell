@@ -13,12 +13,12 @@ const { db } = require('../db'); // Ensure this path is correct
 
 const importData = async () => {
   db.once('open', async () => {
-    await User.deleteMany({});
-    await Landlord.deleteMany({});
-    await Tenant.deleteMany({});
-    await TenantPreference.deleteMany({});
-    await Property.deleteMany({});
-    await Match.deleteMany({});
+    // await User.deleteMany({});
+    // await Landlord.deleteMany({});
+    // await Tenant.deleteMany({});
+    // await TenantPreference.deleteMany({});
+    // await Property.deleteMany({});
+    // await Match.deleteMany({});
     try {
       // Read JSON files
       const users = JSON.parse(
