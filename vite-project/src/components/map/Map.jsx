@@ -35,6 +35,8 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
   });
 
   const [markers, setMarkers] = useState([]);
+  const [isZoom, setIsZoom] = useState(false);
+
   const mapRef = useRef();
   const [center, setCenter] = useState(vancouver);
   const markersRef = useRef([]);
@@ -49,7 +51,6 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
   }, [isLoaded]);
 
   const convertToAddressString = (propertyAddress) => {
-    console.log("zoom map prop "+JSON.stringify(propertyAddress.City))
 
     let { Street, City, Province } = propertyAddress;
     if (!Street) Street = '';
@@ -63,10 +64,10 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
   const zoomCenter = () => {
     return new Promise((resolve, reject) => {
       if (zoomMapProperty && geocoderRef.current) {
+        setIsZoom(true);
         const addr = convertToAddressString(zoomMapProperty);
   
         geocoderRef.current.geocode({ address: addr }, (results, status) => {
-          console.log("address" + addr)
           if (status === 'OK') {
             const position = results[0].geometry.location;
             console.log("zoom pos: " + position)
@@ -96,6 +97,7 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
 
   useEffect(() => {
     if (isLoaded) {
+      setIsZoom(true)
       // const geocoder = new window.google.maps.Geocoder();
 
       const geocodePromises = propertyAddresses.map((propertyAddress) => {
@@ -113,7 +115,7 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
               resolve({ lat: position.lat(), lng: position.lng() });
             } else {
               console.log('Geocode was not successful for the following reason: ' + status);
-              reject(status);
+              // reject(status);
             }
           });
         });
@@ -169,13 +171,13 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
     mapRef.current = mapInstance;
   };
 
-  console.log(center)
+  console.log(isZoom)
 
   return isLoaded ? (
     <GoogleMap
       mapContainerClassName="map-container"
       center={center}
-      zoom={zoomMapProperty? 15: 10}
+      zoom={isZoom? 15: 10}
       onLoad={onLoad}
       options={{
         //mapId: 'id',

@@ -124,7 +124,6 @@ function PropertyCardList({ searchMode }) {
   };
 
   const zoomMap = (property) => {
-    console.log("card clicked" + JSON.stringify(property));
     setzoomMapProperty(property)
   }
 
