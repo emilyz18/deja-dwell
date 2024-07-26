@@ -8,6 +8,25 @@ const vancouver = {
   lng: -123.116226,
 };
 
+const mapStyles = [
+  {
+    "featureType": "poi.medical",
+    "elementType": "labels",
+    "stylers": [{ "visibility": "off" }]
+  },
+  {
+    "featureType": "poi.business",
+    "elementType": "labels",
+    "stylers": [{ "visibility": "off" }]
+  },
+  {
+    "featureType": "poi.attraction",
+    "elementType": "labels",
+    "stylers": [{ "visibility": "off" }]
+  },
+
+];
+
 
 function Map({ propertyAddresses }) {
   const { isLoaded } = useJsApiLoader({
@@ -103,7 +122,8 @@ function Map({ propertyAddresses }) {
       zoom={10}
       onLoad={onLoad}
       options={{
-        mapId: 'id',
+        //mapId: 'id',
+        styles: mapStyles,
       }}
     >
     </GoogleMap>
