@@ -379,7 +379,7 @@ function PropertyCardList({ searchMode }) {
                 className="property-popup"
                 onClick={(e) => e.stopPropagation()}
               >
-                <ExpandedPropertyCard propertyInfo={selectedProperty} />
+                <ExpandedPropertyCard propertyInfo={selectedProperty} isSearch={true} />
               </div>
             </div>
           )}

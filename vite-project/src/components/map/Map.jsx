@@ -27,8 +27,7 @@ const mapStyles = [
 ];
 
 
-function Map({ propertyAddresses,  zoomMapProperty}) {
-  // console.log("zoom property: " + zoomMapProperty)
+function Map({ propertyAddresses,  zoomMapProperty, isRecommendation}) {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: 'AIzaSyBLFCLKvngrnl7PBEZczkzLJbObWvJDScM',
@@ -36,6 +35,7 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
 
   const [markers, setMarkers] = useState([]);
   const [isZoom, setIsZoom] = useState(false);
+
 
   const mapRef = useRef();
   const [center, setCenter] = useState(vancouver);
@@ -64,7 +64,6 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
   const zoomCenter = () => {
     return new Promise((resolve, reject) => {
       if (zoomMapProperty && geocoderRef.current) {
-        setIsZoom(true);
         const addr = convertToAddressString(zoomMapProperty);
   
         geocoderRef.current.geocode({ address: addr }, (results, status) => {
@@ -87,8 +86,8 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
     if (zoomMapProperty) {
       zoomCenter().then((position) => {
         setCenter(position);
-        setIsZoom(true)
-        console.log("use effect center: " + center.lat)
+        setIsZoom(true) //  // triggered when clicking a card, clicking the expand button does not count
+        console.log("card clicked")
       }).catch((error) => {
         console.error(error);
       });
@@ -98,9 +97,9 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
 
   useEffect(() => {
     if (isLoaded) {
+      // triggered when clicking expand, so it zooms out after
+      // TODO: this is buggy, setting to true does not zoom at all (maybe already zoomed, so won't zoom again??)
       setIsZoom(false)
-      // const geocoder = new window.google.maps.Geocoder();
-
       const geocodePromises = propertyAddresses.map((propertyAddress) => {
         let { street, city, province } = propertyAddress;
         if (!street) street = '';
@@ -126,7 +125,10 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
         .then((geocodedMarkers) => {
           setMarkers(geocodedMarkers); // geomarker is lat and long;
           if (geocodedMarkers.length > 0) {
-            // setCenter(geocodedMarkers[0]); // TODO: set center to user location?
+            if (isRecommendation) {
+              setCenter(geocodedMarkers[0]);
+              setIsZoom(true) // on every map load, set to true if is in recommendation
+            }
           }
         })
         .catch((error) => {
@@ -141,7 +143,7 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
       if (markersRef.current) {
         markersRef.current.forEach(marker => marker.setMap(null));
       }
-      markersRef.current = []; // Clear the array
+      markersRef.current = [];
 
       // Add new markers
       const newMarkers = markers.map((marker) => {
@@ -150,15 +152,16 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
           title: 'Marker',
           icon: {
             url: '/images/marker.png',
-            scaledSize: new window.google.maps.Size(50, 50), // Adjust the size as needed
+            scaledSize: new window.google.maps.Size(50, 50),
           }
         });
         return markerInstance;
       });
 
-      markersRef.current = newMarkers; // Update markersRef with new markers
+      mapRef.current.setZoom(15); // this fixes the issue where user clicks expand, and the map zooms out
 
-      // Initialize marker clusterer
+      markersRef.current = newMarkers;
+
       if (markerClusterRef.current) {
         markerClusterRef.current.clearMarkers();
       }
@@ -172,7 +175,7 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
     mapRef.current = mapInstance;
   };
 
-  console.log(isZoom)
+  // console.log("is Zoom " + isZoom)
 
   return isLoaded ? (
     <GoogleMap
