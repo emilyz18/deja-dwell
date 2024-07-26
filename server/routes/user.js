@@ -2,7 +2,6 @@ var express = require('express')
 var crypto = require('crypto')
 const jwt = require('jsonwebtoken')
 
-const { db } = require("../db");
 const { v4: uuid } = require('uuid')
 
 const userQueries = require('../dataBase/queries/userQueries')
@@ -48,6 +47,20 @@ const newLandlord = (landlordId, houseID) => ({
   LandlordID: landlordId,
   HouseID: houseID,
 })
+
+const secret = process.env.SECRET; 
+
+// Middleware to authenticate JWT
+const authenticateToken = (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token) return res.status(401).json({ message: 'No token in cookie, unauthorized' }); 
+  // decode and verify 
+  jwt.verify(token, secret, (err, user) => {
+    if (err) return res.status(403).json({ message: 'Failed to varidy or expired token, forbidden' });
+    req.user = user; // decoded user 
+    next(); 
+  });
+};
 
 router.post('/register', async (req, res) => {
   const userdata = req.body.user
@@ -123,12 +136,23 @@ router.post('/login', async (req, res) => {
     };
 
     const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: '1h' });
+    res.cookie('token', token, { httpOnly: true }); 
 
     res.status(200).json({ Auth: true, User: user, token })
   } catch (err) {
     res.status(401).json({ message: err.message })
   }
 })
+
+router.get('/verifySession', authenticateToken, async (req, res) => {
+  try {
+    const user = await userQueries.getUserByID(req.user.UserID); 
+    if (!user) return res.status(404).send('User not found');
+    res.json(user);
+  } catch (err) {
+    res.status(500).send('Server error');
+  }
+});
 
 router.get('/:userID', async (req, res) => {
   const { userID } = req.params
@@ -158,7 +182,7 @@ router.patch('/edit', async (req, res) => {
   const userID = userdata.UserID
 
   try {
-    const updatedUser = await userQueries.editProfile(userID, userdata) // Using Mongoose query
+    const updatedUser = await userQueries.editProfile(userID, userdata) 
     if (updatedUser) {
       return res.status(200).json(updatedUser)
     } else {
