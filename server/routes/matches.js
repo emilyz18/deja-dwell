@@ -26,7 +26,20 @@ router.patch('/:matchId', async (req, res) => {
     return res.status(400).send('Missing MatchStatus')
   }
 
+
   try {
+    if(MatchStatus == 'Accepted') {
+      // Reject the rest other than the accept one
+      const allMatch = await matchQueries.getAllMatches();
+      const acceptedMatch = allMatch.find(match => (match.MatchID === matchId));
+      const rejectedMatches = allMatch.filter(match => (match.MatchID !== matchId && match.HouseID === acceptedMatch.HouseID));
+      await Promise.all(
+        rejectedMatches.map(rejectedMatch => {
+          matchQueries.updateMatchStatus(rejectedMatch.MatchID, 'Rejected')
+        }
+        )
+      );
+    }
     const updatedMatch = await matchQueries.updateMatchStatus(
       matchId,
       MatchStatus

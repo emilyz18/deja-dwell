@@ -59,7 +59,6 @@ const LandlordPropertyCard = ({ landlordId }) => {
         },
       })
     )
-    setApplicants(applicants.filter((applicant) => applicant.name !== name))
     setNotification({
       open: true,
       message: `Rejected applicant: ${name}`,
@@ -82,24 +81,6 @@ const LandlordPropertyCard = ({ landlordId }) => {
         },
       })
     )
-
-    // Reject other applicants
-    applicants.forEach((applicant) => {
-      if (applicant.name !== name) {
-        dispatch(
-          updateMatchAsync({
-            matchId: applicant.matchID,
-            matchData: {
-              TenantID: applicant.tenantID,
-              LandlordID: applicant.landlordID,
-              HouseID: applicant.houseID,
-              MatchStatus: 'Rejected',
-            },
-          })
-        )
-      }
-    })
-
     setNotification({
       open: true,
       message: `Accepted applicant: ${name}`,

@@ -57,6 +57,8 @@ const matchSlice = createSlice({
       })
       .addCase(updateMatchAsync.fulfilled, (state, action) => {
         state.updateMatch = REQUEST_STATE.FULFILLED
+        state.getLandlordMatches = REQUEST_STATE.IDLE
+        state.getTenantMatches = REQUEST_STATE.IDLE
         const index = state.list.findIndex(
           (match) => match.MatchID === action.payload.MatchID
         )
