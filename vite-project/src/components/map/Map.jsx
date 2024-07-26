@@ -24,11 +24,11 @@ const mapStyles = [
     "elementType": "labels",
     "stylers": [{ "visibility": "off" }]
   },
-
 ];
 
 
-function Map({ propertyAddresses }) {
+function Map({ propertyAddresses,  zoomMapProperty}) {
+  // console.log("zoom property: " + zoomMapProperty)
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: 'AIzaSyBLFCLKvngrnl7PBEZczkzLJbObWvJDScM',
@@ -39,10 +39,64 @@ function Map({ propertyAddresses }) {
   const [center, setCenter] = useState(vancouver);
   const markersRef = useRef([]);
   const markerClusterRef = useRef();
+  const geocoderRef = useRef(null);
+
 
   useEffect(() => {
     if (isLoaded) {
-      const geocoder = new window.google.maps.Geocoder();
+      geocoderRef.current = new window.google.maps.Geocoder();
+    }
+  }, [isLoaded]);
+
+  const convertToAddressString = (propertyAddress) => {
+    console.log("zoom map prop "+JSON.stringify(propertyAddress.City))
+
+    let { Street, City, Province } = propertyAddress;
+    if (!Street) Street = '';
+    if (!City) City = '';
+    if (!Province) Province = '';
+
+    return `${Street}, ${City}, ${Province}`;
+
+  }
+
+  const zoomCenter = () => {
+    return new Promise((resolve, reject) => {
+      if (zoomMapProperty && geocoderRef.current) {
+        const addr = convertToAddressString(zoomMapProperty);
+  
+        geocoderRef.current.geocode({ address: addr }, (results, status) => {
+          console.log("address" + addr)
+          if (status === 'OK') {
+            const position = results[0].geometry.location;
+            console.log("zoom pos: " + position)
+            resolve({ lat: position.lat(), lng: position.lng() });
+          } else {
+            console.error('Geocode was not successful for the following reason: ' + status);
+            // reject(('Geocode failed with status: ' + status));
+          }
+        });
+      } else {
+        // reject(('No zoomMapProperty provided'));
+      }
+    });
+  }
+
+  useEffect(() => {
+    if (zoomMapProperty) {
+      zoomCenter().then((position) => {
+        setCenter(position);
+        console.log("use effect center: " + center.lat)
+      }).catch((error) => {
+        console.error(error);
+      });
+    }
+  }, [zoomMapProperty]);
+  
+
+  useEffect(() => {
+    if (isLoaded) {
+      // const geocoder = new window.google.maps.Geocoder();
 
       const geocodePromises = propertyAddresses.map((propertyAddress) => {
         let { street, city, province } = propertyAddress;
@@ -53,7 +107,7 @@ function Map({ propertyAddresses }) {
         const address = `${street}, ${city}, ${province}`;
 
         return new Promise((resolve, reject) => {
-          geocoder.geocode({ address }, (results, status) => {
+          geocoderRef.current.geocode({ address }, (results, status) => {
             if (status === 'OK') {
               const position = results[0].geometry.location;
               resolve({ lat: position.lat(), lng: position.lng() });
@@ -69,7 +123,7 @@ function Map({ propertyAddresses }) {
         .then((geocodedMarkers) => {
           setMarkers(geocodedMarkers); // geomarker is lat and long;
           if (geocodedMarkers.length > 0) {
-            setCenter(geocodedMarkers[0]); // TODO: set center to user location?
+            // setCenter(geocodedMarkers[0]); // TODO: set center to user location?
           }
         })
         .catch((error) => {
@@ -115,11 +169,13 @@ function Map({ propertyAddresses }) {
     mapRef.current = mapInstance;
   };
 
+  console.log(center)
+
   return isLoaded ? (
     <GoogleMap
       mapContainerClassName="map-container"
       center={center}
-      zoom={10}
+      zoom={zoomMapProperty? 15: 10}
       onLoad={onLoad}
       options={{
         //mapId: 'id',
