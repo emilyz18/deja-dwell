@@ -87,6 +87,7 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
     if (zoomMapProperty) {
       zoomCenter().then((position) => {
         setCenter(position);
+        setIsZoom(true)
         console.log("use effect center: " + center.lat)
       }).catch((error) => {
         console.error(error);
@@ -97,7 +98,7 @@ function Map({ propertyAddresses,  zoomMapProperty}) {
 
   useEffect(() => {
     if (isLoaded) {
-      setIsZoom(true)
+      setIsZoom(false)
       // const geocoder = new window.google.maps.Geocoder();
 
       const geocodePromises = propertyAddresses.map((propertyAddress) => {
