@@ -8,6 +8,7 @@ const vancouver = {
   lng: -123.116226,
 };
 
+
 function Map({ propertyAddresses }) {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -71,6 +72,10 @@ function Map({ propertyAddresses }) {
         const markerInstance = new window.google.maps.Marker({
           position: marker,
           title: 'Marker',
+          icon: {
+            url: '/images/marker.png',
+            scaledSize: new window.google.maps.Size(50, 50), // Adjust the size as needed
+          }
         });
         return markerInstance;
       });
@@ -82,7 +87,8 @@ function Map({ propertyAddresses }) {
         markerClusterRef.current.clearMarkers();
       }
 
-      markerClusterRef.current = new MarkerClusterer({ map: mapRef.current, markers: newMarkers });
+      markerClusterRef.current = new MarkerClusterer({ map: mapRef.current, markers: newMarkers
+      });
     }
   }, [markers, isLoaded]);
 
