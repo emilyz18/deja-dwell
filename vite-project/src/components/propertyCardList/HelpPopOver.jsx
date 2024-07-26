@@ -1,58 +1,40 @@
-// credit to : https://mui.com/material-ui/react-popover/#mouse-over-interaction 
+// modified form : https://mui.com/material-ui/react-popper/
 import * as React from 'react';
-import Popover from '@mui/material/Popover';
+import Popper from '@mui/material/Popper';
 import Typography from '@mui/material/Typography';
 import SwipeIcon from '@mui/icons-material/Swipe';
 import CancelIcon from '@mui/icons-material/Cancel';
 import HelpIcon from '@mui/icons-material/Help';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Box from '@mui/material/Box';
-
+import { Button } from '@mui/material';
 
 export default function MouseOverPopover() {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handlePopoverOpen = (event) => {
-        setAnchorEl(event.currentTarget);
+        setAnchorEl(anchorEl ? null : event.currentTarget);
     };
 
-    const handlePopoverClose = () => {
-        setAnchorEl(null);
-    };
+    
 
     const open = Boolean(anchorEl);
+    const id = open ? 'simple-popper' : undefined;
 
     return (
         <div>
-            <Typography
-                aria-owns={open ? 'mouse-over-popover' : undefined}
-                aria-haspopup="true"
-                onMouseEnter={handlePopoverOpen}
-                onMouseLeave={handlePopoverClose}
-                sx={{ color: 'purple' }}
-            >
-                <HelpIcon fontSize="small"/>
-                How to apply?
-            </Typography>
-            <Popover
-                id="mouse-over-popover"
-                sx={{
-                    pointerEvents: 'none',
-                }}
-                open={open}
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                onClose={handlePopoverClose}
-                disableRestoreFocus
-            >
-                <Box sx={{ p: 1, margin:2 }}>
+           
+            <Button
+                    aria-describedby={id}
+                    onClick={handlePopoverOpen}
+                    sx={{ color: 'purple' }}
+                >
+                    <HelpIcon fontSize="small" />
+                    How to apply?
+            </Button>
+            
+            <Popper id={id} open={open} anchorEl={anchorEl} >
+                <Box sx={{ p: 3, bgcolor: 'background.paper', boxShadow: 1 }}>
                     <Typography variant="body2" component="div" sx={{ display: 'flex', alignItems: 'center' }}>
                         Drag the card <SwipeIcon sx={{ ml: 1 }} />
                     </Typography>
@@ -62,8 +44,10 @@ export default function MouseOverPopover() {
                         <CheckCircleIcon sx={{ color: 'green' }} />
                     </Typography>
                 </Box>
+                
+            </Popper>
 
-            </Popover>
+
         </div>
     );
 }

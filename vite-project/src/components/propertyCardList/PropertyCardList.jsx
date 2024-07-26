@@ -288,9 +288,9 @@ function PropertyCardList({ searchMode }) {
         <div>
           <Box sx={{
             display: 'flex', alignItems: 'center',
-            marginLeft: 10,
-            mt: 5,
-            mb: 2
+            paddingLeft: 8,
+            pt: 5,
+            pb: 2
           }}
           >
             <Typography
@@ -305,8 +305,7 @@ function PropertyCardList({ searchMode }) {
             </Typography>
             <Box
               sx={{
-                marginRight: 10,
-                fontSize: '2.5rem',
+                paddingRight: 10,
               }}
             >
               <HelpPopOver />
