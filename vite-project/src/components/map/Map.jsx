@@ -181,6 +181,7 @@ function Map({ propertyAddresses,  zoomMapProperty, isRecommendation}) {
   };
 
   console.log("is Zoom " + isZoom)
+  console.log("center" + JSON.stringify(center))
 
   return isLoaded ? (
     <GoogleMap
