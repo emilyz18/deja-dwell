@@ -1,14 +1,8 @@
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
+import React, { useState, useEffect } from 'react'
 import { styled } from '@mui/material/styles'
-import { Box, Typography, List, ListItem } from '@mui/material'
-import { Grid } from '@mui/material'
-import Avatar from '@mui/material/Avatar'
-import Stack from '@mui/material/Stack'
-import Alert from '@mui/material/Alert'
-import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Box, Typography, List, ListItem, Snackbar, Alert, Avatar, Stack } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import { getUserAsync, editUserAsync } from '../redux/user/thunks.js'
 import { updateUser } from '../redux/user/reducer.js'
 import './generalInputForm.css'
@@ -31,8 +25,6 @@ export function GeneralInputForm() {
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
   };
-
-  
 
   useEffect(() => {
     if (user && user.UserID) {
@@ -77,10 +69,10 @@ export function GeneralInputForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-      if (validate()) {
-        dispatch(editUserAsync(user))
-        setIsEditing(false)
-      }
+    if (validate()) {
+      dispatch(editUserAsync(user))
+      setIsEditing(false)
+    }
   }
 
   const VisuallyHiddenInput = styled('input')({
@@ -116,102 +108,82 @@ export function GeneralInputForm() {
           <Typography variant="h4" className="header">
             My Profile
           </Typography>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <TextField
-                className="name-field"
-                label="Full Name"
-                variant="filled"
-                required
-                name="UserName"
-                value={user.UserName || ''}
-                onChange={handleChange}
-                placeholder="Enter name here..."
-                fullWidth
-                margin="normal"
-                error={!!errors.UserName}
-                helperText={errors.UserName}
+          <div className="auth-form-group">
+            <label htmlFor="userName" className="auth-label">Full Name</label>
+            <input
+              id="userName"
+              name="UserName"
+              required
+              className="auth-input"
+              value={user.UserName || ''}
+              onChange={handleChange}
+              placeholder="Enter name here..."
+            />
+            {errors.UserName && <Typography color="error">{errors.UserName}</Typography>}
+          </div>
+          <div className="auth-form-group">
+            <label htmlFor="profileImg" className="auth-label">Image URL</label>
+            <input
+              id="profileImg"
+              name="ProfileImg"
+              className="auth-input"
+              value={user.ProfileImg || ''}
+              onChange={handleChange}
+              placeholder="Enter Image URL here..."
+            />
+            <button
+              component="label"
+              className="upload-button"
+            >
+              Upload Photo
+              <VisuallyHiddenInput
+                type="file"
+                accept="image/*"
+                onChange={handlePicFileUpload}
               />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                className="image-field"
-                label="Image URL"
-                variant="filled"
-                name="ProfileImg"
-                value={user.ProfileImg || ''}
-                onChange={handleChange}
-                placeholder="Enter Image URL here..."
-                fullWidth
-                margin="normal"
-                
-              />
-              <Button
-                value={user.ProfileImg || ''}
-                component="label"
-                variant="contained"
-                className="upload-button"
-              >
-                Upload Photo
-                <VisuallyHiddenInput
-                  type="file"
-                  accept="image/*"
-                  onChange={handlePicFileUpload}
-                />
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                className="phoneNumber-field"
-                label="Phone Number"
-                variant="filled"
-                required
-                name="PhoneNumber"
-                value={user.PhoneNumber || ''}
-                onChange={handleChange}
-                placeholder="Enter phone number here..."
-                fullWidth
-                margin="normal"
-                error={!!errors.PhoneNumber}
-                helperText={errors.PhoneNumber}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                className="email-field"
-                label="Email"
-                variant="filled"
-                required
-                type="email"
-                name="UserEmail"
-                value={user.UserEmail || ''}
-                onChange={handleChange}
-                placeholder="Enter email here..."
-                fullWidth
-                margin="normal"
-                error={!!errors.UserEmail}
-                helperText={errors.UserEmail}
-              />
-            </Grid>
-            <Grid item xs={12} className="button-container">
-              <Button
-                className="button"
-                type="submit"
-                variant="contained"
-                color="primary"
-              >
-                Save
-              </Button>
-              <Button
-                className="button"
-                variant="contained"
-                color="primary"
-                onClick={handleCancel}
-              >
-                Cancel
-              </Button>
-            </Grid>
-          </Grid>
+            </button>
+          </div>
+          <div className="auth-form-group">
+            <label htmlFor="phoneNumber" className="auth-label">Phone Number</label>
+            <input
+              id="phoneNumber"
+              name="PhoneNumber"
+              required
+              className="auth-input"
+              value={user.PhoneNumber || ''}
+              onChange={handleChange}
+              placeholder="Enter phone number here..."
+            />
+            {errors.PhoneNumber && <Typography color="error">{errors.PhoneNumber}</Typography>}
+          </div>
+          <div className="auth-form-group">
+            <label htmlFor="userEmail" className="auth-label">Email</label>
+            <input
+              id="userEmail"
+              name="UserEmail"
+              type="email"
+              required
+              className="auth-input"
+              value={user.UserEmail || ''}
+              onChange={handleChange}
+              placeholder="Enter email here..."
+            />
+            {errors.UserEmail && <Typography color="error">{errors.UserEmail}</Typography>}
+          </div>
+          <div className="button-container">
+            <button
+              type="submit"
+              className="auth-button"
+            >
+              Save
+            </button>
+            <button
+              className="auth-button"
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
+          </div>
         </Box>
       ) : (
         <Box className="general-input-form">
@@ -223,29 +195,39 @@ export function GeneralInputForm() {
           <Typography variant="h4" className="header">
             My Profile
           </Typography>
-          <List>
+          <List className="info-list">
             <ListItem className="list-item">
-              <Typography>Name: {user.UserName || 'N/A'}</Typography>
+              <Typography className="label">Name:</Typography>
+              <Typography className="value">{user.UserName || 'N/A'}</Typography>
             </ListItem>
             <ListItem className="list-item">
-              <Typography>Phone Number: {user.PhoneNumber || 'N/A'}</Typography>
+              <Typography className="label">Phone Number:</Typography>
+              <Typography className="value">{user.PhoneNumber || 'N/A'}</Typography>
             </ListItem>
             <ListItem className="list-item">
-              <Typography>Email: {user.UserEmail || 'N/A'}</Typography>
+              <Typography className="label">Email:</Typography>
+              <Typography className="value">{user.UserEmail || 'N/A'}</Typography>
             </ListItem>
             <ListItem className="list-item">
-              <Button
-                variant="contained"
-                color="primary"
+              <button
+                className="auth-button"
                 onClick={handleEdit}
-                className="button"
               >
                 Edit Profile
-              </Button>
+              </button>
             </ListItem>
           </List>
         </Box>
       )}
+      <Snackbar
+        open={warning}
+        autoHideDuration={3000}
+        onClose={() => setWarning(false)}
+      >
+        <Alert onClose={() => setWarning(false)} severity="warning" sx={{ width: '100%' }}>
+          Please complete your {neededInfo}.
+        </Alert>
+      </Snackbar>
     </>
   )
 }

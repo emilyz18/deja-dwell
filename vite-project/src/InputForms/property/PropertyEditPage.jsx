@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Button from '@mui/material/Button';
-import { getLandlordAsync } from '../../redux/landlord/thunks.js';
-import { getPropertyByIdAsync, patchPropertyAsync, createPropertyAsync } from '../../redux/properties/thunks.js';
-import { updateProperty } from '../../redux/properties/reducer.js';
-import { PropertyForm } from './propertyForm.jsx';
-import { PropertyInputDisplay } from './propertyInputDisplay.jsx'
+import { getLandlordAsync } from '../../redux/landlord/thunks';
+import { getPropertyByIdAsync, patchPropertyAsync, createPropertyAsync } from '../../redux/properties/thunks';
+import { updateProperty } from '../../redux/properties/reducer';
+import { PropertyForm } from './PropertyForm';
+import { PropertyInputDisplay } from './PropertyInputDisplay';
+import './PropertyForm.css';
 
 export function PropertyEditPage() {
     const [isEditing, setIsEditing] = useState(false);
@@ -41,7 +41,6 @@ export function PropertyEditPage() {
             HouseID: landlord.HouseID,
             ...property,
         };
-        // console.log('Request Data in hanfle sumit in property input:', requestData); // Debugging line
 
         if (property.HouseID) {
             dispatch(patchPropertyAsync({ HouseID: landlord.HouseID, property: requestData }));
@@ -53,7 +52,6 @@ export function PropertyEditPage() {
         setIsEditing(false);
         setIsCreating(false);
     };
-
 
     const handleCreateNewPost = () => {
         setIsEditing(true);
@@ -80,22 +78,28 @@ export function PropertyEditPage() {
     }
 
     return (
-        <>
-            {(!property.HouseID || isCreating) ? (
-                <Button variant="contained" color="primary" onClick={handleCreateNewPost}>
-                    Create New Post
-                </Button>
-            ) : null}
+      <div className="property-edit-page">
+          {(!property.HouseID || isCreating) ? (
+            <button className="create-new-post-button" onClick={handleCreateNewPost}>
+                Create New Post
+            </button>
+          ) : null}
 
-            {(isEditing || isCreating) && (
-                <PropertyForm property={property} handleSubmit={handleSubmit} handleChange={handleChange} handleCancel={handleCancel} handleImageChange={handleImageChange} />
-            )}
-            {!isEditing && !isCreating && property.HouseID && (
-                <PropertyInputDisplay
-                    property={property}
-                    handleEdit={handleEdit}
-                />
-            )}
-        </>
+          {(isEditing || isCreating) && (
+            <PropertyForm
+              property={property}
+              handleSubmit={handleSubmit}
+              handleChange={handleChange}
+              handleCancel={handleCancel}
+              handleImageChange={handleImageChange}
+            />
+          )}
+          {!isEditing && !isCreating && property.HouseID && (
+            <PropertyInputDisplay
+              property={property}
+              handleEdit={handleEdit}
+            />
+          )}
+      </div>
     );
 }

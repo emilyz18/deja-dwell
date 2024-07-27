@@ -1,23 +1,19 @@
 .general-input-form {
-  background-color: #efefef;
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
-  font-family: 'Arial', sans-serif;
-  color: #333;
-}
-
-.general-input-form h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-family: 'Mulish', sans-serif;
   color: #333;
 }
 
 .general-input-form .header {
-  font-size: 22px;
+  font-size: 2rem;
   margin-bottom: 15px;
-  color: #333;
+  color: #111111;
+  text-align: center;
+  font-weight: bold;
 }
 
 .general-input-form .info-list {
@@ -47,6 +43,44 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
+}
+
+.general-input-form .auth-input, .general-input-form .auth-select, .general-input-form .auth-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.general-input-form .auth-button {
+  background-color: #111111;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.general-input-form .auth-button:hover {
+  background-color: #333333;
+}
+
+.general-input-form .upload-button {
+  margin-top: 10px;
+  background-color: #111111;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.general-input-form .upload-button:hover {
+  background-color: #333333;
 }
 
 .MuiAvatar-root {
@@ -79,8 +113,4 @@
 
 .MuiButton-containedSecondary:hover {
   background-color: #d32f2f;
-}
-
-.upload-button {
-  margin-top: 10px;
 }
