@@ -1,3 +1,4 @@
+
 .property-list {
   display: flex;
   flex-wrap: wrap;
@@ -132,4 +133,19 @@
 .property-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+.body .reload-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  border-radius: 50%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 0;
+  padding: 12px;
+  text-align: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  border: 2px solid red;
 }
