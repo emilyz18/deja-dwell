@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import { theme } from '../themes.jsx'
 
 function MiniPropertyCard(props) {
-  const { propertyInfo, likedFn, dislikedFn, displayPopup } = props
+  const { propertyInfo, likedFn, dislikedFn, displayPopup, searchMode, zoomMap } = props
 
   const { NumBedroom, NumBathroom, isAC, isHeater, isFurnished, AllowPet, AllowSmoke, AllowParty, AllowWeed, ExpectedPrice, Street, City, Province } = propertyInfo;
 
@@ -37,16 +37,19 @@ function MiniPropertyCard(props) {
     displayPopup()
   }
 
+  const carouselSize = searchMode ? { width: 400, height: 230 } : { width: 450, height: 250 };
+
+
   return (
     <>
       <div className="property-card" ref={setNodeRef}>
         <Carousel
           className="carousel-container"
           data={propertyInfo.HouseImgs}
-          size={{ width: 450, height: 250 }}
+          size= {carouselSize}
         />
         <div {...attributes} {...listeners}>
-          <div className="card-details">
+          <div className="card-details" onClick={zoomMap}>
             <h3 className="house-title">{propertyInfo.Title}</h3>
             <span className="address">
               {Street && `  ${Street}, `}
