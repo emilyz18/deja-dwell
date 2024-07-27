@@ -59,7 +59,8 @@ Our project is a platform designed for tenants and landlords to facilitate findi
 3. [ ] Preference updating based on swap and feedback demand
 4. [X] Actual swiping of each selection
 5. [ ] Allow the landlord to list multiple properties
-6. [ ] Once matched, enable the landlord and tenant to interact
+6. [X] Map API integration to mark property location on map
+7. [ ] Once matched, enable the landlord and tenant to interact
     - Chat message
     - Contact exchange
     - Interview process
