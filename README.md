@@ -18,7 +18,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
         - Tenant account
     - ~~Functionality to swap between the two accounts (only if the user has both accounts, i.e. no option to swap if the user has 1 account only)~~
     - We no longer support a user having both a landlord and tenant account because it is not a useful use-case
-2. [ ] Matching
+2. [x] Matching
     - Stable matching algorithm between tenant property preference and property, tailored to our data
     - Display matching score between user preference & housing post on both the landlord and tenant’s dashboard (only shows in console log)
 3. [X] Dashboard
@@ -35,7 +35,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
         - Property properties
 
 ## Standard Requirements
-1. [ ] User Login page
+1. [x] User Login page
     - Allows user to store data in their account
     - User can log in and log out
 2. [X] Application status
