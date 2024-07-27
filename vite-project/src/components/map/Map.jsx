@@ -30,7 +30,7 @@ const mapStyles = [
 function Map({ propertyAddresses,  zoomMapProperty, isRecommendation}) {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyBLFCLKvngrnl7PBEZczkzLJbObWvJDScM',
+    googleMapsApiKey: import.meta.env.VITE_MAP_API_KEY,
   });
 
   const [markers, setMarkers] = useState([]);
