@@ -39,6 +39,9 @@ function PropertyCardList({ searchMode }) {
     severity: '',
   });
 
+  const [zoomMapProperty, setzoomMapProperty] = useState(null);
+
+
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
     minPrice: '',
@@ -120,6 +123,10 @@ function PropertyCardList({ searchMode }) {
       });
     });
   };
+
+  const zoomMap = (property) => {
+    setzoomMapProperty(property)
+  }
 
   const displayPopup = (property) => {
     setSelectedProperty(property);
@@ -252,7 +259,7 @@ function PropertyCardList({ searchMode }) {
             setFilters={setFilters}
           />
           <div className="search-display">
-            <Map propertyAddresses={propertyAddresses} />
+            <Map propertyAddresses={propertyAddresses} zoomMapProperty={zoomMapProperty} />
 
             <div className="cards-container">
               {displaySearchProperties.length === 0 ? (
@@ -267,6 +274,7 @@ function PropertyCardList({ searchMode }) {
                     likedFn={likedProperty}
                     dislikedFn={dislikedProperty}
                     displayPopup={() => displayPopup(property)}
+                    zoomMap={() => zoomMap(property)}
                     searchMode
                   />
                 ))
@@ -398,7 +406,7 @@ function PropertyCardList({ searchMode }) {
                 className="property-popup"
                 onClick={(e) => e.stopPropagation()}
               >
-                <ExpandedPropertyCard propertyInfo={selectedProperty} />
+                <ExpandedPropertyCard propertyInfo={selectedProperty} isSearch={true} />
               </div>
             </div>
           )}

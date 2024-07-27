@@ -3,7 +3,7 @@ import Carousel from '../carousel/Carousel';
 import './expandedPropertyCard.css';
 import Map from '../map/Map';
 
-export function ExpandedPropertyCard({ propertyInfo }) {
+export function ExpandedPropertyCard({ propertyInfo, isSearch }) {
   const {
     NumBedroom,
     NumBathroom,
@@ -46,7 +46,8 @@ export function ExpandedPropertyCard({ propertyInfo }) {
         {AllowWeed && <span className="amenity">Weed Allowed</span>}
       </div>
       <div>
-        <Map propertyAddresses={address} />
+        {isSearch && <Map propertyAddresses={address} isRecommendation={true}/>
+      }
       </div>
     </div>
   );
