@@ -5,7 +5,7 @@ import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCa
 
 import './History.css'
 import { getPropertiesAsync } from '../../redux/properties/thunks'
-import { getMatchesAsync } from '../../redux/matches/matchThunks'
+import { getTenantMatchesAsync } from '../../redux/matches/matchThunks'
 
 function History({ tenantId }) {
   const dispatch = useDispatch()
@@ -13,20 +13,17 @@ function History({ tenantId }) {
   const [popupVisible, setPopupVisible] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
   const getPropertiesStatus = useSelector((state) => state.properties.getProperties)
-  const getMatchStatus = useSelector((state) => state.matches.getMatches)
+  const getTenantMatchesStatus = useSelector((state) => state.matches.getTenantMatches)
+  const tenantID = user.TenantID;
 
-  //TODO: API Improvement: need to change to getUserMatches(tenantID) and getProperty(propertyID)
   useEffect(() => {
-    if (getPropertiesStatus === 'IDLE' || getMatchStatus === 'IDLE') {
+    if (getPropertiesStatus === 'IDLE' || getTenantMatchesStatus === 'IDLE') {
       dispatch(getPropertiesAsync());
-      dispatch(getMatchesAsync());
+      dispatch(getTenantMatchesAsync(tenantID));
     }
-  }, [getPropertiesStatus, getMatchStatus, dispatch])
+  }, [getPropertiesStatus, getTenantMatchesStatus, dispatch])
   const allProperties = useSelector((state) => state.properties.list)
-  const matches = useSelector((state) => state.matches.list)
-
-  // Filter matches based on tenantId
-  const filteredMatches = matches.filter((match) => match.TenantID === tenantId)
+  const matches = useSelector((state) => state.matches.tenantMatches)
 
   const displayPopup = (match) => {
     const currentProperty = allProperties.find(
@@ -45,7 +42,7 @@ function History({ tenantId }) {
   return (
     <div className="history-container">
       <div className="match-list">
-        {filteredMatches.map((match) => (
+        {matches.map((match) => (
           <MatchItem
             key={match.MatchID}
             match={match}

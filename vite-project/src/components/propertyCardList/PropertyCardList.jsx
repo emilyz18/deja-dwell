@@ -13,6 +13,7 @@ import { createMatchAsync } from '../../redux/matches/matchThunks'
 import { Box, Typography, Fab, Snackbar, Alert } from '@mui/material';
 import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
 import { v4 as uuidv4 } from 'uuid'
+import { getTenantMatchesAsync } from '../../redux/matches/matchThunks'
 
 function PropertyCardList({ searchMode }) {
   const dispatch = useDispatch();
@@ -94,6 +95,7 @@ function PropertyCardList({ searchMode }) {
       })
     ).then(() => {
       reloadProperties();
+      dispatch(getTenantMatchesAsync(user.TenantID));
       setNotification({
         open: true,
         message: `Liked property: ${likedProperty.Title}`,
@@ -116,6 +118,7 @@ function PropertyCardList({ searchMode }) {
       })
     ).then(() => {
       reloadProperties();
+      dispatch(getTenantMatchesAsync(user.TenantID));
       setNotification({
         open: true,
         message: `Disliked property: ${dislikedProperty.Title}`,
