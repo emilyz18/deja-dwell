@@ -57,7 +57,7 @@ Our project is a platform designed for tenants and landlords to facilitate findi
     - As the user looks through options we ask them why they did not choose this specific option
 2. [ ] Profile reviews of the tenant/landlord profiles, from a rating between 1 - 5
 3. [ ] Preference updating based on swap and feedback demand
-4. [x ] Actual swiping of each selection
+4. [X] Actual swiping of each selection
 5. [ ] Allow the landlord to list multiple properties
 6. [ ] Once matched, enable the landlord and tenant to interact
     - Chat message
