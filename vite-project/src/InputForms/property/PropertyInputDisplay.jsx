@@ -20,6 +20,13 @@ export function PropertyInputDisplay({ property, handleEdit }) {
     <div className="property-display-container">
       <h2 className="header">Your Property Information</h2>
       <div className="info-grid">
+        <PropertyAttribute label="Description" value={property.Description} />
+        <div className="property-images">
+          <span className="label">Images:</span>
+          {property.HouseImgs && property.HouseImgs.map((image, index) => (
+            <img key={index} src={image.src} alt={image.alt} className="property-image" />
+          ))}
+        </div>
         <PropertyAttribute label="Title" value={property.Title} />
         <PropertyAttribute label="Province" value={property.Province} />
         <PropertyAttribute label="City" value={property.City} />
@@ -38,12 +45,6 @@ export function PropertyInputDisplay({ property, handleEdit }) {
         <PropertyAttribute label="Furnished" value={property.isFurnished ? 'Yes' : 'No'} />
         <PropertyAttribute label="Number of Parking" value={property.NumOfParking} />
         <PropertyAttribute label="Number of Resident" value={property.NumOfResident} />
-        <div className="property-images">
-          <span className="label">Images:</span>
-          {property.HouseImgs && property.HouseImgs.map((image, index) => (
-            <img key={index} src={image.src} alt={image.alt} className="property-image" />
-          ))}
-        </div>
       </div>
 
       <button className="edit-button" onClick={handleEdit}>
