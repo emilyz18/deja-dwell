@@ -1,3 +1,4 @@
+// image preview method guided by chaptgpt 4o with prompt: how to create image preview for each URL input textfield, generated code applied to handleImageChange()
 import React, { useState } from 'react';
 import './PropertyForm.css';
 
@@ -31,14 +32,13 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
     }
   };
 
-  const renderDateField = (label, name, type = 'text', required = false) => (
+  const renderDateField = (label, name) => (
     <div className="property-form-group">
       <label htmlFor={name}>{label}</label>
       <input
         id={name}
         name={name}
-        type={type}
-        required={required}
+        type="date"
         value={formatDate(property[name]) || ''}
         onChange={handleChange}
       />
@@ -62,7 +62,7 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
   );
 
   const renderCheckboxField = (label, name) => (
-    <div>
+    <div className="property-form-group-inline">
       <input
         type="checkbox"
         id={name}
@@ -75,27 +75,29 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
   );
 
   const renderImageFields = () => (
-    <div className="property-form-group">
+    <div className="property-form-group property-image-group">
       <label>Images</label>
-      {(property.HouseImgs || []).map((image, index) => (
-        <div key={index}>
-          <input
-            type="text"
-            placeholder={`Image URL ${index + 1}`}
-            value={image.src}
-            onChange={(e) => handleImageChange(index, 'src', e)}
-          />
-          <input
-            type="text"
-            placeholder={`Image Alt Text ${index + 1}`}
-            value={image.alt}
-            onChange={(e) => handleImageChange(index, 'alt', e)}
-          />
-          {image.src && (
-            <img src={image.src} alt={image.alt} width={300} />
-          )}
-        </div>
-      ))}
+      <div className="image-inputs">
+        {(property.HouseImgs || []).map((image, index) => (
+          <div key={index} className="image-input-container">
+            <input
+              type="text"
+              placeholder={`Image URL ${index + 1}`}
+              value={image.src}
+              onChange={(e) => handleImageChange(index, 'src', e)}
+            />
+            <input
+              type="text"
+              placeholder={`Image Alt Text ${index + 1}`}
+              value={image.alt}
+              onChange={(e) => handleImageChange(index, 'alt', e)}
+            />
+            {image.src && (
+              <img src={image.src} alt={image.alt} className="property-image" />
+            )}
+          </div>
+        ))}
+      </div>
       {errors.HouseImgs && <p className="error">{errors.HouseImgs}</p>}
     </div>
   );
@@ -104,23 +106,32 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
     <div className="property-form-container">
       <h2 className="header">Input Your Property Information</h2>
       <form onSubmit={onSubmit}>
-        <div className="property-form-grid">
-          {renderInputField('Title', 'Title', 'text', true)}
-          {renderInputField('Province', 'Province', 'text', true)}
-          {renderInputField('City', 'City', 'text', true)}
-          {renderInputField('Street', 'Street')}
-          {renderInputField('Rent Per Month', 'ExpectedPrice', 'number', true)}
-          {renderDateField('Start Date', 'StartDate', 'date', false)}
-          {renderDateField('End Date', 'EndDate', 'date', false)}
+        <div className="property-form-section">
+          <div className="property-form-grid">
+            {renderInputField('Title', 'Title', 'text', true)}
+            {renderInputField('Description', 'Description', 'textarea')}
+            {renderInputField('Province', 'Province', 'text', true)}
+            {renderInputField('City', 'City', 'text', true)}
+            {renderInputField('Street', 'Street')}
+            {renderDateField('Start Date', 'StartDate')}
+            {renderDateField('End Date', 'EndDate')}
+            {renderInputField('Rent Per Month', 'ExpectedPrice', 'number', true)}
+          </div>
+          <hr className="separator" />
         </div>
-        {renderInputField('Description', 'Description', 'textarea')}
-        <div className="property-form-grid">
-          {renderInputField('Number of Bedrooms', 'NumBedroom', 'number')}
-          {renderInputField('Number of Bathrooms', 'NumBathroom', 'number')}
-          {renderInputField('Number of Parking', 'NumOfParking', 'number')}
-          {renderInputField('Number of Resident', 'NumOfResident', 'number')}
+        <div className="property-form-section">
+          <div className="property-form-grid">
+            {renderInputField('Number of Bedrooms', 'NumBedroom', 'number')}
+            {renderInputField('Number of Bathrooms', 'NumBathroom', 'number')}
+            {renderInputField('Number of Parking', 'NumOfParking', 'number')}
+            {renderInputField('Number of Resident', 'NumOfResident', 'number')}
+          </div>
+          <hr className="separator" />
         </div>
-        {renderImageFields()}
+        <div className="property-form-section">
+          {renderImageFields()}
+          <hr className="separator" />
+        </div>
         <div className="property-form-group">
           <label>Preferences</label>
           <div className="preferences-grid">
@@ -132,6 +143,7 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
             {renderCheckboxField('Heater included', 'isHeater')}
             {renderCheckboxField('Furnished', 'isFurnished')}
           </div>
+          <hr className="separator" />
         </div>
         <div className="property-form-group">
           <button type="submit">Publish</button>

@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: #f8f8f8;
     min-height: 100vh;
     font-family: 'Mulish', sans-serif;
 }
@@ -26,7 +25,7 @@
 
 .property-form-container {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
@@ -41,6 +40,17 @@
     color: #111111;
 }
 
+.property-form-section {
+    margin-bottom: 20px;
+}
+
+.separator {
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+    margin: 20px 0;
+}
+
 .property-form-group {
     margin-bottom: 15px;
 }
@@ -49,6 +59,16 @@
     display: block;
     font-weight: 600;
     color: #111111;
+}
+
+.property-form-group-inline {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.property-form-group-inline input[type="checkbox"] {
+    margin-right: 10px;
 }
 
 .property-form-group input,
@@ -81,7 +101,6 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
 }
 
 .info-grid {
@@ -114,6 +133,26 @@
     flex-direction: column;
 }
 
+.property-image-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.image-inputs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.image-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(50% - 20px);
+}
+
 .property-image {
     max-width: 100%;
     height: auto;
@@ -126,4 +165,16 @@
 .edit-button {
     margin-top: 20px;
     align-self: center;
+}
+
+.property-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.preferences-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
 }

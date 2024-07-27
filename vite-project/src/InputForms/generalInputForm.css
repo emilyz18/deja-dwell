@@ -1,3 +1,9 @@
+.general-input-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .general-input-form {
   background-color: #ffffff;
   padding: 20px;
@@ -6,9 +12,18 @@
   margin-top: 20px;
   font-family: 'Mulish', sans-serif;
   color: #333;
+  max-width: 850px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.general-input-form .header {
+.input-form-form {
+  width: 70%;
+}
+
+.header {
   font-size: 2rem;
   margin-bottom: 15px;
   color: #111111;
@@ -16,36 +31,38 @@
   font-weight: bold;
 }
 
-.general-input-form .info-list {
+.info-list {
+  list-style: none;
   padding: 0;
   margin-top: 20px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
+  width: 80%;
 }
 
-.general-input-form .list-item {
+.list-item {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
 }
 
-.general-input-form .list-item .label {
+.label {
   font-weight: bold;
   color: #333;
 }
 
-.general-input-form .list-item .value {
+.value {
   color: #555;
 }
 
-.general-input-form .button-container {
+.button-container {
   display: flex;
   justify-content: space-between;
   gap: 10px;
 }
 
-.general-input-form .auth-input, .general-input-form .auth-select, .general-input-form .auth-button {
+.auth-input, .auth-select, .auth-button {
   width: 100%;
   padding: 12px;
   margin-top: 5px;
@@ -55,7 +72,7 @@
   box-sizing: border-box;
 }
 
-.general-input-form .auth-button {
+.auth-button {
   background-color: #111111;
   color: #ffffff;
   border: none;
@@ -63,11 +80,11 @@
   transition: background-color 0.3s ease;
 }
 
-.general-input-form .auth-button:hover {
+.auth-button:hover {
   background-color: #333333;
 }
 
-.general-input-form .upload-button {
+.upload-button {
   margin-top: 10px;
   background-color: #111111;
   color: #ffffff;
@@ -79,38 +96,16 @@
   transition: background-color 0.3s ease;
 }
 
-.general-input-form .upload-button:hover {
+.upload-button:hover {
   background-color: #333333;
 }
 
-.MuiAvatar-root {
-  margin: 20px auto;
-  width: 150px;
-  height: 150px;
-}
-
-.MuiAlert-root {
+.alert-container {
   margin-bottom: 20px;
 }
 
-.MuiAlert-action {
-  align-items: center;
-}
-
-.MuiButton-containedPrimary {
-  background-color: #1976d2;
-  color: white;
-}
-
-.MuiButton-containedPrimary:hover {
-  background-color: #115293;
-}
-
-.MuiButton-containedSecondary {
-  background-color: #e57373;
-  color: white;
-}
-
-.MuiButton-containedSecondary:hover {
-  background-color: #d32f2f;
+.error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 5px;
 }
