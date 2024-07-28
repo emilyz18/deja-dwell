@@ -1,7 +1,7 @@
 import React from 'react';
 import Carousel from '../carousel/Carousel';
 import './expandedPropertyCard.css';
-import Map from '../map/Map';
+import MapComponent from '../map/MapComponent';
 
 export function ExpandedPropertyCard({ propertyInfo, isSearch }) {
   const {
@@ -47,7 +47,7 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch }) {
         {AllowWeed && <span className="amenity">Weed Allowed</span>}
       </div>
       <div>
-        {isSearch && <Map propertyAddresses={address} isRecommendation={true}/>
+        {isSearch && <MapComponent propertyAddresses={address} isRecommendation={true}/>
       }
       </div>
     </div>

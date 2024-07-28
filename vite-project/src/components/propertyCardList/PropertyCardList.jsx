@@ -6,7 +6,7 @@ import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './PropertyCardList.css'
 import SearchBar from '../searchBar/SearchBar.jsx'
-import Map from '../map/Map.jsx'
+import MapComponent from '../map/MapComponent.jsx'
 import HelpPopOver from './HelpPopOver.jsx'
 import { getPreferPropertiesAsync, getUnmatchedPropertiesAsync } from '../../redux/properties/thunks'
 import { createMatchAsync } from '../../redux/matches/matchThunks'
@@ -262,7 +262,7 @@ function PropertyCardList({ searchMode }) {
             setFilters={setFilters}
           />
           <div className="search-display">
-            <Map propertyAddresses={propertyAddresses} zoomMapProperty={zoomMapProperty} />
+            <MapComponent propertyAddresses={propertyAddresses} zoomMapProperty={zoomMapProperty} />
 
             <div className="cards-container">
               {displaySearchProperties.length === 0 ? (
