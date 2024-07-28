@@ -35,6 +35,8 @@ function Map({ propertyAddresses =[], zoomMapProperty, isRecommendation }) {
     googleMapsApiKey: import.meta.env.VITE_MAP_API_KEY,
   })
 
+  // const [geocodeCache, setGeocodeCache] = useState(new Map())
+
   const [markers, setMarkers] = useState([])
   const [isZoom, setIsZoom] = useState(false)
 
@@ -60,8 +62,6 @@ function Map({ propertyAddresses =[], zoomMapProperty, isRecommendation }) {
     if (!City) City = ''
     if (!Province) Province = ''
 
-    // console.log("inside convert " + street)
-
     return `${Street}, ${City}, ${Province}`
   }
 
@@ -70,10 +70,10 @@ function Map({ propertyAddresses =[], zoomMapProperty, isRecommendation }) {
       // if (geocodeCache.has(address)) {
       //   resolve(geocodeCache.get(address));
       // } else {
-        console.log("address " + address)
         geocoderRef.current.geocode({ address }, (results, status) => {
           if (status === 'OK') {
             const position = results[0].geometry.location;
+            console.log("api call count")
             // geocodeCache.set(address, { lat: position.lat(), lng: position.lng() });
             resolve({ lat: position.lat(), lng: position.lng() });
           } else {
@@ -90,21 +90,6 @@ function Map({ propertyAddresses =[], zoomMapProperty, isRecommendation }) {
       //TODO: handle reject case
       if (zoomMapProperty && geocoderRef.current) {
         const addr = convertToAddressString(zoomMapProperty)
-
-        // geocoderRef.current.geocode({ address: addr }, (results, status) => {
-        //   if (status === 'OK') {
-        //     const position = results[0].geometry.location
-        //     console.log('zoom pos: ' + position)
-        //     resolve({ lat: position.lat(), lng: position.lng() })
-        //   } else {
-        //     console.error(
-        //       'Geocode was not successful for the following reason: ' + status
-        //     )
-
-        //     // reject(('Geocode failed with status: ' + status));
-        //   }
-        // })
-
         geocodeAddress(addr).then(resolve).catch(reject);
       } else {
         // reject(('No zoomMapProperty provided'));
@@ -131,33 +116,9 @@ function Map({ propertyAddresses =[], zoomMapProperty, isRecommendation }) {
     if (isLoaded) {
       setIsZoom(false)
       const geocodePromises = propertyAddresses.map((propertyAddress) => {
-        // let { street, city, province } = propertyAddress
-        // if (!street) street = ''
-        // if (!city) city = ''
-        // if (!province) province = ''
-
-        // const address = `${street}, ${city}, ${province}`
         const address = convertToAddressString(propertyAddress)
-        console.log("property address " + JSON.stringify(propertyAddress))
-        console.log("adress after converting: " + address)
-
         return geocodeAddress(address);
       });
-
-        // return new Promise((resolve, reject) => {
-        //   geocoderRef.current.geocode({ address }, (results, status) => {
-        //     if (status === 'OK') {
-        //       const position = results[0].geometry.location
-        //       resolve({ lat: position.lat(), lng: position.lng() })
-        //     } else {
-        //       console.log(
-        //         'Geocode was not successful for the following reason: ' + status
-        //       )
-        //       // reject(status);
-        //     }
-        //   })
-        // })
-      // })
 
       Promise.all(geocodePromises)
         .then((geocodedMarkers) => {
@@ -214,9 +175,6 @@ function Map({ propertyAddresses =[], zoomMapProperty, isRecommendation }) {
   const onLoad = (mapInstance) => {
     mapRef.current = mapInstance
   }
-
-  // console.log('is Zoom ' + isZoom)
-  // console.log('center' + JSON.stringify(center))
 
   return isLoaded ? (
     <GoogleMap
