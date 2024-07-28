@@ -1,142 +1,142 @@
 .tenant-edit-page {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        min-height: 100vh;
-        font-family: 'Mulish', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  font-family: 'Mulish', sans-serif;
 }
 
 .tenant-form-container {
-    width: 100%;
-    max-width: 800px;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .tenant-display-container {
-    width: 100%;
-    max-width: 850px;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 850px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .header {
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #111111;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #111111;
 }
 
 .tenant-form-group,
 .tenant-form-group-inline {
-    width: 100%;
-    max-width: 800px;
-    margin-bottom: 15px;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 15px;
 }
 
 .tenant-form-group label,
 .tenant-form-group-inline label {
-    display: block;
-    font-weight: 600;
-    color: #111111;
+  display: block;
+  font-weight: 600;
+  color: #111111;
 }
 
 .tenant-form-group input,
 .tenant-form-group select,
-.tenant-form-group-inline input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    box-sizing: border-box;
+.tenant-form-group-inline input[type='text'] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
 }
 
 .tenant-form-group-inline {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-.tenant-form-group-inline input[type="checkbox"] {
-    margin-right: 10px;
+.tenant-form-group-inline input[type='checkbox'] {
+  margin-right: 10px;
 }
 
 .tenant-form-group .error,
 .tenant-form-group-inline .error {
-    color: red;
-    font-size: 0.875rem;
-    margin-top: 5px;
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 5px;
 }
 
 .tenant-form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0 10px;
-    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 10px;
+  width: 100%;
 }
 
 .separator {
-    border: none;
-    height: 1px;
-    background-color: #ddd;
-    width: 100%;
+  border: none;
+  height: 1px;
+  background-color: #ddd;
+  width: 100%;
 }
 
 .tenant-attribute {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #f8f8f8;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tenant-attribute .label {
-    font-weight: 600;
-    color: #111111;
+  font-weight: 600;
+  color: #111111;
 }
 
 .tenant-attribute .value {
-    color: #555555;
+  color: #555555;
 }
 
 .submit-button,
 .cancel-button,
 .edit-button {
-    background-color: #111111;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 10px;
+  background-color: #111111;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px;
 }
 
 .submit-button:hover,
 .cancel-button:hover,
 .edit-button:hover {
-    background-color: #333333;
+  background-color: #333333;
 }
 
 .form-buttons {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .info-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 20px;
-    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
 }
