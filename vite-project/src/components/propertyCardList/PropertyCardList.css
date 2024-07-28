@@ -113,13 +113,19 @@
 }
 
 .cards-container {
-  max-height: 580px;
+  max-height: 550px;
   padding: 10px;
   overflow-y: auto;
   flex: 1;
-  border-left: 1px solid #ddd;
-  align-items: center;
+  background-color: #f6f6f6;
+  border: 1px solid #ddd;
 }
+
+.cards-list {
+  max-width: 500px;
+  margin: auto;
+}
+
 
 .property-card {
   background-color: #ffffff;
@@ -143,7 +149,7 @@
   right: 20px;
   z-index: 1000;
   border-radius: 50%;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   min-width: 0;
   padding: 12px;
   text-align: center;
@@ -151,7 +157,4 @@
     box-shadow 0.3s ease,
     transform 0.3s ease;
   border: 2px solid red;
-}
-
-.search-container {
 }
