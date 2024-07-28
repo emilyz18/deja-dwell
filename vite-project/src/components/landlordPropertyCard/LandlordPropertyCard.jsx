@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import Carousel from '../carousel/Carousel'
-import './LandlordPropertyCard.css' // Import the CSS file
-import ApplicantCard from '../applicantCard/ApplicantCard'
-import ExpandedApplicantCard from '../applicantCard/ExpandedApplicantCard'
-import { useDispatch, useSelector } from 'react-redux'
-import { getPropertiesAsync } from '../../redux/properties/thunks'
-import { Snackbar, Alert } from '@mui/material'
+import React, { useState, useEffect } from 'react';
+import Carousel from '../carousel/Carousel';
+import './LandlordPropertyCard.css'; // Import the CSS file
+import ApplicantCard from '../applicantCard/ApplicantCard';
+import ExpandedApplicantCard from '../applicantCard/ExpandedApplicantCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPropertiesAsync } from '../../redux/properties/thunks';
+import { Snackbar, Alert } from '@mui/material';
 import {
   getLandlordMatchesAsync,
   updateMatchAsync,
-} from '../../redux/matches/matchThunks'
+} from '../../redux/matches/matchThunks';
 
 const LandlordPropertyCard = ({ landlordId }) => {
   const dispatch = useDispatch();
@@ -29,25 +29,25 @@ const LandlordPropertyCard = ({ landlordId }) => {
   const [selectedApplicant, setSelectedApplicant] = useState(null);
 
   useEffect(() => {
-    if(getLandlordMatchesStatus === 'IDLE') {
+    if (getLandlordMatchesStatus === 'IDLE') {
       dispatch(getPropertiesAsync());
       dispatch(getLandlordMatchesAsync(landlordID));
     } else if (getLandlordMatchesStatus === 'FULFILLED') {
       setApplicants(landlordMatchesApplicants);
     }
-  }, [getLandlordMatchesStatus, dispatch])
-  
+  }, [getLandlordMatchesStatus, dispatch, landlordID, landlordMatchesApplicants]);
+
   useEffect(() => {
     if (properties.length > 0) {
-      const property = properties.find((prop) => prop.LandlordID === landlordId)
-      setSelectedProperty(property)
+      const property = properties.find((prop) => prop.LandlordID === landlordId);
+      setSelectedProperty(property);
     }
-  }, [properties, landlordId])
+  }, [properties, landlordId]);
 
   const handleRejectApplicant = (name) => {
     const rejectedApplicant = applicants.find(
       (applicant) => applicant.name === name
-    )
+    );
     dispatch(
       updateMatchAsync({
         matchId: rejectedApplicant.matchID,
@@ -58,18 +58,18 @@ const LandlordPropertyCard = ({ landlordId }) => {
           MatchStatus: 'Rejected',
         },
       })
-    )
+    );
     setNotification({
       open: true,
       message: `Rejected applicant: ${name}`,
       severity: 'error',
-    })
-  }
+    });
+  };
 
   const handleAcceptApplicant = (name) => {
     const acceptedApplicant = applicants.find(
       (applicant) => applicant.name === name
-    )
+    );
     dispatch(
       updateMatchAsync({
         matchId: acceptedApplicant.matchID,
@@ -80,32 +80,32 @@ const LandlordPropertyCard = ({ landlordId }) => {
           MatchStatus: 'Accepted',
         },
       })
-    )
+    );
     setNotification({
       open: true,
       message: `Accepted applicant: ${name}`,
       severity: 'success',
-    })
-  }
+    });
+  };
 
   const handleClosePopup = () => {
-    setPopupVisible(false)
-  }
+    setPopupVisible(false);
+  };
 
   const handleCardClick = (applicant) => {
-    setSelectedApplicant(applicant)
-    setPopupVisible(true)
-  }
+    setSelectedApplicant(applicant);
+    setPopupVisible(true);
+  };
 
   const handleNotificationClose = (event, reason) => {
     if (reason === 'clickaway') {
-      return
+      return;
     }
-    setNotification({ ...notification, open: false })
-  }
+    setNotification({ ...notification, open: false });
+  };
 
   if (!selectedProperty) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   const {
@@ -116,8 +116,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
     ExpectedPrice: price,
     NumBedroom: bedroom,
     NumBathroom: bathroom,
-    NumOfParking: parkingAvailability,
-  } = selectedProperty
+  } = selectedProperty;
 
   return (
     <>
@@ -132,11 +131,26 @@ const LandlordPropertyCard = ({ landlordId }) => {
           <div className="property-information">
             <h3>{title}</h3>
             <div className="property-description">
-              <p>Description: {description}</p>
-              <p>Address: {address}</p>
-              <p>Price: ${price} per month</p>
-              <p>Bedroom(s): {bedroom}</p>
-              <p>Bathroom(s): {bathroom}</p>
+              <strong>Description:</strong>
+              <span>{description}</span>
+            </div>
+            <div className="property-details">
+              <div className="property-detail">
+                <strong>Address:</strong>
+                <span>{address}</span>
+              </div>
+              <div className="property-detail">
+                <strong>Price:</strong>
+                <span>${price} per month</span>
+              </div>
+              <div className="property-detail">
+                <strong>Bedroom(s):</strong>
+                <span>{bedroom}</span>
+              </div>
+              <div className="property-detail">
+                <strong>Bathroom(s):</strong>
+                <span>{bathroom}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -184,7 +198,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
         </Alert>
       </Snackbar>
     </>
-  )
-}
+  );
+};
 
-export default LandlordPropertyCard
+export default LandlordPropertyCard;
