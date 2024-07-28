@@ -114,7 +114,8 @@ const LandlordPropertyCard = ({ landlordId }) => {
     Description: description,
     Street: address,
     ExpectedPrice: price,
-    RoomType: roomType,
+    NumBedroom: bedroom,
+    NumBathroom: bathroom,
     NumOfParking: parkingAvailability,
   } = selectedProperty
 
@@ -131,11 +132,11 @@ const LandlordPropertyCard = ({ landlordId }) => {
           <div className="property-information">
             <h3>{title}</h3>
             <div className="property-description">
+              <p>Description: {description}</p>
               <p>Address: {address}</p>
               <p>Price: ${price} per month</p>
-              <p>Room Type: {roomType}</p>
-              <p>Parking Availability: {parkingAvailability}</p>
-              <p>{description}</p>
+              <p>Bedroom(s): {bedroom}</p>
+              <p>Bathroom(s): {bathroom}</p>
             </div>
           </div>
         </div>

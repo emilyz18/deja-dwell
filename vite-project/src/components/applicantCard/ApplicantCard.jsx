@@ -3,7 +3,7 @@ import './ApplicantCard.css'
 import Button from '@mui/material/Button'
 
 const ApplicantCard = ({ applicant, onReject, onAccept, onClick }) => {
-  const { image, name, phoneNumber, lengthOfLease, familySize } = applicant
+  const { image, name, phoneNumber, email } = applicant
 
   // handleReject() and handleAccept() was modified using ChatGPT on Jun 5.
   // prompt: "code in this file" + how to exempt the accept and reject button from being clicked,
@@ -26,8 +26,8 @@ const ApplicantCard = ({ applicant, onReject, onAccept, onClick }) => {
       </div>
       <div className="applicant-info">
         <h3>{name}</h3>
-        <p>Family Size: {familySize}</p>
-        <p>Length of lease: {lengthOfLease}</p>
+        <p>Phone number: {phoneNumber}</p>
+        <p>Email: {email}</p>
       </div>
       <div className="applicant-actions">
         <Button
