@@ -243,9 +243,9 @@ function PropertyCardList({ searchMode }) {
 
   const propertyAddresses = displaySearchProperties.map((property) => {
     return {
-      street: property.Street,
-      city: property.City,
-      province: property.Province,
+      Street: property.Street,
+      City: property.City,
+      Province: property.Province,
     };
   });
 

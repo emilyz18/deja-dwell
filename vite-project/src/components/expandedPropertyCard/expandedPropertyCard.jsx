@@ -20,7 +20,8 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch }) {
     Province,
   } = propertyInfo;
 
-  const address = [{ street: Street, city: City, province: Province }];
+  const address = [{ Street: Street, City: City, Province: Province }];
+  // console.log(address)
 
   return (
     <div className="expanded-property-popup">
