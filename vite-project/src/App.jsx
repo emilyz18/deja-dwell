@@ -8,7 +8,7 @@ import LandlordPropertyCard from './components/landlordPropertyCard/LandlordProp
 import PropertyCardList from './components/propertyCardList/PropertyCardList'
 import { LandLordSideBar } from './components/sideBars/LandLordSideBar'
 import { TenantSideBar } from './components/sideBars/TenantSideBar'
-import {TenantProfilePage } from './InputForms/tenant/tenantProfilePage.jsx'
+import {TenantEditPage } from './InputForms/tenant/TenantEditPage.jsx'
 import { PropertyEditPage } from './InputForms/property/PropertyEditPage.jsx'
 import { GeneralInputForm } from './InputForms/generalInputForm'
 import History from './components/history/History'
@@ -93,7 +93,7 @@ function App() {
               />
               <Route
                 path="/tenantAccount/preference"
-                element={<TenantProfilePage />}
+                element={<TenantEditPage />}
               />
               <Route
                 path="/tenantAccount/history"

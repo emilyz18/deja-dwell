@@ -48,7 +48,6 @@
     border: none;
     height: 1px;
     background-color: #ddd;
-    margin: 20px 0;
 }
 
 .property-form-group {
@@ -170,11 +169,11 @@
 .property-form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 0 10px;
 }
 
 .preferences-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 0 10px;
 }
