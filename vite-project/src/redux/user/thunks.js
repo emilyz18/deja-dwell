@@ -37,3 +37,11 @@ export const getUsersAsync = createAsyncThunk(
     return await userService.getUsers()
   }
 )
+
+export const verifySessionAsync = createAsyncThunk(
+  actionTypes.VERIFY_USER,
+  async () => {
+    return await userService.verifySession();
+   
+  }
+);

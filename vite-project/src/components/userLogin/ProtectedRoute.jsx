@@ -3,9 +3,15 @@ import { Route, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import App from '../../App.jsx'
 
-const ProtectedRoute = ({ element: Element, ...rest }) => {
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
-  return isAuthenticated ? <App /> : <Navigate to="/login" />
-}
+// const ProtectedRoute = ({ element: Element, ...rest }) => {
+//   const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
+//   return isAuthenticated ? <App /> : <Navigate to="/login" />
+// }
+
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+
+  return isAuthenticated ? children : <Navigate to="/login" />;
+};
 
 export default ProtectedRoute

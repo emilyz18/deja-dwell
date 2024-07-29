@@ -4,4 +4,5 @@ export const actionTypes = {
   EDIT_PROFILE: 'user/edit',
   GET_USER: 'user/getUser',
   GET_USERS: 'user/getUsers',
+  VERIFY_USER: 'user/verifySession'
 }

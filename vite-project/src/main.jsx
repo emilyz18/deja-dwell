@@ -7,17 +7,17 @@ import { store } from './redux/store'
 import SignUp from './components/userLogin/SignUp.jsx'
 import SignIn from './components/userLogin/SignIn.jsx'
 import ProtectedRoute from './components/userLogin/ProtectedRoute.jsx'
+import App from './App.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <Router>
+  
     <React.StrictMode>
       <Provider store={store}>
-        <Routes>
-          <Route path="/login" element={<SignIn />} />
-          <Route path="/register" element={<SignUp />} />
-          <Route path="/*" element={<ProtectedRoute />} />
-        </Routes>
+        <Router>
+  
+          <App />
+        </Router>
       </Provider>
     </React.StrictMode>
-  </Router>
+  
 )
