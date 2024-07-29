@@ -243,6 +243,8 @@ function PropertyCardList({ searchMode }) {
 
   const propertyAddresses = displaySearchProperties.map((property) => {
     return {
+      HouseID: property.HouseID,
+      ExpectedPrice: property.ExpectedPrice,
       Street: property.Street,
       City: property.City,
       Province: property.Province,
@@ -262,7 +264,7 @@ function PropertyCardList({ searchMode }) {
             setFilters={setFilters}
           />
           <div className="search-display">
-            <MapComponent propertyAddresses={propertyAddresses} zoomMapProperty={zoomMapProperty} />
+            <MapComponent properties={displaySearchProperties} propertyAddresses={propertyAddresses} zoomMapProperty={zoomMapProperty} />
 
             <div className="cards-container">
               {displaySearchProperties.length === 0 ? (

@@ -28,7 +28,9 @@ const mapStyles = [
 
 const geocodeCache = new Map();
 
-function MapComponent({ propertyAddresses, zoomMapProperty, isRecommendation }) {
+function MapComponent({ properties =[], propertyAddresses, zoomMapProperty, isRecommendation }) {
+
+  // console.log(propertyAddresses)
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: import.meta.env.VITE_MAP_API_KEY,
@@ -39,6 +41,9 @@ function MapComponent({ propertyAddresses, zoomMapProperty, isRecommendation }) 
 
   const [isZoomHelper, setIsZoomHelper] = useState(false)
 
+  const [propertyID, setPropertyID] = useState(null)
+
+
   const mapRef = useRef()
   const [center, setCenter] = useState(vancouver)
   const markersRef = useRef([])
@@ -48,7 +53,7 @@ function MapComponent({ propertyAddresses, zoomMapProperty, isRecommendation }) 
   useEffect(() => {
     if (isLoaded) {
       geocoderRef.current = new window.google.maps.Geocoder()
-      geocodeCache.clear() // TODO: must clear cache for markers to appear after route switching. Not sure if this is an issue with routes
+      // geocodeCache.clear() // TODO: must clear cache for markers to appear after route switching. Not sure if this is a maps or routes issue
     }
   }, [isLoaded])
 
@@ -115,7 +120,13 @@ function MapComponent({ propertyAddresses, zoomMapProperty, isRecommendation }) 
       setIsZoom(false)
       const geocodePromises = propertyAddresses.map((propertyAddress) => {
         const address = convertToAddressString(propertyAddress)
-        return geocodeAddress(address);
+        // return geocodeAddress(address);
+
+        return geocodeAddress(address).then((geocodedMarker) => ({
+          ...geocodedMarker,
+          HouseID: propertyAddress.HouseID, // Add propertyID here
+          ExpectedPrice: propertyAddress.ExpectedPrice
+        }));
       });
 
       Promise.all(geocodePromises)
@@ -143,16 +154,24 @@ function MapComponent({ propertyAddresses, zoomMapProperty, isRecommendation }) 
       }
       markersRef.current = []
 
+      const onMarkerClick = (houseID) => {
+        return () => {
+          setPropertyID(houseID)
+          console.log('Marker clicked:', houseID);
+
+        };
+      };
+
       const newMarkers = markers.map((marker) => {
         const markerInstance = new window.google.maps.Marker({
           position: marker,
-          title: 'Marker',
+          title: `$${String(marker.ExpectedPrice)}`,
           icon: {
             url: '/images/marker.png',
             scaledSize: new window.google.maps.Size(50, 50),
           },
         })
-        // console.log(markerInstance)
+        markerInstance.addListener('click', onMarkerClick(marker.HouseID));
         return markerInstance
       })
 

@@ -5,6 +5,7 @@ import MapComponent from '../map/MapComponent';
 
 export function ExpandedPropertyCard({ propertyInfo, isSearch }) {
   const {
+    HouseID,
     NumBedroom,
     NumBathroom,
     isAC,
@@ -20,7 +21,7 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch }) {
     Province,
   } = propertyInfo;
 
-  const address = [{ Street: Street, City: City, Province: Province }];
+  const address = [{ HouseID: HouseID, ExpectedPrice: ExpectedPrice, Street: Street, City: City, Province: Province }];
   // console.log(address)
 
   return (
