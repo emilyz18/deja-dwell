@@ -12,7 +12,6 @@ import { getPreferPropertiesAsync, getUnmatchedPropertiesAsync } from '../../red
 import { createMatchAsync } from '../../redux/matches/matchThunks'
 import { Box, Typography, Fab, Snackbar, Alert } from '@mui/material';
 import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
-import { v4 as uuidv4 } from 'uuid'
 import { getTenantMatchesAsync } from '../../redux/matches/matchThunks'
 
 function PropertyCardList({ searchMode }) {
@@ -87,7 +86,6 @@ function PropertyCardList({ searchMode }) {
     const likedProperty = properties.find((property) => property.HouseID === id);
     dispatch(
       createMatchAsync({
-        MatchID: uuidv4(),
         TenantID: user.TenantID,
         LandlordID: likedProperty.LandlordID,
         HouseID: likedProperty.HouseID,
@@ -110,7 +108,6 @@ function PropertyCardList({ searchMode }) {
     );
     dispatch(
       createMatchAsync({
-        MatchID: uuidv4(),
         TenantID: user.TenantID,
         LandlordID: dislikedProperty.LandlordID,
         HouseID: dislikedProperty.HouseID,
