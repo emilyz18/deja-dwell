@@ -3,7 +3,11 @@ import Carousel from '../carousel/Carousel';
 import './expandedPropertyCard.css';
 import MapComponent from '../map/MapComponent';
 
-export function ExpandedPropertyCard({ propertyInfo, isSearch }) {
+export function ExpandedPropertyCard({ propertyInfo, isSearch = false }) {
+  // if (!propertyInfo) {
+  //   return null;
+  // }
+  console.log("property INfo: " + propertyInfo)
   const {
     HouseID,
     NumBedroom,

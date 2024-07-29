@@ -1,6 +1,7 @@
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
+import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
 import './MapComponent.css'
 
 const vancouver = {
@@ -26,10 +27,14 @@ const mapStyles = [
   },
 ]
 
-const geocodeCache = new Map();
+const geocodeCache = new Map()
 
-function MapComponent({ properties =[], propertyAddresses, zoomMapProperty, isRecommendation }) {
-
+function MapComponent({
+  properties = [],
+  propertyAddresses,
+  zoomMapProperty,
+  isRecommendation,
+}) {
   // console.log(propertyAddresses)
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -41,8 +46,8 @@ function MapComponent({ properties =[], propertyAddresses, zoomMapProperty, isRe
 
   const [isZoomHelper, setIsZoomHelper] = useState(false)
 
-  const [propertyID, setPropertyID] = useState(null)
-
+  const [openExpanded, setOpenExpanded] = useState(false)
+  const [selectedProperty, setSelectedProperty] = useState(null)
 
   const mapRef = useRef()
   const [center, setCenter] = useState(vancouver)
@@ -71,29 +76,34 @@ function MapComponent({ properties =[], propertyAddresses, zoomMapProperty, isRe
     return new Promise((resolve, reject) => {
       if (geocodeCache.has(address)) {
         // console.log("has addr " + geocodeCache.size)
-        resolve(geocodeCache.get(address));
+        resolve(geocodeCache.get(address))
       } else {
         geocoderRef.current.geocode({ address }, (results, status) => {
           if (status === 'OK') {
-            const position = results[0].geometry.location;
-            console.log("api call count")
-            geocodeCache.set(address, { lat: position.lat(), lng: position.lng() });
-            resolve({ lat: position.lat(), lng: position.lng() });
+            const position = results[0].geometry.location
+            console.log('api call count')
+            geocodeCache.set(address, {
+              lat: position.lat(),
+              lng: position.lng(),
+            })
+            resolve({ lat: position.lat(), lng: position.lng() })
           } else {
-            console.error('Geocode was not successful for the following reason: ' + status);
-            reject(status); // TODO: dont display error in console
+            console.error(
+              'Geocode was not successful for the following reason: ' + status
+            )
+            reject(status) // TODO: dont display error in console
           }
-        });
+        })
       }
-    });
-  };
+    })
+  }
 
   const zoomCenter = () => {
     return new Promise((resolve, reject) => {
       //TODO: handle reject case
       if (zoomMapProperty && geocoderRef.current) {
         const addr = convertToAddressString(zoomMapProperty)
-        geocodeAddress(addr).then(resolve).catch(reject);
+        geocodeAddress(addr).then(resolve).catch(reject)
       } else {
         // reject(('No zoomMapProperty provided'));
       }
@@ -125,9 +135,9 @@ function MapComponent({ properties =[], propertyAddresses, zoomMapProperty, isRe
         return geocodeAddress(address).then((geocodedMarker) => ({
           ...geocodedMarker,
           HouseID: propertyAddress.HouseID, // Add propertyID here
-          ExpectedPrice: propertyAddress.ExpectedPrice
-        }));
-      });
+          ExpectedPrice: propertyAddress.ExpectedPrice,
+        }))
+      })
 
       Promise.all(geocodePromises)
         .then((geocodedMarkers) => {
@@ -146,21 +156,26 @@ function MapComponent({ properties =[], propertyAddresses, zoomMapProperty, isRe
     }
   }, [propertyAddresses, isLoaded])
 
+  const onMarkerClick = useCallback(
+    (houseID) => {
+      return () => {
+        const property = properties.find(
+          (property) => property.HouseID === houseID
+        )
+        setSelectedProperty(property)
+        setOpenExpanded(true);
+      }
+    },
+    [properties]
+  )
+
   useEffect(() => {
     if (mapRef.current) {
       if (markersRef.current) {
-        console.log("clear markers")
+        console.log('clear markers')
         markersRef.current.forEach((marker) => marker.setMap(null))
       }
       markersRef.current = []
-
-      const onMarkerClick = (houseID) => {
-        return () => {
-          setPropertyID(houseID)
-          console.log('Marker clicked:', houseID);
-
-        };
-      };
 
       const newMarkers = markers.map((marker) => {
         const markerInstance = new window.google.maps.Marker({
@@ -171,7 +186,7 @@ function MapComponent({ properties =[], propertyAddresses, zoomMapProperty, isRe
             scaledSize: new window.google.maps.Size(50, 50),
           },
         })
-        markerInstance.addListener('click', onMarkerClick(marker.HouseID));
+        markerInstance.addListener('click', onMarkerClick(marker.HouseID))
         return markerInstance
       })
 
@@ -196,18 +211,27 @@ function MapComponent({ properties =[], propertyAddresses, zoomMapProperty, isRe
   const onLoad = (mapInstance) => {
     mapRef.current = mapInstance
   }
-  
 
+  console.log('selected property: ' + JSON.stringify(selectedProperty))
+
+    console.log(openExpanded)
   return isLoaded ? (
-    <GoogleMap
-      mapContainerClassName="map-container"
-      center={center}
-      zoom={isZoom ? 15 : 10}
-      onLoad={onLoad}
-      options={{
-        styles: mapStyles,
-      }}
-    ></GoogleMap>
+    <>
+      <GoogleMap
+        mapContainerClassName="map-container"
+        center={center}
+        zoom={isZoom ? 15 : 10}
+        onLoad={onLoad}
+        options={{
+          styles: mapStyles,
+        }}
+      ></GoogleMap>
+      {openExpanded && (
+        <ExpandedPropertyCard
+          propertyInfo={selectedProperty} // Pass the entire property object
+        />
+      )}
+    </>
   ) : (
     <div className="loading">Loading...</div>
   )
