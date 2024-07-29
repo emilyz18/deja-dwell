@@ -21,3 +21,13 @@ export const deleteMatch = async (matchId) => {
   const response = await axios.delete(`${API_URL}/${matchId}`)
   return response.data
 }
+
+export const getLandlordMatches = async (landlordId) => {
+  const response = await axios.get(`${API_URL}/landlord/${landlordId}`)
+  return response.data
+}
+
+export const getTenantMatches = async (tenantId) => {
+  const response = await axios.get(`${API_URL}/tenant/${tenantId}`)
+  return response.data
+}

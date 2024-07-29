@@ -2,21 +2,28 @@
   padding: 20px;
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  border-radius: 10px;
   text-align: left;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Mulish', sans-serif;
   overflow: auto;
   max-height: 520px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 600px;
 }
 
 .expanded-property-popup h1 {
-  font-size: 23px;
+  font-size: 24px;
   margin-bottom: 16px;
   color: #333;
+  font-weight: bold;
 }
 
 .carousel-container {
   margin: 20px 0;
+  border: 2px solid #000000;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .expanded-property-popup p {
@@ -40,16 +47,28 @@
   margin-bottom: 20px;
 }
 
-.expanded-property-popup p:last-of-type {
-  margin-top: 20px;
-}
-
 .details-row-expand {
-  /* margin: 3px; */
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
   margin-top: 15px;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.amenity {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #333;
+  font-weight: bold;
+}
+
+.map-container {
+  border: 2px solid #000000;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px; /* Set a fixed height for the map */
 }

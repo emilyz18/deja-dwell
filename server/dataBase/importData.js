@@ -13,7 +13,21 @@ const { db } = require('../db'); // Ensure this path is correct
 
 const importData = async () => {
   db.once('open', async () => {
+          await User.deleteMany({});
+      await Landlord.deleteMany({});
+      await Tenant.deleteMany({});
+      await TenantPreference.deleteMany({});
+      await Property.deleteMany({});
+      await Match.deleteMany({});
     try {
+      await User.deleteMany({});
+      await Landlord.deleteMany({});
+      await Tenant.deleteMany({});
+      await TenantPreference.deleteMany({});
+      await Property.deleteMany({});
+      await Match.deleteMany({});
+
+      await mongoose.connection.collection('users').dropIndexes();
       // Read JSON files
       const users = JSON.parse(
         fs.readFileSync(path.join(__dirname, '../mockData/Users.json'), 'utf-8')
@@ -46,24 +60,24 @@ const importData = async () => {
         fs.readFileSync(path.join(__dirname, '../mockData/Match.json'), 'utf-8')
       )
 
-            // Import data to MongoDB
-            await User.insertMany(users);
-            await Landlord.insertMany(landlords);
-            await Tenant.insertMany(tenants);
-            await TenantPreference.insertMany(tenantPreferences);
-            await Property.insertMany(properties);
-            await Match.insertMany(matches);
+      // Import data to MongoDB
+      await User.insertMany(users);
+      await Landlord.insertMany(landlords);
+      await Tenant.insertMany(tenants);
+      await TenantPreference.insertMany(tenantPreferences);
+      await Property.insertMany(properties);
+      await Match.insertMany(matches);
 
-            console.log('Data imported successfully');
-            process.exit();
-        } catch (err) {
-            console.error(err);
-            process.exit(1);
-        }
-    });
-    db.on('error', (err) => {
-        console.error(`connection error when importing data: ${err}`);
-    });
+      console.log('Data imported successfully');
+      process.exit();
+    } catch (err) {
+      console.error(err);
+      process.exit(1);
+    }
+  });
+  db.on('error', (err) => {
+    console.error(`connection error when importing data: ${err}`);
+  });
 };
 
 importData();

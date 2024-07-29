@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import Carousel from '../carousel/Carousel'
 import './MatchItem.css' // Ensure you have this file for styling
 import {
-  getMatchesAsync,
+  getTenantMatchesAsync,
   updateMatchAsync,
 } from '../../redux/matches/matchThunks'
 import { Alert, Snackbar } from '@mui/material'
@@ -12,7 +12,6 @@ import { useDispatch } from 'react-redux'
 function MatchItem({ match, displayPopup }) {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.user)
-
   const allProperties = useSelector((state) => state.properties.list)
   const currentProperty = allProperties.find(
     (property) => property.HouseID == match.HouseID
@@ -54,7 +53,7 @@ function MatchItem({ match, displayPopup }) {
         },
       })
     ).then(() => {
-      dispatch(getMatchesAsync())
+      dispatch(getTenantMatchesAsync(user.TenantID))
       setNotification({
         open: true,
         message: `Liked property: ${likedProperty.Title}`,
@@ -80,7 +79,7 @@ function MatchItem({ match, displayPopup }) {
         },
       })
     ).then(() => {
-      dispatch(getMatchesAsync())
+      dispatch(getTenantMatchesAsync(user.TenantID))
       setNotification({
         open: true,
         message: `Disliked property: ${dislikedProperty.Title}`,

@@ -1,16 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { REQUEST_STATE } from '../utils'
 import {
-  getMatchesAsync,
   createMatchAsync,
   updateMatchAsync,
   deleteMatchAsync,
+  getLandlordMatchesAsync,
+  getTenantMatchesAsync,
 } from './matchThunks'
 
 const INITIAL_STATE = {
   list: [],
   error: null,
-  getMatches: REQUEST_STATE.IDLE,
+  landlordMatches: [],
+  tenantMatches: [],
+  getLandlordMatches: REQUEST_STATE.IDLE,
+  getTenantMatches: REQUEST_STATE.IDLE,
   createMatch: REQUEST_STATE.IDLE,
   updateMatch: REQUEST_STATE.IDLE,
   deleteMatch: REQUEST_STATE.IDLE,
@@ -32,20 +36,6 @@ const matchSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // GET Matches
-      .addCase(getMatchesAsync.pending, (state) => {
-        state.getMatches = REQUEST_STATE.PENDING
-        state.error = null
-      })
-      .addCase(getMatchesAsync.fulfilled, (state, action) => {
-        state.getMatches = REQUEST_STATE.FULFILLED
-        state.list = action.payload
-      })
-      .addCase(getMatchesAsync.rejected, (state, action) => {
-        state.getMatches = REQUEST_STATE.REJECTED
-        state.error = action.error.message
-      })
-
       // CREATE Match
       .addCase(createMatchAsync.pending, (state) => {
         state.createMatch = REQUEST_STATE.PENDING
@@ -67,6 +57,8 @@ const matchSlice = createSlice({
       })
       .addCase(updateMatchAsync.fulfilled, (state, action) => {
         state.updateMatch = REQUEST_STATE.FULFILLED
+        state.getLandlordMatches = REQUEST_STATE.IDLE
+        state.getTenantMatches = REQUEST_STATE.IDLE
         const index = state.list.findIndex(
           (match) => match.MatchID === action.payload.MatchID
         )
@@ -92,6 +84,34 @@ const matchSlice = createSlice({
       })
       .addCase(deleteMatchAsync.rejected, (state, action) => {
         state.deleteMatch = REQUEST_STATE.REJECTED
+        state.error = action.error.message
+      })
+
+      // GET Landlord Matches
+      .addCase(getLandlordMatchesAsync.pending, (state) => {
+        state.getLandlordMatches = REQUEST_STATE.PENDING
+        state.error = null
+      })
+      .addCase(getLandlordMatchesAsync.fulfilled, (state, action) => {
+        state.getLandlordMatches = REQUEST_STATE.FULFILLED
+        state.landlordMatches = action.payload
+      })
+      .addCase(getLandlordMatchesAsync.rejected, (state, action) => {
+        state.getLandlordMatches = REQUEST_STATE.REJECTED
+        state.error = action.error.message
+      })
+
+      // GET tenant Matches
+      .addCase(getTenantMatchesAsync.pending, (state) => {
+        state.getTenantMatches = REQUEST_STATE.PENDING
+        state.error = null
+      })
+      .addCase(getTenantMatchesAsync.fulfilled, (state, action) => {
+        state.getTenantMatches = REQUEST_STATE.FULFILLED
+        state.tenantMatches = action.payload
+      })
+      .addCase(getTenantMatchesAsync.rejected, (state, action) => {
+        state.getTenantMatches = REQUEST_STATE.REJECTED
         state.error = action.error.message
       })
   },
