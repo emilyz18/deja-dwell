@@ -8,8 +8,10 @@ import { getPropertiesAsync } from '../../redux/properties/thunks'
 import { Snackbar, Alert } from '@mui/material'
 import {
   getLandlordMatchesAsync,
+  reopenMatchesAsync,
   updateMatchAsync,
 } from '../../redux/matches/matchThunks'
+import Button from '@mui/material/Button'
 
 const LandlordPropertyCard = ({ landlordId }) => {
   const dispatch = useDispatch();
@@ -25,6 +27,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
     severity: '',
   });
   const [applicants, setApplicants] = useState([]);
+  const [hasAccepted, setHasAccept] = useState(false);
   const [popupVisible, setPopupVisible] = useState(false);
   const [selectedApplicant, setSelectedApplicant] = useState(null);
 
@@ -34,8 +37,15 @@ const LandlordPropertyCard = ({ landlordId }) => {
       dispatch(getLandlordMatchesAsync(landlordID));
     } else if (getLandlordMatchesStatus === 'FULFILLED') {
       setApplicants(landlordMatchesApplicants);
+      if(landlordMatchesApplicants.some(applicant => applicant.matchStatus === 'Accepted')) {
+        setHasAccept(true);
+      } else {
+        setHasAccept(false);
+      }
     }
-  }, [getLandlordMatchesStatus, dispatch])
+    console.log(applicants);
+    console.log(hasAccepted);
+  }, [getLandlordMatchesStatus,hasAccepted,dispatch])
   
   useEffect(() => {
     if (properties.length > 0) {
@@ -88,6 +98,14 @@ const LandlordPropertyCard = ({ landlordId }) => {
     })
   }
 
+  const handleReopenMatch = () => {
+    if(selectedProperty) {
+      dispatch(
+        reopenMatchesAsync(selectedProperty.HouseID)
+      )
+    }
+  }
+
   const handleClosePopup = () => {
     setPopupVisible(false)
   }
@@ -138,6 +156,11 @@ const LandlordPropertyCard = ({ landlordId }) => {
               <p>{description}</p>
             </div>
           </div>
+          {hasAccepted? <div>
+          <Button className="reopen-button" color="error" onClick={handleReopenMatch}>
+          Reopen Match
+        </Button>
+          </div> : null}
         </div>
         <div className="applicant-list">
           {applicants.length > 0 ? (

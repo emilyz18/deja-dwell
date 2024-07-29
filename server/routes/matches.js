@@ -37,8 +37,7 @@ router.patch('/:matchId', async (req, res) => {
 
 
   try {
-    if(MatchStatus == 'Accepted') {
-      // Reject the rest other than the accept one
+    if (MatchStatus == 'Accepted') {
       const allMatch = await matchQueries.getAllMatches();
       const acceptedMatch = allMatch.find(match => (match.MatchID === matchId));
       const rejectedMatches = allMatch.filter(match => (match.MatchID !== matchId && match.HouseID === acceptedMatch.HouseID));
@@ -128,6 +127,23 @@ router.get('/tenant/:tenantId', async (req, res) => {
     return res.json(tenantMatches);
   } catch (err) {
     res.status(500).send('Error loading matches data: ' + err.message)
+  }
+})
+
+router.post('/reopen/:houseID', async (req, res) => {
+  const { houseID } = req.params
+  try {
+    const matches = await matchQueries.getAllMatches()
+    const houseMatches = matches.filter(match => (match.HouseID === houseID));
+    await Promise.all(
+      houseMatches.map(houseMatch => {
+        matchQueries.updateMatchStatus(houseMatch.MatchID, 'Applied')
+      }
+      )
+    );
+    return res.status(201).send('Matches Reopened!');
+  } catch (err) {
+    res.status(500).send('Error reopen matches data: ' + err.message);
   }
 })
 module.exports = router
