@@ -1,33 +1,32 @@
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-import React, { useState, useRef, useEffect } from 'react';
-import { MarkerClusterer } from '@googlemaps/markerclusterer';
-import './Map.css';
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
+import React, { useState, useRef, useEffect } from 'react'
+import { MarkerClusterer } from '@googlemaps/markerclusterer'
+import './Map.css'
 
 const vancouver = {
   lat: 49.246292,
   lng: -123.116226,
-};
+}
 
 const mapStyles = [
   {
-    "featureType": "poi.medical",
-    "elementType": "labels",
-    "stylers": [{ "visibility": "off" }]
+    featureType: 'poi.medical',
+    elementType: 'labels',
+    stylers: [{ visibility: 'off' }],
   },
   {
-    "featureType": "poi.business",
-    "elementType": "labels",
-    "stylers": [{ "visibility": "off" }]
+    featureType: 'poi.business',
+    elementType: 'labels',
+    stylers: [{ visibility: 'off' }],
   },
   {
-    "featureType": "poi.attraction",
-    "elementType": "labels",
-    "stylers": [{ "visibility": "off" }]
+    featureType: 'poi.attraction',
+    elementType: 'labels',
+    stylers: [{ visibility: 'off' }],
   },
-];
+]
 
-
-function Map({ propertyAddresses,  zoomMapProperty, isRecommendation}) {
+function Map({ propertyAddresses, zoomMapProperty, isRecommendation }) {
   // const { isLoaded } = useJsApiLoader({
   //   id: 'google-map-script',
   //   googleMapsApiKey: import.meta.env.VITE_MAP_API_KEY,
@@ -43,7 +42,6 @@ function Map({ propertyAddresses,  zoomMapProperty, isRecommendation}) {
   // const markersRef = useRef([]);
   // const markerClusterRef = useRef();
   // const geocoderRef = useRef(null);
-
 
   // useEffect(() => {
   //   if (isLoaded) {
@@ -66,7 +64,7 @@ function Map({ propertyAddresses,  zoomMapProperty, isRecommendation}) {
   //   return new Promise((resolve, reject) => { //TODO: handle reject case
   //     if (zoomMapProperty && geocoderRef.current) {
   //       const addr = convertToAddressString(zoomMapProperty);
-  
+
   //       geocoderRef.current.geocode({ address: addr }, (results, status) => {
   //         if (status === 'OK') {
   //           const position = results[0].geometry.location;
@@ -95,7 +93,6 @@ function Map({ propertyAddresses,  zoomMapProperty, isRecommendation}) {
   //     });
   //   }
   // }, [zoomMapProperty]);
-  
 
   // useEffect(() => {
   //   if (isLoaded) {
@@ -192,10 +189,7 @@ function Map({ propertyAddresses,  zoomMapProperty, isRecommendation}) {
   // ) : (
   //   <>Loading...</>
   // );
-  return (
-    <div className='loading'>
-    Loading...</div>
-  )
+  return <div className="loading">Loading map...</div>
 }
 
-export default Map;
+export default Map

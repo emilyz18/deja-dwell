@@ -1,36 +1,46 @@
 // image preview method guided by chaptgpt 4o with prompt: how to create image preview for each URL input textfield, generated code applied to handleImageChange()
-import React, { useState } from 'react';
-import './PropertyForm.css';
+import React, { useState } from 'react'
+import './PropertyForm.css'
 
-export function PropertyForm({ property, handleSubmit, handleChange, handleCancel, handleImageChange }) {
-  const [errors, setErrors] = useState({});
+export function PropertyForm({
+  property,
+  handleSubmit,
+  handleChange,
+  handleCancel,
+  handleImageChange,
+}) {
+  const [errors, setErrors] = useState({})
 
   const formatDate = (date) => {
-    if (!date) return '';
-    const d = new Date(date);
-    return d.toISOString().split('T')[0];
-  };
+    if (!date) return ''
+    const d = new Date(date)
+    return d.toISOString().split('T')[0]
+  }
 
   const validate = () => {
-    let tempErrors = {};
-    if (!property.Title) tempErrors.Title = "Title is required";
-    if (!property.Province) tempErrors.Province = "Province is required";
-    if (!property.City) tempErrors.City = "City is required";
-    if (!property.ExpectedPrice) tempErrors.ExpectedPrice = "Rent Per Month is required";
+    let tempErrors = {}
+    if (!property.Title) tempErrors.Title = 'Title is required'
+    if (!property.Province) tempErrors.Province = 'Province is required'
+    if (!property.City) tempErrors.City = 'City is required'
+    if (!property.ExpectedPrice)
+      tempErrors.ExpectedPrice = 'Rent Per Month is required'
 
-    const validImages = (property.HouseImgs || []).filter(image => image.src !== '');
-    if (validImages.length < 3) tempErrors.HouseImgs = "At least 3 images are required";
+    const validImages = (property.HouseImgs || []).filter(
+      (image) => image.src !== ''
+    )
+    if (validImages.length < 3)
+      tempErrors.HouseImgs = 'At least 3 images are required'
 
-    setErrors(tempErrors);
-    return Object.keys(tempErrors).length === 0;
-  };
+    setErrors(tempErrors)
+    return Object.keys(tempErrors).length === 0
+  }
 
   const onSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     if (validate()) {
-      handleSubmit(event);
+      handleSubmit(event)
     }
-  };
+  }
 
   const renderDateField = (label, name) => (
     <div className="property-form-group">
@@ -44,7 +54,7 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
       />
       {errors[name] && <p className="error">{errors[name]}</p>}
     </div>
-  );
+  )
 
   const renderInputField = (label, name, type = 'text', required = false) => (
     <div className="property-form-group">
@@ -59,7 +69,7 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
       />
       {errors[name] && <p className="error">{errors[name]}</p>}
     </div>
-  );
+  )
 
   const renderCheckboxField = (label, name) => (
     <div className="property-form-group-inline">
@@ -72,7 +82,7 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
       />
       <label htmlFor={name}>{label}</label>
     </div>
-  );
+  )
 
   const renderImageFields = () => (
     <div className="property-form-group property-image-group">
@@ -100,7 +110,7 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
       </div>
       {errors.HouseImgs && <p className="error">{errors.HouseImgs}</p>}
     </div>
-  );
+  )
 
   return (
     <div className="property-form-container">
@@ -115,7 +125,12 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
             {renderInputField('Street', 'Street')}
             {renderDateField('Start Date', 'StartDate')}
             {renderDateField('End Date', 'EndDate')}
-            {renderInputField('Rent Per Month', 'ExpectedPrice', 'number', true)}
+            {renderInputField(
+              'Rent Per Month',
+              'ExpectedPrice',
+              'number',
+              true
+            )}
           </div>
           <hr className="separator" />
         </div>
@@ -147,9 +162,11 @@ export function PropertyForm({ property, handleSubmit, handleChange, handleCance
         </div>
         <div className="property-form-group">
           <button type="submit">Publish</button>
-          <button type="button" onClick={handleCancel}>Cancel</button>
+          <button type="button" onClick={handleCancel}>
+            Cancel
+          </button>
         </div>
       </form>
     </div>
-  );
+  )
 }

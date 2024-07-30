@@ -1,26 +1,23 @@
-// t
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   updateTenant,
   updateTenantPref,
 } from '../../redux/tenant/tenantReducer.js'
-import './TenantInputForm.css'
 import {
   getTenantPrefAsync,
   getTenantProfileAsync,
   patchTenantPrefAsync,
   patchTenantProfileAsync,
 } from '../../redux/tenant/thunks.js'
-import { TenantForm } from './tenantForm.jsx'
-import { TenantInputDisplay } from './tenantInputDisplay.jsx'
+import { TenantForm } from './TenantForm.jsx'
+import { TenantInputDisplay } from './TenantInputDisplay.jsx'
+import './TenantForm.css'
 
-export function TenantProfilePage() {
+export function TenantEditPage() {
   const [isEditing, setIsEditing] = useState(false)
-
   const dispatch = useDispatch()
 
-  // for user reducer
   const tenantID = useSelector((state) => state.user.user.TenantID)
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
   const { tenant, tenantPref } = useSelector((state) => state.tenant)
@@ -73,8 +70,9 @@ export function TenantProfilePage() {
   const handleCancel = () => {
     setIsEditing(false)
   }
+
   return (
-    <>
+    <div className="tenant-edit-page">
       {isEditing ? (
         <TenantForm
           handleSubmit={handleSubmit}
@@ -90,6 +88,6 @@ export function TenantProfilePage() {
           handleEdit={handleEdit}
         />
       )}
-    </>
+    </div>
   )
 }

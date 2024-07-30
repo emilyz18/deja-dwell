@@ -19,10 +19,11 @@ const getLandlord = async (landlordID) => {
 }
 
 export const createLandlord = async (landlordData) => {
-  const response = await axios.post(`${URL_PATH}/createLandlord`, landlordData);
-  return response.data;
-};
+  const response = await axios.post(`${URL_PATH}/createLandlord`, landlordData)
+  return response.data
+}
 
 export default {
-  getLandlord, createLandlord
+  getLandlord,
+  createLandlord,
 }
