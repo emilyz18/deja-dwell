@@ -78,7 +78,10 @@ function MapComponent({
   useEffect(() => {
     if (isLoaded) {
       geocoderRef.current = new window.google.maps.Geocoder()
-      geocodeCache.clear() // TODO: must clear cache for markers to appear after route switching. Not sure if this is a maps or routes issue
+
+      // TODO: must clear cache for markers to appear after route switching. Not sure if this is a maps or routes issue.
+      // Clearing the cache will increase # of API calls (still acceptable)
+      geocodeCache.clear()
     }
   }, [isLoaded])
 
