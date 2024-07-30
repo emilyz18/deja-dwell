@@ -47,8 +47,6 @@ const LandlordPropertyCard = ({ landlordId }) => {
         setHasAccept(false);
       }
     }
-    console.log(applicants);
-    console.log(hasAccepted);
   }, [getLandlordMatchesStatus,hasAccepted,landlordID,landlordMatchesApplicants,dispatch])
   
   useEffect(() => {
