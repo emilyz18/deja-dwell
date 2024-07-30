@@ -1,25 +1,6 @@
-// import React from 'react'
-// import { Route, Navigate } from 'react-router-dom'
-// import { useSelector } from 'react-redux'
-// import App from '../../App.jsx'
-
-// const ProtectedRoute = ({ element: Element, ...rest }) => {
-//   const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
-//   return isAuthenticated ? <App /> : <Navigate to="/login" />
-// }
-
-const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-
-  return isAuthenticated ? children : <Navigate to="/login" />;
-};
-
-// export default ProtectedRoute
-
-// ProtectedRoute.jsx
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import React from 'react'
+import { Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);

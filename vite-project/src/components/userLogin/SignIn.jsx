@@ -24,12 +24,12 @@ export default function SignIn() {
   useEffect(() => {
     if (isAuth) {
       if (isLandlord) {
-        navigate('/landlordAccount/applicants');
+        navigate('/landlordAccount/applicants', { replace: true });
       } else if (isTenant) {
-        navigate('/tenantAccount/matches');
+        navigate('/tenantAccount/matches', { replace: true });
       }
     }
-  }, [isAuth, dispatch, isLandlord, isTenant, navigate]);
+  }, [isAuth, isLandlord, isTenant, navigate]);
 
   return (
     <div className="auth-container">

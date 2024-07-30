@@ -26,12 +26,6 @@ export function GeneralInputForm() {
   };
 
   useEffect(() => {
-    if (user && user.UserID) {
-      dispatch(getUserAsync(user.UserID));
-    }
-  }, [dispatch, user.UserID]);
-
-  useEffect(() => {
     if (location.state && location.state.fromSignUp) {
       setWarning(true);
       if (location.state.fromSignUp === 'Landlord') {

@@ -1,7 +1,5 @@
 import './BaseSideBar.css'
 import * as React from 'react'
-import { Link } from 'react-router-dom'
-
 import Avatar from '@mui/material/Avatar'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
@@ -10,12 +8,18 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
+import { useDispatch } from 'react-redux';
+import { logoutAsync } from '../../redux/user/thunks';
+import { Link, useNavigate } from 'react-router-dom';
 
 export function BaseSideBar({ navBarLinks, profile, accountType }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onLogout = () => {
-    // TODO - for now we are only reloading to log out since we dont store the user session
-    // TODO - if we ever choose to store the user session we must update the log out function
-    location.reload()
+    // Clear the session token
+    document.cookie = 'token=; Max-Age=0; path=/;'; 
+    dispatch(logoutAsync());
+    navigate('/login', { replace: true });
   }
 
   return (

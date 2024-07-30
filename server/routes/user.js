@@ -87,6 +87,8 @@ router.post('/register', async (req, res) => {
       UserEmail: email,
       HashKey: hashKey,
       ProfileImg: '/images/default_profile_pic.jpg',
+      isLandlord: accountType === 'Landlord',
+      isTenant: accountType === 'Tenant'
     }
 
     if (accountType === 'Landlord') {
@@ -113,10 +115,18 @@ router.post('/register', async (req, res) => {
         newTenantPref(tenantId, tenantPrefID)
       )
     }
+    const userForToken = {
+      UserEmail: newUser.UserEmail,
+      UserID: newUser.UserID,
+      isLandlord: newUser.isLandlord,
+      isTenant: newUser.isTenant
+    };
+    const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: '1h' });
+    res.cookie('token', token, { httpOnly: true }); 
 
-    res
+    return res
       .status(201)
-      .json({ message: 'User registered', Auth: true, User: newUser })
+      .json({ message: 'User registered', Auth: true, User: newUser,token })
   }
 })
 
@@ -139,9 +149,9 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: '1h' });
     res.cookie('token', token, { httpOnly: true }); 
 
-    res.status(200).json({ Auth: true, User: user, token })
+    return res.status(200).json({ Auth: true, User: user, token })
   } catch (err) {
-    res.status(401).json({ message: err.message })
+    return res.status(401).json({ message: err.message })
   }
 })
 

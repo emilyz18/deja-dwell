@@ -9,6 +9,8 @@ export default function SignUp() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.user.isAuthenticated);
+  const isLandlord = useSelector((state) => state.user.isLandlord);
+  const isTenant = useSelector((state) => state.user.isTenant);
 
   const [accountType, setAccountType] = useState('');
   const [password, setPassword] = useState('');
@@ -60,16 +62,17 @@ export default function SignUp() {
   };
 
   useEffect(() => {
+    //console.log('isAuth:', isAuth, 'isLandlord:', isLandlord, 'isTenant:', isTenant);
     if (isAuth) {
-      if (accountType === 'Landlord') {
+      if (isLandlord) {
         navigate('/landlordAccount/profile', {
           state: { fromSignUp: 'Landlord' },
         });
-      } else if (accountType === 'Tenant') {
+      } else if (isTenant) {
         navigate('/tenantAccount/profile', { state: { fromSignUp: 'Tenant' } });
       }
     }
-  }, [isAuth, dispatch, navigate, accountType]);
+  }, [isAuth, isLandlord, isTenant, navigate]);
 
   return (
     <div className="auth-container">

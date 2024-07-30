@@ -43,4 +43,8 @@ export const verifySessionAsync = createAsyncThunk(
   async () => {
     return await userService.verifySession();
   }
-);
+)
+
+export const logoutAsync = createAsyncThunk('user/logout', async () => {
+  return await userService.logout();
+})

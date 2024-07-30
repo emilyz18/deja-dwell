@@ -6,7 +6,7 @@ import {
   editUserAsync,
   getUserAsync,
   getUsersAsync,
-  verifySessionAsync
+  verifySessionAsync, logoutAsync
 } from './thunks'
 
 const INITIAL_STATE = {
@@ -53,28 +53,17 @@ const userSlice = createSlice({
       })
       .addCase(signUpAsync.fulfilled, (state, action) => {
         const userPayload = action.payload
-        state.isAuthenticated = userPayload.Auth
+        state.isAuthenticated = true;
         state.user = userPayload.User
+        state.isLandlord = action.payload.User.isLandlord;
+        state.isTenant = action.payload.User.isTenant;
         state.requestState = REQUEST_STATE.FULFILLED
       })
       .addCase(signUpAsync.rejected, (state, action) => {
         state.error = action.error
         state.requestState = REQUEST_STATE.REJECTED
       })
-      // verfiy session
-      .addCase(verifySessionAsync.pending, (state) => {
-        state.requestState = REQUEST_STATE.PENDING;
-      })
-      .addCase(verifySessionAsync.fulfilled, (state, action) => {
-        state.isAuthenticated = true;
-        state.user = action.payload;
-        state.requestState = REQUEST_STATE.FULFILLED;
-      })
-      .addCase(verifySessionAsync.rejected, (state) => {
-        state.isAuthenticated = false;
-        state.user = null;
-        state.requestState = REQUEST_STATE.REJECTED;
-      })
+
       // Get User
       .addCase(getUserAsync.pending, (state) => {
         state.error = null
@@ -133,9 +122,21 @@ const userSlice = createSlice({
         state.isLandlord = false;
         state.isTenant = false;
         state.requestState = REQUEST_STATE.REJECTED;
+      })
+      // log out 
+      .addCase(logoutAsync.fulfilled, (state) => {
+        state.user = null;
+        state.isAuthenticated = false;
+        state.isLandlord = false;
+        state.isTenant = false;
+        state.error = null;
+        state.requestState = REQUEST_STATE.IDLE
+      }).addCase(logoutAsync.pending, (state) => {
+        state.error = null;
+        state.requestState = REQUEST_STATE.PENDING;
       });
   },
 })
 
-export const { updateUser } = userSlice.actions
+export const { updateUser, logout } = userSlice.actions
 export default userSlice.reducer
