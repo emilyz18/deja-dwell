@@ -33,7 +33,7 @@ function MapComponent({
   properties = [],
   propertyAddresses,
   zoomMapProperty,
-  isRecommendation,
+  isRecommendation = false,
   likedFn,
   dislikedFn,
 }) {
@@ -60,7 +60,7 @@ function MapComponent({
   useEffect(() => {
     if (isLoaded) {
       geocoderRef.current = new window.google.maps.Geocoder()
-      // geocodeCache.clear() // TODO: must clear cache for markers to appear after route switching. Not sure if this is a maps or routes issue
+      geocodeCache.clear() // TODO: must clear cache for markers to appear after route switching. Not sure if this is a maps or routes issue
     }
   }, [isLoaded])
 
@@ -164,6 +164,7 @@ function MapComponent({
 
   const onMarkerClick = useCallback(
     (houseID) => {
+      if (!isRecommendation) {
       return () => {
         const property = properties.find(
           (property) => property.HouseID === houseID
@@ -171,6 +172,7 @@ function MapComponent({
         setSelectedProperty(property)
         setPopupVisible(true)
       }
+    }
     },
     [properties]
   )
@@ -191,7 +193,9 @@ function MapComponent({
             scaledSize: new window.google.maps.Size(50, 50),
           },
         })
-        markerInstance.addListener('click', onMarkerClick(marker.HouseID))
+        if (!isRecommendation) {
+          markerInstance.addListener('click', onMarkerClick(marker.HouseID))
+        }
         return markerInstance
       })
 
