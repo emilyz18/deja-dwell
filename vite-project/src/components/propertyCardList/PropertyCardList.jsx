@@ -49,6 +49,8 @@ function PropertyCardList({ searchMode }) {
   })
 
   const [zoomMapProperty, setzoomMapProperty] = useState(null)
+  const [zoomTrigger, setZoomTrigger] = useState(0)
+
 
   const [searchTerm, setSearchTerm] = useState('')
   const [filters, setFilters] = useState({
@@ -139,6 +141,7 @@ function PropertyCardList({ searchMode }) {
 
   const zoomMap = (property) => {
     setzoomMapProperty(property)
+    setZoomTrigger(Date.now())
   }
 
   const displayPopup = (property) => {
@@ -276,6 +279,7 @@ function PropertyCardList({ searchMode }) {
               properties={displaySearchProperties}
               propertyAddresses={propertyAddresses}
               zoomMapProperty={zoomMapProperty}
+              zoomTrigger={zoomTrigger}
               likedFn={likedProperty}
               dislikedFn={dislikedProperty}
             />

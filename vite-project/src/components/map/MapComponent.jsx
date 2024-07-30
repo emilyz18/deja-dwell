@@ -30,9 +30,10 @@ const mapStyles = [
 const geocodeCache = new Map()
 
 function MapComponent({
-  properties = [],
-  propertyAddresses,
-  zoomMapProperty,
+  properties = [], // all properties passed in from search page
+  propertyAddresses, // property addresses displayed
+  zoomMapProperty, // single property that the map will zoom on 
+  zoomTrigger, // changes value on every card click, used to trigger another zoom
   isRecommendation = false,
   likedFn,
   dislikedFn,
@@ -82,7 +83,7 @@ function MapComponent({
   const geocodeAddress = (address) => {
     return new Promise((resolve, reject) => {
       if (geocodeCache.has(address)) {
-        // console.log("has addr " + geocodeCache.size)
+        console.log("zoom addr " + JSON.stringify(geocodeCache.get(address)))
         resolve(geocodeCache.get(address))
       } else {
         geocoderRef.current.geocode({ address }, (results, status) => {
@@ -95,7 +96,6 @@ function MapComponent({
             })
             resolve({ lat: position.lat(), lng: position.lng() })
           } else {
-            // reject(status) // TODO: dont display error in console
             resolve(null)
           }
         })
@@ -119,7 +119,11 @@ function MapComponent({
     if (zoomMapProperty) {
       zoomCenter()
         .then((position) => {
-          setCenter(position)
+          // console.log("zooming on property")
+          console.log("setting center: " + JSON.stringify(position))
+          // setCenter(position)
+          setCenter((prev) => ({ ...prev, ...position }))
+
           setIsZoom(true)
           setIsZoomHelper(true)
         })
@@ -127,7 +131,7 @@ function MapComponent({
           console.error(error)
         })
     }
-  }, [zoomMapProperty])
+  }, [zoomMapProperty, zoomTrigger, isLoaded])
 
   useEffect(() => {
     if (isLoaded) {
@@ -224,6 +228,8 @@ function MapComponent({
   const onLoad = (mapInstance) => {
     mapRef.current = mapInstance
   }
+
+  // console.log("map center: " + JSON.stringify(center))
 
   return isLoaded ? (
     <>
