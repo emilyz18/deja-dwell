@@ -8,8 +8,10 @@ import { getPropertiesAsync } from '../../redux/properties/thunks'
 import { Snackbar, Alert } from '@mui/material'
 import {
   getLandlordMatchesAsync,
+  reopenMatchesAsync,
   updateMatchAsync,
 } from '../../redux/matches/matchThunks'
+import Button from '@mui/material/Button'
 
 const LandlordPropertyCard = ({ landlordId }) => {
   const dispatch = useDispatch()
@@ -27,25 +29,26 @@ const LandlordPropertyCard = ({ landlordId }) => {
     open: false,
     message: '',
     severity: '',
-  })
-  const [applicants, setApplicants] = useState([])
-  const [popupVisible, setPopupVisible] = useState(false)
-  const [selectedApplicant, setSelectedApplicant] = useState(null)
+  });
+  const [applicants, setApplicants] = useState([]);
+  const [hasAccepted, setHasAccept] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [selectedApplicant, setSelectedApplicant] = useState(null);
 
   useEffect(() => {
     if (getLandlordMatchesStatus === 'IDLE') {
       dispatch(getPropertiesAsync())
       dispatch(getLandlordMatchesAsync(landlordID))
     } else if (getLandlordMatchesStatus === 'FULFILLED') {
-      setApplicants(landlordMatchesApplicants)
+      setApplicants(landlordMatchesApplicants);
+      if(landlordMatchesApplicants.some(applicant => applicant.matchStatus === 'Accepted')) {
+        setHasAccept(true);
+      } else {
+        setHasAccept(false);
+      }
     }
-  }, [
-    getLandlordMatchesStatus,
-    dispatch,
-    landlordID,
-    landlordMatchesApplicants,
-  ])
-
+  }, [getLandlordMatchesStatus,hasAccepted,landlordID,landlordMatchesApplicants,dispatch])
+  
   useEffect(() => {
     if (properties.length > 0) {
       const property = properties.find((prop) => prop.LandlordID === landlordId)
@@ -95,6 +98,14 @@ const LandlordPropertyCard = ({ landlordId }) => {
       message: `Accepted applicant: ${name}`,
       severity: 'success',
     })
+  }
+
+  const handleReopenMatch = () => {
+    if(selectedProperty) {
+      dispatch(
+        reopenMatchesAsync(selectedProperty.HouseID)
+      )
+    }
   }
 
   const handleClosePopup = () => {
@@ -159,6 +170,11 @@ const LandlordPropertyCard = ({ landlordId }) => {
               </div>
             </div>
           </div>
+          {hasAccepted? <div>
+          <Button className="reopen-button" color="error" onClick={handleReopenMatch}>
+          Reopen Match
+        </Button>
+          </div> : null}
         </div>
         <div className="applicant-list">
           {applicants.length > 0 ? (
