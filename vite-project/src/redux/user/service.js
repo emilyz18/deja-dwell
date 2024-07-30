@@ -34,6 +34,9 @@ const getUser = async (userID) => {
 const getUsers = async () => {
   return handleResponse(() => axios.get(URL_PATH))
 }
+const verifySession = async () => { 
+  return handleResponse(() => axios.get(URL_PATH + '/verifySession'));
+};
 
 const verifySession = async () => {
   return handleResponse(() => axios.get(URL_PATH + '/verifySession', { withCredentials: true }));

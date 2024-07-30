@@ -114,6 +114,26 @@ const userSlice = createSlice({
         state.error = action.error
         state.requestState = REQUEST_STATE.REJECTED
       })
+      // Verify Session
+      .addCase(verifySessionAsync.pending, (state) => {
+        state.error = null;
+        state.requestState = REQUEST_STATE.PENDING;
+      })
+      .addCase(verifySessionAsync.fulfilled, (state, action) => {
+        const userPayload = action.payload;
+        state.isAuthenticated = true;
+        state.user = userPayload;
+        state.isLandlord = userPayload.isLandlord;
+        state.isTenant = userPayload.isTenant;
+        state.requestState = REQUEST_STATE.FULFILLED;
+      })
+      .addCase(verifySessionAsync.rejected, (state, action) => {
+        state.isAuthenticated = false;
+        state.user = null;
+        state.isLandlord = false;
+        state.isTenant = false;
+        state.requestState = REQUEST_STATE.REJECTED;
+      });
   },
 })
 

@@ -1,7 +1,7 @@
-import React from 'react'
-import { Route, Navigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import App from '../../App.jsx'
+// import React from 'react'
+// import { Route, Navigate } from 'react-router-dom'
+// import { useSelector } from 'react-redux'
+// import App from '../../App.jsx'
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
@@ -14,4 +14,18 @@ const ProtectedRoute = ({ children }) => {
   return isAuthenticated ? children : <Navigate to="/login" />;
 };
 
-export default ProtectedRoute
+// export default ProtectedRoute
+
+// ProtectedRoute.jsx
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+
+  return isAuthenticated ? children : <Navigate to="/login" />;
+};
+
+export default ProtectedRoute;
+

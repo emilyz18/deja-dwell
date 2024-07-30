@@ -1,6 +1,7 @@
 var express = require('express')
 var crypto = require('crypto')
 const jwt = require('jsonwebtoken')
+const { db } = require("../db");
 
 const { v4: uuid } = require('uuid')
 
@@ -194,5 +195,10 @@ router.patch('/edit', async (req, res) => {
       .json({ message: `Error updating user profile: ${err.message}` })
   }
 })
+
+router.post('/logout', (req, res) => {
+  res.clearCookie('token'); 
+  res.status(200).json({ message: 'Logged out successfully' });
+});
 
 module.exports = router
