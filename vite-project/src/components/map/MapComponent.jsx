@@ -95,10 +95,8 @@ function MapComponent({
             })
             resolve({ lat: position.lat(), lng: position.lng() })
           } else {
-            console.error(
-              'Geocode was not successful for the following reason: ' + status
-            )
-            reject(status) // TODO: dont display error in console
+            // reject(status) // TODO: dont display error in console
+            resolve(null)
           }
         })
       }
@@ -138,20 +136,27 @@ function MapComponent({
         const address = convertToAddressString(propertyAddress)
         // return geocodeAddress(address);
 
-        return geocodeAddress(address).then((geocodedMarker) => ({
-          ...geocodedMarker,
-          HouseID: propertyAddress.HouseID, // Add propertyID here
-          ExpectedPrice: propertyAddress.ExpectedPrice,
-        }))
+       return geocodeAddress(address).then((geocodedMarker) => {
+          if (geocodedMarker) {
+            return {
+              ...geocodedMarker,
+              HouseID: propertyAddress.HouseID, // Add propertyID here
+              ExpectedPrice: propertyAddress.ExpectedPrice,
+            }
+          } else {
+            return null
+          }
+        })
       })
 
       Promise.all(geocodePromises)
         .then((geocodedMarkers) => {
-          setMarkers(geocodedMarkers)
+          const validMarkers = geocodedMarkers.filter(marker => marker !== null);
+          setMarkers(validMarkers)
           // console.log(geocodedMarkers)
-          if (geocodedMarkers.length > 0) {
+          if (validMarkers.length > 0) {
             if (isRecommendation) {
-              setCenter(geocodedMarkers[0])
+              setCenter(validMarkers[0])
               setIsZoom(true)
             }
           }
@@ -248,9 +253,5 @@ function MapComponent({
   ) : (
     <div className="loading">Loading...</div>
   )
-  // return (
-  //   <div className='loading'>
-  //   Loading...</div>
-  // )
 }
 export default MapComponent
