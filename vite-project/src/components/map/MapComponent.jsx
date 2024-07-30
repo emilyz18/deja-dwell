@@ -119,7 +119,6 @@ function MapComponent({
     if (zoomMapProperty) {
       zoomCenter()
         .then((position) => {
-          // console.log("zooming on property")
           console.log("setting center: " + JSON.stringify(position))
           // setCenter(position)
           setCenter((prev) => ({ ...prev, ...position }))
@@ -131,7 +130,7 @@ function MapComponent({
           console.error(error)
         })
     }
-  }, [zoomMapProperty, zoomTrigger, isLoaded])
+  }, [zoomMapProperty, zoomTrigger, isLoaded, propertyAddresses])
 
   useEffect(() => {
     if (isLoaded) {
@@ -157,7 +156,7 @@ function MapComponent({
         .then((geocodedMarkers) => {
           const validMarkers = geocodedMarkers.filter(marker => marker !== null);
           setMarkers(validMarkers)
-          // console.log(geocodedMarkers)
+          console.log(geocodedMarkers)
           if (validMarkers.length > 0) {
             if (isRecommendation) {
               setCenter(validMarkers[0])
