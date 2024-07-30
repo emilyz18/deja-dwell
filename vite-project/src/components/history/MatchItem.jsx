@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Carousel from '../carousel/Carousel'
-import './MatchItem.css' // Ensure you have this file for styling
+import './MatchItem.css'
 import {
   getTenantMatchesAsync,
   updateMatchAsync,
 } from '../../redux/matches/matchThunks'
 import { Alert, Snackbar } from '@mui/material'
-import { useDispatch } from 'react-redux'
 
 function MatchItem({ match, displayPopup }) {
   const dispatch = useDispatch()
@@ -64,7 +63,6 @@ function MatchItem({ match, displayPopup }) {
 
   const dislikedProperty = (id, event) => {
     event.stopPropagation()
-
     const dislikedProperty = allProperties.find(
       (property) => property.HouseID === id
     )
@@ -87,6 +85,7 @@ function MatchItem({ match, displayPopup }) {
       })
     })
   }
+
   const handleNotificationClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
@@ -108,9 +107,16 @@ function MatchItem({ match, displayPopup }) {
         {currentProperty && (
           <div className="house-details" onClick={displayPopup}>
             <h2>{currentProperty.Title}</h2>
-            <p>Price: {currentProperty.ExpectedPrice}</p>
-            <p>Number of Bedrooms: {currentProperty.NumBedroom}</p>
-            <p>Number of Bathroom: {currentProperty.NumBathroom}</p>
+            <p>
+              <strong>Price:</strong> {currentProperty.ExpectedPrice}
+            </p>
+            <p>
+              <strong>Number of Bedrooms:</strong> {currentProperty.NumBedroom}
+            </p>
+            <p>
+              <strong>Number of Bathrooms:</strong>{' '}
+              {currentProperty.NumBathroom}
+            </p>
           </div>
         )}
         <div className="right-side">
@@ -120,6 +126,7 @@ function MatchItem({ match, displayPopup }) {
           <div className="action-buttons">
             {match.MatchStatus === 'Applied' ? (
               <button
+                className="disliked"
                 onClick={(event) =>
                   dislikedProperty(currentProperty.HouseID, event)
                 }
@@ -128,13 +135,14 @@ function MatchItem({ match, displayPopup }) {
               </button>
             ) : match.MatchStatus === 'Disliked' ? (
               <button
+                className="accepted"
                 onClick={(event) =>
                   likedProperty(currentProperty.HouseID, event)
                 }
               >
                 Change to Applied
               </button>
-            ) : null}{' '}
+            ) : null}
           </div>
         </div>
       </div>

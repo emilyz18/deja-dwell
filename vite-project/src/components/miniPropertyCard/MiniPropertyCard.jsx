@@ -6,9 +6,30 @@ import { ThemeProvider } from '@mui/material/styles'
 import { theme } from '../themes.jsx'
 
 function MiniPropertyCard(props) {
-  const { propertyInfo, likedFn, dislikedFn, displayPopup, searchMode, zoomMap } = props
+  const {
+    propertyInfo,
+    likedFn,
+    dislikedFn,
+    displayPopup,
+    searchMode,
+    zoomMap,
+  } = props
 
-  const { NumBedroom, NumBathroom, isAC, isHeater, isFurnished, AllowPet, AllowSmoke, AllowParty, AllowWeed, ExpectedPrice, Street, City, Province } = propertyInfo;
+  const {
+    NumBedroom,
+    NumBathroom,
+    isAC,
+    isHeater,
+    isFurnished,
+    AllowPet,
+    AllowSmoke,
+    AllowParty,
+    AllowWeed,
+    ExpectedPrice,
+    Street,
+    City,
+    Province,
+  } = propertyInfo
 
   if (!propertyInfo) return null
 
@@ -37,8 +58,9 @@ function MiniPropertyCard(props) {
     displayPopup()
   }
 
-  const carouselSize = searchMode ? { width: 400, height: 230 } : { width: 450, height: 250 };
-
+  const carouselSize = searchMode
+    ? { width: '100%', height: 230 }
+    : { width: '100%', height: 250 }
 
   return (
     <>
@@ -46,7 +68,7 @@ function MiniPropertyCard(props) {
         <Carousel
           className="carousel-container"
           data={propertyInfo.HouseImgs}
-          size= {carouselSize}
+          size={carouselSize}
         />
         <div {...attributes} {...listeners}>
           <div className="card-details" onClick={zoomMap}>
@@ -57,16 +79,14 @@ function MiniPropertyCard(props) {
               {Province && `${Province} `}
             </span>
             <div className="details-row">
-              
-              {propertyInfo.NumBedroom && (
-                <span className="house-type">{propertyInfo.NumBedroom}Bed</span>
+              {NumBedroom && (
+                <span className="house-type">{NumBedroom}Bed</span>
               )}
-               {propertyInfo.NumBathroom && (
-                <span className="house-type">{propertyInfo.NumBathroom}Bath</span>
+              {NumBathroom && (
+                <span className="house-type">{NumBathroom}Bath</span>
               )}
-              
             </div>
-            <div className='details-row-amenity'>
+            <div className="details-row-amenity">
               {isAC && <span className="amenity">AC</span>}
               {isHeater && <span className="amenity">Heater</span>}
               {isFurnished && <span className="amenity">Furnished</span>}
@@ -75,10 +95,8 @@ function MiniPropertyCard(props) {
               {AllowParty && <span className="amenity">Party Allowed</span>}
               {AllowWeed && <span className="amenity">Weed Allowed</span>}
             </div>
-            <div className='details-row'>
-              {ExpectedPrice && (
-                <h5 className="price">${ExpectedPrice}</h5>
-              )}
+            <div className="details-row">
+              {ExpectedPrice && <h5 className="price">${ExpectedPrice}</h5>}
             </div>
           </div>
         </div>
