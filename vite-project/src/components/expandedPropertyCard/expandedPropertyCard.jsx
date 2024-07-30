@@ -4,10 +4,10 @@ import './expandedPropertyCard.css';
 import MapComponent from '../map/MapComponent';
 
 export function ExpandedPropertyCard({ propertyInfo, isSearch = false }) {
-  // if (!propertyInfo) {
-  //   return null;
-  // }
-  console.log("property INfo: " + propertyInfo)
+  if (!propertyInfo) {
+    return null;
+  }
+
   const {
     HouseID,
     NumBedroom,

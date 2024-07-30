@@ -41,6 +41,8 @@ function MapComponent({
     googleMapsApiKey: import.meta.env.VITE_MAP_API_KEY,
   })
 
+  const [popupVisible, setPopupVisible] = useState(false)
+
   const [markers, setMarkers] = useState([])
   const [isZoom, setIsZoom] = useState(false)
 
@@ -61,6 +63,11 @@ function MapComponent({
       // geocodeCache.clear() // TODO: must clear cache for markers to appear after route switching. Not sure if this is a maps or routes issue
     }
   }, [isLoaded])
+
+  const closePopup = () => {
+    setPopupVisible(false)
+    setSelectedProperty(null)
+  }
 
   const convertToAddressString = (propertyAddress) => {
     let { Street, City, Province } = propertyAddress
@@ -163,7 +170,8 @@ function MapComponent({
           (property) => property.HouseID === houseID
         )
         setSelectedProperty(property)
-        setOpenExpanded(true);
+        // setOpenExpanded(true)
+        setPopupVisible(true);
       }
     },
     [properties]
@@ -214,7 +222,7 @@ function MapComponent({
 
   console.log('selected property: ' + JSON.stringify(selectedProperty))
 
-    console.log(openExpanded)
+  // console.log(openExpanded)
   return isLoaded ? (
     <>
       <GoogleMap
@@ -226,10 +234,12 @@ function MapComponent({
           styles: mapStyles,
         }}
       ></GoogleMap>
-      {openExpanded && (
-        <ExpandedPropertyCard
-          propertyInfo={selectedProperty} // Pass the entire property object
-        />
+      {popupVisible && (
+        <div className="marker-popup-background" onClick={closePopup}>
+          <div className="marker-popup" onClick={(e) => e.stopPropagation()}>
+            <ExpandedPropertyCard propertyInfo={selectedProperty} />
+          </div>
+        </div>
       )}
     </>
   ) : (
