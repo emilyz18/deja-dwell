@@ -73,10 +73,7 @@
   background-color: #dee8dd;
   padding: 2px 8px;
   border-radius: 12px;
-
 }
-
-
 
 .buttons-row {
   display: flex;
@@ -86,7 +83,7 @@
   background-color: white;
 }
 
-.price{
+.price {
   font-size: larger;
 }
 
