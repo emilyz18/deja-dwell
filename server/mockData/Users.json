@@ -281,5 +281,18 @@
     "PhoneNumber": "012-345-6789",
     "ProfileImg": "/images/default_profile_pic.jpg",
     "Password": "password10"
+  },
+  {
+    "UserID": "12333333-abcd-4efg-90hi-1234567890jk",
+    "LandlordID": null,
+    "TenantID": "12333333-abcd-4efg-90hi-1234567890jk",
+    "HashKey": "hashkey11",
+    "isLandlord": false,
+    "isTenant": true,
+    "UserName": "MockTenantDemo",
+    "UserEmail": "MockTenant@demo.com",
+    "PhoneNumber": "012-345-6789",
+    "ProfileImg": "/images/default_profile_pic.jpg",
+    "Password": "MockTenant123"
   }
 ]
