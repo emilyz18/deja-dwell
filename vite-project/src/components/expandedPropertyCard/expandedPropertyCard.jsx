@@ -3,7 +3,7 @@ import Carousel from '../carousel/Carousel';
 import './expandedPropertyCard.css';
 import MapComponent from '../map/MapComponent';
 
-export function ExpandedPropertyCard({ propertyInfo, isSearch = false }) {
+export function ExpandedPropertyCard({ propertyInfo, isSearch = false, showButtons = false, likedFn, dislikedFn, setPopupVisible}) {
   if (!propertyInfo) {
     return null;
   }
@@ -27,6 +27,16 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch = false }) {
 
   const address = [{ HouseID: HouseID, ExpectedPrice: ExpectedPrice, Street: Street, City: City, Province: Province }];
   // console.log(address)
+
+  const likeProperty = () => {
+    likedFn(propertyInfo.HouseID)
+    setPopupVisible(false)
+  }
+
+  const dislikeProperty = () => {
+    dislikedFn(propertyInfo.HouseID)
+    setPopupVisible(false)
+  }
 
   return (
     <div className="expanded-property-popup">
@@ -54,6 +64,22 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch = false }) {
       <div>
         {isSearch && <MapComponent propertyAddresses={address} isRecommendation={true}/>
       }
+      </div>
+      <div>
+        {showButtons &&   <div className="buttons-row">
+          <button
+            className="circle-button cross-button"
+            onClick={dislikeProperty}
+          >
+            ✖
+          </button>
+          <button
+            className="circle-button checkmark-button"
+            onClick={likeProperty}
+          >
+            ✔
+          </button>
+        </div>}
       </div>
     </div>
   );

@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { closestCenter, DndContext, DragOverlay, useDroppable } from '@dnd-kit/core'
+import {
+  closestCenter,
+  DndContext,
+  DragOverlay,
+  useDroppable,
+} from '@dnd-kit/core'
 import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable'
 import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
@@ -8,42 +13,44 @@ import './PropertyCardList.css'
 import SearchBar from '../searchBar/SearchBar.jsx'
 import MapComponent from '../map/MapComponent.jsx'
 import HelpPopOver from './HelpPopOver.jsx'
-import { getPreferPropertiesAsync, getUnmatchedPropertiesAsync } from '../../redux/properties/thunks'
+import {
+  getPreferPropertiesAsync,
+  getUnmatchedPropertiesAsync,
+} from '../../redux/properties/thunks'
 import { createMatchAsync } from '../../redux/matches/matchThunks'
-import { Box, Typography, Fab, Snackbar, Alert } from '@mui/material';
-import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
+import { Box, Typography, Fab, Snackbar, Alert } from '@mui/material'
+import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded'
 import { v4 as uuidv4 } from 'uuid'
 import { getTenantMatchesAsync } from '../../redux/matches/matchThunks'
 
 function PropertyCardList({ searchMode }) {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.user)
 
   const getUnMatchedPropertiesStatus = useSelector(
     (state) => state.properties.getUnmatchedProperties
-  );
+  )
   const getPreferPropertiesStatus = useSelector(
     (state) => state.properties.getPreferProperties
-  );
+  )
 
   const properties = searchMode
     ? useSelector((state) => state.properties.unmatchProperties)
-    : useSelector((state) => state.properties.preferProperties);
+    : useSelector((state) => state.properties.preferProperties)
 
-  const [activeId, setActiveId] = useState(null); // activeId only used when dragging
-  const [popupVisible, setPopupVisible] = useState(false);
-  const [selectedProperty, setSelectedProperty] = useState(null);
-  const [isDragging, setIsDragging] = useState(false);
+  const [activeId, setActiveId] = useState(null) // activeId only used when dragging
+  const [popupVisible, setPopupVisible] = useState(false)
+  const [selectedProperty, setSelectedProperty] = useState(null)
+  const [isDragging, setIsDragging] = useState(false)
   const [notification, setNotification] = useState({
     open: false,
     message: '',
     severity: '',
-  });
+  })
 
-  const [zoomMapProperty, setzoomMapProperty] = useState(null);
+  const [zoomMapProperty, setzoomMapProperty] = useState(null)
 
-
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState('')
   const [filters, setFilters] = useState({
     minPrice: '',
     maxPrice: '',
@@ -61,30 +68,31 @@ function PropertyCardList({ searchMode }) {
     furnished: false,
     ac: false,
     heater: false,
-  });
+  })
 
   useEffect(() => {
     if (
       getPreferPropertiesStatus === 'IDLE' ||
       getUnMatchedPropertiesStatus === 'IDLE'
     ) {
-      reloadProperties();
+      reloadProperties()
     }
   }, [
     getUnMatchedPropertiesStatus,
     getPreferPropertiesStatus,
     searchMode,
     dispatch,
-  ]);
+  ])
 
   const reloadProperties = () => {
-    dispatch(getUnmatchedPropertiesAsync(user.TenantID));
-    dispatch(getPreferPropertiesAsync(user.TenantID));
-    console.log("Properties Reloaded");
-  };
+    dispatch(getUnmatchedPropertiesAsync(user.TenantID))
+    dispatch(getPreferPropertiesAsync(user.TenantID))
+    console.log('Properties Reloaded')
+  }
 
   const likedProperty = (id) => {
-    const likedProperty = properties.find((property) => property.HouseID === id);
+    const likedProperty = properties.find((property) => property.HouseID === id)
+    console.log("liked property: " + likedProperty)
     dispatch(
       createMatchAsync({
         MatchID: uuidv4(),
@@ -94,20 +102,22 @@ function PropertyCardList({ searchMode }) {
         MatchStatus: 'Applied',
       })
     ).then(() => {
-      reloadProperties();
-      dispatch(getTenantMatchesAsync(user.TenantID));
+      reloadProperties()
+      dispatch(getTenantMatchesAsync(user.TenantID))
       setNotification({
         open: true,
         message: `Liked property: ${likedProperty.Title}`,
         severity: 'success',
-      });
-    });
-  };
+      })
+    })
+  }
 
   const dislikedProperty = (id) => {
     const dislikedProperty = properties.find(
       (property) => property.HouseID === id
-    );
+    )
+    console.log("disliked property: " + dislikedProperty)
+
     dispatch(
       createMatchAsync({
         MatchID: uuidv4(),
@@ -117,96 +127,96 @@ function PropertyCardList({ searchMode }) {
         MatchStatus: 'Disliked',
       })
     ).then(() => {
-      reloadProperties();
-      dispatch(getTenantMatchesAsync(user.TenantID));
+      reloadProperties()
+      dispatch(getTenantMatchesAsync(user.TenantID))
       setNotification({
         open: true,
         message: `Disliked property: ${dislikedProperty.Title}`,
         severity: 'error',
-      });
-    });
-  };
+      })
+    })
+  }
 
   const zoomMap = (property) => {
     setzoomMapProperty(property)
   }
 
   const displayPopup = (property) => {
-    setSelectedProperty(property);
-    setPopupVisible(true);
-  };
+    setSelectedProperty(property)
+    setPopupVisible(true)
+  }
 
   const closePopup = () => {
-    setPopupVisible(false);
-    setSelectedProperty(null);
-  };
+    setPopupVisible(false)
+    setSelectedProperty(null)
+  }
 
   const handleDragStart = (event) => {
-    const { active } = event;
-    setActiveId(active.id);
-    setIsDragging(true);
-  };
+    const { active } = event
+    setActiveId(active.id)
+    setIsDragging(true)
+  }
 
   const handleDragEnd = (event) => {
-    const { delta } = event;
+    const { delta } = event
 
     if (delta.x > 200) {
-      likedProperty(activeId);
+      likedProperty(activeId)
     } else if (delta.x < -200) {
-      dislikedProperty(activeId);
+      dislikedProperty(activeId)
     }
 
-    setActiveId(null);
-    setIsDragging(false);
-  };
+    setActiveId(null)
+    setIsDragging(false)
+  }
 
   const { setNodeRef: setLikeRef, isOver: isOverLike } = useDroppable({
     id: 'like-dropzone',
-  });
+  })
 
   const { setNodeRef: setDislikeRef, isOver: isOverDislike } = useDroppable({
     id: 'dislike-dropzone',
     onDragEnter: () => {
-      console.log('Draggable card entered the dislike dropzone');
+      console.log('Draggable card entered the dislike dropzone')
     },
     onDragLeave: () => {
-      console.log('Draggable card left the dislike dropzone');
+      console.log('Draggable card left the dislike dropzone')
     },
-  });
+  })
 
   const displaySearchProperties = properties.filter((property) => {
     const matchesSearchTerm = property.Title.toLowerCase().includes(
       searchTerm.toLowerCase()
-    );
+    )
     const matchesMaxPrice =
       filters.maxPrice === '' ||
-      property.ExpectedPrice <= parseFloat(filters.maxPrice);
+      property.ExpectedPrice <= parseFloat(filters.maxPrice)
     const matchesProvince =
       filters.province === '' ||
-      property.Province.toLowerCase() === filters.province.toLowerCase();
+      property.Province.toLowerCase() === filters.province.toLowerCase()
     const matchesCity =
       filters.city === '' ||
-      property.City.toLowerCase() === filters.city.toLowerCase();
+      property.City.toLowerCase() === filters.city.toLowerCase()
 
     const matchesStartDate =
-      filters.startDate === '' || property.StartDate === filters.startDate;
+      filters.startDate === '' || property.StartDate === filters.startDate
     const matchesEndDate =
-      filters.endDate === '' || property.EndDate === filters.endDate;
+      filters.endDate === '' || property.EndDate === filters.endDate
     const matchesBedroomNum =
       filters.bedroomNum === '' ||
-      property.NumBedroom === parseFloat(filters.bedroomNum);
+      property.NumBedroom === parseFloat(filters.bedroomNum)
     const matchesBathroomNum =
       filters.bathroomNum === '' ||
-      property.NumBathroom === parseFloat(filters.bathroomNum);
+      property.NumBathroom === parseFloat(filters.bathroomNum)
 
-    const matchesAllowPet = !filters.allowPet || property.AllowPet;
-    const matchesAllowSmoke = !filters.allowSmoke || property.AllowSmoke;
-    const matchesAllowParty = !filters.allowParty || property.AllowParty;
-    const matchesAllowWeed = !filters.allowWeed || property.AllowWeed;
+    const matchesAllowPet = !filters.allowPet || property.AllowPet
+    const matchesAllowSmoke = !filters.allowSmoke || property.AllowSmoke
+    const matchesAllowParty = !filters.allowParty || property.AllowParty
+    const matchesAllowWeed = !filters.allowWeed || property.AllowWeed
 
-    const isFurnished = !filters.furnished || property.isFurnished;
-    const hasAC = !filters.ac || property.isAC;
-    const hasHeater = !filters.heater || property.isHeater;
+    const isFurnished = !filters.furnished || property.isFurnished
+    const hasAC = !filters.ac || property.isAC
+    const hasHeater = !filters.heater || property.isHeater
 
     return (
       matchesSearchTerm &&
@@ -224,22 +234,22 @@ function PropertyCardList({ searchMode }) {
       isFurnished &&
       hasAC &&
       hasHeater
-    );
-  });
+    )
+  })
 
-  const displayedRecommendationProperty = properties[0]; // property length decreases with each like/dislike
-  var nextRecommendationProperty = properties[1];
+  const displayedRecommendationProperty = properties[0] // property length decreases with each like/dislike
+  var nextRecommendationProperty = properties[1]
 
   if (properties.length === 1) {
-    nextRecommendationProperty = properties[0];
+    nextRecommendationProperty = properties[0]
   }
 
   const handleNotificationClose = (event, reason) => {
     if (reason === 'clickaway') {
-      return;
+      return
     }
-    setNotification({ ...notification, open: false });
-  };
+    setNotification({ ...notification, open: false })
+  }
 
   const propertyAddresses = displaySearchProperties.map((property) => {
     return {
@@ -248,13 +258,11 @@ function PropertyCardList({ searchMode }) {
       Street: property.Street,
       City: property.City,
       Province: property.Province,
-    };
-  });
+    }
+  })
 
   return (
     <>
-
-
       {searchMode ? (
         <div>
           <SearchBar
@@ -264,7 +272,13 @@ function PropertyCardList({ searchMode }) {
             setFilters={setFilters}
           />
           <div className="search-display">
-            <MapComponent properties={displaySearchProperties} propertyAddresses={propertyAddresses} zoomMapProperty={zoomMapProperty} />
+            <MapComponent
+              properties={displaySearchProperties}
+              propertyAddresses={propertyAddresses}
+              zoomMapProperty={zoomMapProperty}
+              likedFn={likedProperty}
+              dislikedFn={dislikedProperty}
+            />
 
             <div className="cards-container">
               {displaySearchProperties.length === 0 ? (
@@ -299,12 +313,14 @@ function PropertyCardList({ searchMode }) {
         </div>
       ) : (
         <div>
-          <Box sx={{
-            display: 'flex', alignItems: 'center',
-            paddingLeft: 8,
-            pt: 5,
-            pb: 2
-          }}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              paddingLeft: 8,
+              pt: 5,
+              pb: 2,
+            }}
           >
             <Typography
               variant="h4"
@@ -333,8 +349,9 @@ function PropertyCardList({ searchMode }) {
             <div className="dropzone-container">
               {isDragging ? (
                 <div
-                  className={`dropzone left-dropzone ${isOverDislike ? 'active' : ''
-                    }`}
+                  className={`dropzone left-dropzone ${
+                    isOverDislike ? 'active' : ''
+                  }`}
                   ref={setDislikeRef}
                 >
                   <span className="dropzone-icon">✖</span>
@@ -382,8 +399,9 @@ function PropertyCardList({ searchMode }) {
               </SortableContext>
               {isDragging ? (
                 <div
-                  className={`dropzone right-dropzone ${isOverLike ? 'active' : ''
-                    }`}
+                  className={`dropzone right-dropzone ${
+                    isOverLike ? 'active' : ''
+                  }`}
                   ref={setLikeRef}
                 >
                   <span className="dropzone-icon">✔</span>
@@ -411,7 +429,10 @@ function PropertyCardList({ searchMode }) {
                 className="property-popup"
                 onClick={(e) => e.stopPropagation()}
               >
-                <ExpandedPropertyCard propertyInfo={selectedProperty} isSearch={true} />
+                <ExpandedPropertyCard
+                  propertyInfo={selectedProperty}
+                  isSearch={true}
+                />
               </div>
             </div>
           )}
@@ -438,19 +459,24 @@ function PropertyCardList({ searchMode }) {
           zIndex: 1000,
         }}
       >
-        <Fab variant="extended" size="medium" onClick={reloadProperties} sx={{
-          backgroundColor: 'black',
-          color: 'white',
-          '&:hover': {
-            backgroundColor: '#333',
-          },
-        }}>
+        <Fab
+          variant="extended"
+          size="medium"
+          onClick={reloadProperties}
+          sx={{
+            backgroundColor: 'black',
+            color: 'white',
+            '&:hover': {
+              backgroundColor: '#333',
+            },
+          }}
+        >
           <ReplayRoundedIcon sx={{ mr: 1 }} />
           Reload Properties
         </Fab>
       </Box>
     </>
-  );
+  )
 }
 
-export default PropertyCardList;
+export default PropertyCardList

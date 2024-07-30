@@ -34,8 +34,9 @@ function MapComponent({
   propertyAddresses,
   zoomMapProperty,
   isRecommendation,
+  likedFn,
+  dislikedFn
 }) {
-  // console.log(propertyAddresses)
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: import.meta.env.VITE_MAP_API_KEY,
@@ -220,8 +221,6 @@ function MapComponent({
     mapRef.current = mapInstance
   }
 
-  console.log('selected property: ' + JSON.stringify(selectedProperty))
-
   // console.log(openExpanded)
   return isLoaded ? (
     <>
@@ -237,7 +236,7 @@ function MapComponent({
       {popupVisible && (
         <div className="marker-popup-background" onClick={closePopup}>
           <div className="marker-popup" onClick={(e) => e.stopPropagation()}>
-            <ExpandedPropertyCard propertyInfo={selectedProperty} />
+            <ExpandedPropertyCard propertyInfo={selectedProperty} showButtons={true} likedFn={likedFn}  dislikedFn={dislikedFn} setPopupVisible={setPopupVisible}/>
           </div>
         </div>
       )}
