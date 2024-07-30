@@ -6,7 +6,9 @@ import { ExpandedPropertyCard } from '../expandedPropertyCard/ExpandedPropertyCa
 import './History.css'
 import { getPropertiesAsync } from '../../redux/properties/thunks'
 import { getTenantMatchesAsync } from '../../redux/matches/matchThunks'
-import { Box, Typography, Fab } from '@mui/material'
+import { Typography } from '@mui/material'
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
 import  ReplayRoundedIcon from '@mui/icons-material/ReplayRounded'
 
 function History() {
