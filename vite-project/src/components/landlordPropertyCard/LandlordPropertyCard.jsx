@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Carousel from '../carousel/Carousel'
-import './LandlordPropertyCard.css' // Import the CSS file
+import './LandlordPropertyCard.css' 
 import ApplicantCard from '../applicantCard/ApplicantCard'
 import ExpandedApplicantCard from '../applicantCard/ExpandedApplicantCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPropertiesAsync } from '../../redux/properties/thunks'
-import { Snackbar, Alert } from '@mui/material'
+import { Snackbar, Alert, Box, Fab } from '@mui/material'
+import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded'
 import {
   getLandlordMatchesAsync,
   reopenMatchesAsync,
@@ -124,8 +125,14 @@ const LandlordPropertyCard = ({ landlordId }) => {
     setNotification({ ...notification, open: false })
   }
 
+  const reloadApplicants = () => {
+    dispatch(getPropertiesAsync())
+    dispatch(getLandlordMatchesAsync(landlordID))
+    
+  }
+
   if (!selectedProperty) {
-    return <div>Loading property...</div>
+    return <div>Your have not publish a property yet...</div>
   }
 
   const {
@@ -219,7 +226,32 @@ const LandlordPropertyCard = ({ landlordId }) => {
           {notification.message}
         </Alert>
       </Snackbar>
+      <Box
+        sx={{
+          position: 'fixed',
+          bottom: 20,
+          right: 20,
+          zIndex: 1000,
+        }}
+      >
+        <Fab
+          variant="extended"
+          size="medium"
+          onClick={reloadApplicants}
+          sx={{
+            backgroundColor: 'black',
+            color: 'white',
+            '&:hover': {
+              backgroundColor: '#333',
+            },
+          }}
+        >
+          <ReplayRoundedIcon sx={{ mr: 1 }} />
+          Reload Applicants
+        </Fab>
+      </Box>
     </>
+    
   )
 }
 
