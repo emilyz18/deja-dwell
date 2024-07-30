@@ -4,12 +4,21 @@ const matchQueries = require('../dataBase/queries/matchQueries')
 const tenantPrefQueries = require('../dataBase/queries/tenantPrefQueries')
 const tenantProfileQueries = require('../dataBase/queries/tenantProfileQueries')
 const userQueries = require('../dataBase/queries/userQueries')
+const { v4: uuid } = require('uuid')
+
 
 // Create a new match
 router.post('/', async (req, res) => {
-  const newMatch = req.body
+  let newMatch = req.body
 
   try {
+    const existingMatch = await matchQueries.findMatchWithIds(newMatch.HouseID, newMatch.TenantID);
+    if (existingMatch) {
+      return res.status(409).json({ message: 'Duplicate match exists' });
+    }
+    const matchID = uuid()
+    newMatch.MatchID = matchID;
+
     const createdMatch = await matchQueries.createMatch(newMatch)
     res.status(201).json(createdMatch)
   } catch (err) {

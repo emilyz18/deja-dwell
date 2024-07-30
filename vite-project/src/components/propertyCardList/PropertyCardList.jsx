@@ -94,7 +94,6 @@ function PropertyCardList({ searchMode }) {
     const likedProperty = properties.find((property) => property.HouseID === id)
     dispatch(
       createMatchAsync({
-        MatchID: uuidv4(),
         TenantID: user.TenantID,
         LandlordID: likedProperty.LandlordID,
         HouseID: likedProperty.HouseID,
@@ -117,7 +116,6 @@ function PropertyCardList({ searchMode }) {
     )
     dispatch(
       createMatchAsync({
-        MatchID: uuidv4(),
         TenantID: user.TenantID,
         LandlordID: dislikedProperty.LandlordID,
         HouseID: dislikedProperty.HouseID,
