@@ -59,6 +59,23 @@ function MapComponent({
   const geocoderRef = useRef(null)
 
   useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          }
+          setCenter(userLocation)
+        },
+        (error) => {
+          // If there is an error, the center remains the default location
+        }
+      )
+    }
+  }, [])
+
+  useEffect(() => {
     if (isLoaded) {
       geocoderRef.current = new window.google.maps.Geocoder()
       geocodeCache.clear() // TODO: must clear cache for markers to appear after route switching. Not sure if this is a maps or routes issue
@@ -83,7 +100,7 @@ function MapComponent({
   const geocodeAddress = (address) => {
     return new Promise((resolve, reject) => {
       if (geocodeCache.has(address)) {
-        console.log("zoom addr " + JSON.stringify(geocodeCache.get(address)))
+        // console.log("zoom addr " + JSON.stringify(geocodeCache.get(address)))
         resolve(geocodeCache.get(address))
       } else {
         geocoderRef.current.geocode({ address }, (results, status) => {
@@ -119,7 +136,7 @@ function MapComponent({
     if (zoomMapProperty) {
       zoomCenter()
         .then((position) => {
-          console.log("setting center: " + JSON.stringify(position))
+          // console.log("setting center: " + JSON.stringify(position))
           // setCenter(position)
           setCenter((prev) => ({ ...prev, ...position }))
 
@@ -156,7 +173,7 @@ function MapComponent({
         .then((geocodedMarkers) => {
           const validMarkers = geocodedMarkers.filter(marker => marker !== null);
           setMarkers(validMarkers)
-          console.log(geocodedMarkers)
+          // console.log(geocodedMarkers)
           if (validMarkers.length > 0) {
             if (isRecommendation) {
               setCenter(validMarkers[0])
