@@ -35,7 +35,7 @@ function MapComponent({
   zoomMapProperty,
   isRecommendation,
   likedFn,
-  dislikedFn
+  dislikedFn,
 }) {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -49,7 +49,6 @@ function MapComponent({
 
   const [isZoomHelper, setIsZoomHelper] = useState(false)
 
-  const [openExpanded, setOpenExpanded] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
 
   const mapRef = useRef()
@@ -125,7 +124,6 @@ function MapComponent({
           setCenter(position)
           setIsZoom(true)
           setIsZoomHelper(true)
-          // console.log('card clicked')
         })
         .catch((error) => {
           console.error(error)
@@ -171,8 +169,7 @@ function MapComponent({
           (property) => property.HouseID === houseID
         )
         setSelectedProperty(property)
-        // setOpenExpanded(true)
-        setPopupVisible(true);
+        setPopupVisible(true)
       }
     },
     [properties]
@@ -181,7 +178,6 @@ function MapComponent({
   useEffect(() => {
     if (mapRef.current) {
       if (markersRef.current) {
-        console.log('clear markers')
         markersRef.current.forEach((marker) => marker.setMap(null))
       }
       markersRef.current = []
@@ -206,7 +202,6 @@ function MapComponent({
       markersRef.current = newMarkers
 
       if (markerClusterRef.current) {
-        // console.log("clear marker cluster")
         markerClusterRef.current.clearMarkers()
       }
 
@@ -221,7 +216,6 @@ function MapComponent({
     mapRef.current = mapInstance
   }
 
-  // console.log(openExpanded)
   return isLoaded ? (
     <>
       <GoogleMap
@@ -236,7 +230,13 @@ function MapComponent({
       {popupVisible && (
         <div className="marker-popup-background" onClick={closePopup}>
           <div className="marker-popup" onClick={(e) => e.stopPropagation()}>
-            <ExpandedPropertyCard propertyInfo={selectedProperty} showButtons={true} likedFn={likedFn}  dislikedFn={dislikedFn} setPopupVisible={setPopupVisible}/>
+            <ExpandedPropertyCard
+              propertyInfo={selectedProperty}
+              showButtons={true}
+              likedFn={likedFn}
+              dislikedFn={dislikedFn}
+              setPopupVisible={setPopupVisible}
+            />
           </div>
         </div>
       )}

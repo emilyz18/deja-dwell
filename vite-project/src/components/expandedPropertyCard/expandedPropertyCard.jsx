@@ -26,7 +26,6 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch = false, showButto
   } = propertyInfo;
 
   const address = [{ HouseID: HouseID, ExpectedPrice: ExpectedPrice, Street: Street, City: City, Province: Province }];
-  // console.log(address)
 
   const likeProperty = () => {
     likedFn(propertyInfo.HouseID)
