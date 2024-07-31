@@ -14,7 +14,7 @@ export function GeneralInputForm() {
   const dispatch = useDispatch()
   const location = useLocation()
 
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({}) // for form restriction 
   useEffect(() => {
     if (user && user.UserID) {
       dispatch(getUserAsync(user.UserID))
