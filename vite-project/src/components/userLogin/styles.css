@@ -37,7 +37,8 @@
   flex-direction: column;
   background-color: #ffffff;
   padding: 20px;
-  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-y: auto;
+  /* Enable vertical scrolling */
 }
 
 .auth-form-box {
@@ -117,4 +118,17 @@ label {
   margin-top: 10px;
   text-align: center;
   color: #f6f6f6;
+}
+
+.password-toggle {
+  margin-top: 10px;
+  background-color: white;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.password-toggle:hover {
+  color: rgb(211, 210, 210);
 }
