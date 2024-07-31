@@ -10,10 +10,8 @@ export function TenantForm({
   handleChange,
   handleCancel,
 }) {
-  const [customGender, setCustomGender] = useState('')
-  const [errors, setErrors] = useState({})
 
-  const dispatch = useDispatch()
+  const [errors, setErrors] = useState({})
 
   const formatDate = (date) => {
     if (!date) return ''
@@ -21,38 +19,18 @@ export function TenantForm({
     return d.toISOString().split('T')[0]
   }
 
-  const handleGenderChange = (e) => {
-    const value = e.target.value
-    if (value === 'self-describe') {
-      setCustomGender(customGender)
-      dispatch(updateTenant({ Gender: customGender }))
-    } else {
-      setCustomGender('')
-      dispatch(updateTenant({ Gender: value }))
-    }
-  }
-
-  const handleCustomGenderChange = (e) => {
-    const value = e.target.value
-    setCustomGender(value)
-    dispatch(updateTenant({ Gender: value }))
-  }
-
   const validate = () => {
     let tempErrors = {}
     if (tenant.Age > 120) tempErrors.Age = 'Age too big'
-    if (!tenant.Gender) tempErrors.Gender = 'Gender is required'
-    if (!tenant.Habit)
-      tempErrors.Habit = 'Your daily habit is required to get a better match'
-    if (!tenantPref.Province)
-      tempErrors.Province =
-        'Your preferred province is required to get a better match'
-    if (!tenantPref.City)
-      tempErrors.City = 'Your preferred city is required to get a better match'
-    if (tenant.Gender === 'self-describe' && !customGender)
-      tempErrors.Gender = 'Please describe your gender'
-    if (!tenant.Gender === '') tempErrors.Gender = 'Please select your gender'
+    // Date validation
+    if (tenantPref.StartDate && tenantPref.EndDate) {
+      const startDate = new Date(tenantPref.StartDate)
+      const endDate = new Date(tenantPref.EndDate)
+      if (startDate > endDate) {
+        tempErrors.EndDate = 'End date must be greater than start date'
+      }
 
+    }
     setErrors(tempErrors)
     return Object.keys(tempErrors).length === 0
   }
@@ -79,8 +57,11 @@ export function TenantForm({
         value={value}
         onChange={handleChange}
         required={required}
+        min={type === 'number' ? '0' : undefined}
       />
-      {errors[name] && <p className="error">{errors[name]}</p>}
+      {name === 'Age' && errors.Age && <p className="error">{errors.Age}</p>}
+      {name === 'EndDate' && errors.EndDate && <p className="error">{errors.EndDate}</p>}
+
     </div>
   )
 
@@ -106,37 +87,12 @@ export function TenantForm({
       <form onSubmit={onSubmit}>
         <div className="tenant-form-grid">
           {renderInputField('Age', 'Age', 'number')}
-          <div className="tenant-form-group">
-            <label>Gender*</label>
-            <select
-              value={
-                tenant.Gender === customGender
-                  ? 'self-describe'
-                  : tenant.Gender || ''
-              }
-              onChange={handleGenderChange}
-            >
-              <option value="">None</option>
-              <option value="Female">Female</option>
-              <option value="Male">Male</option>
-              <option value="Non-binary">Non-binary</option>
-              <option value="self-describe">Prefer to self-describe</option>
-            </select>
-            {tenant.Gender === 'self-describe' && (
-              <input
-                type="text"
-                name="customGender"
-                value={customGender || ''}
-                onChange={handleCustomGenderChange}
-                placeholder="Enter gender here..."
-              />
-            )}
-            {errors.Gender && <p className="error">{errors.Gender}</p>}
-          </div>
           {renderInputField('Occupation', 'Occupation')}
+          {renderInputField('Gender', 'Gender', true)}
           {renderInputField('Income in $', 'Income', 'number')}
           {renderInputField('Company', 'Company')}
           {renderInputField('Habit', 'Habit', 'text', true)}
+
         </div>
 
         <hr className="separator" />
