@@ -4,5 +4,4 @@ export const actionTypes = {
   DELETE_MATCH: 'matches/deleteMatch',
   GET_LANDLORD_MATCHES: 'matches/getLandlordMatches',
   GET_TENANT_MATCHES: 'matches/getTenantMatches',
-  REOPEN_MATCHES: 'matches/reopenMatches',
 }

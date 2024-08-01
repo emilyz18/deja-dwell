@@ -126,7 +126,7 @@ const Filters = ({
             />
             Allow Weed
           </label>
-
+          
           <ThemeProvider theme={theme}>
             <div className="button-group">
               <Button
@@ -149,34 +149,34 @@ const Filters = ({
           </ThemeProvider>
         </div>
         <div className="filter-section filter-checkboxes">
-          <label>
-            <input
-              type="checkbox"
-              name="furnished"
-              checked={tempFilters.furnished}
-              onChange={handleTempFilterChange}
-            />
-            Furnished
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="ac"
-              checked={tempFilters.ac}
-              onChange={handleTempFilterChange}
-            />
-            AC
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="heater"
-              checked={tempFilters.heater}
-              onChange={handleTempFilterChange}
-            />
-            Heater
-          </label>
-        </div>
+            <label>
+              <input
+                type="checkbox"
+                name="furnished"
+                checked={tempFilters.furnished}
+                onChange={handleTempFilterChange}
+              />
+              Furnished
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="ac"
+                checked={tempFilters.ac}
+                onChange={handleTempFilterChange}
+              />
+              AC
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="heater"
+                checked={tempFilters.heater}
+                onChange={handleTempFilterChange}
+              />
+              Heater
+            </label>
+          </div>
       </div>
     </>
   )

@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { REQUEST_STATE } from '../utils'
-import { getLandlordAsync, createLandlordAsync } from './thunks'
+import {
+  getLandlordAsync, createLandlordAsync
+} from './thunks'
 
 const INITIAL_STATE = {
   landlord: {},
@@ -9,7 +11,8 @@ const INITIAL_STATE = {
 const landlordSlice = createSlice({
   name: 'landlord',
   initialState: INITIAL_STATE,
-  reducers: {},
+  reducers: {
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getLandlordAsync.pending, (state) => {
@@ -25,17 +28,17 @@ const landlordSlice = createSlice({
         state.requestState = REQUEST_STATE.REJECTED
       })
       .addCase(createLandlordAsync.pending, (state) => {
-        state.error = null
-        state.requestState = REQUEST_STATE.PENDING
+        state.error = null;
+        state.requestState = REQUEST_STATE.PENDING;
       })
       .addCase(createLandlordAsync.fulfilled, (state, action) => {
-        state.landlord = action.payload
-        state.requestState = REQUEST_STATE.FULFILLED
+        state.landlord = action.payload;
+        state.requestState = REQUEST_STATE.FULFILLED;
       })
       .addCase(createLandlordAsync.rejected, (state, action) => {
-        state.error = action.payload
-        state.requestState = REQUEST_STATE.REJECTED
-      })
+        state.error = action.payload;
+        state.requestState = REQUEST_STATE.REJECTED;
+      });
   },
 })
 

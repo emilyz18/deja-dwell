@@ -1,7 +1,17 @@
 .history-container {
-  font-family: 'Mulish', sans-serif;
+  padding: 20px;
 }
 
-.match-list {
-  padding: 10px;
+.matches-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.house-details {
+  flex: 1;
+}
+
+.status-buttons {
+  display: flex;
+  gap: 10px;
 }

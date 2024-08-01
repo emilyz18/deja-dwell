@@ -29,7 +29,7 @@ const INITIAL_STATE = {
   deleteProperty: 'IDLE',
   putProperty: 'IDLE',
   patchProperty: 'IDLE',
-  preferProperties: [],
+  preferProperties: []
 }
 
 const propertiesSlice = createSlice({
@@ -42,8 +42,8 @@ const propertiesSlice = createSlice({
       )
     },
     updateProperty: (state, action) => {
-      state.property = { ...state.property, ...action.payload }
-    },
+      state.property = {...state.property, ...action.payload}
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -103,13 +103,13 @@ const propertiesSlice = createSlice({
       .addCase(createPropertyAsync.fulfilled, (state, action) => {
         state.createProperty = 'FULFILLED'
         state.list.push(action.payload)
-        state.property = { ...INITIAL_STATE.property, ...action.payload }
+        state.property = { ...INITIAL_STATE.property, ...action.payload } 
       })
       .addCase(createPropertyAsync.rejected, (state, action) => {
         state.createProperty = 'REJECTED'
         state.error = action.error.message
       })
-
+      
       .addCase(deletePropertyAsync.pending, (state) => {
         state.deleteProperty = 'PENDING'
         state.error = null
@@ -152,7 +152,7 @@ const propertiesSlice = createSlice({
         )
         if (index !== -1) {
           state.list[index] = action.payload
-          state.property = { ...INITIAL_STATE.property, ...action.payload }
+          state.property = { ...INITIAL_STATE.property, ...action.payload } 
         }
       })
       .addCase(patchPropertyAsync.rejected, (state, action) => {
@@ -162,5 +162,5 @@ const propertiesSlice = createSlice({
   },
 })
 
-export const { removeProperty, updateProperty } = propertiesSlice.actions
+export const { removeProperty, updateProperty} = propertiesSlice.actions
 export default propertiesSlice.reducer

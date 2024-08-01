@@ -22,16 +22,16 @@ export function BaseSideBar({ navBarLinks, profile, accountType }) {
     <div className="sidebar-container">
       <Drawer className="sidebar-drawer" variant="permanent" anchor="left">
         <div className="sidebar-content">
-          <ListItemText
-            disableTypography
-            sx={{
-              fontFamily: 'Mulish, sans-serif',
-              fontSize: '1.2em',
-              fontWeight: 200,
-              textAlign: 'center',
-            }}
-            primary={`${accountType.toUpperCase()} DASHBOARD`}
-          />
+            <ListItemText
+                disableTypography
+                sx={{
+                    fontFamily: 'Mulish, sans-serif',
+                    fontSize: '1.2em',
+                    fontWeight: 200,
+                    textAlign: 'center',
+                }}
+                primary={`${accountType.toUpperCase()} DASHBOARD`}
+            />
           <div className="sidebar-avatar">
             <Avatar src={profile.ProfileImg} className="MuiAvatar-root" />
             <ListItemText

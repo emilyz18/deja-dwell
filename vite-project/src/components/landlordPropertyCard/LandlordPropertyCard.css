@@ -11,55 +11,31 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-family: 'Mulish', sans-serif;
 }
 
 .landlord-carousel-container {
-  width: 450px;
+  width: 400px;
   height: 240px;
 }
 
 .property-information {
   display: flex;
   flex-direction: column;
+  height: 240px;
   margin-left: 20px;
   flex-grow: 1;
 }
 
 .property-description {
-  font-size: 18px;
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.property-description strong {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.property-details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-}
-
-.property-detail {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #ddd;
-  padding: 5px 0;
+  margin: 10px 0 0 0;
+  flex-grow: 1;
+  overflow: auto;
+  scrollbar-width: thin;
 }
 
 .property-information h3 {
-  margin: 0 0 10px;
+  margin: 0;
+  margin-bottom: 10px;
   font-size: 24px;
   color: #333;
 }
@@ -78,5 +54,4 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-family: 'Mulish', sans-serif;
 }

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signInAsync } from '../../redux/user/thunks';
 import { useNavigate } from 'react-router-dom';
-import { Snackbar, Alert } from '@mui/material';
 import './styles.css';
 
 export default function SignIn() {
@@ -11,55 +10,15 @@ export default function SignIn() {
   const isAuth = useSelector((state) => state.user.isAuthenticated);
   const isLandlord = useSelector((state) => state.user.isLandlord);
   const isTenant = useSelector((state) => state.user.isTenant);
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    message: '',
-    severity: '',
-  });
-  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const user = {
       Email: data.get('email'),
       Password: data.get('password'),
     };
-
-    if (!user.Email || !user.Password) {
-      setSnackbar({
-        open: true,
-        message: 'All fields are required.',
-        severity: 'error',
-      });
-      return;
-    }
-
-    try {
-      await dispatch(signInAsync(user)).unwrap();
-    } catch (error) {
-      //console.log('Error caught:', error.message);
-      if (error.message == "Cannot set properties of null (setting 'HashKey')") {
-        setSnackbar({
-          open: true,
-          message: 'Incorrect email or password.',
-          severity: 'error',
-        });
-      } else {
-        setSnackbar({
-          open: true,
-          message: 'Server Error',
-          severity: 'error',
-        });   
-      }    
-    }
-  };
-
-  const handleSnackbarClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setSnackbar({ ...snackbar, open: false });
+    dispatch(signInAsync(user));
   };
 
   useEffect(() => {
@@ -84,39 +43,14 @@ export default function SignIn() {
             <h2 className="auth-subtitle">Sign In</h2>
             <form onSubmit={handleSubmit}>
               <div className="auth-form-group">
-                <label htmlFor="email" className="auth-label">
-                  Email Address
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  className="auth-input"
-                />
+                <label htmlFor="email" className="auth-label">Email Address</label>
+                <input id="email" name="email" required className="auth-input" />
               </div>
               <div className="auth-form-group">
-                <label htmlFor="password" className="auth-label">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  required
-                  className="auth-input"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="password-toggle"
-                >
-                  {showPassword ? 'Hide' : 'Show'} Password
-                </button>
+                <label htmlFor="password" className="auth-label">Password</label>
+                <input id="password" name="password" type="password" required className="auth-input" />
               </div>
-              <button type="submit" className="auth-button">
-                Sign In
-              </button>
+              <button type="submit" className="auth-button">Sign In</button>
             </form>
             <div className="auth-link">
               <a href="/register">{`Don't have an account? Sign up`}</a>
@@ -124,19 +58,6 @@ export default function SignIn() {
           </div>
         </div>
       </div>
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-      >
-        <Alert
-          onClose={handleSnackbarClose}
-          severity={snackbar.severity}
-          sx={{ width: '100%' }}
-        >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
     </div>
   );
 }
