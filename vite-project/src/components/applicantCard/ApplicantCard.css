@@ -7,15 +7,24 @@
   margin: 12px 0;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
+  min-width: 550px;
+  position: relative;
 }
 
 .applicant-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.applicant-card.accepted {
+  background-color: #f1fff1; /* Light green tint for accepted applicants */
+}
+
+.applicant-card.accepted:hover {
+  background-color: #f1fff1; /* Light green tint for accepted applicants */
+  box-shadow: 0 8px 16px rgba(10, 213, 27, 0.5);
 }
 
 .applicant-image img {
@@ -73,4 +82,15 @@
 
 .applicant-actions button.reject-button:hover {
   background-color: #e53935;
+}
+
+.accepted-label {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  font-size: 1.2em;
+  color: #29782c;
+  opacity: 0.8;
+  font-family: 'Mulish', sans-serif;
 }
