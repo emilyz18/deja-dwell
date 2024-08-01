@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {
+  getMatches,
   createMatch,
   updateMatch,
   deleteMatch,
   getLandlordMatches,
   getTenantMatches,
-  reopenMatches,
 } from './matchService'
 import { actionTypes } from './actionTypes'
 
@@ -45,14 +45,6 @@ export const getTenantMatchesAsync = createAsyncThunk(
   actionTypes.GET_TENANT_MATCHES,
   async (tenantId) => {
     const response = await getTenantMatches(tenantId)
-    return response
-  }
-)
-
-export const reopenMatchesAsync = createAsyncThunk(
-  actionTypes.REOPEN_MATCHES,
-  async (matchId) => {
-    const response = await reopenMatches(matchId)
     return response
   }
 )

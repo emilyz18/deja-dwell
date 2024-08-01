@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 var express = require('express')
 var path = require('path')
 var cookieParser = require('cookie-parser')
@@ -35,8 +35,8 @@ app.use('/api/landlord', landlordRouter)
 
 // Wild care routing to serve login page on refresh
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'))
-})
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 // for payload to large
 app.use(bodyParser.json({ limit: '50mb' })) // Increase payload limit

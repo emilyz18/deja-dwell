@@ -12,11 +12,6 @@ export const createMatch = async (matchData) => {
   return response.data
 }
 
-export const reopenMatches = async (matchId) => {
-  const response = await axios.post(`${API_URL}/reopen/${matchId}`)
-  return response.data
-}
-
 export const updateMatch = async (matchId, matchData) => {
   const response = await axios.patch(`${API_URL}/${matchId}`, matchData)
   return response.data

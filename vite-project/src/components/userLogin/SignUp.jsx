@@ -1,81 +1,75 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { signUpAsync } from '../../redux/user/thunks'
-import { Snackbar, Alert } from '@mui/material'
-import './styles.css'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { signUpAsync } from '../../redux/user/thunks';
+import { Snackbar, Alert } from '@mui/material';
+import './styles.css';
 
 export default function SignUp() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const isAuth = useSelector((state) => state.user.isAuthenticated)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isAuth = useSelector((state) => state.user.isAuthenticated);
 
-  const [accountType, setAccountType] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const [accountType, setAccountType] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
     severity: '',
-  })
+  });
 
   const handleChange = (event) => {
-    const { name, value } = event.target
-    if (name === 'accountType') setAccountType(value)
-    if (name === 'password') setPassword(value)
-    if (name === 'confirmPassword') setConfirmPassword(value)
-  }
+    const { name, value } = event.target;
+    if (name === 'accountType') setAccountType(value);
+    if (name === 'password') setPassword(value);
+    if (name === 'confirmPassword') setConfirmPassword(value);
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    const data = new FormData(event.currentTarget)
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
     const user = {
       UserName: data.get('userName'),
       Email: data.get('email'),
       Password: data.get('password'),
       accountType: accountType,
-    }
-    if (
-      !user.UserName ||
-      !user.Email ||
-      !user.Password ||
-      !user.accountType ||
-      !confirmPassword
-    ) {
+    };
+    if (!user.UserName || !user.Email || !user.Password || !user.accountType || !confirmPassword) {
       setSnackbar({
         open: true,
         message: 'All fields are required.',
         severity: 'error',
-      })
+      });
     } else if (user.Password !== confirmPassword) {
       setSnackbar({
         open: true,
         message: 'Passwords do not match.',
         severity: 'error',
-      })
+      });
     } else {
-      dispatch(signUpAsync(user))
+      dispatch(signUpAsync(user));
     }
-  }
+  };
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === 'clickaway') {
-      return
+      return;
     }
-    setSnackbar({ ...snackbar, open: false })
-  }
+    setSnackbar({ ...snackbar, open: false });
+  };
 
   useEffect(() => {
     if (isAuth) {
       if (accountType === 'Landlord') {
         navigate('/landlordAccount/profile', {
           state: { fromSignUp: 'Landlord' },
-        })
+        });
       } else if (accountType === 'Tenant') {
-        navigate('/tenantAccount/profile', { state: { fromSignUp: 'Tenant' } })
+        navigate('/tenantAccount/profile', { state: { fromSignUp: 'Tenant' } });
       }
     }
-  }, [isAuth, dispatch, navigate, accountType])
+  }, [isAuth, dispatch, navigate, accountType]);
 
   return (
     <div className="auth-container">
@@ -89,31 +83,15 @@ export default function SignUp() {
             <h2 className="auth-subtitle">Sign Up</h2>
             <form onSubmit={handleSubmit}>
               <div className="auth-form-group">
-                <label htmlFor="userName" className="auth-label">
-                  User Name
-                </label>
-                <input
-                  id="userName"
-                  name="userName"
-                  required
-                  className="auth-input"
-                />
+                <label htmlFor="userName" className="auth-label">User Name</label>
+                <input id="userName" name="userName" required className="auth-input" />
               </div>
               <div className="auth-form-group">
-                <label htmlFor="email" className="auth-label">
-                  Email Address
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  required
-                  className="auth-input"
-                />
+                <label htmlFor="email" className="auth-label">Email Address</label>
+                <input id="email" name="email" required className="auth-input" />
               </div>
               <div className="auth-form-group">
-                <label htmlFor="password" className="auth-label">
-                  Password
-                </label>
+                <label htmlFor="password" className="auth-label">Password</label>
                 <input
                   id="password"
                   name="password"
@@ -125,9 +103,7 @@ export default function SignUp() {
                 />
               </div>
               <div className="auth-form-group">
-                <label htmlFor="confirmPassword" className="auth-label">
-                  Confirm Password
-                </label>
+                <label htmlFor="confirmPassword" className="auth-label">Confirm Password</label>
                 <input
                   id="confirmPassword"
                   name="confirmPassword"
@@ -139,9 +115,7 @@ export default function SignUp() {
                 />
               </div>
               <div className="auth-form-group">
-                <label htmlFor="account-type" className="auth-label">
-                  Account Type
-                </label>
+                <label htmlFor="account-type" className="auth-label">Account Type</label>
                 <select
                   id="account-type"
                   name="accountType"
@@ -150,16 +124,12 @@ export default function SignUp() {
                   required
                   className="auth-select"
                 >
-                  <option value="" disabled>
-                    Select an account type
-                  </option>
+                  <option value="" disabled>Select an account type</option>
                   <option value="Landlord">Landlord</option>
                   <option value="Tenant">Tenant</option>
                 </select>
               </div>
-              <button type="submit" className="auth-button">
-                Sign Up
-              </button>
+              <button type="submit" className="auth-button">Sign Up</button>
             </form>
             <div className="auth-link">
               <a href="/login">Already have an account? Sign in</a>
@@ -172,14 +142,10 @@ export default function SignUp() {
         autoHideDuration={3000}
         onClose={handleSnackbarClose}
       >
-        <Alert
-          onClose={handleSnackbarClose}
-          severity={snackbar.severity}
-          sx={{ width: '100%' }}
-        >
+        <Alert onClose={handleSnackbarClose} severity={snackbar.severity} sx={{ width: '100%' }}>
           {snackbar.message}
         </Alert>
       </Snackbar>
     </div>
-  )
+  );
 }

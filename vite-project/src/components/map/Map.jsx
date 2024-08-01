@@ -1,195 +1,197 @@
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
-import React, { useState, useRef, useEffect } from 'react'
-import { MarkerClusterer } from '@googlemaps/markerclusterer'
-import './Map.css'
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import React, { useState, useRef, useEffect } from 'react';
+import { MarkerClusterer } from '@googlemaps/markerclusterer';
+import './Map.css';
 
 const vancouver = {
   lat: 49.246292,
   lng: -123.116226,
-}
+};
 
 const mapStyles = [
   {
-    featureType: 'poi.medical',
-    elementType: 'labels',
-    stylers: [{ visibility: 'off' }],
+    "featureType": "poi.medical",
+    "elementType": "labels",
+    "stylers": [{ "visibility": "off" }]
   },
   {
-    featureType: 'poi.business',
-    elementType: 'labels',
-    stylers: [{ visibility: 'off' }],
+    "featureType": "poi.business",
+    "elementType": "labels",
+    "stylers": [{ "visibility": "off" }]
   },
   {
-    featureType: 'poi.attraction',
-    elementType: 'labels',
-    stylers: [{ visibility: 'off' }],
+    "featureType": "poi.attraction",
+    "elementType": "labels",
+    "stylers": [{ "visibility": "off" }]
   },
-]
+];
 
-function Map({ propertyAddresses, zoomMapProperty, isRecommendation }) {
-  // const { isLoaded } = useJsApiLoader({
-  //   id: 'google-map-script',
-  //   googleMapsApiKey: import.meta.env.VITE_MAP_API_KEY,
-  // });
 
-  // const [markers, setMarkers] = useState([]);
-  // const [isZoom, setIsZoom] = useState(false);
+function Map({ propertyAddresses,  zoomMapProperty, isRecommendation}) {
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: import.meta.env.VITE_MAP_API_KEY,
+  });
 
-  // const [isZoomHelper, setIsZoomHelper] = useState(false);
+  const [markers, setMarkers] = useState([]);
+  const [isZoom, setIsZoom] = useState(false);
 
-  // const mapRef = useRef();
-  // const [center, setCenter] = useState(vancouver);
-  // const markersRef = useRef([]);
-  // const markerClusterRef = useRef();
-  // const geocoderRef = useRef(null);
+  const [isZoomHelper, setIsZoomHelper] = useState(false);
 
-  // useEffect(() => {
-  //   if (isLoaded) {
-  //     geocoderRef.current = new window.google.maps.Geocoder();
-  //   }
-  // }, [isLoaded]);
+  const mapRef = useRef();
+  const [center, setCenter] = useState(vancouver);
+  const markersRef = useRef([]);
+  const markerClusterRef = useRef();
+  const geocoderRef = useRef(null);
 
-  // const convertToAddressString = (propertyAddress) => {
 
-  //   let { Street, City, Province } = propertyAddress;
-  //   if (!Street) Street = '';
-  //   if (!City) City = '';
-  //   if (!Province) Province = '';
+  useEffect(() => {
+    if (isLoaded) {
+      geocoderRef.current = new window.google.maps.Geocoder();
+    }
+  }, [isLoaded]);
 
-  //   return `${Street}, ${City}, ${Province}`;
+  const convertToAddressString = (propertyAddress) => {
 
-  // }
+    let { Street, City, Province } = propertyAddress;
+    if (!Street) Street = '';
+    if (!City) City = '';
+    if (!Province) Province = '';
 
-  // const zoomCenter = () => {
-  //   return new Promise((resolve, reject) => { //TODO: handle reject case
-  //     if (zoomMapProperty && geocoderRef.current) {
-  //       const addr = convertToAddressString(zoomMapProperty);
+    return `${Street}, ${City}, ${Province}`;
 
-  //       geocoderRef.current.geocode({ address: addr }, (results, status) => {
-  //         if (status === 'OK') {
-  //           const position = results[0].geometry.location;
-  //           console.log("zoom pos: " + position)
-  //           resolve({ lat: position.lat(), lng: position.lng() });
-  //         } else {
-  //           console.error('Geocode was not successful for the following reason: ' + status);
-  //           // reject(('Geocode failed with status: ' + status));
-  //         }
-  //       });
-  //     } else {
-  //       // reject(('No zoomMapProperty provided'));
-  //     }
-  //   });
-  // }
+  }
 
-  // useEffect(() => {
-  //   if (zoomMapProperty) {
-  //     zoomCenter().then((position) => {
-  //       setCenter(position);
-  //       setIsZoom(true)
-  //       setIsZoomHelper(true)
-  //       console.log("card clicked")
-  //     }).catch((error) => {
-  //       console.error(error);
-  //     });
-  //   }
-  // }, [zoomMapProperty]);
+  const zoomCenter = () => {
+    return new Promise((resolve, reject) => { //TODO: handle reject case
+      if (zoomMapProperty && geocoderRef.current) {
+        const addr = convertToAddressString(zoomMapProperty);
+  
+        geocoderRef.current.geocode({ address: addr }, (results, status) => {
+          if (status === 'OK') {
+            const position = results[0].geometry.location;
+            console.log("zoom pos: " + position)
+            resolve({ lat: position.lat(), lng: position.lng() });
+          } else {
+            console.error('Geocode was not successful for the following reason: ' + status);
+            // reject(('Geocode failed with status: ' + status));
+          }
+        });
+      } else {
+        // reject(('No zoomMapProperty provided'));
+      }
+    });
+  }
 
-  // useEffect(() => {
-  //   if (isLoaded) {
-  //     setIsZoom(false)
-  //     const geocodePromises = propertyAddresses.map((propertyAddress) => {
-  //       let { street, city, province } = propertyAddress;
-  //       if (!street) street = '';
-  //       if (!city) city = '';
-  //       if (!province) province = '';
+  useEffect(() => {
+    if (zoomMapProperty) {
+      zoomCenter().then((position) => {
+        setCenter(position);
+        setIsZoom(true)
+        setIsZoomHelper(true)
+        console.log("card clicked")
+      }).catch((error) => {
+        console.error(error);
+      });
+    }
+  }, [zoomMapProperty]);
+  
 
-  //       const address = `${street}, ${city}, ${province}`;
+  useEffect(() => {
+    if (isLoaded) {
+      setIsZoom(false)
+      const geocodePromises = propertyAddresses.map((propertyAddress) => {
+        let { street, city, province } = propertyAddress;
+        if (!street) street = '';
+        if (!city) city = '';
+        if (!province) province = '';
 
-  //       return new Promise((resolve, reject) => {
-  //         geocoderRef.current.geocode({ address }, (results, status) => {
-  //           if (status === 'OK') {
-  //             const position = results[0].geometry.location;
-  //             resolve({ lat: position.lat(), lng: position.lng() });
-  //           } else {
-  //             console.log('Geocode was not successful for the following reason: ' + status);
-  //             // reject(status);
-  //           }
-  //         });
-  //       });
-  //     });
+        const address = `${street}, ${city}, ${province}`;
 
-  //     Promise.all(geocodePromises)
-  //       .then((geocodedMarkers) => {
-  //         setMarkers(geocodedMarkers);
-  //         if (geocodedMarkers.length > 0) {
-  //           if (isRecommendation) {
-  //             setCenter(geocodedMarkers[0]);
-  //             setIsZoom(true)
-  //           }
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error('Error geocoding addresses:', error);
-  //       });
-  //   }
-  // }, [propertyAddresses, isLoaded]);
+        return new Promise((resolve, reject) => {
+          geocoderRef.current.geocode({ address }, (results, status) => {
+            if (status === 'OK') {
+              const position = results[0].geometry.location;
+              resolve({ lat: position.lat(), lng: position.lng() });
+            } else {
+              console.log('Geocode was not successful for the following reason: ' + status);
+              // reject(status);
+            }
+          });
+        });
+      });
 
-  // useEffect(() => {
-  //   if (mapRef.current) {
-  //     if (markersRef.current) {
-  //       markersRef.current.forEach(marker => marker.setMap(null));
-  //     }
-  //     markersRef.current = [];
+      Promise.all(geocodePromises)
+        .then((geocodedMarkers) => {
+          setMarkers(geocodedMarkers);
+          if (geocodedMarkers.length > 0) {
+            if (isRecommendation) {
+              setCenter(geocodedMarkers[0]);
+              setIsZoom(true)
+            }
+          }
+        })
+        .catch((error) => {
+          console.error('Error geocoding addresses:', error);
+        });
+    }
+  }, [propertyAddresses, isLoaded]);
 
-  //     const newMarkers = markers.map((marker) => {
-  //       const markerInstance = new window.google.maps.Marker({
-  //         position: marker,
-  //         title: 'Marker',
-  //         icon: {
-  //           url: '/images/marker.png',
-  //           scaledSize: new window.google.maps.Size(50, 50),
-  //         }
-  //       });
-  //       return markerInstance;
-  //     });
+  useEffect(() => {
+    if (mapRef.current) {
+      if (markersRef.current) {
+        markersRef.current.forEach(marker => marker.setMap(null));
+      }
+      markersRef.current = [];
 
-  //     if (isZoomHelper) {
-  //       mapRef.current.setZoom(15);
-  //     }
+      const newMarkers = markers.map((marker) => {
+        const markerInstance = new window.google.maps.Marker({
+          position: marker,
+          title: 'Marker',
+          icon: {
+            url: '/images/marker.png',
+            scaledSize: new window.google.maps.Size(50, 50),
+          }
+        });
+        return markerInstance;
+      });
 
-  //     markersRef.current = newMarkers;
+      if (isZoomHelper) {
+        mapRef.current.setZoom(15);
+      }
 
-  //     if (markerClusterRef.current) {
-  //       markerClusterRef.current.clearMarkers();
-  //     }
+      markersRef.current = newMarkers;
 
-  //     markerClusterRef.current = new MarkerClusterer({ map: mapRef.current, markers: newMarkers
-  //     });
-  //   }
-  // }, [markers, isLoaded]);
+      if (markerClusterRef.current) {
+        markerClusterRef.current.clearMarkers();
+      }
 
-  // const onLoad = (mapInstance) => {
-  //   mapRef.current = mapInstance;
-  // };
+      markerClusterRef.current = new MarkerClusterer({ map: mapRef.current, markers: newMarkers
+      });
+    }
+  }, [markers, isLoaded]);
 
-  // console.log("is Zoom " + isZoom)
-  // console.log("center" + JSON.stringify(center))
+  const onLoad = (mapInstance) => {
+    mapRef.current = mapInstance;
+  };
 
-  // return isLoaded ? (
-  //   <GoogleMap
-  //     mapContainerClassName="map-container"
-  //     center={center}
-  //     zoom={isZoom? 15: 10}
-  //     onLoad={onLoad}
-  //     options={{
-  //       styles: mapStyles,
-  //     }}
-  //   >
-  //   </GoogleMap>
-  // ) : (
-  //   <>Loading...</>
-  // );
-  return <div className="loading">Loading map...</div>
+  console.log("is Zoom " + isZoom)
+  console.log("center" + JSON.stringify(center))
+
+  return isLoaded ? (
+    <GoogleMap
+      mapContainerClassName="map-container"
+      center={center}
+      zoom={isZoom? 15: 10}
+      onLoad={onLoad}
+      options={{
+        styles: mapStyles,
+      }}
+    >
+    </GoogleMap>
+  ) : (
+    <>Loading...</>
+  );
 }
 
-export default Map
+export default Map;

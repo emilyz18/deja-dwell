@@ -11,7 +11,7 @@ export const store = configureStore({
     user: userReducer,
     tenant: tenantPrefReducer,
     matches: matchReducer,
-    landlord: landlordReducer,
+    landlord: landlordReducer
   },
   devTools: true,
 })
