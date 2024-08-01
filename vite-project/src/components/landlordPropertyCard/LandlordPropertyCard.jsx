@@ -13,7 +13,6 @@ import {
   reopenMatchesAsync,
   updateMatchAsync,
 } from '../../redux/matches/matchThunks'
-import Button from '@mui/material/Button'
 
 const LandlordPropertyCard = ({ landlordId }) => {
   const dispatch = useDispatch()
@@ -178,11 +177,15 @@ const LandlordPropertyCard = ({ landlordId }) => {
               </div>
             </div>
           </div>
-          {hasAccepted ? <div>
-            <Button className="reopen-button" color="error" onClick={handleReopenMatch}>
-              Reopen Match
-            </Button>
-          </div> : null}
+        </div>
+        <div className="reopen-button-container">
+          {hasAccepted ? (
+            <div>
+              <button className="reopen-button" onClick={handleReopenMatch}>
+                Reopen Match
+              </button>
+            </div>
+          ) : null}
         </div>
         <div className="applicant-list">
           {applicants.length > 0 ? (
