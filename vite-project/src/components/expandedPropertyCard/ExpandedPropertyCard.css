@@ -1,15 +1,15 @@
 .expanded-property-popup {
   padding: 20px;
   background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   text-align: left;
   font-family: 'Mulish', sans-serif;
-  overflow: auto;
   max-height: 520px;
   margin: 20px auto;
   width: 90%;
-  max-width: 600px;
+  max-width: 850px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .expanded-property-popup h1 {
@@ -26,49 +26,51 @@
   overflow: hidden;
 }
 
-.expanded-property-popup p {
-  font-size: 18px;
-  color: #555;
-  margin: 10px 0;
-  line-height: 1.6;
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
-.expanded-property-popup p span {
+.info-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-item.full-width {
+  grid-column: span 2;
+}
+
+.label {
   font-weight: bold;
-  color: #333;
-}
-
-.expanded-property-popup p:first-of-type {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.expanded-property-popup p:nth-of-type(2) {
-  margin-bottom: 20px;
+  margin-right: 5px;
 }
 
 .details-row-expand {
   display: flex;
-  align-items: center;
-  margin-top: 15px;
   flex-wrap: wrap;
   gap: 10px;
+  margin-top: 15px;
 }
 
 .amenity {
   background-color: #f0f0f0;
   padding: 5px 10px;
   border-radius: 5px;
-  color: #333;
   font-weight: bold;
 }
 
 .map-container {
-  border: 2px solid #000000;
-  border-radius: 10px;
   overflow: hidden;
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 300px; /* Set a fixed height for the map */
+  margin-top: 20px;
+  align-self: center;
 }

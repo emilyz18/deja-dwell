@@ -62,7 +62,9 @@
   gap: 10px;
 }
 
-.auth-input, .auth-select, .auth-button {
+.auth-input,
+.auth-select,
+.auth-button {
   width: 100%;
   padding: 12px;
   margin-top: 5px;
