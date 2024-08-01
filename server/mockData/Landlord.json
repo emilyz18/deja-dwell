@@ -18,5 +18,45 @@
   {
     "LandlordID": "b7a9e8d6-4c3e-4d1e-9f2b-3e8a1d5c7f9d",
     "HouseID": "4e1a7c9b-5f6e-4c3d-8a9f-2e7a3b1d5c9f"
+  },
+  {
+    "LandlordID": "e0e93a67-58e5-4b85-b2c1-f497e3b09c6d",
+    "HouseID": "d6b8c916-17b2-48fa-84e8-0e3f48e99c80"
+  },
+  {
+    "LandlordID": "2b5bbda5-9897-4a5d-82f2-2e9b5a58269f",
+    "HouseID": "4c3a5e38-4379-4d9d-bff4-2f183d83b102"
+  },
+  {
+    "LandlordID": "f0a537f7-7483-4a38-9f37-bfb98f435252",
+    "HouseID": "0d7f3b4e-2457-4b3b-9614-91a7800b5e13"
+  },
+  {
+    "LandlordID": "8efdfb35-dfb4-4d74-bc36-4d6b5e5bb2f9",
+    "HouseID": "fa5c9d95-5693-4760-8463-fadb6e5ad5c3"
+  },
+  {
+    "LandlordID": "43b58b4c-7d65-4c48-9e6f-fb7b58e6b747",
+    "HouseID": "3c6f9c97-67e6-4f45-8fd7-6b64b6d635b7"
+  },
+  {
+    "LandlordID": "9b8e5c43-5d34-44f3-9612-0a5f29b5c6d9",
+    "HouseID": "e5f4d6c1-7e3f-4a8f-b2d1-4e5f4d6e3c8d"
+  },
+  {
+    "LandlordID": "4a8f6e5d-4c6b-4b4d-b2d6-f9c6d5b5c8d2",
+    "HouseID": "c3d6b9a5-5e4f-4b6d-8c2f-6d4c9b6a5f3d"
+  },
+  {
+    "LandlordID": "2c5e4f8d-4a6b-4b4d-9c2d-8d6b5c4e5d2f",
+    "HouseID": "d5c6b7a4-3e8f-4b6d-8c4d-5e4f6b7d5a4c"
+  },
+  {
+    "LandlordID": "6d5e4f4a-4b6c-4b4d-9e2f-6d5c8d6b5e4d",
+    "HouseID": "b3c6d7a5-4e4f-4b8d-8d6d-6f4e5c3b6d8a"
+  },
+  {
+    "LandlordID": "4b6d5c4a-4e4f-4b6d-8c5e-6d4f9c5e6b4d",
+    "HouseID": "e4d6c5b9-3f4e-4b6d-8c3d-5e6d4b9c5e4d"
   }
 ]

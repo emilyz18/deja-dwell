@@ -6,7 +6,10 @@ import { ExpandedPropertyCard } from '../expandedPropertyCard/ExpandedPropertyCa
 import './History.css'
 import { getPropertiesAsync } from '../../redux/properties/thunks'
 import { getTenantMatchesAsync } from '../../redux/matches/matchThunks'
-import { Box, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+import  ReplayRoundedIcon from '@mui/icons-material/ReplayRounded'
 
 function History() {
   const dispatch = useDispatch()
@@ -42,6 +45,11 @@ function History() {
   const closePopup = () => {
     setPopupVisible(false)
     setSelectedProperty(null)
+  }
+
+  const reloadHistory = () => {
+    dispatch(getPropertiesAsync())
+    dispatch(getTenantMatchesAsync(tenantID))
   }
 
   return (
@@ -84,6 +92,31 @@ function History() {
           </div>
         </div>
       )}
+
+      <Box
+        sx={{
+          position: 'fixed',
+          bottom: 20,
+          right: 20,
+          zIndex: 1000,
+        }}
+      >
+        <Fab
+          variant="extended"
+          size="medium"
+          onClick={reloadHistory}
+          sx={{
+            backgroundColor: 'black',
+            color: 'white',
+            '&:hover': {
+              backgroundColor: '#333',
+            },
+          }}
+        >
+          <ReplayRoundedIcon sx={{ mr: 1 }} />
+          Reload History Status
+        </Fab>
+      </Box>
     </div>
   )
 }

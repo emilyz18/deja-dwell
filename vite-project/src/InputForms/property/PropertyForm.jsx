@@ -19,17 +19,22 @@ export function PropertyForm({
 
   const validate = () => {
     let tempErrors = {}
-    if (!property.Title) tempErrors.Title = 'Title is required'
-    if (!property.Province) tempErrors.Province = 'Province is required'
-    if (!property.City) tempErrors.City = 'City is required'
-    if (!property.ExpectedPrice)
-      tempErrors.ExpectedPrice = 'Rent Per Month is required'
-
     const validImages = (property.HouseImgs || []).filter(
       (image) => image.src !== ''
     )
     if (validImages.length < 3)
       tempErrors.HouseImgs = 'At least 3 images are required'
+
+    // Date validation
+    if (property.StartDate && property.EndDate) {
+      const startDate = new Date(property.StartDate)
+      const endDate = new Date(property.EndDate)
+      if (startDate > endDate) {
+        tempErrors.EndDate = 'End date must be greater than start date'
+      }
+    
+    }
+    
 
     setErrors(tempErrors)
     return Object.keys(tempErrors).length === 0
@@ -52,7 +57,8 @@ export function PropertyForm({
         value={formatDate(property[name]) || ''}
         onChange={handleChange}
       />
-      {errors[name] && <p className="error">{errors[name]}</p>}
+
+      {name === 'EndDate'&& errors.EndDate && <p className="error">{errors.EndDate}</p>}
     </div>
   )
 
@@ -66,8 +72,8 @@ export function PropertyForm({
         required={required}
         value={property[name] || ''}
         onChange={handleChange}
+        min={type === 'number' ? '0' : undefined}
       />
-      {errors[name] && <p className="error">{errors[name]}</p>}
     </div>
   )
 

@@ -14,17 +14,7 @@ export function GeneralInputForm() {
   const dispatch = useDispatch()
   const location = useLocation()
 
-  const [errors, setErrors] = useState({})
-  const validate = () => {
-    let tempErrors = {}
-    if (!user.UserName) tempErrors.UserName = 'Name is required'
-    if (!user.UserEmail) tempErrors.UserEmail = 'Email is required'
-    if (!user.PhoneNumber) tempErrors.PhoneNumber = 'Phone number is required'
-
-    setErrors(tempErrors)
-    return Object.keys(tempErrors).length === 0
-  }
-
+  const [errors, setErrors] = useState({}) // for form restriction 
   useEffect(() => {
     if (user && user.UserID) {
       dispatch(getUserAsync(user.UserID))
@@ -68,10 +58,10 @@ export function GeneralInputForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    if (validate()) {
-      dispatch(editUserAsync(user))
-      setIsEditing(false)
-    }
+    //using HTML5 validation
+    dispatch(editUserAsync(user))
+    setIsEditing(false)
+    
   }
 
   return (
@@ -100,8 +90,10 @@ export function GeneralInputForm() {
                   value={user.UserName || ''}
                   onChange={handleChange}
                   placeholder="Enter name here..."
+                  maxLength="20"
+                  pattern="[A-Za-z0-9\s]+"
+                  title="Name should only contain letters, numbers, and spaces"
                 />
-                {errors.UserName && <p className="error">{errors.UserName}</p>}
               </div>
               <div className="auth-form-group">
                 <label htmlFor="profileImg" className="auth-label">
@@ -142,6 +134,7 @@ export function GeneralInputForm() {
                   value={user.PhoneNumber || ''}
                   onChange={handleChange}
                   placeholder="Enter phone number here..."
+                  type="tel"
                 />
                 {errors.PhoneNumber && (
                   <p className="error">{errors.PhoneNumber}</p>
@@ -161,9 +154,7 @@ export function GeneralInputForm() {
                   onChange={handleChange}
                   placeholder="Enter email here..."
                 />
-                {errors.UserEmail && (
-                  <p className="error">{errors.UserEmail}</p>
-                )}
+                
               </div>
               <div className="button-container">
                 <button type="submit" className="auth-button">

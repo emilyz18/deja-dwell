@@ -46,7 +46,7 @@
     "isAC": false,
     "isFurnished": true,
     "isHeater": true,
-    "ExpectedPrice": 1500,
+    "ExpectedPrice": 4300,
     "Province": "BC",
     "City": "Vancouver",
     "Street": "Robson Street",
@@ -177,6 +177,376 @@
       {
         "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
         "alt": "Image 2 for carouselkk"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
+  },
+  {
+    "HouseID": "d6b8c916-17b2-48fa-84e8-0e3f48e99c80",
+    "LandlordID": "e0e93a67-58e5-4b85-b2c1-f497e3b09c6d",
+    "AllowPet": true,
+    "AllowSmoke": false,
+    "AllowParty": true,
+    "AllowWeed": false,
+    "isAC": true,
+    "isFurnished": true,
+    "isHeater": true,
+    "ExpectedPrice": 4500,
+    "Province": "BC",
+    "City": "Vancouver",
+    "Street": "1234 W 1st Ave",
+    "StartDate": "2024-08-01",
+    "EndDate": "2025-08-01",
+    "NumOfParking": 2,
+    "NumOfResident": 4,
+    "NumBedroom": 4,
+    "NumBathroom": 2,
+    "Title": "Beautiful House in Vancouver",
+    "Description": "A lovely house located in the heart of Vancouver.",
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
+  },
+  {
+    "HouseID": "4c3a5e38-4379-4d9d-bff4-2f183d83b102",
+    "LandlordID": "2b5bbda5-9897-4a5d-82f2-2e9b5a58269f",
+    "AllowPet": true,
+    "AllowSmoke": false,
+    "AllowParty": true,
+    "AllowWeed": false,
+    "isAC": true,
+    "isFurnished": true,
+    "isHeater": true,
+    "ExpectedPrice": 1800,
+    "Province": "BC",
+    "City": "Richmond",
+    "Street": "1000-3700 No. 3 Road",
+    "StartDate": "2024-08-01",
+    "EndDate": "2025-08-01",
+    "NumOfParking": 2,
+    "NumOfResident": 4,
+    "NumBedroom": 3,
+    "NumBathroom": 2,
+    "Title": "P0: Cozy Apartment in Richmond",
+    "Description": "A cozy apartment perfect for small families.",
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
+  },
+  {
+    "HouseID": "0d7f3b4e-2457-4b3b-9614-91a7800b5e13",
+    "LandlordID": "f0a537f7-7483-4a38-9f37-bfb98f435252",
+    "AllowPet": false,
+    "AllowSmoke": true,
+    "AllowParty": false,
+    "AllowWeed": true,
+    "isAC": false,
+    "isFurnished": false,
+    "isHeater": true,
+    "ExpectedPrice": 2050,
+    "Province": "BC",
+    "City": "Richmond",
+    "Street": "200-6540 No. 3 Road",
+    "StartDate": "2024-09-01",
+    "EndDate": "2025-09-01",
+    "NumOfParking": 1,
+    "NumOfResident": 3,
+    "NumBedroom": 2,
+    "NumBathroom": 1,
+    "Title": "P1: Cozy Apartment in Richmond",
+    "Description": "A cozy apartment perfect for small families.",
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
+  },
+  {
+    "HouseID": "fa5c9d95-5693-4760-8463-fadb6e5ad5c3",
+    "LandlordID": "8efdfb35-dfb4-4d74-bc36-4d6b5e5bb2f9",
+    "AllowPet": true,
+    "AllowSmoke": false,
+    "AllowParty": true,
+    "AllowWeed": false,
+    "isAC": true,
+    "isFurnished": true,
+    "isHeater": true,
+    "ExpectedPrice": 2000,
+    "Province": "BC",
+    "City": "Richmond",
+    "Street": "8311 Cambie Road",
+    "StartDate": "2024-08-01",
+    "EndDate": "2025-08-01",
+    "NumOfParking": 2,
+    "NumOfResident": 4,
+    "NumBedroom": 3,
+    "NumBathroom": 2,
+    "Title": "p2: Modern House in richmond",
+    "Description": "A modern house with all amenities in richmond.",
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
+  },
+  {
+    "HouseID": "3c6f9c97-67e6-4f45-8fd7-6b64b6d635b7",
+    "LandlordID": "43b58b4c-7d65-4c48-9e6f-fb7b58e6b747",
+    "AllowPet": true,
+    "AllowSmoke": false,
+    "AllowParty": true,
+    "AllowWeed": false,
+    "isAC": true,
+    "isFurnished": true,
+    "isHeater": true,
+    "ExpectedPrice": 2000,
+    "Province": "BC",
+    "City": "Richmond",
+    "Street": "1000-3700 No. 3 Road",
+    "StartDate": "2024-08-01",
+    "EndDate": "2025-08-01",
+    "NumOfParking": 1,
+    "NumOfResident": 4,
+    "NumBedroom": 3,
+    "NumBathroom": 1,
+    "Title": "p3: Nice House in Richmond 3b2b ",
+    "Description": "A luxury house in a prime location in Richmond.",
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
+  },
+  {
+    "HouseID": "e5f4d6c1-7e3f-4a8f-b2d1-4e5f4d6e3c8d",
+    "LandlordID": "9b8e5c43-5d34-44f3-9612-0a5f29b5c6d9",
+    "AllowPet": false,
+    "AllowSmoke": false,
+    "AllowParty": false,
+    "AllowWeed": false,
+    "isAC": false,
+    "isFurnished": false,
+    "isHeater": false,
+    "ExpectedPrice": 3800,
+    "Province": "BC",
+    "City": "Langley",
+    "Street": "3456 Willowbrook Dr",
+    "StartDate": "2024-08-15",
+    "EndDate": "2025-08-15",
+    "NumOfParking": 1,
+    "NumOfResident": 3,
+    "NumBedroom": 2,
+    "NumBathroom": 1,
+    "Title": "Charming Apartment in Langley",
+    "Description": "A charming apartment in a quiet neighborhood in Langley.",
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
+  },
+  {
+    "HouseID": "c3d6b9a5-5e4f-4b6d-8c2f-6d4c9b6a5f3d",
+    "LandlordID": "4a8f6e5d-4c6b-4b4d-b2d6-f9c6d5b5c8d2",
+    "AllowPet": true,
+    "AllowSmoke": false,
+    "AllowParty": true,
+    "AllowWeed": false,
+    "isAC": true,
+    "isFurnished": true,
+    "isHeater": true,
+    "ExpectedPrice": 4300,
+    "Province": "BC",
+    "City": "North Vancouver",
+    "Street": "4567 Marine Dr",
+    "StartDate": "2024-09-01",
+    "EndDate": "2025-09-01",
+    "NumOfParking": 2,
+    "NumOfResident": 4,
+    "NumBedroom": 3,
+    "NumBathroom": 2,
+    "Title": "Beautiful House in North Vancouver",
+    "Description": "A beautiful house with stunning views in North Vancouver.",
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
+  },
+  {
+    "HouseID": "d5c6b7a4-3e8f-4b6d-8c4d-5e4f6b7d5a4c",
+    "LandlordID": "2c5e4f8d-4a6b-4b4d-9c2d-8d6b5c4e5d2f",
+    "AllowPet": false,
+    "AllowSmoke": true,
+    "AllowParty": false,
+    "AllowWeed": true,
+    "isAC": true,
+    "isFurnished": false,
+    "isHeater": true,
+    "ExpectedPrice": 2000,
+    "Province": "BC",
+    "City": "Richmond",
+    "Street": "3800 No. 4 Road",
+    "StartDate": "2024-10-01",
+    "EndDate": "2025-10-01",
+    "NumOfParking": 1,
+    "NumOfResident": 1,
+    "NumBedroom": 1,
+    "NumBathroom": 1,
+    "Title": "P4: Apartment in Richmond near shoping mall ",
+    "Description": "A cozy apartment in a convenient location in Richmond.",
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
+  },
+  {
+    "HouseID": "b3c6d7a5-4e4f-4b8d-8d6d-6f4e5c3b6d8a",
+    "LandlordID": "6d5e4f4a-4b6c-4b4d-9e2f-6d5c8d6b5e4d",
+    "AllowPet": true,
+    "AllowSmoke": false,
+    "AllowParty": true,
+    "AllowWeed": false,
+    "isAC": true,
+    "isFurnished": true,
+    "isHeater": true,
+    "ExpectedPrice": 5500,
+    "Province": "BC",
+    "City": "Victoria",
+    "Street": "7890 Douglas St",
+    "StartDate": "2024-11-01",
+    "EndDate": "2025-11-01",
+    "NumOfParking": 2,
+    "NumOfResident": 5,
+    "NumBedroom": 5,
+    "NumBathroom": 3,
+    "Title": "Luxury House in Victoria",
+    "Description": "A luxury house with modern amenities in Victoria.",
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "alt": "Image 3 for carousel"
+      }
+    ]
+  },
+  {
+    "HouseID": "e4d6c5b9-3f4e-4b6d-8c3d-5e6d4b9c5e4d",
+    "LandlordID": "4b6d5c4a-4e4f-4b6d-8c5e-6d4f9c5e6b4d",
+    "AllowPet": false,
+    "AllowSmoke": true,
+    "AllowParty": false,
+    "AllowWeed": true,
+    "isAC": false,
+    "isFurnished": false,
+    "isHeater": true,
+    "ExpectedPrice": 5700,
+    "Province": "BC",
+    "City": "Kelowna",
+    "Street": "8901 Pandosy St",
+    "StartDate": "2024-12-01",
+    "EndDate": "2025-12-01",
+    "NumOfParking": 1,
+    "NumOfResident": 8,
+    "NumBedroom": 8,
+    "NumBathroom": 7,
+    "Title": "Modern Big house in Kelowna",
+    "Description": "Modern Big house with all amenities in Kelowna.",
+    "HouseImgs": [
+      {
+        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "alt": "Image 2 for carousel"
       },
       {
         "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",

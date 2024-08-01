@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Carousel from '../carousel/Carousel'
-import './LandlordPropertyCard.css' // Import the CSS file
+import './LandlordPropertyCard.css'
 import ApplicantCard from '../applicantCard/ApplicantCard'
 import ExpandedApplicantCard from '../applicantCard/ExpandedApplicantCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPropertiesAsync } from '../../redux/properties/thunks'
-import { Snackbar, Alert } from '@mui/material'
+import { Snackbar, Alert, Box } from '@mui/material'
+import Fab from '@mui/material/Fab';
+import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded'
 import {
   getLandlordMatchesAsync,
   reopenMatchesAsync,
@@ -41,14 +43,14 @@ const LandlordPropertyCard = ({ landlordId }) => {
       dispatch(getLandlordMatchesAsync(landlordID))
     } else if (getLandlordMatchesStatus === 'FULFILLED') {
       setApplicants(landlordMatchesApplicants);
-      if(landlordMatchesApplicants.some(applicant => applicant.matchStatus === 'Accepted')) {
+      if (landlordMatchesApplicants.some(applicant => applicant.matchStatus === 'Accepted')) {
         setHasAccept(true);
       } else {
         setHasAccept(false);
       }
     }
-  }, [getLandlordMatchesStatus,hasAccepted,landlordID,landlordMatchesApplicants,dispatch])
-  
+  }, [getLandlordMatchesStatus, hasAccepted, landlordID, landlordMatchesApplicants, dispatch])
+
   useEffect(() => {
     if (properties.length > 0) {
       const property = properties.find((prop) => prop.LandlordID === landlordId)
@@ -101,7 +103,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
   }
 
   const handleReopenMatch = () => {
-    if(selectedProperty) {
+    if (selectedProperty) {
       dispatch(
         reopenMatchesAsync(selectedProperty.HouseID)
       )
@@ -124,8 +126,14 @@ const LandlordPropertyCard = ({ landlordId }) => {
     setNotification({ ...notification, open: false })
   }
 
+  const reloadApplicants = () => {
+    dispatch(getPropertiesAsync())
+    dispatch(getLandlordMatchesAsync(landlordID))
+
+  }
+
   if (!selectedProperty) {
-    return <div>Loading property...</div>
+    return <div>Your have not publish a property yet...</div>
   }
 
   const {
@@ -170,10 +178,10 @@ const LandlordPropertyCard = ({ landlordId }) => {
               </div>
             </div>
           </div>
-          {hasAccepted? <div>
-          <Button className="reopen-button" color="error" onClick={handleReopenMatch}>
-          Reopen Match
-        </Button>
+          {hasAccepted ? <div>
+            <Button className="reopen-button" color="error" onClick={handleReopenMatch}>
+              Reopen Match
+            </Button>
           </div> : null}
         </div>
         <div className="applicant-list">
@@ -219,7 +227,32 @@ const LandlordPropertyCard = ({ landlordId }) => {
           {notification.message}
         </Alert>
       </Snackbar>
+      <Box
+        sx={{
+          position: 'fixed',
+          bottom: 20,
+          right: 20,
+          zIndex: 1000,
+        }}
+      >
+        <Fab
+          variant="extended"
+          size="medium"
+          onClick={reloadApplicants}
+          sx={{
+            backgroundColor: 'black',
+            color: 'white',
+            '&:hover': {
+              backgroundColor: '#333',
+            },
+          }}
+        >
+          <ReplayRoundedIcon sx={{ mr: 1 }} />
+          Reload Applicants
+        </Fab>
+      </Box>
     </>
+
   )
 }
 
