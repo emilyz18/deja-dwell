@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { getUserAsync, editUserAsync } from '../redux/user/thunks.js'
 import { updateUser } from '../redux/user/reducer.js'
-import './generalInputForm.css'
+import './GeneralInputForm.css'
 
 export function GeneralInputForm() {
   const [isEditing, setIsEditing] = useState(false)

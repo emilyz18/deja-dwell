@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import './TenantForm.css'
-import { updateTenant } from '../../redux/tenant/tenantReducer'
 
 export function TenantForm({
   handleSubmit,
