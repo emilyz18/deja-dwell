@@ -14,22 +14,11 @@ export function GeneralInputForm() {
   const dispatch = useDispatch()
   const location = useLocation()
 
-  const [errors, setErrors] = useState({});
-  const validate = () => {
-    let tempErrors = {};
-    if (!user.UserName) tempErrors.UserName = "Name is required";
-    if (!user.UserEmail) tempErrors.UserEmail = "Email is required";
-    if (!user.PhoneNumber) tempErrors.PhoneNumber = "Phone number is required";
-
-    setErrors(tempErrors);
-    return Object.keys(tempErrors).length === 0;
-  };
-
-  useEffect(() => {
-    if (user && user.UserID) {
-      dispatch(getUserAsync(user.UserID));
-    }
-  }, [dispatch, user.UserID]);
+  // useEffect(() => {
+  //   if (user && user.UserID) {
+  //     dispatch(getUserAsync(user.UserID));
+  //   }
+  // }, [dispatch, user.UserID]);
 
   useEffect(() => {
     if (location.state && location.state.fromSignUp) {
@@ -146,9 +135,7 @@ export function GeneralInputForm() {
                   placeholder="Enter phone number here..."
                   type="tel"
                 />
-                {errors.PhoneNumber && (
-                  <p className="error">{errors.PhoneNumber}</p>
-                )}
+    
               </div>
               <div className="auth-form-group">
                 <label htmlFor="userEmail" className="auth-label">

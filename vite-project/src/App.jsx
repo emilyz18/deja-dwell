@@ -1,19 +1,19 @@
-import './css/App.css'
-
-import React, { useEffect, useState } from 'react'
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-
-import LandlordPropertyCard from './components/landlordPropertyCard/LandlordPropertyCard'
-import PropertyCardList from './components/propertyCardList/PropertyCardList'
-import { LandLordSideBar } from './components/sideBars/LandLordSideBar'
-import { TenantSideBar } from './components/sideBars/TenantSideBar'
-import { TenantEditPage } from './InputForms/tenant/TenantEditPage.jsx'
-import { PropertyEditPage } from './InputForms/property/PropertyEditPage.jsx'
-import { GeneralInputForm } from './InputForms/generalInputForm'
-import History from './components/history/History'
-
-import { getUserAsync } from './redux/user/thunks'
+import './css/App.css';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import LandlordPropertyCard from './components/landlordPropertyCard/LandlordPropertyCard';
+import PropertyCardList from './components/propertyCardList/PropertyCardList';
+import { LandLordSideBar } from './components/sideBars/LandLordSideBar';
+import { TenantSideBar } from './components/sideBars/TenantSideBar';
+import { TenantEditPage } from './InputForms/tenant/TenantEditPage';
+import { PropertyEditPage } from './InputForms/property/PropertyEditPage';
+import { GeneralInputForm } from './InputForms/generalInputForm';
+import History from './components/history/History';
+import SignIn from './components/userLogin/SignIn';
+import SignUp from './components/userLogin/SignUp';
+import ProtectedRoute from './components/userLogin/ProtectedRoute';
+import { verifySessionAsync } from './redux/user/thunks';
 
 const LANDLORD = 'landlord';
 const TENANT = 'tenant';
