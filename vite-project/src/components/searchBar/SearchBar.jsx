@@ -49,9 +49,9 @@ const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
       allowWeed: false,
       furnished: false,
       ac: false,
-      heater: false
-    });
-  };
+      heater: false,
+    })
+  }
 
   return (
     <div className="search-bar">

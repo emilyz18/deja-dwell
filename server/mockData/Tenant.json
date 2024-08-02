@@ -70,5 +70,16 @@
     "Income": null,
     "Company": null,
     "Habit": null
+  },
+  {
+    "TenantID": "12333333-abcd-4efg-90hi-1234567890jk",
+    "UserID": "12333333-abcd-4efg-90hi-1234567890jk",
+    "TenantPreferenceID": "12333333-abcd-4efg-90hi-1234567890jk",
+    "Age": 23,
+    "Gender": "Male",
+    "Occupation": "Mock Tenant demo",
+    "Income": 3000,
+    "Company": "UBC",
+    "Habit": "early bird"
   }
 ]

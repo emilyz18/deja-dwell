@@ -1,78 +1,68 @@
-import React, { useState, useEffect } from 'react';
-import { Snackbar, Alert, Avatar } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import { getUserAsync, editUserAsync } from '../redux/user/thunks.js';
-import { updateUser } from '../redux/user/reducer.js';
-import './generalInputForm.css';
+import React, { useState, useEffect } from 'react'
+import { Snackbar, Alert, Avatar } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import { getUserAsync, editUserAsync } from '../redux/user/thunks.js'
+import { updateUser } from '../redux/user/reducer.js'
+import './generalInputForm.css'
 
 export function GeneralInputForm() {
-  const [isEditing, setIsEditing] = useState(false);
-  const [warning, setWarning] = useState(false);
-  const [neededInfo, setNeededInfo] = useState('');
-  const user = useSelector((state) => state.user.user);
-  const dispatch = useDispatch();
-  const location = useLocation();
+  const [isEditing, setIsEditing] = useState(false)
+  const [warning, setWarning] = useState(false)
+  const [neededInfo, setNeededInfo] = useState('')
+  const user = useSelector((state) => state.user.user)
+  const dispatch = useDispatch()
+  const location = useLocation()
 
-  const [errors, setErrors] = useState({});
-  const validate = () => {
-    let tempErrors = {};
-    if (!user.UserName) tempErrors.UserName = "Name is required";
-    if (!user.UserEmail) tempErrors.UserEmail = "Email is required";
-    if (!user.PhoneNumber) tempErrors.PhoneNumber = "Phone number is required";
-
-    setErrors(tempErrors);
-    return Object.keys(tempErrors).length === 0;
-  };
-
+  const [errors, setErrors] = useState({}) // for form restriction 
   useEffect(() => {
     if (user && user.UserID) {
-      dispatch(getUserAsync(user.UserID));
+      dispatch(getUserAsync(user.UserID))
     }
-  }, [dispatch, user.UserID]);
+  }, [dispatch, user.UserID])
 
   useEffect(() => {
     if (location.state && location.state.fromSignUp) {
-      setWarning(true);
+      setWarning(true)
       if (location.state.fromSignUp === 'Landlord') {
-        setNeededInfo('Profile');
+        setNeededInfo('Profile')
       } else if (location.state.fromSignUp === 'Tenant') {
-        setNeededInfo('Profile and Rent preference');
+        setNeededInfo('Profile and Rent preference')
       }
     }
-  }, [location.state]);
+  }, [location.state])
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    dispatch(updateUser({ ...user, [name]: value }));
-  };
+    const { name, value } = e.target
+    dispatch(updateUser({ ...user, [name]: value }))
+  }
 
   const handlePicFileUpload = (e) => {
     if (e.target.files && e.target.files.length > 0) {
-      const curFile = e.target.files[0];
-      const reader = new FileReader();
+      const curFile = e.target.files[0]
+      const reader = new FileReader()
       reader.onloadend = () => {
-        dispatch(updateUser({ ...user, ProfileImg: reader.result }));
-      };
-      reader.readAsDataURL(curFile);
+        dispatch(updateUser({ ...user, ProfileImg: reader.result }))
+      }
+      reader.readAsDataURL(curFile)
     }
-  };
+  }
 
   const handleEdit = () => {
-    setIsEditing(true);
-  };
+    setIsEditing(true)
+  }
 
   const handleCancel = () => {
-    setIsEditing(false);
-  };
+    setIsEditing(false)
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    if (validate()) {
-      dispatch(editUserAsync(user));
-      setIsEditing(false);
-    }
-  };
+    event.preventDefault()
+    //using HTML5 validation
+    dispatch(editUserAsync(user))
+    setIsEditing(false)
+    
+  }
 
   return (
     <>
@@ -89,7 +79,9 @@ export function GeneralInputForm() {
             <h2 className="header">My Profile</h2>
             <form className="input-form-form" onSubmit={handleSubmit}>
               <div className="auth-form-group">
-                <label htmlFor="userName" className="auth-label">Full Name</label>
+                <label htmlFor="userName" className="auth-label">
+                  Full Name
+                </label>
                 <input
                   id="userName"
                   name="UserName"
@@ -98,11 +90,15 @@ export function GeneralInputForm() {
                   value={user.UserName || ''}
                   onChange={handleChange}
                   placeholder="Enter name here..."
+                  maxLength="20"
+                  pattern="[A-Za-z0-9\s]+"
+                  title="Name should only contain letters, numbers, and spaces"
                 />
-                {errors.UserName && <p className="error">{errors.UserName}</p>}
               </div>
               <div className="auth-form-group">
-                <label htmlFor="profileImg" className="auth-label">Image URL</label>
+                <label htmlFor="profileImg" className="auth-label">
+                  Image URL
+                </label>
                 <input
                   id="profileImg"
                   name="ProfileImg"
@@ -127,7 +123,9 @@ export function GeneralInputForm() {
                 />
               </div>
               <div className="auth-form-group">
-                <label htmlFor="phoneNumber" className="auth-label">Phone Number</label>
+                <label htmlFor="phoneNumber" className="auth-label">
+                  Phone Number
+                </label>
                 <input
                   id="phoneNumber"
                   name="PhoneNumber"
@@ -136,11 +134,16 @@ export function GeneralInputForm() {
                   value={user.PhoneNumber || ''}
                   onChange={handleChange}
                   placeholder="Enter phone number here..."
+                  type="tel"
                 />
-                {errors.PhoneNumber && <p className="error">{errors.PhoneNumber}</p>}
+                {errors.PhoneNumber && (
+                  <p className="error">{errors.PhoneNumber}</p>
+                )}
               </div>
               <div className="auth-form-group">
-                <label htmlFor="userEmail" className="auth-label">Email</label>
+                <label htmlFor="userEmail" className="auth-label">
+                  Email
+                </label>
                 <input
                   id="userEmail"
                   name="UserEmail"
@@ -151,13 +154,10 @@ export function GeneralInputForm() {
                   onChange={handleChange}
                   placeholder="Enter email here..."
                 />
-                {errors.UserEmail && <p className="error">{errors.UserEmail}</p>}
+                
               </div>
               <div className="button-container">
-                <button
-                  type="submit"
-                  className="auth-button"
-                >
+                <button type="submit" className="auth-button">
                   Save
                 </button>
                 <button
@@ -194,10 +194,7 @@ export function GeneralInputForm() {
                 <span className="value">{user.UserEmail || 'N/A'}</span>
               </li>
               <li className="list-item">
-                <button
-                  className="auth-button"
-                  onClick={handleEdit}
-                >
+                <button className="auth-button" onClick={handleEdit}>
                   Edit Profile
                 </button>
               </li>
@@ -210,10 +207,14 @@ export function GeneralInputForm() {
         autoHideDuration={3000}
         onClose={() => setWarning(false)}
       >
-        <Alert onClose={() => setWarning(false)} severity="warning" sx={{ width: '100%' }}>
+        <Alert
+          onClose={() => setWarning(false)}
+          severity="warning"
+          sx={{ width: '100%' }}
+        >
           Please complete your {neededInfo}.
         </Alert>
       </Snackbar>
     </>
-  );
+  )
 }

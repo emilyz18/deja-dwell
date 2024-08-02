@@ -8,7 +8,7 @@ import {
 } from '@dnd-kit/core'
 import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable'
 import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
-import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
+import { ExpandedPropertyCard } from '../expandedPropertyCard/ExpandedPropertyCard.jsx'
 import './PropertyCardList.css'
 import SearchBar from '../searchBar/SearchBar.jsx'
 import MapComponent from '../map/MapComponent.jsx'
@@ -94,10 +94,8 @@ function PropertyCardList({ searchMode }) {
 
   const likedProperty = (id) => {
     const likedProperty = properties.find((property) => property.HouseID === id)
-    console.log("liked property: " + likedProperty)
     dispatch(
       createMatchAsync({
-        MatchID: uuidv4(),
         TenantID: user.TenantID,
         LandlordID: likedProperty.LandlordID,
         HouseID: likedProperty.HouseID,
@@ -118,11 +116,8 @@ function PropertyCardList({ searchMode }) {
     const dislikedProperty = properties.find(
       (property) => property.HouseID === id
     )
-    console.log("disliked property: " + dislikedProperty)
-
     dispatch(
       createMatchAsync({
-        MatchID: uuidv4(),
         TenantID: user.TenantID,
         LandlordID: dislikedProperty.LandlordID,
         HouseID: dislikedProperty.HouseID,
@@ -267,7 +262,28 @@ function PropertyCardList({ searchMode }) {
   return (
     <>
       {searchMode ? (
-        <div>
+        <div className="search-container">
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              paddingLeft: 2,
+              pt: 2,
+              pb: 2,
+            }}
+          >
+            <Typography
+              variant="h4"
+              component="h1"
+              sx={{
+                flexGrow: 1,
+                fontWeight: 'bold',
+                fontFamily: 'Mulish, sans-serif',
+              }}
+            >
+              Search
+            </Typography>
+          </Box>
           <SearchBar
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
@@ -285,23 +301,25 @@ function PropertyCardList({ searchMode }) {
             />
 
             <div className="cards-container">
-              {displaySearchProperties.length === 0 ? (
-                <li className="no-properties-message">
-                  No more properties to show
-                </li>
-              ) : (
-                displaySearchProperties.map((property) => (
-                  <MiniPropertyCard
-                    key={property.HouseID}
-                    propertyInfo={property}
-                    likedFn={likedProperty}
-                    dislikedFn={dislikedProperty}
-                    displayPopup={() => displayPopup(property)}
-                    zoomMap={() => zoomMap(property)}
-                    searchMode
-                  />
-                ))
-              )}
+              <div className="cards-list">
+                {displaySearchProperties.length === 0 ? (
+                  <li className="no-properties-message">
+                    No more properties to show
+                  </li>
+                ) : (
+                  displaySearchProperties.map((property) => (
+                    <MiniPropertyCard
+                      key={property.HouseID}
+                      propertyInfo={property}
+                      likedFn={likedProperty}
+                      dislikedFn={dislikedProperty}
+                      displayPopup={() => displayPopup(property)}
+                      zoomMap={() => zoomMap(property)}
+                      searchMode
+                    />
+                  ))
+                )}
+              </div>
             </div>
             {popupVisible && (
               <div className="property-popup-background" onClick={closePopup}>
@@ -321,8 +339,8 @@ function PropertyCardList({ searchMode }) {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              paddingLeft: 8,
-              pt: 5,
+              paddingLeft: 2,
+              pt: 2,
               pb: 2,
             }}
           >
@@ -332,9 +350,10 @@ function PropertyCardList({ searchMode }) {
               sx={{
                 flexGrow: 1,
                 fontWeight: 'bold',
+                fontFamily: 'Mulish, sans-serif',
               }}
             >
-              Your Recommendations
+              Recommendation
             </Typography>
             <Box
               sx={{

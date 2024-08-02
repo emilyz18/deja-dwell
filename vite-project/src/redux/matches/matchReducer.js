@@ -6,6 +6,7 @@ import {
   deleteMatchAsync,
   getLandlordMatchesAsync,
   getTenantMatchesAsync,
+  reopenMatchesAsync,
 } from './matchThunks'
 
 const INITIAL_STATE = {
@@ -43,10 +44,14 @@ const matchSlice = createSlice({
       })
       .addCase(createMatchAsync.fulfilled, (state, action) => {
         state.createMatch = REQUEST_STATE.FULFILLED
+        state.getLandlordMatches = REQUEST_STATE.IDLE
+        state.getTenantMatches = REQUEST_STATE.IDLE
         state.list.push(action.payload)
       })
       .addCase(createMatchAsync.rejected, (state, action) => {
         state.createMatch = REQUEST_STATE.REJECTED
+        state.getLandlordMatches = REQUEST_STATE.IDLE
+        state.getTenantMatches = REQUEST_STATE.IDLE
         state.error = action.error.message
       })
 
@@ -68,6 +73,8 @@ const matchSlice = createSlice({
       })
       .addCase(updateMatchAsync.rejected, (state, action) => {
         state.updateMatch = REQUEST_STATE.REJECTED
+        state.getLandlordMatches = REQUEST_STATE.IDLE
+        state.getTenantMatches = REQUEST_STATE.IDLE
         state.error = action.error.message
       })
 
@@ -112,6 +119,18 @@ const matchSlice = createSlice({
       })
       .addCase(getTenantMatchesAsync.rejected, (state, action) => {
         state.getTenantMatches = REQUEST_STATE.REJECTED
+        state.error = action.error.message
+      })
+
+      // Reopen Match
+      .addCase(reopenMatchesAsync.pending, (state) => {
+        state.error = null
+      })
+      .addCase(reopenMatchesAsync.fulfilled, (state, action) => {
+        state.getLandlordMatches = REQUEST_STATE.IDLE
+        state.getTenantMatches = REQUEST_STATE.IDLE
+      })
+      .addCase(reopenMatchesAsync.rejected, (state, action) => {
         state.error = action.error.message
       })
   },
