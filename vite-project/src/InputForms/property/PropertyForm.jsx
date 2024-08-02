@@ -32,9 +32,9 @@ export function PropertyForm({
       if (startDate > endDate) {
         tempErrors.EndDate = 'End date must be greater than start date'
       }
-    
+
     }
-    
+
 
     setErrors(tempErrors)
     return Object.keys(tempErrors).length === 0
@@ -58,13 +58,15 @@ export function PropertyForm({
         onChange={handleChange}
       />
 
-      {name === 'EndDate'&& errors.EndDate && <p className="error">{errors.EndDate}</p>}
+      {name === 'EndDate' && errors.EndDate && <p className="error">{errors.EndDate}</p>}
     </div>
   )
 
   const renderInputField = (label, name, type = 'text', required = false) => (
     <div className="property-form-group">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>
+        {label} {required && <span className="required-asterisk">*</span>}
+      </label>
       <input
         id={name}
         name={name}

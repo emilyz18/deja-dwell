@@ -50,7 +50,7 @@ export function TenantForm({
     value = tenant[name] || ''
   ) => (
     <div className="tenant-form-group">
-      <label>{label}</label>
+      <label>{label} {required && <span className="required-asterisk">*</span>}</label>
       <input
         type={type}
         name={name}
@@ -88,7 +88,7 @@ export function TenantForm({
         <div className="tenant-form-grid">
           {renderInputField('Age', 'Age', 'number')}
           {renderInputField('Occupation', 'Occupation')}
-          {renderInputField('Gender', 'Gender', true)}
+          {renderInputField('Gender', 'Gender', 'text', true)}
           {renderInputField('Income in $', 'Income', 'number')}
           {renderInputField('Company', 'Company')}
           {renderInputField('Habit', 'Habit', 'text', true)}
