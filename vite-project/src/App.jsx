@@ -8,7 +8,7 @@ import LandlordPropertyCard from './components/landlordPropertyCard/LandlordProp
 import PropertyCardList from './components/propertyCardList/PropertyCardList'
 import { LandLordSideBar } from './components/sideBars/LandLordSideBar'
 import { TenantSideBar } from './components/sideBars/TenantSideBar'
-import {TenantProfilePage } from './InputForms/tenant/tenantProfilePage.jsx'
+import {TenantProfilePage } from './InputForms/tenant/TenantProfilePage.jsx'
 import { PropertyEditPage } from './InputForms/property/PropertyEditPage.jsx'
 import { GeneralInputForm } from './InputForms/GeneralInputForm.jsx'
 import History from './components/history/History'

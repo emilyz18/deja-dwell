@@ -43,7 +43,7 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch = false, showButto
 
   return (
     <div className="expanded-property-popup">
-     <h1>{Title}</h1>
+      <h1>{Title}</h1>
       <div className="carousel-container">
         <Carousel data={HouseImgs} size={{ width: null, height: null }} />
       </div>
@@ -91,7 +91,7 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch = false, showButto
         </div>}
       </div>
     </div>
-    
+
   );
 }
 

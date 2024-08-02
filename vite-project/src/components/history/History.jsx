@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import MatchItem from './MatchItem'
-import { ExpandedPropertyCard } from '../expandedPropertyCard/expandedPropertyCard'
+import { ExpandedPropertyCard } from '../expandedPropertyCard/ExpandedPropertyCard.jsx'
 
 import './History.css'
 import { getPropertiesAsync } from '../../redux/properties/thunks'

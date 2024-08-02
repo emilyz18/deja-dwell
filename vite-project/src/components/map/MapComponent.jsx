@@ -1,7 +1,7 @@
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
-import { ExpandedPropertyCard } from '../expandedPropertyCard/ExpandedPropertyCard'
+import { ExpandedPropertyCard } from '../expandedPropertyCard/ExpandedPropertyCard.jsx'
 import './MapComponent.css'
 
 const vancouver = {

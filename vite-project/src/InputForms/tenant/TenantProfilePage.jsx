@@ -5,7 +5,7 @@ import {
   updateTenant,
   updateTenantPref,
 } from '../../redux/tenant/tenantReducer.js'
-import './TenantInputForm.css'
+import './TenantForm.css'
 import {
   getTenantPrefAsync,
   getTenantProfileAsync,
@@ -13,7 +13,7 @@ import {
   patchTenantProfileAsync,
 } from '../../redux/tenant/thunks.js'
 import { TenantForm } from './tenantForm.jsx'
-import { TenantInputDisplay } from './tenantInputDisplay.jsx'
+import { TenantInputDisplay } from './TenantInputDisplay.jsx'
 
 export function TenantProfilePage() {
   const [isEditing, setIsEditing] = useState(false)
