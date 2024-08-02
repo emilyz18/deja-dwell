@@ -11,7 +11,7 @@ import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/ExpandedPropertyCard.jsx'
 import './PropertyCardList.css'
 import SearchBar from '../searchBar/SearchBar.jsx'
-import Map from '../map/Map.jsx'
+import MapComponent from '../map/MapComponent.jsx'
 import HelpPopOver from './HelpPopOver.jsx'
 import {
   getPreferPropertiesAsync,
@@ -20,7 +20,6 @@ import {
 import { createMatchAsync } from '../../redux/matches/matchThunks'
 import { Box, Typography, Fab, Snackbar, Alert } from '@mui/material'
 import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded'
-import { v4 as uuidv4 } from 'uuid'
 import { getTenantMatchesAsync } from '../../redux/matches/matchThunks'
 
 function PropertyCardList({ searchMode }) {
@@ -49,6 +48,8 @@ function PropertyCardList({ searchMode }) {
   })
 
   const [zoomMapProperty, setzoomMapProperty] = useState(null)
+  const [zoomTrigger, setZoomTrigger] = useState(0)
+
 
   const [searchTerm, setSearchTerm] = useState('')
   const [filters, setFilters] = useState({
@@ -134,6 +135,7 @@ function PropertyCardList({ searchMode }) {
 
   const zoomMap = (property) => {
     setzoomMapProperty(property)
+    setZoomTrigger(Date.now())
   }
 
   const displayPopup = (property) => {
@@ -248,9 +250,11 @@ function PropertyCardList({ searchMode }) {
 
   const propertyAddresses = displaySearchProperties.map((property) => {
     return {
-      street: property.Street,
-      city: property.City,
-      province: property.Province,
+      HouseID: property.HouseID,
+      ExpectedPrice: property.ExpectedPrice,
+      Street: property.Street,
+      City: property.City,
+      Province: property.Province,
     }
   })
 
@@ -286,10 +290,16 @@ function PropertyCardList({ searchMode }) {
             setFilters={setFilters}
           />
           <div className="search-display">
-            <Map
-              propertyAddresses={propertyAddresses}
-              zoomMapProperty={zoomMapProperty}
-            />
+            <div className="map-border">
+              <MapComponent
+                properties={displaySearchProperties}
+                propertyAddresses={propertyAddresses}
+                zoomMapProperty={zoomMapProperty}
+                zoomTrigger={zoomTrigger}
+                likedFn={likedProperty}
+                dislikedFn={dislikedProperty}
+              />
+            </div>
             <div className="cards-container">
               <div className="cards-list">
                 {displaySearchProperties.length === 0 ? (
@@ -330,8 +340,7 @@ function PropertyCardList({ searchMode }) {
               display: 'flex',
               alignItems: 'center',
               paddingLeft: 2,
-              pt: 2,
-              pb: 2,
+              pt: 2
             }}
           >
             <Typography

@@ -15,8 +15,6 @@
 .dropzone-container {
   display: flex;
   width: 100%;
-  padding: 10px;
-  margin: 10px;
 }
 
 .dropzone {

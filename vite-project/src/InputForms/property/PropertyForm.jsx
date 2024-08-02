@@ -64,7 +64,9 @@ export function PropertyForm({
 
   const renderInputField = (label, name, type = 'text', required = false) => (
     <div className="property-form-group">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>
+        {label} {required && <span className="required-asterisk">*</span>}
+      </label>
       <input
         id={name}
         name={name}
