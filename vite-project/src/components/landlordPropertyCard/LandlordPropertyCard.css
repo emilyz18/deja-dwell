@@ -6,20 +6,23 @@
 
 .landlord-property-card {
   display: flex;
-  margin-bottom: 20px;
-  padding: 20px;
+  flex-direction: row;
+  margin-bottom: 15px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   font-family: 'Mulish', sans-serif;
+  min-width: 930px;
 }
 
 .landlord-carousel-container {
+  min-width: 450px;
   width: 450px;
-  height: 240px;
 }
 
 .property-information {
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-left: 20px;
@@ -80,3 +83,48 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   font-family: 'Mulish', sans-serif;
 }
+
+.reopen-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.reopen-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f44336;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reopen-button:hover {
+  background-color: #d32f2f;
+}
+
+.reopen-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
+}
+
+.reopen-button:active {
+  background-color: #c62828;
+}
+
+.applicant-title {
+  margin: 0 0 0 10px;
+  align-self: center;
+}
+
+.landlord-applicant-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  padding: 15px;
+}
+

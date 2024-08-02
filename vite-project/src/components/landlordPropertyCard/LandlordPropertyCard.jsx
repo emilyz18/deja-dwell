@@ -13,7 +13,6 @@ import {
   reopenMatchesAsync,
   updateMatchAsync,
 } from '../../redux/matches/matchThunks'
-import Button from '@mui/material/Button'
 
 const LandlordPropertyCard = ({ landlordId }) => {
   const dispatch = useDispatch()
@@ -151,7 +150,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
       <div className="landlord-dashboard-display">
         <div className="landlord-property-card">
           <div className="landlord-carousel-container">
-            <Carousel data={images} size={{ width: '100%', height: '240px' }} />
+            <Carousel data={images} size={{ width: '100%', height: '100%' }} />
           </div>
           <div className="property-information">
             <h3>{title}</h3>
@@ -178,27 +177,36 @@ const LandlordPropertyCard = ({ landlordId }) => {
               </div>
             </div>
           </div>
-          {hasAccepted ? <div>
-            <Button className="reopen-button" color="error" onClick={handleReopenMatch}>
-              Reopen Match
-            </Button>
-          </div> : null}
         </div>
-        <div className="applicant-list">
-          {applicants.length > 0 ? (
-            applicants.map((applicant, index) => (
-              <ApplicantCard
-                key={index}
-                applicant={applicant}
-                onReject={handleRejectApplicant}
-                onAccept={handleAcceptApplicant}
-                onClick={() => handleCardClick(applicant)}
-                accepted={applicant.matchStatus === 'Accepted'}
-              />
-            ))
-          ) : (
-            <div className="no-applicants">No Applicants at the moment!</div>
-          )}
+        <div className="landlord-applicant-card">
+          <div>
+            <h1 className="applicant-title">Applicants</h1>
+          </div>
+          <div className="reopen-button-container">
+            {hasAccepted ? (
+              <div>
+                <button className="reopen-button" onClick={handleReopenMatch}>
+                  Reopen Match
+                </button>
+              </div>
+            ) : null}
+          </div>
+          <div className="applicant-list">
+            {applicants.length > 0 ? (
+              applicants.map((applicant, index) => (
+                <ApplicantCard
+                  key={index}
+                  applicant={applicant}
+                  onReject={handleRejectApplicant}
+                  onAccept={handleAcceptApplicant}
+                  onClick={() => handleCardClick(applicant)}
+                  accepted={applicant.matchStatus === 'Accepted'}
+                />
+              ))
+            ) : (
+              <div className="no-applicants">No Applicants at the moment!</div>
+            )}
+          </div>
         </div>
         {popupVisible && (
           <div className="property-popup-background" onClick={handleClosePopup}>
