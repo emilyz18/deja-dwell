@@ -77,7 +77,7 @@ export function PropertyForm({
     </div>
   )
 
-  const renderTextArea = (label, name, type = 'text', required = false) => (
+  const renderTextArea = (label, name) => (
     <div className="property-form-group">
       <label htmlFor={name}>{label}</label>
       <textarea
@@ -141,18 +141,18 @@ export function PropertyForm({
         <div className="property-form-section">
           <div className="property-form-grid">
             {renderInputField('Title', 'Title', 'text', true)}
-            {renderTextArea('Description', 'Description', 'textarea')}
+            {renderTextArea('Description', 'Description')}
             {renderInputField('Province', 'Province', 'text', true)}
             {renderInputField('City', 'City', 'text', true)}
             {renderInputField('Street', 'Street')}
-            {renderDateField('Start Date', 'StartDate')}
-            {renderDateField('End Date', 'EndDate')}
             {renderInputField(
               'Rent Per Month',
               'ExpectedPrice',
               'number',
               true
             )}
+            {renderDateField('Start Date', 'StartDate')}
+            {renderDateField('End Date', 'EndDate')}
           </div>
           <hr className="separator" />
         </div>

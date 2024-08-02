@@ -178,30 +178,35 @@ const LandlordPropertyCard = ({ landlordId }) => {
             </div>
           </div>
         </div>
-        <div className="reopen-button-container">
-          {hasAccepted ? (
-            <div>
-              <button className="reopen-button" onClick={handleReopenMatch}>
-                Reopen Match
-              </button>
-            </div>
-          ) : null}
-        </div>
-        <div className="applicant-list">
-          {applicants.length > 0 ? (
-            applicants.map((applicant, index) => (
-              <ApplicantCard
-                key={index}
-                applicant={applicant}
-                onReject={handleRejectApplicant}
-                onAccept={handleAcceptApplicant}
-                onClick={() => handleCardClick(applicant)}
-                accepted={applicant.matchStatus === 'Accepted'}
-              />
-            ))
-          ) : (
-            <div className="no-applicants">No Applicants at the moment!</div>
-          )}
+        <div className="landlord-applicant-card">
+          <div>
+            <h1 className="applicant-title">Applicants</h1>
+          </div>
+          <div className="reopen-button-container">
+            {hasAccepted ? (
+              <div>
+                <button className="reopen-button" onClick={handleReopenMatch}>
+                  Reopen Match
+                </button>
+              </div>
+            ) : null}
+          </div>
+          <div className="applicant-list">
+            {applicants.length > 0 ? (
+              applicants.map((applicant, index) => (
+                <ApplicantCard
+                  key={index}
+                  applicant={applicant}
+                  onReject={handleRejectApplicant}
+                  onAccept={handleAcceptApplicant}
+                  onClick={() => handleCardClick(applicant)}
+                  accepted={applicant.matchStatus === 'Accepted'}
+                />
+              ))
+            ) : (
+              <div className="no-applicants">No Applicants at the moment!</div>
+            )}
+          </div>
         </div>
         {popupVisible && (
           <div className="property-popup-background" onClick={handleClosePopup}>
