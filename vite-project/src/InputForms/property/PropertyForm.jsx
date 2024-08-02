@@ -32,9 +32,9 @@ export function PropertyForm({
       if (startDate > endDate) {
         tempErrors.EndDate = 'End date must be greater than start date'
       }
-    
+
     }
-    
+
 
     setErrors(tempErrors)
     return Object.keys(tempErrors).length === 0
@@ -58,7 +58,7 @@ export function PropertyForm({
         onChange={handleChange}
       />
 
-      {name === 'EndDate'&& errors.EndDate && <p className="error">{errors.EndDate}</p>}
+      {name === 'EndDate' && errors.EndDate && <p className="error">{errors.EndDate}</p>}
     </div>
   )
 
@@ -74,6 +74,22 @@ export function PropertyForm({
         onChange={handleChange}
         min={type === 'number' ? '0' : undefined}
       />
+    </div>
+  )
+
+  const renderTextArea = (label, name, type = 'text', required = false) => (
+    <div className="property-form-group">
+      <label htmlFor={name}>{label}</label>
+      <textarea
+        id={name}
+        name={name}
+        value={property[name] || ''}
+        onChange={handleChange}
+        rows="4"
+        maxLength="250"
+        placeholder="Max 250 characters"
+      />
+      <p>{(property[name] || '').length}/250 characters</p>
     </div>
   )
 
@@ -125,7 +141,7 @@ export function PropertyForm({
         <div className="property-form-section">
           <div className="property-form-grid">
             {renderInputField('Title', 'Title', 'text', true)}
-            {renderInputField('Description', 'Description', 'textarea')}
+            {renderTextArea('Description', 'Description', 'textarea')}
             {renderInputField('Province', 'Province', 'text', true)}
             {renderInputField('City', 'City', 'text', true)}
             {renderInputField('Street', 'Street')}
