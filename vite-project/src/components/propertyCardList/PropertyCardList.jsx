@@ -20,7 +20,6 @@ import {
 import { createMatchAsync } from '../../redux/matches/matchThunks'
 import { Box, Typography, Fab, Snackbar, Alert } from '@mui/material'
 import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded'
-import { v4 as uuidv4 } from 'uuid'
 import { getTenantMatchesAsync } from '../../redux/matches/matchThunks'
 
 function PropertyCardList({ searchMode }) {
@@ -291,15 +290,16 @@ function PropertyCardList({ searchMode }) {
             setFilters={setFilters}
           />
           <div className="search-display">
-            <MapComponent
-              properties={displaySearchProperties}
-              propertyAddresses={propertyAddresses}
-              zoomMapProperty={zoomMapProperty}
-              zoomTrigger={zoomTrigger}
-              likedFn={likedProperty}
-              dislikedFn={dislikedProperty}
-            />
-
+            <div className="map-border">
+              <MapComponent
+                properties={displaySearchProperties}
+                propertyAddresses={propertyAddresses}
+                zoomMapProperty={zoomMapProperty}
+                zoomTrigger={zoomTrigger}
+                likedFn={likedProperty}
+                dislikedFn={dislikedProperty}
+              />
+            </div>
             <div className="cards-container">
               <div className="cards-list">
                 {displaySearchProperties.length === 0 ? (
@@ -340,8 +340,7 @@ function PropertyCardList({ searchMode }) {
               display: 'flex',
               alignItems: 'center',
               paddingLeft: 2,
-              pt: 2,
-              pb: 2,
+              pt: 2
             }}
           >
             <Typography

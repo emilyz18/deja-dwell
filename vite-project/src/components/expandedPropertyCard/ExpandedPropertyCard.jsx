@@ -68,12 +68,14 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch = false, showButto
         {AllowParty && <span className="amenity">Party Allowed</span>}
         {AllowWeed && <span className="amenity">Weed Allowed</span>}
       </div>
-      <div>
-        {isSearch && <MapComponent propertyAddresses={address} isRecommendation={true}/>
-      }
+      <div className="map-border-container">
+        <div className="map-border">
+          {isSearch && <MapComponent propertyAddresses={address} isRecommendation={true} />
+          }
+        </div>
       </div>
       <div>
-        {showButtons &&   <div className="buttons-row">
+        {showButtons && <div className="buttons-row">
           <button
             className="circle-button cross-button"
             onClick={dislikeProperty}
