@@ -1,9 +1,13 @@
 import React from 'react'
 import Carousel from '../carousel/Carousel'
 import './ExpandedPropertyCard.css'
-import Map from '../map/Map'
+import MapComponent from '../map/MapComponent';
 
-export function ExpandedPropertyCard({ propertyInfo, isSearch }) {
+export function ExpandedPropertyCard({ propertyInfo, isSearch = false, showButtons = false, likedFn, dislikedFn, setPopupVisible}) {
+  if (!propertyInfo) {
+    return null;
+  }
+
   const {
     NumBedroom,
     NumBathroom,
@@ -26,6 +30,15 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch }) {
 
   const address = [{ street: Street, city: City, province: Province }]
 
+  const likeProperty = () => {
+    likedFn(propertyInfo.HouseID)
+    setPopupVisible(false)
+  }
+
+  const dislikeProperty = () => {
+    dislikedFn(propertyInfo.HouseID)
+    setPopupVisible(false)
+  }
   return (
     <div className="expanded-property-popup">
       <h1>{Title}</h1>
@@ -53,11 +66,24 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch }) {
         {AllowParty && <span className="amenity">Party Allowed</span>}
         {AllowWeed && <span className="amenity">Weed Allowed</span>}
       </div>
-      {isSearch && (
-        <div className="map-container">
-          <Map propertyAddresses={address} isRecommendation={true} />
-        </div>
-      )}
+      {isSearch && <MapComponent propertyAddresses={address} isRecommendation={true}/>
+      }
+      <div>
+        {showButtons &&   <div className="buttons-row">
+          <button
+            className="circle-button cross-button"
+            onClick={dislikeProperty}
+          >
+            ✖
+          </button>
+          <button
+            className="circle-button checkmark-button"
+            onClick={likeProperty}
+          >
+            ✔
+          </button>
+        </div>}
+      </div>
     </div>
   )
 }

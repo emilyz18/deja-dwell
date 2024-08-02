@@ -1,16 +1,15 @@
 .map-container {
-    /* flex: 0 0 60%; */
-    width: 500px;
-    height: 530px;
-    overflow: hidden;
+  /* flex: 0 0 60%; */
+  width: 550px;
+  height: 550px;
+  overflow: hidden;
+}
 
-  }
-  
-  .loading {
-    width: 500px;
-    height: 530px;
-    border: 3px solid black;
-  }
+.loading {
+  width: 550px;
+  height: 550px;
+  border: 3px solid black;
+}
 
   .marker-popup {
     padding: 20px;
