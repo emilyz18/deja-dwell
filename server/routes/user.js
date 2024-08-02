@@ -1,8 +1,8 @@
 var express = require('express')
 var crypto = require('crypto')
 const jwt = require('jsonwebtoken')
-const { db } = require("../db");
 
+const { db } = require('../db')
 const { v4: uuid } = require('uuid')
 
 const userQueries = require('../dataBase/queries/userQueries')
@@ -144,7 +144,7 @@ router.post('/login', async (req, res) => {
     const userForToken = {
       UserEmail: user.UserEmail,
       UserID: user.UserID,
-    };
+    }
 
     const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: '1h' });
     res.cookie('token', token, { httpOnly: true }); 

@@ -34,6 +34,13 @@ const matchQueries = {
       throw new Error('Failed to delete match, ' + err.message)
     }
   },
+  findMatchWithIds: async (houseID, tenantID) => {
+    try {
+      return await Match.findOne({ HouseID: houseID, TenantID: tenantID });
+    } catch (err) {
+      throw new Error('Failed to find match, ' + err.message);
+    }
+  },
 }
 
 module.exports = matchQueries
