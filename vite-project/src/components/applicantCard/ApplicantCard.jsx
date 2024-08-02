@@ -3,12 +3,8 @@ import './ApplicantCard.css'
 import Button from '@mui/material/Button'
 
 const ApplicantCard = ({ applicant, onReject, onAccept, onClick }) => {
-  const { image, name, phoneNumber, lengthOfLease, familySize } = applicant
+  const { image, name, phoneNumber, email, matchStatus } = applicant
 
-  // handleReject() and handleAccept() was modified using ChatGPT on Jun 5.
-  // prompt: "code in this file" + how to exempt the accept and reject button from being clicked,
-  // so that the popup does not open if I click on those buttons.
-  // I followed the prompt to add event.stopPropagation() to both functions
   const handleReject = (event) => {
     event.stopPropagation() // Prevent event bubbling to the card click handler
     onReject(name)
@@ -20,27 +16,33 @@ const ApplicantCard = ({ applicant, onReject, onAccept, onClick }) => {
   }
 
   return (
-    <div className="applicant-card" onClick={onClick}>
+    <div
+      className={`applicant-card ${matchStatus === 'Accepted' ? 'accepted' : ''}`}
+      onClick={onClick}
+    >
       <div className="applicant-image">
         <img src={image} alt={`${name}'s profile`} />
       </div>
       <div className="applicant-info">
         <h3>{name}</h3>
-        <p>Family Size: {familySize}</p>
-        <p>Length of lease: {lengthOfLease}</p>
+        <p>
+          <span>Phone Number:</span> {phoneNumber}
+        </p>
+        <p>
+          <span>Email:</span> {email}
+        </p>
       </div>
-      <div className="applicant-actions">
-        <Button
-          className="accept-button"
-          color="success"
-          onClick={handleAccept}
-        >
-          Accept
-        </Button>
-        <Button className="reject-button" color="error" onClick={handleReject}>
-          Reject
-        </Button>
-      </div>
+      {matchStatus !== 'Accepted' && (
+        <div className="applicant-actions">
+          <Button className="accept-button" onClick={handleAccept}>
+            Accept
+          </Button>
+          <Button className="reject-button" onClick={handleReject}>
+            Reject
+          </Button>
+        </div>
+      )}
+      {matchStatus === 'Accepted' && <div className="accepted-label">Accepted</div>}
     </div>
   )
 }

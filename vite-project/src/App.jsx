@@ -10,7 +10,7 @@ import { LandLordSideBar } from './components/sideBars/LandLordSideBar'
 import { TenantSideBar } from './components/sideBars/TenantSideBar'
 import {TenantProfilePage } from './InputForms/tenant/tenantProfilePage.jsx'
 import { PropertyEditPage } from './InputForms/property/PropertyEditPage.jsx'
-import { GeneralInputForm } from './InputForms/generalInputForm'
+import { GeneralInputForm } from './InputForms/GeneralInputForm.jsx'
 import History from './components/history/History'
 
 import { getUserAsync } from './redux/user/thunks'

@@ -1,18 +1,35 @@
 .applicant-card {
   display: flex;
   align-items: center;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 14px;
-  margin: 8px 0;
+  padding: 16px;
+  margin: 12px 0;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: auto; /* Enable scrolling for long content */
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  min-width: 550px;
+  position: relative;
+}
+
+.applicant-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.applicant-card.accepted {
+  background-color: #f1fff1; /* Light green tint for accepted applicants */
+}
+
+.applicant-card.accepted:hover {
+  background-color: #f1fff1; /* Light green tint for accepted applicants */
+  box-shadow: 0 8px 16px rgba(10, 213, 27, 0.5);
 }
 
 .applicant-image img {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -24,15 +41,56 @@
 
 .applicant-info h3 {
   margin: 0;
-  font-size: 1.25em;
+  font-size: 1.5em;
+  color: #333;
 }
 
 .applicant-info p {
   margin: 4px 0;
+  color: #555;
+}
+
+.applicant-info p span {
+  font-weight: bold;
+  color: #333;
 }
 
 .applicant-actions {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.applicant-actions button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.applicant-actions button.reject-button {
+  background-color: #f44336;
+}
+
+.applicant-actions button:hover {
+  background-color: #45a049;
+}
+
+.applicant-actions button.reject-button:hover {
+  background-color: #e53935;
+}
+
+.accepted-label {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  font-size: 1.2em;
+  color: #29782c;
+  opacity: 0.8;
+  font-family: 'Mulish', sans-serif;
 }

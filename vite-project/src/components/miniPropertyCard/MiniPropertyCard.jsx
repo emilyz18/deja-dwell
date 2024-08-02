@@ -33,7 +33,6 @@ function MiniPropertyCard(props) {
   }
 
   const expandProperty = () => {
-    console.log('house ' + propertyInfo.HouseID + ' was expanded!')
     displayPopup()
   }
 

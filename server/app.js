@@ -16,6 +16,10 @@ var landlordRouter = require('./routes/landlord')
 
 var app = express()
 
+// for payload to large
+app.use(bodyParser.json({ limit: '50mb' })) // Increase payload limit
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -38,8 +42,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-// for payload to large
-app.use(bodyParser.json({ limit: '50mb' })) // Increase payload limit
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+
 
 module.exports = app

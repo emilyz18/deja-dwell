@@ -1,10 +1,15 @@
 import React from 'react';
 import Carousel from '../carousel/Carousel';
-import './expandedPropertyCard.css';
-import Map from '../map/Map';
+import './ExpandedPropertyCard.css';
+import MapComponent from '../map/MapComponent';
 
-export function ExpandedPropertyCard({ propertyInfo, isSearch }) {
+export function ExpandedPropertyCard({ propertyInfo, isSearch = false, showButtons = false, likedFn, dislikedFn, setPopupVisible}) {
+  if (!propertyInfo) {
+    return null;
+  }
+
   const {
+    HouseID,
     NumBedroom,
     NumBathroom,
     isAC,
@@ -18,24 +23,42 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch }) {
     Street,
     City,
     Province,
+    Title,
+    HouseImgs,
+    Description,
+    NumOfParking,
   } = propertyInfo;
 
-  const address = [{ street: Street, city: City, province: Province }];
+  const address = [{ HouseID: HouseID, ExpectedPrice: ExpectedPrice, Street: Street, City: City, Province: Province }];
+
+  const likeProperty = () => {
+    likedFn(propertyInfo.HouseID)
+    setPopupVisible(false)
+  }
+
+  const dislikeProperty = () => {
+    dislikedFn(propertyInfo.HouseID)
+    setPopupVisible(false)
+  }
 
   return (
     <div className="expanded-property-popup">
-      <h1>{propertyInfo.Title}</h1>
+     <h1>{Title}</h1>
       <div className="carousel-container">
-        <Carousel data={propertyInfo.HouseImgs} size={{ width: null, height: null }} />
+        <Carousel data={HouseImgs} size={{ width: null, height: null }} />
       </div>
-      <p>Price: ${propertyInfo.ExpectedPrice}</p>
-      <p>
-        Address: {propertyInfo.Street}, {propertyInfo.City}, {propertyInfo.Province}
-      </p>
-      <p>Number of Bedroom: {propertyInfo.NumBedroom}</p>
-      <p>Number of Bathroom: {propertyInfo.NumBathroom}</p>
-      <p>Parking Availability: {propertyInfo.NumOfParking}</p>
-      <p>Description: {propertyInfo.Description}</p>
+      <div className="info-grid">
+        <InfoItem label="Description" value={Description} isFullWidth />
+        <InfoItem
+          label="Address"
+          value={`${Street}, ${City}, ${Province}`}
+          isFullWidth
+        />
+        <InfoItem label="Price" value={`$${ExpectedPrice}`} />
+        <InfoItem label="Parking Availability" value={NumOfParking} />
+        <InfoItem label="Number of Bedrooms" value={NumBedroom} />
+        <InfoItem label="Number of Bathrooms" value={NumBathroom} />
+      </div>
       <div className="details-row-expand">
         {isAC && <span className="amenity">AC</span>}
         {isHeater && <span className="amenity">Heater</span>}
@@ -45,10 +68,36 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch }) {
         {AllowParty && <span className="amenity">Party Allowed</span>}
         {AllowWeed && <span className="amenity">Weed Allowed</span>}
       </div>
+      <div className="map-border-container">
+        <div className="map-border">
+          {isSearch && <MapComponent propertyAddresses={address} isRecommendation={true} />
+          }
+        </div>
+      </div>
       <div>
-        {isSearch && <Map propertyAddresses={address} isRecommendation={true}/>
-      }
+        {showButtons && <div className="buttons-row">
+          <button
+            className="circle-button cross-button"
+            onClick={dislikeProperty}
+          >
+            ✖
+          </button>
+          <button
+            className="circle-button checkmark-button"
+            onClick={likeProperty}
+          >
+            ✔
+          </button>
+        </div>}
       </div>
     </div>
+    
   );
 }
+
+const InfoItem = ({ label, value, isFullWidth }) => (
+  <div className={`info-item ${isFullWidth ? 'full-width' : ''}`}>
+    <span className="label">{label}</span>
+    <span className="value">{value}</span>
+  </div>
+)

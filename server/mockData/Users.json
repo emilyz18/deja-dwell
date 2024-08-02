@@ -111,7 +111,7 @@
     "isLandlord": true,
     "isTenant": false,
     "UserName": "zxc",
-    "UserEmail": "zxc",
+    "UserEmail": "zxc@zxc.com",
     "PhoneNumber": "555-4567",
     "ProfileImg": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?cs=srgb&dl=pexels-simon-robben-55958-614810.jpg&fm=jpg",
     "Password": "zxc"
@@ -124,7 +124,7 @@
     "isLandlord": false,
     "isTenant": true,
     "UserName": "qwe",
-    "UserEmail": "qwe",
+    "UserEmail": "qwe@qwe.com",
     "PhoneNumber": "555-7891-9",
     "ProfileImg": "https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg",
     "Password": "qwe"
@@ -133,7 +133,7 @@
     "UserID": "160f80ca-0e17-4394-bfaa-c1cbf78ef314",
     "UserName": "asd",
     "Password": "asd",
-    "UserEmail": "asd",
+    "UserEmail": "asd@asd.com",
     "HashKey": "811b044ca1d49442e45f24392c1b2793",
     "isLandlord": false,
     "isTenant": true,

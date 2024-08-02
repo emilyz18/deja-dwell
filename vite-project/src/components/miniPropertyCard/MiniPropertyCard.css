@@ -2,7 +2,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 24px;
+  margin-bottom: 5px;
   justify-content: center;
   max-width: 450px;
   padding: 10px;
@@ -30,7 +30,11 @@
 
 .card-details {
   background-color: white;
-  padding: 16px;
+  padding: 8px;
+}
+
+.card-details:hover {
+  cursor: pointer;
 }
 
 .house-title {
@@ -40,23 +44,18 @@
 }
 
 .details-row {
-  /* margin: 3px; */
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
-  margin-top: 15px;
+  margin-top: 10px;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 5px;
 }
 
 .details-row-amenity {
-  /* margin: 3px; */
   display: flex;
-  /* justify-content: space-between; */
-  /* align-items: center; */
-  margin-top: 15px;
+  margin-top: 10px;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 5px;
 }
 
 .details-row span {
@@ -88,6 +87,7 @@
 
 .price{
   font-size: larger;
+  margin-bottom: 10px;
 }
 
 .circle-button {
