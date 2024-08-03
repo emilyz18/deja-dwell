@@ -1,13 +1,15 @@
 var express = require('express')
 var router = express.Router()
-const axios = require('axios');
-require('dotenv').config();
+const axios = require('axios')
+require('dotenv').config()
 
 const tenantProfileQueries = require('../dataBase/queries/tenantProfileQueries')
 const tenantPrefQueries = require('../dataBase/queries/tenantPrefQueries')
 const propertyQueries = require('../dataBase/queries/propertyQueries')
 const matchQueries = require('../dataBase/queries/matchQueries')
 const { randomInt } = require('crypto')
+
+const distanceCache = {}
 
 const loadPropertiesJson = async () => {
   try {
@@ -149,47 +151,72 @@ const getScore = (property, preference) => {
             Province: property.Province,
           }
 
-          // if strret is incorrect, the just calculate prov and city?
+          // if strret is invalid, then just calculate prov and city?
 
           const origins = convertToAddressString(tenantPref)
           const destinations = convertToAddressString(propertyAddress)
 
-          console.log("origin: " + origins)
-          console.log("destinations: " + destinations)
+          console.log('origin: ' + origins)
+          console.log('destinations: ' + destinations)
+
+          const cacheKey = `${origins}%-%${destinations}`
+
+          if (distanceCache[cacheKey]) {
+            // Use cached result
+            const distanceValue = distanceCache[cacheKey]
+            console.log(score + ' before (cached)')
+
+            if (distanceValue <= 10000) {
+              // within 10 km
+              score += weights.distanceW
+            } else if (distanceValue <= 20000) {
+              // between 10 km and 20 km
+              score += weights.distanceW / 2
+            } // not penalized for longer distance (if it is even possible within a city)
+
+            console.log(score + ' after (cached)')
+            console.log(
+              `Distance from ${origins} to ${destinations}: ${distanceValue} (cached)`
+            )
+          } else {
+            const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${encodeURIComponent(origins)}&destinations=${encodeURIComponent(destinations)}&mode=driving&key=${process.env.MAP_API_KEY}`
+            axios
+              .get(url)
+              .then((response) => {
+                if (response.data.status === 'OK') {
+                  const origin = response.data.origin_addresses[0]
+                  const destination = response.data.destination_addresses[0]
+                  const results = response.data.rows[0].elements
+
+                  // driving distance
+                  const distanceValue =
+                    response.data.rows[0].elements[0].distance.value // distance in meters
+
+                  console.log(score + 'before')
+
+                  distanceCache[cacheKey] = distanceValue;
 
 
-          const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${encodeURIComponent(origins)}&destinations=${encodeURIComponent(destinations)}&mode=driving&key=${process.env.MAP_API_KEY}`
-          console.log("url: " + url)
-          axios
-            .get(url)
-            .then((response) => {
-              if (response.data.status === 'OK') {
-                const origin = response.data.origin_addresses[0]
-                const destination = response.data.destination_addresses[0]
-                const results = response.data.rows[0].elements
+                  if (distanceValue <= 10000) {
+                    // within 10 km
+                    score += weights.distanceW
+                  } else if (distanceValue <= 20000) {
+                    // between 10 km and 20 km
+                    score += weights.distanceW / 2
+                  } // not penalized for longer distance (if it is even possible within a city)
+                  console.log(score + 'after')
 
-                // driving distance
-                const distanceValue = response.data.rows[0].elements[0].distance.value; // distance in meters
-
-                console.log(score + "before")
-
-                if (distanceValue <= 10000) { // within 10 km
-                  score += weights.distanceW;
-                } else if (distanceValue <= 20000) { // between 10 km and 20 km
-                  score += weights.distanceW / 2;
-                } // not penalized for longer distance (if it is even possible within a city)
-                console.log(score + "after")
-
-                console.log(
-                  `Distance from ${origin} to ${destination}: ${distanceValue}`
-                )
-              } else {
-                console.error('Error: ' + response.data.status)
-              }
-            })
-            .catch((error) => {
-              console.error('Error: ' + error.message)
-            })
+                  console.log(
+                    `Distance from ${origin} to ${destination}: ${distanceValue}`
+                  )
+                } else {
+                  console.error('Error: ' + response.data.status)
+                }
+              })
+              .catch((error) => {
+                console.error('Error: ' + error.message)
+              })
+          }
 
           // if (
           //   property.Street &&
