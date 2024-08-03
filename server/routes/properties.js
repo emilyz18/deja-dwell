@@ -374,6 +374,8 @@ router.get('/preferProperties/:tenantID', async (req, res) => {
       }
     })
 
+    console.log(prefProperties)
+
     // console.log(prefProperties)
     prefProperties.sort((a, b) => b.prefScore - a.prefScore)
 
