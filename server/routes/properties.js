@@ -149,11 +149,17 @@ const getScore = (property, preference) => {
             Province: property.Province,
           }
 
+          // if strret is incorrect, the just calculate prov and city?
+
           const origins = convertToAddressString(tenantPref)
           const destinations = convertToAddressString(propertyAddress)
 
-          const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${encodeURIComponent(origins)}&destinations=${encodeURIComponent(destinations)}&mode=driving&key=${process.env.MAP_API_KEY}`
+          console.log("origin: " + origins)
+          console.log("destinations: " + destinations)
 
+
+          const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${encodeURIComponent(origins)}&destinations=${encodeURIComponent(destinations)}&mode=driving&key=${process.env.MAP_API_KEY}`
+          console.log("url: " + url)
           axios
             .get(url)
             .then((response) => {
