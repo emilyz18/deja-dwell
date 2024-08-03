@@ -34,7 +34,9 @@ function PropertyCardList({ searchMode }) {
   )
 
   const properties = searchMode
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     ? useSelector((state) => state.properties.unmatchProperties)
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     : useSelector((state) => state.properties.preferProperties)
 
   const [activeId, setActiveId] = useState(null) // activeId only used when dragging
@@ -168,17 +170,11 @@ function PropertyCardList({ searchMode }) {
   }
 
   const { setNodeRef: setLikeRef, isOver: isOverLike } = useDroppable({
-    id: 'like-dropzone',
+    id: 'like-dropzone'
   })
 
   const { setNodeRef: setDislikeRef, isOver: isOverDislike } = useDroppable({
-    id: 'dislike-dropzone',
-    onDragEnter: () => {
-      console.log('Draggable card entered the dislike dropzone')
-    },
-    onDragLeave: () => {
-      console.log('Draggable card left the dislike dropzone')
-    },
+    id: 'dislike-dropzone'
   })
 
   const displaySearchProperties = properties.filter((property) => {
@@ -371,7 +367,7 @@ function PropertyCardList({ searchMode }) {
             <div className="dropzone-container">
               {isDragging ? (
                 <div
-                  className={`dropzone left-dropzone ${
+                  className={`dropzone left-dropzone active-dropzone ${
                     isOverDislike ? 'active' : ''
                   }`}
                   ref={setDislikeRef}
@@ -379,7 +375,14 @@ function PropertyCardList({ searchMode }) {
                   <span className="dropzone-icon">✖</span>
                 </div>
               ) : (
-                <div className="dropzone-placeholder"></div>
+                <div
+                  className={`dropzone left-dropzone${
+                    isOverDislike ? 'active' : ''
+                  }`}
+                  ref={setDislikeRef}
+                >
+                  <span className="dropzone-icon">✖</span>
+                </div>
               )}
               <SortableContext
                 items={[displayedRecommendationProperty]} // Display only the active property
@@ -421,7 +424,7 @@ function PropertyCardList({ searchMode }) {
               </SortableContext>
               {isDragging ? (
                 <div
-                  className={`dropzone right-dropzone ${
+                  className={`dropzone right-dropzone active-dropzone ${
                     isOverLike ? 'active' : ''
                   }`}
                   ref={setLikeRef}
@@ -429,7 +432,14 @@ function PropertyCardList({ searchMode }) {
                   <span className="dropzone-icon">✔</span>
                 </div>
               ) : (
-                <div className="dropzone-placeholder"></div>
+                <div
+                  className={`dropzone right-dropzone ${
+                    isOverLike ? 'active' : ''
+                  }`}
+                  ref={setLikeRef}
+                >
+                  <span className="dropzone-icon">✔</span>
+                </div>
               )}
             </div>
             <DragOverlay>
