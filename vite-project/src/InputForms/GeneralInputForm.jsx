@@ -66,13 +66,6 @@ export function GeneralInputForm() {
 
   return (
     <>
-      {warning && (
-        <div className="alert-container">
-          <Alert severity="warning" onClose={() => setWarning(false)}>
-            Please complete your {neededInfo}.
-          </Alert>
-        </div>
-      )}
       {isEditing ? (
         <div className="general-input-form-container">
           <div className="general-input-form">
