@@ -210,7 +210,14 @@ export function GeneralInputForm() {
         <Alert
           onClose={() => setWarning(false)}
           severity="warning"
-          sx={{ width: '100%' }}
+          sx={{
+            position: 'fixed',
+            top: '5%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 1000,
+            fontSize: '1.2rem'
+          }}
         >
           Please complete your {neededInfo}.
         </Alert>

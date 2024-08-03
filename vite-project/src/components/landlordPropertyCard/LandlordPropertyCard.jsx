@@ -230,7 +230,14 @@ const LandlordPropertyCard = ({ landlordId }) => {
         <Alert
           onClose={handleNotificationClose}
           severity={notification.severity}
-          sx={{ width: '100%' }}
+          sx={{
+            position: 'fixed',
+            top: '5%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 1000,
+            fontSize: '1.2rem'
+          }}
         >
           {notification.message}
         </Alert>
