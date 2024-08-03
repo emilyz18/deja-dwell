@@ -1,5 +1,7 @@
 var express = require('express')
 var router = express.Router()
+const axios = require('axios');
+require('dotenv').config();
 
 const tenantProfileQueries = require('../dataBase/queries/tenantProfileQueries')
 const tenantPrefQueries = require('../dataBase/queries/tenantPrefQueries')
@@ -107,6 +109,7 @@ const getScore = (property, preference) => {
     heatW: 3,
     furnishW: 3,
     parkingMatchW: 3,
+    distanceW: 20,
 
     // Add more properties and their weights as needed
   }
@@ -124,13 +127,71 @@ const getScore = (property, preference) => {
           property.City.toLowerCase() == preference.City.toLowerCase()
         ) {
           score += weights.cityW
-          if (
-            property.Street &&
-            preference.Street &&
-            property.Street.toLowerCase() == preference.Street.toLowerCase()
-          ) {
-            score += weights.streetW // no negative score if missed on street because it is likely going to miss
+
+          const convertToAddressString = (propertyAddress) => {
+            let { Street, City, Province } = propertyAddress
+
+            if (!Street) Street = ''
+            if (!City) City = ''
+            if (!Province) Province = ''
+
+            return `${Street}, ${City}, ${Province}`
           }
+
+          const tenantPref = {
+            Street: preference.Street,
+            City: preference.City,
+            Province: preference.Province,
+          }
+          const propertyAddress = {
+            Street: property.Street,
+            City: property.City,
+            Province: property.Province,
+          }
+
+          const origins = convertToAddressString(tenantPref)
+          const destinations = convertToAddressString(propertyAddress)
+
+          const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${encodeURIComponent(origins)}&destinations=${encodeURIComponent(destinations)}&mode=driving&key=${process.env.MAP_API_KEY}`
+
+          axios
+            .get(url)
+            .then((response) => {
+              if (response.data.status === 'OK') {
+                const origin = response.data.origin_addresses[0]
+                const destination = response.data.destination_addresses[0]
+                const results = response.data.rows[0].elements
+
+                // driving distance
+                const distanceValue = response.data.rows[0].elements[0].distance.value; // distance in meters
+
+                console.log(score + "before")
+
+                if (distanceValue <= 10000) { // within 10 km
+                  score += weights.distanceW;
+                } else if (distanceValue <= 20000) { // between 10 km and 20 km
+                  score += weights.distanceW / 2;
+                } // not penalized for longer distance (if it is even possible within a city)
+                console.log(score + "after")
+
+                console.log(
+                  `Distance from ${origin} to ${destination}: ${distanceValue}`
+                )
+              } else {
+                console.error('Error: ' + response.data.status)
+              }
+            })
+            .catch((error) => {
+              console.error('Error: ' + error.message)
+            })
+
+          // if (
+          //   property.Street &&
+          //   preference.Street &&
+          //   property.Street.toLowerCase() == preference.Street.toLowerCase()
+          // ) {
+          //   score += weights.streetW // no negative score if missed on street because it is likely going to miss
+          // }
         } else {
           score -= weights.cityW
         }
@@ -312,6 +373,8 @@ router.get('/preferProperties/:tenantID', async (req, res) => {
         prefScore: getScore(property, tenantPrefs),
       }
     })
+
+    // console.log(prefProperties)
     prefProperties.sort((a, b) => b.prefScore - a.prefScore)
 
     return res.status(200).send(prefProperties)
