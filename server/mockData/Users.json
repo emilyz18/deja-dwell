@@ -294,5 +294,70 @@
     "PhoneNumber": "012-345-6789",
     "ProfileImg": "/images/default_profile_pic.jpg",
     "Password": "MockTenant123"
+  },
+  {
+    "UserID": "1c86d2f4-a6f3-4c3f-bc1a-003f5fa6f6b2",
+    "LandlordID": "1c86d2f4-a6f3-4c3f-bc1a-003f5fa6f6b2",
+    "TenantID": null,
+    "HashKey": "hashkey1",
+    "isLandlord": true,
+    "isTenant": false,
+    "UserName": "Alice Johnson",
+    "UserEmail": "alice.johnson@example.com",
+    "PhoneNumber": "604-555-0123",
+    "ProfileImg": "https://randomuser.me/api/portraits/women/68.jpg",
+    "Password": "password1"
+  },
+  {
+    "UserID": "2e0b9e35-4f5c-4a8a-bc5d-2a7a89e1fef3",
+    "LandlordID": "2e0b9e35-4f5c-4a8a-bc5d-2a7a89e1fef3",
+    "TenantID": null,
+    "HashKey": "hashkey2",
+    "isLandlord": true,
+    "isTenant": false,
+    "UserName": "Bob Smith",
+    "UserEmail": "bob.smith@example.com",
+    "PhoneNumber": "604-555-0456",
+    "ProfileImg": "https://randomuser.me/api/portraits/men/32.jpg",
+    "Password": "password2"
+  },
+  {
+    "UserID": "3f2d3c9a-5f2b-4d9f-bc3d-3f6d7f4b9e7c",
+    "LandlordID": "3f2d3c9a-5f2b-4d9f-bc3d-3f6d7f4b9e7c",
+    "TenantID": null,
+    "HashKey": "hashkey3",
+    "isLandlord": true,
+    "isTenant": false,
+    "UserName": "Charlie Brown",
+    "UserEmail": "charlie.brown@example.com",
+    "PhoneNumber": "604-555-0789",
+    "ProfileImg": "https://randomuser.me/api/portraits/men/5.jpg",
+    "Password": "password3"
+  },
+  {
+    "UserID": "4a6c8f9e-6f5d-4b3c-bf1a-4f8a9e7d8c3b",
+    "LandlordID": "4a6c8f9e-6f5d-4b3c-bf1a-4f8a9e7d8c3b",
+    "TenantID": null,
+    "HashKey": "hashkey4",
+    "isLandlord": true,
+    "isTenant": false,
+    "UserName": "Diana Evans",
+    "UserEmail": "diana.evans@example.com",
+    "PhoneNumber": "604-555-0912",
+    "ProfileImg": "https://randomuser.me/api/portraits/women/44.jpg",
+    "Password": "password4"
+  },
+  {
+    "UserID": "5d7b8c2f-7a9d-4f5e-bd2b-5e8d9f7a9b4c",
+    "LandlordID": "5d7b8c2f-7a9d-4f5e-bd2b-5e8d9f7a9b4c",
+    "TenantID": null,
+    "HashKey": "hashkey5",
+    "isLandlord": true,
+    "isTenant": false,
+    "UserName": "Edward Green",
+    "UserEmail": "edward.green@example.com",
+    "PhoneNumber": "604-555-0345",
+    "ProfileImg": "https://randomuser.me/api/portraits/men/1.jpg",
+    "Password": "password5"
   }
 ]

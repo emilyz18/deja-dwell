@@ -10,9 +10,9 @@
     "isFurnished": true,
     "isHeater": true,
     "ExpectedPrice": 2000,
-    "Province": "ON",
-    "City": "Toronto",
-    "Street": "King Street",
+    "Province": "BC",
+    "City": "Victoria",
+    "Street": "3000 Shelbourne Street",
     "StartDate": "2024-07-01",
     "EndDate": "2024-12-31",
     "NumOfParking": 1,
@@ -84,9 +84,9 @@
     "isFurnished": false,
     "isHeater": true,
     "ExpectedPrice": 1800,
-    "Province": "AB",
-    "City": "Calgary",
-    "Street": "Centre Street",
+    "Province": "BC",
+    "City": "Kelowna",
+    "Street": "2500 Pandosy Street",
     "StartDate": "2024-09-01",
     "EndDate": "2025-08-31",
     "NumOfParking": 1,
@@ -121,9 +121,9 @@
     "isFurnished": true,
     "isHeater": true,
     "ExpectedPrice": 2500,
-    "Province": "ON",
-    "City": "Ottawa",
-    "Street": "Bank Street",
+    "Province": "BC",
+    "City": "Victoria",
+    "Street": "1500 Cook Street",
     "StartDate": "2024-10-01",
     "EndDate": "2025-03-31",
     "NumOfParking": 2,
@@ -158,9 +158,9 @@
     "isFurnished": false,
     "isHeater": false,
     "ExpectedPrice": 3000,
-    "Province": "QC",
-    "City": "Montreal",
-    "Street": "Saint Catherine Street",
+    "Province": "BC",
+    "City": "Victoria",
+    "Street": "2500 Richmond Road",
     "StartDate": "2024-11-15",
     "EndDate": "2025-11-14",
     "NumOfParking": 1,
@@ -551,6 +551,191 @@
       {
         "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
         "alt": "Image 3 for carousel"
+      }
+    ]
+  },
+  {
+    "HouseID": "6d8f9e3a-8a9d-4c3b-bf1a-6f9a8e7c9d4f",
+    "LandlordID": "1c86d2f4-a6f3-4c3f-bc1a-003f5fa6f6b2",
+    "AllowPet": true,
+    "AllowSmoke": false,
+    "AllowParty": true,
+    "AllowWeed": false,
+    "isAC": true,
+    "isFurnished": true,
+    "isHeater": true,
+    "ExpectedPrice": 2500,
+    "Province": "BC",
+    "City": "Vancouver",
+    "Street": "1234 Main Street",
+    "StartDate": "2024-09-01",
+    "EndDate": "2025-09-01",
+    "NumOfParking": 2,
+    "NumOfResident": 4,
+    "NumBedroom": 3,
+    "NumBathroom": 2,
+    "Title": "Modern Home in Vancouver",
+    "Description": "A spacious and modern home with all the amenities you need.",
+    "HouseImgs": [
+      {
+        "src": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Front view of the house"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1505691723518-36dc417c9d88?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Living room with modern decor"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1612437126225-6b052e3a97a5?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Spacious bathroom"
+      }
+    ]
+  },
+  {
+    "HouseID": "7b9e8d3f-8c2d-4a5b-bd2f-7e9b8f6a9c5d",
+    "LandlordID": "2e0b9e35-4f5c-4a8a-bc5d-2a7a89e1fef3",
+    "AllowPet": false,
+    "AllowSmoke": true,
+    "AllowParty": false,
+    "AllowWeed": true,
+    "isAC": false,
+    "isFurnished": false,
+    "isHeater": true,
+    "ExpectedPrice": 1800,
+    "Province": "BC",
+    "City": "Burnaby",
+    "Street": "5678 Oak Avenue",
+    "StartDate": "2024-10-01",
+    "EndDate": "2025-10-01",
+    "NumOfParking": 1,
+    "NumOfResident": 3,
+    "NumBedroom": 2,
+    "NumBathroom": 1,
+    "Title": "Cozy Apartment in Burnaby",
+    "Description": "A cozy and affordable apartment located in a quiet neighborhood.",
+    "HouseImgs": [
+      {
+        "src": "https://images.unsplash.com/photo-1495968283544-44d5c3928015?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Exterior of the apartment building"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1590698933944-3f17c8deac2b?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Bright and airy living room"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1601097812340-b03a96897db3?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Office space"
+      }
+    ]
+  },
+  {
+    "HouseID": "8c9d7b4a-8e3d-4b5f-bd1a-8e7d9f6c9b2e",
+    "LandlordID": "3f2d3c9a-5f2b-4d9f-bc3d-3f6d7f4b9e7c",
+    "AllowPet": true,
+    "AllowSmoke": false,
+    "AllowParty": true,
+    "AllowWeed": false,
+    "isAC": true,
+    "isFurnished": true,
+    "isHeater": true,
+    "ExpectedPrice": 2700,
+    "Province": "BC",
+    "City": "Surrey",
+    "Street": "9101 Pine Crescent",
+    "StartDate": "2024-11-01",
+    "EndDate": "2025-11-01",
+    "NumOfParking": 2,
+    "NumOfResident": 5,
+    "NumBedroom": 4,
+    "NumBathroom": 3,
+    "Title": "Luxury Home in Surrey",
+    "Description": "An exquisite luxury home with top-of-the-line amenities and finishes.",
+    "HouseImgs": [
+      {
+        "src": "https://images.unsplash.com/photo-1600585154727-42b0b8dd5c62?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Luxury home front view"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1583945433690-abb25c9feff9?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Gourmet kitchen with high-end appliances"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1596219482932-4f543ba2a982?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Master bedroom with en-suite bathroom"
+      }
+    ]
+  },
+  {
+    "HouseID": "9e7d8c6a-9b2d-4d5c-bc2f-9e8f7a6b9d3c",
+    "LandlordID": "4a6c8f9e-6f5d-4b3c-bf1a-4f8a9e7d8c3b",
+    "AllowPet": false,
+    "AllowSmoke": true,
+    "AllowParty": false,
+    "AllowWeed": true,
+    "isAC": true,
+    "isFurnished": true,
+    "isHeater": true,
+    "ExpectedPrice": 2600,
+    "Province": "BC",
+    "City": "Vancouver",
+    "Street": "2456 Spruce Street",
+    "StartDate": "2024-08-01",
+    "EndDate": "2025-08-01",
+    "NumOfParking": 1,
+    "NumOfResident": 4,
+    "NumBedroom": 3,
+    "NumBathroom": 2,
+    "Title": "Elegant Condo in Vancouver",
+    "Description": "An elegant condo located in the heart of Vancouver with easy access to downtown.",
+    "HouseImgs": [
+      {
+        "src": "https://images.unsplash.com/photo-1598425236639-0f9e6f68e5f8?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Condo front view"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1600585154940-e2a8b2231d5b?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Stylish living room"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1586023492120-27c1cc5ebd1c?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Master bedroom with modern decor"
+      }
+    ]
+  },
+  {
+    "HouseID": "a9f7b6c5-bd3f-4c2d-8a6f-a7e9d8f7c6b4",
+    "LandlordID": "5d7b8c2f-7a9d-4f5e-bd2b-5e8d9f7a9b4c",
+    "AllowPet": true,
+    "AllowSmoke": false,
+    "AllowParty": true,
+    "AllowWeed": false,
+    "isAC": true,
+    "isFurnished": false,
+    "isHeater": true,
+    "ExpectedPrice": 2200,
+    "Province": "BC",
+    "City": "Burnaby",
+    "Street": "1357 Maple Avenue",
+    "StartDate": "2024-12-01",
+    "EndDate": "2025-12-01",
+    "NumOfParking": 2,
+    "NumOfResident": 4,
+    "NumBedroom": 3,
+    "NumBathroom": 2,
+    "Title": "Family House in Burnaby",
+    "Description": "A comfortable family house located near schools and parks in Burnaby.",
+    "HouseImgs": [
+      {
+        "src": "https://images.unsplash.com/photo-1600585154321-4cbb5710cf0e?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Family house front view"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1600585154751-9e8ae62bcd7f?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Living room with cozy decor"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1597092412137-cb9ff945c227?ixlib=rb-4.0.3&q=80&w=400",
+        "alt": "Modern kitchen"
       }
     ]
   }
