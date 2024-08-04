@@ -26,10 +26,8 @@
     background-color 0.2s ease-in-out;
   border-style: dashed;
   border-radius: 10px;
-
   margin: 10px;
   min-height: 600px;
-  /* TODO ezhang: changing the height is changing height of prop card, need to go a level above? */
 }
 
 .active-dropzone {
@@ -119,10 +117,6 @@
 .property-card {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
-  /* justify-content: flex-start; */
-  /* TODO ezhang: use flex start for the card information */
-
   background-color: #ffffff;
   border: 2px solid #000000;
   border-radius: 10px;
