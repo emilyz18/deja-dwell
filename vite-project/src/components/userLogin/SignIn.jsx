@@ -132,7 +132,14 @@ export default function SignIn() {
         <Alert
           onClose={handleSnackbarClose}
           severity={snackbar.severity}
-          sx={{ width: '100%' }}
+          sx={{
+            position: 'fixed',
+            top: '10%',
+            left: '75%',
+            transform: 'translateX(-50%)',
+            zIndex: 1000,
+            margin: '20px'
+          }}
         >
           {snackbar.message}
         </Alert>

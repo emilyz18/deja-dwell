@@ -1,27 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Carousel from '../carousel/Carousel'
 import './LandlordPropertyCard.css'
 import ApplicantCard from '../applicantCard/ApplicantCard'
 import ExpandedApplicantCard from '../applicantCard/ExpandedApplicantCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPropertiesAsync } from '../../redux/properties/thunks'
-import { Snackbar, Alert, Box } from '@mui/material'
-import Fab from '@mui/material/Fab';
+import { Alert, Box, Snackbar } from '@mui/material'
+import Fab from '@mui/material/Fab'
 import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded'
-import {
-  getLandlordMatchesAsync,
-  reopenMatchesAsync,
-  updateMatchAsync,
-} from '../../redux/matches/matchThunks'
+import { getLandlordMatchesAsync, reopenMatchesAsync, updateMatchAsync } from '../../redux/matches/matchThunks'
 
 const LandlordPropertyCard = ({ landlordId }) => {
   const dispatch = useDispatch()
   const properties = useSelector((state) => state.properties.list)
   const getLandlordMatchesStatus = useSelector(
-    (state) => state.matches.getLandlordMatches
+    (state) => state.matches.getLandlordMatches,
   )
   const landlordMatchesApplicants = useSelector(
-    (state) => state.matches.landlordMatches
+    (state) => state.matches.landlordMatches,
   )
   const landlordID = useSelector((state) => state.user.user.LandlordID)
 
@@ -30,22 +26,22 @@ const LandlordPropertyCard = ({ landlordId }) => {
     open: false,
     message: '',
     severity: '',
-  });
-  const [applicants, setApplicants] = useState([]);
-  const [hasAccepted, setHasAccept] = useState(false);
-  const [popupVisible, setPopupVisible] = useState(false);
-  const [selectedApplicant, setSelectedApplicant] = useState(null);
+  })
+  const [applicants, setApplicants] = useState([])
+  const [hasAccepted, setHasAccept] = useState(false)
+  const [popupVisible, setPopupVisible] = useState(false)
+  const [selectedApplicant, setSelectedApplicant] = useState(null)
 
   useEffect(() => {
     if (getLandlordMatchesStatus === 'IDLE') {
       dispatch(getPropertiesAsync())
       dispatch(getLandlordMatchesAsync(landlordID))
     } else if (getLandlordMatchesStatus === 'FULFILLED') {
-      setApplicants(landlordMatchesApplicants);
+      setApplicants(landlordMatchesApplicants)
       if (landlordMatchesApplicants.some(applicant => applicant.matchStatus === 'Accepted')) {
-        setHasAccept(true);
+        setHasAccept(true)
       } else {
-        setHasAccept(false);
+        setHasAccept(false)
       }
     }
   }, [getLandlordMatchesStatus, hasAccepted, landlordID, landlordMatchesApplicants, dispatch])
@@ -59,7 +55,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
 
   const handleRejectApplicant = (name) => {
     const rejectedApplicant = applicants.find(
-      (applicant) => applicant.name === name
+      (applicant) => applicant.name === name,
     )
     dispatch(
       updateMatchAsync({
@@ -70,7 +66,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
           HouseID: rejectedApplicant.houseID,
           MatchStatus: 'Rejected',
         },
-      })
+      }),
     )
     setNotification({
       open: true,
@@ -81,7 +77,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
 
   const handleAcceptApplicant = (name) => {
     const acceptedApplicant = applicants.find(
-      (applicant) => applicant.name === name
+      (applicant) => applicant.name === name,
     )
     dispatch(
       updateMatchAsync({
@@ -92,7 +88,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
           HouseID: acceptedApplicant.houseID,
           MatchStatus: 'Accepted',
         },
-      })
+      }),
     )
     setNotification({
       open: true,
@@ -104,7 +100,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
   const handleReopenMatch = () => {
     if (selectedProperty) {
       dispatch(
-        reopenMatchesAsync(selectedProperty.HouseID)
+        reopenMatchesAsync(selectedProperty.HouseID),
       )
     }
   }
@@ -132,7 +128,11 @@ const LandlordPropertyCard = ({ landlordId }) => {
   }
 
   if (!selectedProperty) {
-    return <div>Your have not publish a property yet...</div>
+    return <div className="no-property-container">
+            <span className="no-property-message">
+            You have not created a property yet
+          </span>
+    </div>
   }
 
   const {
@@ -230,7 +230,14 @@ const LandlordPropertyCard = ({ landlordId }) => {
         <Alert
           onClose={handleNotificationClose}
           severity={notification.severity}
-          sx={{ width: '100%' }}
+          sx={{
+            position: 'fixed',
+            top: '5%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 1000,
+            fontSize: '1.2rem',
+          }}
         >
           {notification.message}
         </Alert>

@@ -76,13 +76,21 @@ function History() {
         </Typography>
       </Box>
       <div className="match-list">
-        {matches.map((match) => (
-          <MatchItem
-            key={match.MatchID}
-            match={match}
-            displayPopup={() => displayPopup(match)}
-          />
-        ))}
+        {matches.length === 0 ? (
+          <div className="no-matches-container">
+            <span className="no-matches-message">
+            You have not applied to a posting yet
+          </span>
+          </div>
+        ) : (
+          matches.map((match) => (
+            <MatchItem
+              key={match.MatchID}
+              match={match}
+              displayPopup={() => displayPopup(match)}
+            />
+          ))
+        )}
       </div>
 
       {popupVisible && (

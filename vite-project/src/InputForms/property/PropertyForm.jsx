@@ -75,6 +75,8 @@ export function PropertyForm({
         value={property[name] || ''}
         onChange={handleChange}
         min={type === 'number' ? '0' : undefined}
+        maxLength="50"
+        placeholder='Max 50 characters'
       />
     </div>
   )
