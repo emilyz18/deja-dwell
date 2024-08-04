@@ -54,8 +54,6 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch = false, showButto
 
   const startDate = StartDate? formatDate(StartDate): "Right away"
   const endDate = EndDate? formatDate(EndDate): "Long term"
-  console.log("enddate " + endDate)
-
 
   return (
     <div className="expanded-property-popup">
