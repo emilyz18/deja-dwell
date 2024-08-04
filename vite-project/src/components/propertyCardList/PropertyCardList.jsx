@@ -401,6 +401,7 @@ function PropertyCardList({ searchMode }) {
                             displayPopup(nextRecommendationProperty)
                           }
                         />
+                        card underneath
                       </>
                     ) : (
                       <>
@@ -413,6 +414,7 @@ function PropertyCardList({ searchMode }) {
                             displayPopup(displayedRecommendationProperty)
                           }
                         />
+                        one card display test
                       </>
                     )
                   ) : (
@@ -453,6 +455,7 @@ function PropertyCardList({ searchMode }) {
                   }
                 />
               )}
+              while dragging
             </DragOverlay>
           </DndContext>
           {popupVisible && (

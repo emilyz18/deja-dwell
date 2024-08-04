@@ -29,8 +29,10 @@
     background-color 0.2s ease-in-out;
   border-style: dashed;
   border-radius: 10px;
+
   margin: 10px;
   min-height: 630px;
+  /* TODO ezhang: changing the height is changing height of prop card, need to go a level above? */
 }
 
 .active-dropzone {
