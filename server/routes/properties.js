@@ -151,20 +151,14 @@ const getScore = (property, preference) => {
             Province: property.Province,
           }
 
-          // if strret is invalid, then just calculate prov and city?
-
+          // if strret is invalid, then api will calculate prov and city
           const origins = convertToAddressString(tenantPref)
           const destinations = convertToAddressString(propertyAddress)
-
-          console.log('origin: ' + origins)
-          console.log('destinations: ' + destinations)
 
           const cacheKey = `${origins}%-%${destinations}`
 
           if (distanceCache[cacheKey]) {
-            // Use cached result
             const distanceValue = distanceCache[cacheKey]
-            console.log(score + ' before (cached)')
 
             if (distanceValue <= 10000) {
               // within 10 km
@@ -173,11 +167,6 @@ const getScore = (property, preference) => {
               // between 10 km and 20 km
               score += weights.distanceW / 2
             } // not penalized for longer distance (if it is even possible within a city)
-
-            console.log(score + ' after (cached)')
-            console.log(
-              `Distance from ${origins} to ${destinations}: ${distanceValue} (cached)`
-            )
           } else {
             const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${encodeURIComponent(origins)}&destinations=${encodeURIComponent(destinations)}&mode=driving&key=${process.env.MAP_API_KEY}`
             axios
@@ -192,10 +181,9 @@ const getScore = (property, preference) => {
                   const distanceValue =
                     response.data.rows[0].elements[0].distance.value // distance in meters
 
-                  console.log(score + 'before')
+                  console.log(score + ' before')
 
-                  distanceCache[cacheKey] = distanceValue;
-
+                  distanceCache[cacheKey] = distanceValue
 
                   if (distanceValue <= 10000) {
                     // within 10 km
@@ -204,7 +192,7 @@ const getScore = (property, preference) => {
                     // between 10 km and 20 km
                     score += weights.distanceW / 2
                   } // not penalized for longer distance (if it is even possible within a city)
-                  console.log(score + 'after')
+                  console.log(score + ' after')
 
                   console.log(
                     `Distance from ${origin} to ${destination}: ${distanceValue}`
@@ -406,8 +394,6 @@ router.get('/preferProperties/:tenantID', async (req, res) => {
         prefScore: getScore(property, tenantPrefs),
       }
     })
-
-    console.log(prefProperties)
 
     // console.log(prefProperties)
     prefProperties.sort((a, b) => b.prefScore - a.prefScore)
