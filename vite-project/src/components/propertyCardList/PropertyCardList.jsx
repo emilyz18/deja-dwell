@@ -453,7 +453,6 @@ function PropertyCardList({ searchMode }) {
                   }
                 />
               )}
-              while dragging
             </DragOverlay>
           </DndContext>
           {popupVisible && (

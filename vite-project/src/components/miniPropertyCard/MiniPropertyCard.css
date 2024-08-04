@@ -20,7 +20,12 @@
 
 .card-details {
   background-color: white;
+  /* justify-content: flex-start; */
+  display: flex;
+  flex-direction: column;
+  
   padding: 8px;
+  padding-top: 20px;
 }
 
 .card-details:hover {
@@ -64,6 +69,8 @@
   align-items: center;
   padding: 6px;
   background-color: white;
+  margin-top: auto; /* Ensure buttons row is always at the bottom */
+
 }
 
 .price {
