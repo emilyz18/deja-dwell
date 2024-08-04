@@ -11,7 +11,7 @@ function MiniPropertyCard(props) {
     likedFn,
     dislikedFn,
     displayPopup,
-    searchMode,
+    searchMode = false,
     zoomMap,
   } = props
 
@@ -61,9 +61,11 @@ function MiniPropertyCard(props) {
     ? { width: '100%', height: 230 }
     : { width: '100%', height: 250 }
 
+  const cardClassName = searchMode ? '' : 'recommendation-property-card'
+
   return (
     <>
-      <div className="property-card" ref={setNodeRef}>
+      <div className={`property-card ${cardClassName}`} ref={setNodeRef}>
         <Carousel
           className="carousel-container"
           data={propertyInfo.HouseImgs}

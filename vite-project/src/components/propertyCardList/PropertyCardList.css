@@ -130,6 +130,9 @@
     box-shadow 0.3s ease;
   width: 450px;
   margin-bottom: 10px;
+}
+
+.recommendation-property-card {
   min-height: 550px;
 }
 
