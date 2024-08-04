@@ -8,9 +8,6 @@
   margin: 0 auto;
 }
 
-.placeholder-card {
-  height: 410px;
-}
 
 .dropzone-container {
   display: flex;
@@ -31,13 +28,13 @@
   border-radius: 10px;
 
   margin: 10px;
-  min-height: 630px;
+  min-height: 550px;
   /* TODO ezhang: changing the height is changing height of prop card, need to go a level above? */
 }
 
 .active-dropzone {
   opacity: 0.8; /* More visible when active */
-  min-height: 630px;
+  min-height: 550px;
 }
 
 .left-dropzone {
@@ -133,6 +130,7 @@
     box-shadow 0.3s ease;
   width: 450px;
   margin-bottom: 10px;
+  min-height: 550px;
 }
 
 .property-card:hover {
