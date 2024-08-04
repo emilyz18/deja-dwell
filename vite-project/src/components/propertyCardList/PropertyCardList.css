@@ -28,13 +28,13 @@
   border-radius: 10px;
 
   margin: 10px;
-  min-height: 550px;
+  min-height: 600px;
   /* TODO ezhang: changing the height is changing height of prop card, need to go a level above? */
 }
 
 .active-dropzone {
   opacity: 0.8; /* More visible when active */
-  min-height: 550px;
+  min-height: 600px;
 }
 
 .left-dropzone {
@@ -133,7 +133,7 @@
 }
 
 .recommendation-property-card {
-  min-height: 550px;
+  min-height: 600px;
 }
 
 .property-card:hover {

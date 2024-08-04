@@ -33,7 +33,7 @@
   text-align: left;
 }
 
-.details-row {
+.details-row, .details-row-amenity{
   display: flex;
   align-items: center;
   margin-top: 10px;
@@ -41,12 +41,6 @@
   gap: 5px;
 }
 
-.details-row-amenity {
-  display: flex;
-  margin-top: 10px;
-  flex-wrap: wrap;
-  gap: 5px;
-}
 
 .details-row span {
   font-size: 0.9em;
