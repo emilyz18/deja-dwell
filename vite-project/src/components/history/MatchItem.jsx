@@ -100,7 +100,7 @@ function MatchItem({ match, displayPopup }) {
           {currentProperty && (
             <Carousel
               data={currentProperty.HouseImgs}
-              size={{ width: 240, height: 150 }}
+              size={{ width: '100%', height: '100%' }}
             />
           )}
         </div>

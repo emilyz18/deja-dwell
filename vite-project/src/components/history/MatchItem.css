@@ -133,10 +133,6 @@
     align-items: center;
   }
 
-  .carousel-container-mi {
-    width: 50%;
-  }
-
   .right-side {
     align-items: center;
     width: 100%;
@@ -162,5 +158,17 @@
   .house-details p {
     margin: 4px 0;
     font-size: 0.9rem;
+  }
+}
+
+
+@media (max-width: 806px) {
+
+  .house-details h2 {
+    font-size: 1.0em;
+  }
+
+  .house-details p {
+    font-size: 0.7rem;
   }
 }

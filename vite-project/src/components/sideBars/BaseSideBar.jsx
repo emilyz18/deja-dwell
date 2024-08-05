@@ -13,8 +13,6 @@ import Button from '@mui/material/Button'
 
 export function BaseSideBar({ navBarLinks, profile, accountType }) {
   const onLogout = () => {
-    // TODO - for now we are only reloading to log out since we dont store the user session
-    // TODO - if we ever choose to store the user session we must update the log out function
     location.reload()
   }
 
