@@ -12,6 +12,7 @@
     box-shadow 0.3s ease;
   gap: 10px;
   min-width: 800px;
+  max-width: 100%;
 }
 
 .match-item:hover {
@@ -53,7 +54,8 @@
   font-weight: bold;
   text-align: center;
   margin-bottom: 10px;
-  width: 220px; /* Fixed width */
+  width: 220px;
+  /* Fixed width */
 }
 
 .match-status.p {
@@ -93,7 +95,8 @@
     background-color 0.3s ease,
     transform 0.3s ease,
     box-shadow 0.3s ease;
-  width: 220px; /* Fixed width */
+  width: 220px;
+  /* Fixed width */
   height: 60px;
   text-align: center;
 }
@@ -121,4 +124,43 @@
 
 .snackbar {
   width: 100%;
+}
+
+@media (max-width: 1053px) {
+  .match-item {
+    min-width: auto;
+    padding: 10px;
+    align-items: center;
+  }
+
+  .carousel-container-mi {
+    width: 50%;
+  }
+
+  .right-side {
+    align-items: center;
+    width: 100%;
+  }
+
+  .action-buttons button {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+
+  .match-status {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .house-details h2 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0 0 10px;
+  }
+
+  .house-details p {
+    margin: 4px 0;
+    font-size: 0.rem;
+  }
 }
