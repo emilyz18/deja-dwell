@@ -10,9 +10,9 @@
     "isFurnished": true,
     "isHeater": true,
     "ExpectedPrice": 2000,
-    "Province": "ON",
-    "City": "Toronto",
-    "Street": "King Street",
+    "Province": "BC",
+    "City": "Victoria",
+    "Street": "3000 Shelbourne Street",
     "StartDate": "2024-07-01",
     "EndDate": "2024-12-31",
     "NumOfParking": 1,
@@ -23,7 +23,7 @@
     "Description": "A modern condo in the heart of Toronto with stunning city views.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=2784&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 1 for carousel"
       },
       {
@@ -60,7 +60,7 @@
     "Description": "Spacious apartment with top-notch amenities and a view of the mountains.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://images.unsplash.com/photo-1528255671579-01b9e182ed1d?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhvbWV8ZW58MHx8MHx8fDI%3D",
         "alt": "Image 1 for carousel"
       },
       {
@@ -84,9 +84,9 @@
     "isFurnished": false,
     "isHeater": true,
     "ExpectedPrice": 1800,
-    "Province": "AB",
-    "City": "Calgary",
-    "Street": "Centre Street",
+    "Province": "BC",
+    "City": "Kelowna",
+    "Street": "2500 Pandosy Street",
     "StartDate": "2024-09-01",
     "EndDate": "2025-08-31",
     "NumOfParking": 1,
@@ -97,7 +97,7 @@
     "Description": "Cozy studio apartment perfect for a single person or couple.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 1 for carousel"
       },
       {
@@ -121,9 +121,9 @@
     "isFurnished": true,
     "isHeater": true,
     "ExpectedPrice": 2500,
-    "Province": "ON",
-    "City": "Ottawa",
-    "Street": "Bank Street",
+    "Province": "BC",
+    "City": "Victoria",
+    "Street": "1500 Cook Street",
     "StartDate": "2024-10-01",
     "EndDate": "2025-03-31",
     "NumOfParking": 2,
@@ -134,7 +134,7 @@
     "Description": "Beautiful townhouse with a private garden, ideal for families.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://images.unsplash.com/photo-1463620910506-d0458143143e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 1 for carousel"
       },
       {
@@ -158,9 +158,9 @@
     "isFurnished": false,
     "isHeater": false,
     "ExpectedPrice": 3000,
-    "Province": "QC",
-    "City": "Montreal",
-    "Street": "Saint Catherine Street",
+    "Province": "BC",
+    "City": "Victoria",
+    "Street": "2500 Richmond Road",
     "StartDate": "2024-11-15",
     "EndDate": "2025-11-14",
     "NumOfParking": 1,
@@ -208,11 +208,11 @@
     "Description": "A lovely house located in the heart of Vancouver.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fGhvbWV8ZW58MHwwfDB8fHwy",
         "alt": "Image 1 for carousel"
       },
       {
-        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "src": "https://images.unsplash.com/photo-1444676632488-26a136c45b9b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fGhvbWV8ZW58MHwwfDB8fHwy",
         "alt": "Image 2 for carousel"
       },
       {
@@ -245,15 +245,15 @@
     "Description": "A cozy apartment perfect for small families.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 1 for carousel"
       },
       {
-        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "src": "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=2768&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 2 for carousel"
       },
       {
-        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "src": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 3 for carousel"
       }
     ]
@@ -282,15 +282,15 @@
     "Description": "A cozy apartment perfect for small families.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://images.unsplash.com/photo-1499916078039-922301b0eb9b?q=80&w=2585&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 1 for carousel"
       },
       {
-        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "src": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2760&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 2 for carousel"
       },
       {
-        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "src": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 3 for carousel"
       }
     ]
@@ -319,15 +319,15 @@
     "Description": "A modern house with all amenities in richmond.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 1 for carousel"
       },
       {
-        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "src": "https://images.unsplash.com/photo-1499955085172-a104c9463ece?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 2 for carousel"
       },
       {
-        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "src": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cmVudGFsJTIwaG91c2V8ZW58MHx8MHx8fDA%3D",
         "alt": "Image 3 for carousel"
       }
     ]
@@ -356,7 +356,7 @@
     "Description": "A luxury house in a prime location in Richmond.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 1 for carousel"
       },
       {
@@ -393,11 +393,11 @@
     "Description": "A charming apartment in a quiet neighborhood in Langley.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://images.unsplash.com/photo-1499955085172-a104c9463ece?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 1 for carousel"
       },
       {
-        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
         "alt": "Image 2 for carousel"
       },
       {
@@ -430,7 +430,7 @@
     "Description": "A beautiful house with stunning views in North Vancouver.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://images.unsplash.com/photo-1501876725168-00c445821c9e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 1 for carousel"
       },
       {
@@ -467,7 +467,7 @@
     "Description": "A cozy apartment in a convenient location in Richmond.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://plus.unsplash.com/premium_photo-1683769251695-963095b23d67?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 1 for carousel"
       },
       {
@@ -504,15 +504,15 @@
     "Description": "A luxury house with modern amenities in Victoria.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://images.unsplash.com/photo-1527772482340-7895c3f2b3f7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D",
         "alt": "Image 1 for carousel"
       },
       {
-        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "src": "https://images.unsplash.com/flagged/photo-1556438758-872c68902f60?q=80&w=2674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 2 for carousel"
       },
       {
-        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
+        "src": "https://images.unsplash.com/photo-1575386848021-028a496c03fe?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 3 for carousel"
       }
     ]
@@ -541,16 +541,201 @@
     "Description": "Modern Big house with all amenities in Kelowna.",
     "HouseImgs": [
       {
-        "src": "https://www.apartments.com/blog/sites/default/files/styles/x_large/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg.webp?itok=lYDRCGzC",
+        "src": "https://images.unsplash.com/photo-1665735628022-9f607ce31e58?q=80&w=2748&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 1 for carousel"
       },
       {
-        "src": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/condo-vs-apartment.jpeg.jpg",
+        "src": "https://images.unsplash.com/photo-1575386848021-028a496c03fe?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "alt": "Image 2 for carousel"
       },
       {
         "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZrCV9ggiDvDrsz1oG6EcIA_LME3EUZbLOA&s",
         "alt": "Image 3 for carousel"
+      }
+    ]
+  },
+  {
+    "HouseID": "6d8f9e3a-8a9d-4c3b-bf1a-6f9a8e7c9d4f",
+    "LandlordID": "1c86d2f4-a6f3-4c3f-bc1a-003f5fa6f6b2",
+    "AllowPet": true,
+    "AllowSmoke": false,
+    "AllowParty": true,
+    "AllowWeed": false,
+    "isAC": true,
+    "isFurnished": true,
+    "isHeater": true,
+    "ExpectedPrice": 2500,
+    "Province": "BC",
+    "City": "Vancouver",
+    "Street": "1234 Main Street",
+    "StartDate": "2024-09-01",
+    "EndDate": "2025-09-01",
+    "NumOfParking": 2,
+    "NumOfResident": 4,
+    "NumBedroom": 3,
+    "NumBathroom": 2,
+    "Title": "Modern Home in Vancouver",
+    "Description": "A spacious and modern home with all the amenities you need.",
+    "HouseImgs": [
+      {
+        "src": "https://images.unsplash.com/flagged/photo-1556438758-e02fa974a98f?q=80&w=2674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "window"
+      },
+      {
+        "src": "https://images.unsplash.com/flagged/photo-1556438758-1d61c8c65409?q=80&w=2674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "Living room with modern decor"
+      },
+      {
+        "src": "https://images.unsplash.com/flagged/photo-1556438758-872c68902f60?q=80&w=2674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "Spacious bathroom"
+      }
+    ]
+  },
+  {
+    "HouseID": "7b9e8d3f-8c2d-4a5b-bd2f-7e9b8f6a9c5d",
+    "LandlordID": "2e0b9e35-4f5c-4a8a-bc5d-2a7a89e1fef3",
+    "AllowPet": false,
+    "AllowSmoke": true,
+    "AllowParty": false,
+    "AllowWeed": true,
+    "isAC": false,
+    "isFurnished": false,
+    "isHeater": true,
+    "ExpectedPrice": 1800,
+    "Province": "BC",
+    "City": "Burnaby",
+    "Street": "5678 Oak Avenue",
+    "StartDate": "2024-10-01",
+    "EndDate": "2025-10-01",
+    "NumOfParking": 1,
+    "NumOfResident": 3,
+    "NumBedroom": 2,
+    "NumBathroom": 1,
+    "Title": "Cozy Apartment in Burnaby",
+    "Description": "A cozy and affordable apartment located in a quiet neighborhood.",
+    "HouseImgs": [
+      {
+        "src": "https://images.unsplash.com/flagged/photo-1556438758-df7b9e0c0fe4?q=80&w=2674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "Exterior of the apartment building"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "Bright and airy living room"
+      },
+      {
+        "src": "https://images.unsplash.com/flagged/photo-1556438758-e02fa974a98f?q=80&w=2674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "Office space"
+      }
+    ]
+  },
+  {
+    "HouseID": "8c9d7b4a-8e3d-4b5f-bd1a-8e7d9f6c9b2e",
+    "LandlordID": "3f2d3c9a-5f2b-4d9f-bc3d-3f6d7f4b9e7c",
+    "AllowPet": true,
+    "AllowSmoke": false,
+    "AllowParty": true,
+    "AllowWeed": false,
+    "isAC": true,
+    "isFurnished": true,
+    "isHeater": true,
+    "ExpectedPrice": 2700,
+    "Province": "BC",
+    "City": "Surrey",
+    "Street": "9101 Pine Crescent",
+    "StartDate": "2024-11-01",
+    "EndDate": "2025-11-01",
+    "NumOfParking": 2,
+    "NumOfResident": 5,
+    "NumBedroom": 4,
+    "NumBathroom": 3,
+    "Title": "Luxury Home in Surrey",
+    "Description": "An exquisite luxury home with top-of-the-line amenities and finishes.",
+    "HouseImgs": [
+      {
+        "src": "https://images.unsplash.com/photo-1472224371017-08207f84aaae?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "Luxury home front view"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1495433324511-bf8e92934d90?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "Gourmet kitchen with high-end appliances"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "Master bedroom with en-suite bathroom"
+      }
+    ]
+  },
+  {
+    "HouseID": "9e7d8c6a-9b2d-4d5c-bc2f-9e8f7a6b9d3c",
+    "LandlordID": "4a6c8f9e-6f5d-4b3c-bf1a-4f8a9e7d8c3b",
+    "AllowPet": false,
+    "AllowSmoke": true,
+    "AllowParty": false,
+    "AllowWeed": true,
+    "isAC": true,
+    "isFurnished": true,
+    "isHeater": true,
+    "ExpectedPrice": 2600,
+    "Province": "BC",
+    "City": "Vancouver",
+    "Street": "2456 Spruce Street",
+    "StartDate": "2024-08-01",
+    "EndDate": "2025-08-01",
+    "NumOfParking": 1,
+    "NumOfResident": 4,
+    "NumBedroom": 3,
+    "NumBathroom": 2,
+    "Title": "Elegant Condo in Vancouver",
+    "Description": "An elegant condo located in the heart of Vancouver with easy access to downtown.",
+    "HouseImgs": [
+      {
+        "src": "https://images.unsplash.com/photo-1569152811536-fb47aced8409?q=80&w=2669&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "Condo front view"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "Stylish living room"
+      },
+      {
+        "src": "https://images.unsplash.com/flagged/photo-1556438758-1d61c8c65409?q=80&w=2674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "Master bedroom with modern decor"
+      }
+    ]
+  },
+  {
+    "HouseID": "a9f7b6c5-bd3f-4c2d-8a6f-a7e9d8f7c6b4",
+    "LandlordID": "5d7b8c2f-7a9d-4f5e-bd2b-5e8d9f7a9b4c",
+    "AllowPet": true,
+    "AllowSmoke": false,
+    "AllowParty": true,
+    "AllowWeed": false,
+    "isAC": true,
+    "isFurnished": false,
+    "isHeater": true,
+    "ExpectedPrice": 2200,
+    "Province": "BC",
+    "City": "Burnaby",
+    "Street": "1357 Maple Avenue",
+    "StartDate": "2024-12-01",
+    "EndDate": "2025-12-01",
+    "NumOfParking": 2,
+    "NumOfResident": 4,
+    "NumBedroom": 3,
+    "NumBathroom": 2,
+    "Title": "Family House in Burnaby",
+    "Description": "A comfortable family house located near schools and parks in Burnaby.",
+    "HouseImgs": [
+      {
+        "src": "https://images.unsplash.com/flagged/photo-1556438758-1d61c8c65409?q=80&w=2674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "bed room"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "Living room with cozy decor"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=2676&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "alt": "Modern kitchen"
       }
     ]
   }
