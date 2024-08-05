@@ -5,3 +5,26 @@
 .match-list {
   padding: 10px;
 }
+
+.no-matches-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.no-matches-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+  font-family: 'Mulish', sans-serif;
+  color: #555;
+  height: 100px;
+  width: 80%;
+  text-align: center;
+  background-color: #f8f8f8;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+}
