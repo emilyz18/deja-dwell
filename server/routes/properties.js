@@ -160,41 +160,20 @@ const getScore = (property, preference) => {
           if (distanceCache[cacheKey]) {
             const distanceValue = distanceCache[cacheKey]
 
-            score += weights.distanceW * (1 - (distanceValue/10000))
+            score += weights.distanceW * (1 - distanceValue / 10000)
           } else {
             const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${encodeURIComponent(origins)}&destinations=${encodeURIComponent(destinations)}&mode=driving&key=${process.env.MAP_API_KEY}`
             axios
               .get(url)
               .then((response) => {
                 if (response.data.status === 'OK') {
-                  const origin = response.data.origin_addresses[0]
-                  const destination = response.data.destination_addresses[0]
-                  const results = response.data.rows[0].elements
-
                   // driving distance in meters
                   const distanceValue =
                     response.data.rows[0].elements[0].distance.value
 
-                    console.log("Distance: " + distanceValue)
-
-                  console.log(score + ' before')
-
                   distanceCache[cacheKey] = distanceValue
 
-                  score += weights.distanceW * (1 - (distanceValue/10000))
-
-                  // if (distanceValue <= 10000) {
-                  //   // within 10 km
-                  //   score += weights.distanceW
-                  // } else if (distanceValue <= 20000) {
-                  //   // between 10 km and 20 km
-                  //   score += weights.distanceW / 2
-                  // } // not penalized for longer distance (if it is even possible within a city)
-                  // console.log(score + ' after')
-
-                  // console.log(
-                  //   `Distance from ${origin} to ${destination}: ${distanceValue}`
-                  // )
+                  score += weights.distanceW * (1 - distanceValue / 10000)
                 } else {
                   console.error('Error: ' + response.data.status)
                 }
@@ -385,7 +364,6 @@ router.get('/preferProperties/:tenantID', async (req, res) => {
       }
     })
 
-    // console.log(prefProperties)
     prefProperties.sort((a, b) => b.prefScore - a.prefScore)
 
     return res.status(200).send(prefProperties)
