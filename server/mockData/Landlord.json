@@ -58,5 +58,24 @@
   {
     "LandlordID": "4b6d5c4a-4e4f-4b6d-8c5e-6d4f9c5e6b4d",
     "HouseID": "e4d6c5b9-3f4e-4b6d-8c3d-5e6d4b9c5e4d"
+  },
+  {
+    "LandlordID": "1c86d2f4-a6f3-4c3f-bc1a-003f5fa6f6b2",
+    "HouseID": "6d8f9e3a-8a9d-4c3b-bf1a-6f9a8e7c9d4f"
+  },
+  {
+    "LandlordID": "2e0b9e35-4f5c-4a8a-bc5d-2a7a89e1fef3",
+    "HouseID": "7b9e8d3f-8c2d-4a5b-bd2f-7e9b8f6a9c5d"
+  },{
+    "LandlordID": "3f2d3c9a-5f2b-4d9f-bc3d-3f6d7f4b9e7c",
+    "HouseID": "8c9d7b4a-8e3d-4b5f-bd1a-8e7d9f6c9b2e"
+  },
+  {
+    "LandlordID": "4a6c8f9e-6f5d-4b3c-bf1a-4f8a9e7d8c3b",
+    "HouseID": "9e7d8c6a-9b2d-4d5c-bc2f-9e8f7a6b9d3c"
+  },
+  {
+    "LandlordID": "5d7b8c2f-7a9d-4f5e-bd2b-5e8d9f7a9b4c",
+    "HouseID": "a9f7b6c5-bd3f-4c2d-8a6f-a7e9d8f7c6b4"
   }
 ]
