@@ -82,8 +82,12 @@ router.post('/register', async (req, res) => {
       newUser.LandlordID = landlordId
       const houseID = uuid()
 
-      await userQueries.signUp(newUser)
-      await landlordQueries.creatLandlord(newLandlord(landlordId, houseID))
+      try {
+        await userQueries.signUp(newUser)
+        await landlordQueries.creatLandlord(newLandlord(landlordId, houseID))
+      } catch (error) {
+        return res.status(401).json({ message: error.message })
+      }
     } else {
       newUser.isLandlord = false
       newUser.isTenant = true
@@ -91,13 +95,17 @@ router.post('/register', async (req, res) => {
       newUser.TenantID = tenantId
       const tenantPrefID = uuid()
 
-      await userQueries.signUp(newUser)
-      await tenantProfileQueries.creatTenantProfile(
-        newTenantProfile(userId, tenantId, tenantPrefID)
-      )
-      await tenantPrefQueries.creatTenantPref(
-        newTenantPref(tenantId, tenantPrefID)
-      )
+      try {
+        await userQueries.signUp(newUser)
+        await tenantProfileQueries.creatTenantProfile(
+          newTenantProfile(userId, tenantId, tenantPrefID)
+        )
+        await tenantPrefQueries.creatTenantPref(
+          newTenantPref(tenantId, tenantPrefID)
+        )
+      } catch (error) {
+        return res.status(401).json({ message: error.message })
+      }
     }
 
     res
