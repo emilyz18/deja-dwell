@@ -160,13 +160,7 @@ const getScore = (property, preference) => {
           if (distanceCache[cacheKey]) {
             const distanceValue = distanceCache[cacheKey]
 
-            if (distanceValue <= 10000) {
-              // within 10 km
-              score += weights.distanceW
-            } else if (distanceValue <= 20000) {
-              // between 10 km and 20 km
-              score += weights.distanceW / 2
-            } // not penalized for longer distance (if it is even possible within a city)
+            score += weights.distanceW * (1 - (distanceValue/10000))
           } else {
             const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${encodeURIComponent(origins)}&destinations=${encodeURIComponent(destinations)}&mode=driving&key=${process.env.MAP_API_KEY}`
             axios
@@ -177,26 +171,30 @@ const getScore = (property, preference) => {
                   const destination = response.data.destination_addresses[0]
                   const results = response.data.rows[0].elements
 
-                  // driving distance
+                  // driving distance in meters
                   const distanceValue =
-                    response.data.rows[0].elements[0].distance.value // distance in meters
+                    response.data.rows[0].elements[0].distance.value
+
+                    console.log("Distance: " + distanceValue)
 
                   console.log(score + ' before')
 
                   distanceCache[cacheKey] = distanceValue
 
-                  if (distanceValue <= 10000) {
-                    // within 10 km
-                    score += weights.distanceW
-                  } else if (distanceValue <= 20000) {
-                    // between 10 km and 20 km
-                    score += weights.distanceW / 2
-                  } // not penalized for longer distance (if it is even possible within a city)
-                  console.log(score + ' after')
+                  score += weights.distanceW * (1 - (distanceValue/10000))
 
-                  console.log(
-                    `Distance from ${origin} to ${destination}: ${distanceValue}`
-                  )
+                  // if (distanceValue <= 10000) {
+                  //   // within 10 km
+                  //   score += weights.distanceW
+                  // } else if (distanceValue <= 20000) {
+                  //   // between 10 km and 20 km
+                  //   score += weights.distanceW / 2
+                  // } // not penalized for longer distance (if it is even possible within a city)
+                  // console.log(score + ' after')
+
+                  // console.log(
+                  //   `Distance from ${origin} to ${destination}: ${distanceValue}`
+                  // )
                 } else {
                   console.error('Error: ' + response.data.status)
                 }
@@ -205,14 +203,6 @@ const getScore = (property, preference) => {
                 console.error('Error: ' + error.message)
               })
           }
-
-          // if (
-          //   property.Street &&
-          //   preference.Street &&
-          //   property.Street.toLowerCase() == preference.Street.toLowerCase()
-          // ) {
-          //   score += weights.streetW // no negative score if missed on street because it is likely going to miss
-          // }
         } else {
           score -= weights.cityW
         }
