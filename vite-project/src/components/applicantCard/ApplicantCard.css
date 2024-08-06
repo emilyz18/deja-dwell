@@ -1,3 +1,12 @@
+.applicant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .applicant-card {
   display: flex;
   align-items: center;
@@ -9,8 +18,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
-  min-width: 550px;
   position: relative;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .applicant-card:hover {
@@ -19,11 +29,13 @@
 }
 
 .applicant-card.accepted {
-  background-color: #f1fff1; /* Light green tint for accepted applicants */
+  background-color: #f1fff1;
+  /* Light green tint for accepted applicants */
 }
 
 .applicant-card.accepted:hover {
-  background-color: #f1fff1; /* Light green tint for accepted applicants */
+  background-color: #f1fff1;
+  /* Light green tint for accepted applicants */
   box-shadow: 0 8px 16px rgba(10, 213, 27, 0.5);
 }
 
@@ -93,4 +105,46 @@
   color: #29782c;
   opacity: 0.8;
   font-family: 'Mulish', sans-serif;
+}
+
+@media screen and (max-width:957px) {
+  .applicant-card {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .applicant-info {
+    margin-left: 0;
+    margin-top: 12px;
+  }
+
+  .applicant-image img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .applicant-info {
+    padding-left: 10px;
+    padding-right:10px;
+    font-size: 0.8em;
+  }
+
+  .applicant-info h3 {
+    font-size: 1.0em;
+  }
+
+  .applicant-actions button {
+    flex-grow: 1;
+    font-size: 0.8em;
+    padding: 6px;
+  }
+
+  .accepted-label {
+    position: static;
+    transform: none;
+    font-size: 1em;
+    margin-top: 8px;
+    margin-left: auto;
+    text-align: right;
+  }
 }
