@@ -3,7 +3,9 @@
 ![CI](https://github.com/ubc-cpsc455-2024S/project-15_deja/actions/workflows/ci.yml/badge.svg)
 
 ## Project Description
-Our project, DejaDwell, is a platform designed for tenants and landlords to facilitate finding rental accommodations. It allows tenants to post their profile data and preferences while enabling landlords to post details of their units. Tenants are matched with homes that fit their preferences, while landlords connect with tenants who meet their criteria.
+Our project, DejaDwell, is a platform designed for tenants and landlords to facilitate finding rental accommodations. It allows tenants to post their profile data and preferences while enabling landlords to post details of their units. Tenants are matched with homes that fit their preferences, while landlords connect with tenants who meet their criteria. With DejaDwell, we offer a streamlined and effective process for finding your perfect rental or tenant.
+ 
+Deployed Link: https://deja-dwell.onrender.com/login 
 
 ## Project Requirements
 ### Minimal Requirements
@@ -81,7 +83,10 @@ TBD
 - Established release engineering using Render and GitHub Actions to implement CI/CD.
 
 ### Xinyue 
-TBD
+- Implement main React & Redux componemnts, including user and property input forms with validations, React Routers
+- Prepared mock data, set up MongoDB schemas and import script 
+- Developed server routes and NoSQL queries for user signIn/register, user and property information management.  
+- Enhanced UI/UX styling, added responsiveness for change screen sizes.
 
 ## Prototype Sketches
 #### Tenant Dashboard
@@ -94,8 +99,10 @@ TBD
 <img src ="images/prototypeSketches/LandlordDashboard.png" width=700>
 
 ## References
+- Partial concept design is modified from Xinyue's CPSC344 prototype design project: https://www.youtube.com/watch?v=7eFO5YDZCoo 
+- The carousel component was done from following the tutorial: https://www.youtube.com/watch?v=QpsGo8kZiTo, as well as using the code in this repo: https://github.com/CodeCompleteYT/react-image-carousel on May 31st. Modified the tutorial code to add another prop, as well as change the way data is being passed in.
 
-{Add your stuff here}
+
 
 
 
