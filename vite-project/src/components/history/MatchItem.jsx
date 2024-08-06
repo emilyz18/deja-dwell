@@ -154,7 +154,13 @@ function MatchItem({ match, displayPopup }) {
         <Alert
           onClose={handleNotificationClose}
           severity={notification.severity}
-          sx={{ width: '100%' }}
+          sx={{
+            position: 'fixed',
+            top: '2%',
+            left: '46%',
+            transform: 'translateX(-50%)',
+            zIndex: 1000,
+            fontSize: '1.2rem' }}
         >
           {notification.message}
         </Alert>
