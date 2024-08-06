@@ -86,7 +86,7 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch = false, showButto
         {AllowWeed && <span className="amenity">Weed Allowed</span>}
       </div>
       <div className="map-border-container">
-        <div className="map-border">
+        <div className={isSearch? 'map-border': ''}>
           {isSearch && <MapComponent propertyAddresses={address} isRecommendation={true} />
           }
         </div>

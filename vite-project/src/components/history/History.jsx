@@ -96,7 +96,7 @@ function History() {
       {popupVisible && (
         <div className="property-popup-background" onClick={closePopup}>
           <div className="property-popup" onClick={(e) => e.stopPropagation()}>
-            <ExpandedPropertyCard propertyInfo={selectedProperty} />
+            <ExpandedPropertyCard propertyInfo={selectedProperty} isSearch={true}/>
           </div>
         </div>
       )}
