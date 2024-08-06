@@ -167,6 +167,24 @@
 
 
 /* Responsive styles for medium screens */
+@media (max-width: 1402px) {
+  
+  .map-border {
+    width: 100%;
+  }
+
+  .cards-container {
+    max-width: 100%;
+    padding-right: 30px;
+  }
+
+  .property-card {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.8em;
+  }
+}
+
 @media (max-width: 1067px) {
   .search-display {
     flex-direction: column;
