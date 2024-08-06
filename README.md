@@ -100,7 +100,7 @@ TBD
 
 ## References
 - Partial concept design is modified from Xinyue's CPSC344 prototype design project: https://www.youtube.com/watch?v=7eFO5YDZCoo 
-- The carousel component was done from following the tutorial: https://www.youtube.com/watch?v=QpsGo8kZiTo, as well as using the code in this repo: https://github.com/CodeCompleteYT/react-image-carousel on May 31st. Modified the tutorial code to add another prop, as well as change the way data is being passed in.
+
 
 
 
