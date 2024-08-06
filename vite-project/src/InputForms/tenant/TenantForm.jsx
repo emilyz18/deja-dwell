@@ -1,14 +1,7 @@
 import React, { useState } from 'react'
 import './TenantForm.css'
 
-export function TenantForm({
-  handleSubmit,
-  tenant,
-  tenantPref,
-  handleChange,
-  handleCancel,
-}) {
-
+export function TenantForm({ handleSubmit, tenant, tenantPref, handleChange, handleCancel }) {
   const [errors, setErrors] = useState({})
 
   const formatDate = (date) => {
@@ -27,7 +20,6 @@ export function TenantForm({
       if (startDate > endDate) {
         tempErrors.EndDate = 'End date must be greater than start date'
       }
-
     }
     setErrors(tempErrors)
     return Object.keys(tempErrors).length === 0
@@ -40,15 +32,11 @@ export function TenantForm({
     }
   }
 
-  const renderInputField = (
-    label,
-    name,
-    type = 'text',
-    required = false,
-    value = tenant[name] || ''
-  ) => (
+  const renderInputField = (label, name, type = 'text', required = false, value = tenant[name] || '') => (
     <div className="tenant-form-group">
-      <label>{label} {required && <span className="required-asterisk">*</span>}</label>
+      <label>
+        {label} {required && <span className="required-asterisk">*</span>}
+      </label>
       <input
         type={type}
         name={name}
@@ -59,22 +47,12 @@ export function TenantForm({
       />
       {name === 'Age' && errors.Age && <p className="error">{errors.Age}</p>}
       {name === 'EndDate' && errors.EndDate && <p className="error">{errors.EndDate}</p>}
-
     </div>
   )
 
-  const renderCheckboxField = (
-    label,
-    name,
-    checked = tenantPref[name] || false
-  ) => (
+  const renderCheckboxField = (label, name, checked = tenantPref[name] || false) => (
     <div className="tenant-form-group-inline">
-      <input
-        type="checkbox"
-        name={name}
-        checked={checked}
-        onChange={handleChange}
-      />
+      <input type="checkbox" name={name} checked={checked} onChange={handleChange} />
       <label>{label}</label>
     </div>
   )
@@ -90,69 +68,20 @@ export function TenantForm({
           {renderInputField('Income in $', 'Income', 'number')}
           {renderInputField('Company', 'Company')}
           {renderInputField('Habit', 'Habit', 'text', true)}
-
         </div>
 
         <hr className="separator" />
 
         <h2 className="header">You are looking for rent that...</h2>
         <div className="tenant-form-grid">
-          {renderInputField(
-            'Province',
-            'Province',
-            'text',
-            true,
-            tenantPref.Province || ''
-          )}
-          {renderInputField(
-            'City',
-            'City',
-            'text',
-            true,
-            tenantPref.City || ''
-          )}
-          {renderInputField(
-            'Street',
-            'Street',
-            'text',
-            false,
-            tenantPref.Street || ''
-          )}
-          {renderInputField(
-            'Maximum Price',
-            'MaxPrice',
-            'number',
-            false,
-            tenantPref.MaxPrice || ''
-          )}
-          {renderInputField(
-            'Start Date',
-            'StartDate',
-            'date',
-            false,
-            formatDate(tenantPref.StartDate) || ''
-          )}
-          {renderInputField(
-            'End Date',
-            'EndDate',
-            'date',
-            false,
-            formatDate(tenantPref.EndDate) || ''
-          )}
-          {renderInputField(
-            'Number of Bedrooms',
-            'NumBedroom',
-            'number',
-            false,
-            tenantPref.NumBedroom || ''
-          )}
-          {renderInputField(
-            'Number of Bathrooms',
-            'NumBathroom',
-            'number',
-            false,
-            tenantPref.NumBathroom || ''
-          )}
+          {renderInputField('Province', 'Province', 'text', true, tenantPref.Province || '')}
+          {renderInputField('City', 'City', 'text', true, tenantPref.City || '')}
+          {renderInputField('Street', 'Street', 'text', false, tenantPref.Street || '')}
+          {renderInputField('Maximum Price', 'MaxPrice', 'number', false, tenantPref.MaxPrice || '')}
+          {renderInputField('Start Date', 'StartDate', 'date', false, formatDate(tenantPref.StartDate) || '')}
+          {renderInputField('End Date', 'EndDate', 'date', false, formatDate(tenantPref.EndDate) || '')}
+          {renderInputField('Number of Bedrooms', 'NumBedroom', 'number', false, tenantPref.NumBedroom || '')}
+          {renderInputField('Number of Bathrooms', 'NumBathroom', 'number', false, tenantPref.NumBathroom || '')}
         </div>
 
         <hr className="separator" />
@@ -170,31 +99,15 @@ export function TenantForm({
         <hr className="separator" />
 
         <div className="tenant-form-grid">
-          {renderInputField(
-            'Number of Parking',
-            'NumOfParking',
-            'number',
-            false,
-            tenantPref.NumOfParking || ''
-          )}
-          {renderInputField(
-            'Number of Residents',
-            'NumOfResident',
-            'number',
-            false,
-            tenantPref.NumOfResident || ''
-          )}
+          {renderInputField('Number of Parking', 'NumOfParking', 'number', false, tenantPref.NumOfParking || '')}
+          {renderInputField('Number of Residents', 'NumOfResident', 'number', false, tenantPref.NumOfResident || '')}
         </div>
 
         <div className="form-buttons">
           <button type="submit" className="submit-button">
             Save
           </button>
-          <button
-            type="button"
-            onClick={handleCancel}
-            className="cancel-button"
-          >
+          <button type="button" onClick={handleCancel} className="cancel-button">
             Cancel
           </button>
         </div>

@@ -6,14 +6,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import { theme } from '../themes.jsx'
 
 function MiniPropertyCard(props) {
-  const {
-    propertyInfo,
-    likedFn,
-    dislikedFn,
-    displayPopup,
-    searchMode = false,
-    zoomMap,
-  } = props
+  const { propertyInfo, likedFn, dislikedFn, displayPopup, searchMode = false, zoomMap } = props
 
   const {
     NumBedroom,
@@ -40,10 +33,9 @@ function MiniPropertyCard(props) {
 
   // transform and transition not used currently, but keep them to potentially add further UI
   // improvements in the future
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id: propertyInfo.HouseID,
-    })
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: propertyInfo.HouseID,
+  })
 
   const likeProperty = () => {
     likedFn(propertyInfo.HouseID)
@@ -57,20 +49,14 @@ function MiniPropertyCard(props) {
     displayPopup()
   }
 
-  const carouselSize = searchMode
-    ? { width: '100%', height: '16vw' }
-    : { width: '100%', height: '20vw' }
+  const carouselSize = searchMode ? { width: '100%', height: '16vw' } : { width: '100%', height: '20vw' }
 
   const cardClassName = searchMode ? '' : 'recommendation-property-card'
 
   return (
     <>
       <div className={`property-card ${cardClassName}`} ref={setNodeRef}>
-        <Carousel
-          className="carousel-container"
-          data={propertyInfo.HouseImgs}
-          size={carouselSize}
-        />
+        <Carousel className="carousel-container" data={propertyInfo.HouseImgs} size={carouselSize} />
         <div {...attributes} {...listeners}>
           <div className="card-details" onClick={zoomMap}>
             <h3 className="house-title">{propertyInfo.Title}</h3>
@@ -80,12 +66,8 @@ function MiniPropertyCard(props) {
               {Province && `${Province} `}
             </span>
             <div className="details-row">
-              {NumBedroom && (
-                <span className="house-type">{NumBedroom}Bed</span>
-              )}
-              {NumBathroom && (
-                <span className="house-type">{NumBathroom}Bath</span>
-              )}
+              {NumBedroom && <span className="house-type">{NumBedroom}Bed</span>}
+              {NumBathroom && <span className="house-type">{NumBathroom}Bath</span>}
             </div>
             <div className="details-row-amenity">
               {isAC && <span className="amenity">AC</span>}
@@ -96,32 +78,19 @@ function MiniPropertyCard(props) {
               {AllowParty && <span className="amenity">Party Allowed</span>}
               {AllowWeed && <span className="amenity">Weed Allowed</span>}
             </div>
-            <div className="details-row">
-              {ExpectedPrice && <h5 className="price">${ExpectedPrice}</h5>}
-            </div>
+            <div className="details-row">{ExpectedPrice && <h5 className="price">${ExpectedPrice}</h5>}</div>
           </div>
         </div>
         <div className="buttons-row">
-          <button
-            className="circle-button cross-button"
-            onClick={dislikeProperty}
-          >
+          <button className="circle-button cross-button" onClick={dislikeProperty}>
             ✖
           </button>
           <ThemeProvider theme={theme}>
-            <Button
-              color="jet"
-              variant="contained"
-              onClick={expandProperty}
-              className="expand-info-button"
-            >
+            <Button color="jet" variant="contained" onClick={expandProperty} className="expand-info-button">
               Expand Info
             </Button>
           </ThemeProvider>
-          <button
-            className="circle-button checkmark-button"
-            onClick={likeProperty}
-          >
+          <button className="circle-button checkmark-button" onClick={likeProperty}>
             ✔
           </button>
         </div>

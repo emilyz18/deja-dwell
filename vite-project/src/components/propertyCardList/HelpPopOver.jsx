@@ -21,22 +21,14 @@ export default function MouseOverPopover() {
 
   return (
     <div>
-      <Button
-        aria-describedby={id}
-        onClick={handlePopoverOpen}
-        sx={{ color: 'purple' }}
-      >
+      <Button aria-describedby={id} onClick={handlePopoverOpen} sx={{ color: 'purple' }}>
         <HelpIcon fontSize="small" />
         How to apply?
       </Button>
 
       <Popper id={id} open={open} anchorEl={anchorEl}>
         <Box sx={{ p: 3, bgcolor: 'background.paper', boxShadow: 1 }}>
-          <Typography
-            variant="body2"
-            component="div"
-            sx={{ display: 'flex', alignItems: 'center' }}
-          >
+          <Typography variant="body2" component="div" sx={{ display: 'flex', alignItems: 'center' }}>
             Drag the card <SwipeIcon sx={{ ml: 1 }} />
           </Typography>
           <Typography variant="body2" sx={{ mt: 1 }}>

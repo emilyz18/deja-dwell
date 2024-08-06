@@ -1,5 +1,5 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 
 const tenantProfileQueries = require('../dataBase/queries/tenantProfileQueries')
 
@@ -24,11 +24,7 @@ router.get('/:tenantID', async (req, res) => {
       return res.status(404).send('Tenant not found')
     }
   } catch (err) {
-    return res
-      .status(500)
-      .send(
-        `Error getting tenant data with ID: ${tenantID} from DB:  ${err.message}, `
-      )
+    return res.status(500).send(`Error getting tenant data with ID: ${tenantID} from DB:  ${err.message}, `)
   }
 })
 
@@ -38,19 +34,14 @@ router.patch('/:tenantID', async (req, res) => {
   const tenantData = req.body
 
   try {
-    const updatedTenant = await tenantProfileQueries.editTenantProfile(
-      tenantID,
-      tenantData
-    )
+    const updatedTenant = await tenantProfileQueries.editTenantProfile(tenantID, tenantData)
     if (updatedTenant) {
       return res.status(200).json(updatedTenant)
     } else {
       return res.status(404).send('Tenant profile not found when editing')
     }
   } catch (err) {
-    return res
-      .status(500)
-      .send(`Error editing tenant profile data: ${err.message}`)
+    return res.status(500).send(`Error editing tenant profile data: ${err.message}`)
   }
 })
 

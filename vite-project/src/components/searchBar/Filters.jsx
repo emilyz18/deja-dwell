@@ -3,12 +3,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import { theme } from '../themes.jsx'
 import Button from '@mui/material/Button'
 
-const Filters = ({
-  tempFilters,
-  handleTempFilterChange,
-  applyFilters,
-  clearFilters,
-}) => {
+const Filters = ({ tempFilters, handleTempFilterChange, applyFilters, clearFilters }) => {
   return (
     <>
       <div className="filters">
@@ -91,12 +86,7 @@ const Filters = ({
         </div>
         <div className="filter-section filter-checkboxes">
           <label>
-            <input
-              type="checkbox"
-              name="allowPet"
-              checked={tempFilters.allowPet}
-              onChange={handleTempFilterChange}
-            />
+            <input type="checkbox" name="allowPet" checked={tempFilters.allowPet} onChange={handleTempFilterChange} />
             Allow Pet
           </label>
           <label>
@@ -118,31 +108,16 @@ const Filters = ({
             Allow Party
           </label>
           <label>
-            <input
-              type="checkbox"
-              name="allowWeed"
-              checked={tempFilters.allowWeed}
-              onChange={handleTempFilterChange}
-            />
+            <input type="checkbox" name="allowWeed" checked={tempFilters.allowWeed} onChange={handleTempFilterChange} />
             Allow Weed
           </label>
 
           <ThemeProvider theme={theme}>
             <div className="button-group">
-              <Button
-                color="jet"
-                variant="contained"
-                onClick={clearFilters}
-                sx={{ fontSize: '11px' }}
-              >
+              <Button color="jet" variant="contained" onClick={clearFilters} sx={{ fontSize: '11px' }}>
                 Clear filters
               </Button>
-              <Button
-                color="jet"
-                variant="contained"
-                onClick={applyFilters}
-                sx={{ fontSize: '11px' }}
-              >
+              <Button color="jet" variant="contained" onClick={applyFilters} sx={{ fontSize: '11px' }}>
                 Apply filters
               </Button>
             </div>
@@ -150,30 +125,15 @@ const Filters = ({
         </div>
         <div className="filter-section filter-checkboxes">
           <label>
-            <input
-              type="checkbox"
-              name="furnished"
-              checked={tempFilters.furnished}
-              onChange={handleTempFilterChange}
-            />
+            <input type="checkbox" name="furnished" checked={tempFilters.furnished} onChange={handleTempFilterChange} />
             Furnished
           </label>
           <label>
-            <input
-              type="checkbox"
-              name="ac"
-              checked={tempFilters.ac}
-              onChange={handleTempFilterChange}
-            />
+            <input type="checkbox" name="ac" checked={tempFilters.ac} onChange={handleTempFilterChange} />
             AC
           </label>
           <label>
-            <input
-              type="checkbox"
-              name="heater"
-              checked={tempFilters.heater}
-              onChange={handleTempFilterChange}
-            />
+            <input type="checkbox" name="heater" checked={tempFilters.heater} onChange={handleTempFilterChange} />
             Heater
           </label>
         </div>

@@ -16,9 +16,7 @@ const handleResponse = async (request) => {
 }
 
 const createProperty = async (property) => {
-  return handleResponse(() =>
-    axios.post(URL_PATH + '/createProperty', property)
-  )
+  return handleResponse(() => axios.post(URL_PATH + '/createProperty', property))
 }
 
 const getProperties = async () => {
@@ -26,21 +24,15 @@ const getProperties = async () => {
 }
 
 const getPropertyById = async (propertyId) => {
-  return handleResponse(() =>
-    axios.get(URL_PATH + `/getPropertyById/${propertyId}`)
-  )
+  return handleResponse(() => axios.get(URL_PATH + `/getPropertyById/${propertyId}`))
 }
 
 const getUnMatchedProperties = async (tenantId) => {
-  return handleResponse(() =>
-    axios.get(URL_PATH + `/unmatchedProperties/${tenantId}`)
-  )
+  return handleResponse(() => axios.get(URL_PATH + `/unmatchedProperties/${tenantId}`))
 }
 
 const getPreferProperties = async (tenantId) => {
-  return handleResponse(() =>
-    axios.get(URL_PATH + `/preferProperties/${tenantId}`)
-  )
+  return handleResponse(() => axios.get(URL_PATH + `/preferProperties/${tenantId}`))
 }
 
 const deleteProperty = async (propertyId) => {
@@ -49,9 +41,7 @@ const deleteProperty = async (propertyId) => {
 }
 
 const patchProperty = async ({ HouseID, property }) => {
-  return handleResponse(() =>
-    axios.patch(`${URL_PATH}/patchProperty/${HouseID}`, property)
-  )
+  return handleResponse(() => axios.patch(`${URL_PATH}/patchProperty/${HouseID}`, property))
 }
 
 const putProperty = async (property) => {

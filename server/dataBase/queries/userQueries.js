@@ -18,11 +18,7 @@ const userQueries = {
   },
   editProfile: async function (userID, data) {
     try {
-      const newUserProfile = await User.findOneAndUpdate(
-        { UserID: userID },
-        data,
-        { new: true }
-      )
+      const newUserProfile = await User.findOneAndUpdate({ UserID: userID }, data, { new: true })
       return newUserProfile
     } catch (error) {
       throw new Error('Failed updating user profile to mongoDB' + error.message)

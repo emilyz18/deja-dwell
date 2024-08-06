@@ -14,7 +14,7 @@ export function GeneralInputForm() {
   const dispatch = useDispatch()
   const location = useLocation()
 
-  const [errors, setErrors] = useState({}) // for form restriction 
+  const [errors, setErrors] = useState({}) // for form restriction
   useEffect(() => {
     if (user && user.UserID) {
       dispatch(getUserAsync(user.UserID))
@@ -61,7 +61,6 @@ export function GeneralInputForm() {
     //using HTML5 validation
     dispatch(editUserAsync(user))
     setIsEditing(false)
-    
   }
 
   return (
@@ -129,9 +128,7 @@ export function GeneralInputForm() {
                   placeholder="Enter phone number here..."
                   type="tel"
                 />
-                {errors.PhoneNumber && (
-                  <p className="error">{errors.PhoneNumber}</p>
-                )}
+                {errors.PhoneNumber && <p className="error">{errors.PhoneNumber}</p>}
               </div>
               <div className="auth-form-group">
                 <label htmlFor="userEmail" className="auth-label">
@@ -147,17 +144,12 @@ export function GeneralInputForm() {
                   onChange={handleChange}
                   placeholder="Enter email here..."
                 />
-                
               </div>
               <div className="button-container">
                 <button type="submit" className="auth-button">
                   Save
                 </button>
-                <button
-                  type="button"
-                  className="auth-button"
-                  onClick={handleCancel}
-                >
+                <button type="button" className="auth-button" onClick={handleCancel}>
                   Cancel
                 </button>
               </div>
@@ -167,11 +159,7 @@ export function GeneralInputForm() {
       ) : (
         <div className="general-input-form-container">
           <div className="general-input-form">
-            <Avatar
-              alt="user profile"
-              src={user.ProfileImg}
-              sx={{ marginTop: 0, width: 200, height: 200 }}
-            />
+            <Avatar alt="user profile" src={user.ProfileImg} sx={{ marginTop: 0, width: 200, height: 200 }} />
             <h2 className="header">My Profile</h2>
             <ul className="info-list">
               <li className="list-item">
@@ -195,11 +183,7 @@ export function GeneralInputForm() {
           </div>
         </div>
       )}
-      <Snackbar
-        open={warning}
-        autoHideDuration={3000}
-        onClose={() => setWarning(false)}
-      >
+      <Snackbar open={warning} autoHideDuration={3000} onClose={() => setWarning(false)}>
         <Alert
           onClose={() => setWarning(false)}
           severity="warning"
@@ -209,7 +193,7 @@ export function GeneralInputForm() {
             left: '50%',
             transform: 'translateX(-50%)',
             zIndex: 1000,
-            fontSize: '1.2rem'
+            fontSize: '1.2rem',
           }}
         >
           Please complete your {neededInfo}.

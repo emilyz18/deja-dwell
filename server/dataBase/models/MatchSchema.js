@@ -12,6 +12,6 @@ const MatchSchema = new mongoose.Schema({
   },
 })
 
-MatchSchema.index({ HouseID: 1, TenantID: 1 }, { unique: true });
+MatchSchema.index({ HouseID: 1, TenantID: 1 }, { unique: true })
 
 module.exports = mongoose.model('Match', MatchSchema)

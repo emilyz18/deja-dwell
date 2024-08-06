@@ -1,7 +1,5 @@
-var express = require('express')
-var router = express.Router()
-var fs = require('fs')
-var path = require('path')
+const express = require('express')
+const router = express.Router()
 
 const tenantPrefQueries = require('../dataBase/queries/tenantPrefQueries')
 
@@ -11,9 +9,7 @@ router.get('/', async (req, res) => {
     const tenantPrefs = await tenantPrefQueries.getAllTenantPrefs()
     return res.status(200).json(tenantPrefs)
   } catch (err) {
-    return res
-      .status(500)
-      .send('Error loading all tenant preference data from DB')
+    return res.status(500).send('Error loading all tenant preference data from DB')
   }
 })
 
@@ -22,8 +18,7 @@ router.get('/:tenantPreferenceID', async (req, res) => {
   const { tenantPreferenceID } = req.params
 
   try {
-    const tenantPrefs =
-      await tenantPrefQueries.getOneTenantPref(tenantPreferenceID)
+    const tenantPrefs = await tenantPrefQueries.getOneTenantPref(tenantPreferenceID)
     if (tenantPrefs) {
       return res.json(tenantPrefs)
     } else {
@@ -32,9 +27,7 @@ router.get('/:tenantPreferenceID', async (req, res) => {
   } catch (err) {
     return res
       .status(500)
-      .send(
-        `Error loading tenant preference data with ID: ${tenantPreferenceID} from DB:  ${err.message}, `
-      )
+      .send(`Error loading tenant preference data with ID: ${tenantPreferenceID} from DB:  ${err.message}, `)
   }
 })
 
@@ -44,19 +37,14 @@ router.patch('/:tenantPreferenceID', async (req, res) => {
   const tenantPrefData = req.body
 
   try {
-    const updatedTenantPref = await tenantPrefQueries.editTenantPref(
-      tenantPreferenceID,
-      tenantPrefData
-    )
+    const updatedTenantPref = await tenantPrefQueries.editTenantPref(tenantPreferenceID, tenantPrefData)
     if (updatedTenantPref) {
       return res.status(200).json(updatedTenantPref)
     } else {
       return res.status(404).send('Tenant pref not found when editing')
     }
   } catch (err) {
-    return res
-      .status(500)
-      .send(`Error editing tenant pref data: ${err.message}`)
+    return res.status(500).send(`Error editing tenant pref data: ${err.message}`)
   }
 })
 

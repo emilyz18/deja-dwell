@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getLandlordAsync } from '../../redux/landlord/thunks'
-import {
-  getPropertyByIdAsync,
-  patchPropertyAsync,
-  createPropertyAsync,
-} from '../../redux/properties/thunks'
+import { getPropertyByIdAsync, patchPropertyAsync, createPropertyAsync } from '../../redux/properties/thunks'
 import { updateProperty } from '../../redux/properties/reducer'
 import { PropertyForm } from './PropertyForm'
 import { PropertyInputDisplay } from './PropertyInputDisplay'
@@ -47,9 +43,7 @@ export function PropertyEditPage() {
     }
 
     if (property.HouseID) {
-      dispatch(
-        patchPropertyAsync({ HouseID: landlord.HouseID, property: requestData })
-      )
+      dispatch(patchPropertyAsync({ HouseID: landlord.HouseID, property: requestData }))
     } else {
       await dispatch(createPropertyAsync(requestData))
       await dispatch(getPropertyByIdAsync(landlord.HouseID))
@@ -86,10 +80,7 @@ export function PropertyEditPage() {
   return (
     <div className="property-edit-page">
       {!property.HouseID || isCreating ? (
-        <button
-          className="create-new-post-button"
-          onClick={handleCreateNewPost}
-        >
+        <button className="create-new-post-button" onClick={handleCreateNewPost}>
           Create New Post
         </button>
       ) : null}

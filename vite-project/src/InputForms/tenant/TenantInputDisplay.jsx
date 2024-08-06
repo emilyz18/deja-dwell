@@ -34,60 +34,19 @@ export function TenantInputDisplay({ tenant, tenantPref, handleEdit }) {
         <TenantAttribute label="City" value={tenantPref.City} />
         <TenantAttribute label="Street" value={tenantPref.Street} />
         <TenantAttribute label="Max Price" value={tenantPref.MaxPrice} />
-        <TenantAttribute
-          label="Start Date"
-          value={
-            tenantPref.StartDate ? formatDate(tenantPref.StartDate) : 'N/A'
-          }
-        />
-        <TenantAttribute
-          label="End Date"
-          value={tenantPref.EndDate ? formatDate(tenantPref.EndDate) : 'N/A'}
-        />
-        <TenantAttribute
-          label="Number of Bedrooms"
-          value={tenantPref.NumBedroom}
-        />
-        <TenantAttribute
-          label="Number of Bathrooms"
-          value={tenantPref.NumBathroom}
-        />
-        <TenantAttribute
-          label="Allow Pet"
-          value={tenantPref.isOwnPet ? 'Yes' : 'No'}
-        />
-        <TenantAttribute
-          label="Allow Smoke"
-          value={tenantPref.isSmoke ? 'Yes' : 'No'}
-        />
-        <TenantAttribute
-          label="Allow Party"
-          value={tenantPref.isParty ? 'Yes' : 'No'}
-        />
-        <TenantAttribute
-          label="Allow Weed"
-          value={tenantPref.isWeed ? 'Yes' : 'No'}
-        />
-        <TenantAttribute
-          label="AC included"
-          value={tenantPref.isAC ? 'Yes' : 'No'}
-        />
-        <TenantAttribute
-          label="Heater included"
-          value={tenantPref.isHeater ? 'Yes' : 'No'}
-        />
-        <TenantAttribute
-          label="Furnished"
-          value={tenantPref.isFurnished ? 'Yes' : 'No'}
-        />
-        <TenantAttribute
-          label="Number of Parking"
-          value={tenantPref.NumOfParking}
-        />
-        <TenantAttribute
-          label="Number of Residents"
-          value={tenantPref.NumOfResident}
-        />
+        <TenantAttribute label="Start Date" value={tenantPref.StartDate ? formatDate(tenantPref.StartDate) : 'N/A'} />
+        <TenantAttribute label="End Date" value={tenantPref.EndDate ? formatDate(tenantPref.EndDate) : 'N/A'} />
+        <TenantAttribute label="Number of Bedrooms" value={tenantPref.NumBedroom} />
+        <TenantAttribute label="Number of Bathrooms" value={tenantPref.NumBathroom} />
+        <TenantAttribute label="Allow Pet" value={tenantPref.isOwnPet ? 'Yes' : 'No'} />
+        <TenantAttribute label="Allow Smoke" value={tenantPref.isSmoke ? 'Yes' : 'No'} />
+        <TenantAttribute label="Allow Party" value={tenantPref.isParty ? 'Yes' : 'No'} />
+        <TenantAttribute label="Allow Weed" value={tenantPref.isWeed ? 'Yes' : 'No'} />
+        <TenantAttribute label="AC included" value={tenantPref.isAC ? 'Yes' : 'No'} />
+        <TenantAttribute label="Heater included" value={tenantPref.isHeater ? 'Yes' : 'No'} />
+        <TenantAttribute label="Furnished" value={tenantPref.isFurnished ? 'Yes' : 'No'} />
+        <TenantAttribute label="Number of Parking" value={tenantPref.NumOfParking} />
+        <TenantAttribute label="Number of Residents" value={tenantPref.NumOfResident} />
       </div>
 
       <button className="edit-button" onClick={handleEdit}>

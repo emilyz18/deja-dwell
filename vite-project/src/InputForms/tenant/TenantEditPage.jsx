@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  updateTenant,
-  updateTenantPref,
-} from '../../redux/tenant/tenantReducer.js'
+import { updateTenant, updateTenantPref } from '../../redux/tenant/tenantReducer.js'
 import {
   getTenantPrefAsync,
   getTenantProfileAsync,
@@ -39,9 +36,7 @@ export function TenantEditPage() {
     if (name in tenant) {
       dispatch(updateTenant({ [name]: type === 'checkbox' ? checked : value }))
     } else {
-      dispatch(
-        updateTenantPref({ [name]: type === 'checkbox' ? checked : value })
-      )
+      dispatch(updateTenantPref({ [name]: type === 'checkbox' ? checked : value }))
     }
   }
 
@@ -56,9 +51,7 @@ export function TenantEditPage() {
         })
       )
     } else {
-      console.error(
-        'In input form component. TenantPreferenceID undefined. Cannot patch'
-      )
+      console.error('In input form component. TenantPreferenceID undefined. Cannot patch')
     }
     setIsEditing(false)
   }
@@ -82,11 +75,7 @@ export function TenantEditPage() {
           handleCancel={handleCancel}
         />
       ) : (
-        <TenantInputDisplay
-          tenant={tenant}
-          tenantPref={tenantPref}
-          handleEdit={handleEdit}
-        />
+        <TenantInputDisplay tenant={tenant} tenantPref={tenantPref} handleEdit={handleEdit} />
       )}
     </div>
   )

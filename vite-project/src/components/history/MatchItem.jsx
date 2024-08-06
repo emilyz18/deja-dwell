@@ -2,19 +2,14 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Carousel from '../carousel/Carousel'
 import './MatchItem.css'
-import {
-  getTenantMatchesAsync,
-  updateMatchAsync,
-} from '../../redux/matches/matchThunks'
+import { getTenantMatchesAsync, updateMatchAsync } from '../../redux/matches/matchThunks'
 import { Alert, Snackbar } from '@mui/material'
 
 function MatchItem({ match, displayPopup }) {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.user)
   const allProperties = useSelector((state) => state.properties.list)
-  const currentProperty = allProperties.find(
-    (property) => property.HouseID == match.HouseID
-  )
+  const currentProperty = allProperties.find((property) => property.HouseID == match.HouseID)
 
   const [notification, setNotification] = useState({
     open: false,
@@ -38,9 +33,7 @@ function MatchItem({ match, displayPopup }) {
 
   const likedProperty = (id, event) => {
     event.stopPropagation()
-    const likedProperty = allProperties.find(
-      (property) => property.HouseID === id
-    )
+    const likedProperty = allProperties.find((property) => property.HouseID === id)
     dispatch(
       updateMatchAsync({
         matchId: match.MatchID,
@@ -63,9 +56,7 @@ function MatchItem({ match, displayPopup }) {
 
   const dislikedProperty = (id, event) => {
     event.stopPropagation()
-    const dislikedProperty = allProperties.find(
-      (property) => property.HouseID === id
-    )
+    const dislikedProperty = allProperties.find((property) => property.HouseID === id)
     dispatch(
       updateMatchAsync({
         matchId: match.MatchID,
@@ -97,12 +88,7 @@ function MatchItem({ match, displayPopup }) {
     <>
       <div className="match-item">
         <div className="carousel-container-mi">
-          {currentProperty && (
-            <Carousel
-              data={currentProperty.HouseImgs}
-              size={{ width: '100%', height: '100%' }}
-            />
-          )}
+          {currentProperty && <Carousel data={currentProperty.HouseImgs} size={{ width: '100%', height: '100%' }} />}
         </div>
         {currentProperty && (
           <div className="house-details" onClick={displayPopup}>
@@ -114,8 +100,7 @@ function MatchItem({ match, displayPopup }) {
               <strong>Number of Bedrooms:</strong> {currentProperty.NumBedroom}
             </p>
             <p>
-              <strong>Number of Bathrooms:</strong>{' '}
-              {currentProperty.NumBathroom}
+              <strong>Number of Bathrooms:</strong> {currentProperty.NumBathroom}
             </p>
           </div>
         )}
@@ -125,32 +110,18 @@ function MatchItem({ match, displayPopup }) {
           </div>
           <div className="action-buttons">
             {match.MatchStatus === 'Applied' ? (
-              <button
-                className="disliked"
-                onClick={(event) =>
-                  dislikedProperty(currentProperty.HouseID, event)
-                }
-              >
+              <button className="disliked" onClick={(event) => dislikedProperty(currentProperty.HouseID, event)}>
                 Withdraw Application
               </button>
             ) : match.MatchStatus === 'Disliked' ? (
-              <button
-                className="accepted"
-                onClick={(event) =>
-                  likedProperty(currentProperty.HouseID, event)
-                }
-              >
+              <button className="accepted" onClick={(event) => likedProperty(currentProperty.HouseID, event)}>
                 Change to Applied
               </button>
             ) : null}
           </div>
         </div>
       </div>
-      <Snackbar
-        open={notification.open}
-        autoHideDuration={3000}
-        onClose={handleNotificationClose}
-      >
+      <Snackbar open={notification.open} autoHideDuration={3000} onClose={handleNotificationClose}>
         <Alert
           onClose={handleNotificationClose}
           severity={notification.severity}
@@ -160,7 +131,8 @@ function MatchItem({ match, displayPopup }) {
             left: '46%',
             transform: 'translateX(-50%)',
             zIndex: 1000,
-            fontSize: '1.2rem' }}
+            fontSize: '1.2rem',
+          }}
         >
           {notification.message}
         </Alert>

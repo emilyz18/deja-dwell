@@ -1,5 +1,5 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 
 const landlordQueries = require('../dataBase/queries/landlordQueries')
 
@@ -14,11 +14,7 @@ router.get('/:landlordID', async (req, res) => {
       return res.status(404).send('landlord not found')
     }
   } catch (err) {
-    return res
-      .status(500)
-      .send(
-        `Error getting landlord data with ID: ${landlordID} from DB:  ${err.message}, `
-      )
+    return res.status(500).send(`Error getting landlord data with ID: ${landlordID} from DB:  ${err.message}, `)
   }
 })
 

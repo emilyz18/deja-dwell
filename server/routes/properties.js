@@ -1,5 +1,5 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 const axios = require('axios')
 require('dotenv').config()
 
@@ -7,7 +7,6 @@ const tenantProfileQueries = require('../dataBase/queries/tenantProfileQueries')
 const tenantPrefQueries = require('../dataBase/queries/tenantPrefQueries')
 const propertyQueries = require('../dataBase/queries/propertyQueries')
 const matchQueries = require('../dataBase/queries/matchQueries')
-const { randomInt } = require('crypto')
 
 const distanceCache = {}
 
@@ -33,21 +32,12 @@ getUnmatchedProperties = async (tenantID) => {
   const matches = await loadMatchesJson()
   const properties = await loadPropertiesJson()
 
-  const acceptedMatches = matches.filter(
-    (match) => match.MatchStatus === 'Accepted'
-  )
-  const acceptedHouseIDs = new Set(
-    acceptedMatches.map((match) => match.HouseID)
-  )
-  unAcceptedProperties = properties.filter(
-    (property) => !acceptedHouseIDs.has(property.HouseID)
-  )
+  const acceptedMatches = matches.filter((match) => match.MatchStatus === 'Accepted')
+  const acceptedHouseIDs = new Set(acceptedMatches.map((match) => match.HouseID))
+  unAcceptedProperties = properties.filter((property) => !acceptedHouseIDs.has(property.HouseID))
 
   const unmatchedProperties = unAcceptedProperties.filter((property) => {
-    return !matches.some(
-      (match) =>
-        match.TenantID === tenantID && match.HouseID === property.HouseID
-    )
+    return !matches.some((match) => match.TenantID === tenantID && match.HouseID === property.HouseID)
   })
 
   return unmatchedProperties
@@ -76,9 +66,7 @@ router.get('/getPropertyById/:HouseID', async (req, res) => {
     return res.status(200).json(property)
   } catch (error) {
     console.error('Error fetching property:', error.message)
-    res
-      .status(500)
-      .json({ message: 'Internal Server Error', error: error.message })
+    res.status(500).json({ message: 'Internal Server Error', error: error.message })
   }
 })
 
@@ -168,8 +156,7 @@ const getScore = (property, preference) => {
               .then((response) => {
                 if (response.data.status === 'OK') {
                   // driving distance in meters
-                  const distanceValue =
-                    response.data.rows[0].elements[0].distance.value
+                  const distanceValue = response.data.rows[0].elements[0].distance.value
 
                   distanceCache[cacheKey] = distanceValue
 
@@ -203,15 +190,11 @@ const getScore = (property, preference) => {
       if (property.ExpectedPrice <= preference.MaxPrice) {
         score += weights.underMaxPriceW
         //Each 1% decrease in price will increase 1 point
-        let diffPercent =
-          (100 * (preference.MaxPrice - property.ExpectedPrice)) /
-          preference.MaxPrice
+        let diffPercent = (100 * (preference.MaxPrice - property.ExpectedPrice)) / preference.MaxPrice
         score += diffPercent
       } else {
         score -= weights.underMaxPriceW
-        let diffPercent =
-          (100 * (property.ExpectedPrice - preference.MaxPrice)) /
-          preference.MaxPrice
+        let diffPercent = (100 * (property.ExpectedPrice - preference.MaxPrice)) / preference.MaxPrice
         score -= diffPercent
       }
     }
@@ -342,9 +325,7 @@ router.get('/preferProperties/:tenantID', async (req, res) => {
 
     const tenantInfo = await tenantProfileQueries.getOneTenantProfile(tenantID)
     if (!tenantInfo) {
-      return res
-        .status(500)
-        .send(`Error loading tenantInfo data for user: ${tenantID} from DB`)
+      return res.status(500).send(`Error loading tenantInfo data for user: ${tenantID} from DB`)
     }
 
     const tenantPrefID = tenantInfo.TenantPreferenceID
@@ -369,11 +350,7 @@ router.get('/preferProperties/:tenantID', async (req, res) => {
     return res.status(200).send(prefProperties)
   } catch (err) {
     console.log(err)
-    res
-      .status(500)
-      .send(
-        `Error loading prefer property for user: ${tenantID} from DB: ${err.message}`
-      )
+    res.status(500).send(`Error loading prefer property for user: ${tenantID} from DB: ${err.message}`)
   }
 })
 
@@ -383,10 +360,7 @@ router.patch('/patchProperty/:HouseID', async (req, res) => {
     const { HouseID } = req.params
     const updatedData = req.body
 
-    const updatedProperty = await propertyQueries.editProperty(
-      HouseID,
-      updatedData
-    )
+    const updatedProperty = await propertyQueries.editProperty(HouseID, updatedData)
 
     if (!updatedProperty) {
       return res.status(404).json({ message: 'Property not found' })
@@ -395,9 +369,7 @@ router.patch('/patchProperty/:HouseID', async (req, res) => {
     return res.json(updatedProperty)
   } catch (error) {
     console.error('Error updating property:', error.message)
-    res
-      .status(500)
-      .json({ message: 'Internal Server Error', error: error.message })
+    res.status(500).json({ message: 'Internal Server Error', error: error.message })
   }
 })
 
@@ -414,9 +386,7 @@ router.post('/createProperty', async (req, res) => {
     return res.json(createdProperty)
   } catch (error) {
     console.error('Error creating property:', error.message)
-    res
-      .status(500)
-      .json({ message: 'Internal Server Error', error: error.message })
+    res.status(500).json({ message: 'Internal Server Error', error: error.message })
   }
 })
 

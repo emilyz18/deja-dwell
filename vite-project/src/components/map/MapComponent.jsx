@@ -32,7 +32,7 @@ const geocodeCache = new Map()
 function MapComponent({
   properties = [], // all properties passed in from search page
   propertyAddresses, // property addresses displayed
-  zoomMapProperty, // single property that the map will zoom on 
+  zoomMapProperty, // single property that the map will zoom on
   zoomTrigger, // changes value on every card click, used to trigger another zoom
   isRecommendation = false,
   likedFn,
@@ -151,7 +151,7 @@ function MapComponent({
         const address = convertToAddressString(propertyAddress)
         // return geocodeAddress(address);
 
-       return geocodeAddress(address).then((geocodedMarker) => {
+        return geocodeAddress(address).then((geocodedMarker) => {
           if (geocodedMarker) {
             return {
               ...geocodedMarker,
@@ -166,7 +166,7 @@ function MapComponent({
 
       Promise.all(geocodePromises)
         .then((geocodedMarkers) => {
-          const validMarkers = geocodedMarkers.filter(marker => marker !== null);
+          const validMarkers = geocodedMarkers.filter((marker) => marker !== null)
           setMarkers(validMarkers)
           // console.log(geocodedMarkers)
           if (validMarkers.length > 0) {
@@ -185,14 +185,12 @@ function MapComponent({
   const onMarkerClick = useCallback(
     (houseID) => {
       if (!isRecommendation) {
-      return () => {
-        const property = properties.find(
-          (property) => property.HouseID === houseID
-        )
-        setSelectedProperty(property)
-        setPopupVisible(true)
+        return () => {
+          const property = properties.find((property) => property.HouseID === houseID)
+          setSelectedProperty(property)
+          setPopupVisible(true)
+        }
       }
-    }
     },
     [properties]
   )
@@ -239,7 +237,6 @@ function MapComponent({
   const onLoad = (mapInstance) => {
     mapRef.current = mapInstance
   }
-
 
   return isLoaded ? (
     <>

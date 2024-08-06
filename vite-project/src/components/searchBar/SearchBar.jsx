@@ -56,12 +56,7 @@ const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
   return (
     <div className="search-bar">
       <div className="search-input">
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={handleSearchChange}
-          placeholder="Search..."
-        />
+        <input type="text" value={searchQuery} onChange={handleSearchChange} placeholder="Search..." />
         <ThemeProvider theme={theme}>
           <Button color="jet" variant="contained" onClick={performSearch}>
             Search

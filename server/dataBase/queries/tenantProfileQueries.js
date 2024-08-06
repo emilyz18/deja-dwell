@@ -3,16 +3,10 @@ const Tenant = require('../models/TenantSchema')
 const tenantProfileQueries = {
   editTenantProfile: async function (tenantID, data) {
     try {
-      const newTenantProfile = await Tenant.findOneAndUpdate(
-        { TenantID: tenantID },
-        data,
-        { new: true }
-      )
+      const newTenantProfile = await Tenant.findOneAndUpdate({ TenantID: tenantID }, data, { new: true })
       return newTenantProfile
     } catch (error) {
-      throw new Error(
-        'Failed updating tenant profile to mongoDB' + error.message
-      )
+      throw new Error('Failed updating tenant profile to mongoDB' + error.message)
     }
   },
   getOneTenantProfile: async function (tenantID) {
@@ -34,9 +28,7 @@ const tenantProfileQueries = {
       const tenant = new Tenant(data)
       return await tenant.save()
     } catch (error) {
-      throw new Error(
-        'Failed create tenant profile when sign up' + error.message
-      )
+      throw new Error('Failed create tenant profile when sign up' + error.message)
     }
   },
 }

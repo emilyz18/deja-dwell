@@ -1,42 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { signInAsync } from '../../redux/user/thunks';
-import { useNavigate } from 'react-router-dom';
-import { Snackbar, Alert } from '@mui/material';
-import './styles.css';
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { signInAsync } from '../../redux/user/thunks'
+import { useNavigate } from 'react-router-dom'
+import { Snackbar, Alert } from '@mui/material'
+import './styles.css'
 
 export default function SignIn() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.user.isAuthenticated);
-  const isLandlord = useSelector((state) => state.user.isLandlord);
-  const isTenant = useSelector((state) => state.user.isTenant);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const isAuth = useSelector((state) => state.user.isAuthenticated)
+  const isLandlord = useSelector((state) => state.user.isLandlord)
+  const isTenant = useSelector((state) => state.user.isTenant)
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
     severity: '',
-  });
-  const [showPassword, setShowPassword] = useState(false);
+  })
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
     const user = {
       Email: data.get('email'),
       Password: data.get('password'),
-    };
+    }
 
     if (!user.Email || !user.Password) {
       setSnackbar({
         open: true,
         message: 'All fields are required.',
         severity: 'error',
-      });
-      return;
+      })
+      return
     }
 
     try {
-      await dispatch(signInAsync(user)).unwrap();
+      await dispatch(signInAsync(user)).unwrap()
     } catch (error) {
       //console.log('Error caught:', error.message);
       if (error.message == "Cannot set properties of null (setting 'HashKey')") {
@@ -44,33 +44,33 @@ export default function SignIn() {
           open: true,
           message: 'Incorrect email or password.',
           severity: 'error',
-        });
+        })
       } else {
         setSnackbar({
           open: true,
           message: 'Server Error',
           severity: 'error',
-        });   
-      }    
+        })
+      }
     }
-  };
+  }
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === 'clickaway') {
-      return;
+      return
     }
-    setSnackbar({ ...snackbar, open: false });
-  };
+    setSnackbar({ ...snackbar, open: false })
+  }
 
   useEffect(() => {
     if (isAuth) {
       if (isLandlord) {
-        navigate('/landlordAccount/applicants');
+        navigate('/landlordAccount/applicants')
       } else if (isTenant) {
-        navigate('/tenantAccount/matches');
+        navigate('/tenantAccount/matches')
       }
     }
-  }, [isAuth, dispatch, isLandlord, isTenant, navigate]);
+  }, [isAuth, dispatch, isLandlord, isTenant, navigate])
 
   return (
     <div className="auth-container">
@@ -87,13 +87,7 @@ export default function SignIn() {
                 <label htmlFor="email" className="auth-label">
                   Email Address
                 </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  className="auth-input"
-                />
+                <input id="email" name="email" type="email" required className="auth-input" />
               </div>
               <div className="auth-form-group">
                 <label htmlFor="password" className="auth-label">
@@ -106,11 +100,7 @@ export default function SignIn() {
                   required
                   className="auth-input"
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="password-toggle"
-                >
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="password-toggle">
                   {showPassword ? 'Hide' : 'Show'} Password
                 </button>
               </div>
@@ -124,11 +114,7 @@ export default function SignIn() {
           </div>
         </div>
       </div>
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-      >
+      <Snackbar open={snackbar.open} autoHideDuration={3000} onClose={handleSnackbarClose}>
         <Alert
           onClose={handleSnackbarClose}
           severity={snackbar.severity}
@@ -138,12 +124,12 @@ export default function SignIn() {
             left: '75%',
             transform: 'translateX(-50%)',
             zIndex: 1000,
-            margin: '20px'
+            margin: '20px',
           }}
         >
           {snackbar.message}
         </Alert>
       </Snackbar>
     </div>
-  );
+  )
 }

@@ -2,13 +2,7 @@
 import React, { useState } from 'react'
 import './PropertyForm.css'
 
-export function PropertyForm({
-  property,
-  handleSubmit,
-  handleChange,
-  handleCancel,
-  handleImageChange,
-}) {
+export function PropertyForm({ property, handleSubmit, handleChange, handleCancel, handleImageChange }) {
   const [errors, setErrors] = useState({})
 
   const formatDate = (date) => {
@@ -19,11 +13,8 @@ export function PropertyForm({
 
   const validate = () => {
     let tempErrors = {}
-    const validImages = (property.HouseImgs || []).filter(
-      (image) => image.src !== ''
-    )
-    if (validImages.length < 3)
-      tempErrors.HouseImgs = 'At least 3 images are required'
+    const validImages = (property.HouseImgs || []).filter((image) => image.src !== '')
+    if (validImages.length < 3) tempErrors.HouseImgs = 'At least 3 images are required'
 
     // Date validation
     if (property.StartDate && property.EndDate) {
@@ -32,9 +23,7 @@ export function PropertyForm({
       if (startDate > endDate) {
         tempErrors.EndDate = 'End date must be greater than start date'
       }
-
     }
-
 
     setErrors(tempErrors)
     return Object.keys(tempErrors).length === 0
@@ -50,13 +39,7 @@ export function PropertyForm({
   const renderDateField = (label, name) => (
     <div className="property-form-group">
       <label htmlFor={name}>{label}</label>
-      <input
-        id={name}
-        name={name}
-        type="date"
-        value={formatDate(property[name]) || ''}
-        onChange={handleChange}
-      />
+      <input id={name} name={name} type="date" value={formatDate(property[name]) || ''} onChange={handleChange} />
 
       {name === 'EndDate' && errors.EndDate && <p className="error">{errors.EndDate}</p>}
     </div>
@@ -76,7 +59,7 @@ export function PropertyForm({
         onChange={handleChange}
         min={type === 'number' ? '0' : undefined}
         maxLength="50"
-        placeholder='Max 50 characters'
+        placeholder="Max 50 characters"
       />
     </div>
   )
@@ -99,13 +82,7 @@ export function PropertyForm({
 
   const renderCheckboxField = (label, name) => (
     <div className="property-form-group-inline">
-      <input
-        type="checkbox"
-        id={name}
-        name={name}
-        checked={property[name] || false}
-        onChange={handleChange}
-      />
+      <input type="checkbox" id={name} name={name} checked={property[name] || false} onChange={handleChange} />
       <label htmlFor={name}>{label}</label>
     </div>
   )
@@ -128,9 +105,7 @@ export function PropertyForm({
               value={image.alt}
               onChange={(e) => handleImageChange(index, 'alt', e)}
             />
-            {image.src && (
-              <img src={image.src} alt={image.alt} className="property-image" />
-            )}
+            {image.src && <img src={image.src} alt={image.alt} className="property-image" />}
           </div>
         ))}
       </div>
@@ -149,12 +124,7 @@ export function PropertyForm({
             {renderInputField('Province', 'Province', 'text', true)}
             {renderInputField('City', 'City', 'text', true)}
             {renderInputField('Street', 'Street')}
-            {renderInputField(
-              'Rent Per Month',
-              'ExpectedPrice',
-              'number',
-              true
-            )}
+            {renderInputField('Rent Per Month', 'ExpectedPrice', 'number', true)}
             {renderDateField('Start Date', 'StartDate')}
             {renderDateField('End Date', 'EndDate')}
           </div>

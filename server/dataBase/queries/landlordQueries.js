@@ -12,9 +12,7 @@ const landlordQueries = {
     try {
       return await Landlord.findOne({ LandlordID: landlordID })
     } catch (err) {
-      throw new Error(
-        `Failed to find this Landlord with id: ${landlordID}, ` + err.message
-      )
+      throw new Error(`Failed to find this Landlord with id: ${landlordID}, ` + err.message)
     }
   },
   creatLandlord: async function (data) {

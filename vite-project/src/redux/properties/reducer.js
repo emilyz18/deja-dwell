@@ -37,9 +37,7 @@ const propertiesSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     removeProperty: (state, action) => {
-      state.list = state.list.filter(
-        (property) => property.HouseID !== action.payload
-      )
+      state.list = state.list.filter((property) => property.HouseID !== action.payload)
     },
     updateProperty: (state, action) => {
       state.property = { ...state.property, ...action.payload }
@@ -116,9 +114,7 @@ const propertiesSlice = createSlice({
       })
       .addCase(deletePropertyAsync.fulfilled, (state, action) => {
         state.deleteProperty = 'FULFILLED'
-        state.list = state.list.filter(
-          (property) => property.id !== action.payload
-        )
+        state.list = state.list.filter((property) => property.id !== action.payload)
       })
       .addCase(deletePropertyAsync.rejected, (state, action) => {
         state.deleteProperty = 'REJECTED'
@@ -130,9 +126,7 @@ const propertiesSlice = createSlice({
       })
       .addCase(putPropertyAsync.fulfilled, (state, action) => {
         state.putProperty = 'FULFILLED'
-        const index = state.list.findIndex(
-          (property) => property.id === action.payload.id
-        )
+        const index = state.list.findIndex((property) => property.id === action.payload.id)
         if (index !== -1) {
           state.list[index] = action.payload
         }
@@ -147,9 +141,7 @@ const propertiesSlice = createSlice({
       })
       .addCase(patchPropertyAsync.fulfilled, (state, action) => {
         state.patchProperty = 'FULFILLED'
-        const index = state.list.findIndex(
-          (property) => property.HouseID === action.payload.HouseID
-        )
+        const index = state.list.findIndex((property) => property.HouseID === action.payload.HouseID)
         if (index !== -1) {
           state.list[index] = action.payload
           state.property = { ...INITIAL_STATE.property, ...action.payload }

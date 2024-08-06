@@ -33,23 +33,17 @@ const getTenantProfile = async (tenantID) => {
 
 // Get tenant preference by ID
 const getTenantPref = async (tenantPreferenceID) => {
-  return handleResponse(() =>
-    axios.get(`${URL_PATH_PREFERENCE}/${tenantPreferenceID}`)
-  )
+  return handleResponse(() => axios.get(`${URL_PATH_PREFERENCE}/${tenantPreferenceID}`))
 }
 
 // Patch tenant profile by ID
 const patchTenantProfile = async (tenantID, tenant) => {
-  return handleResponse(() =>
-    axios.patch(`${URL_PATH_PROFILE}/${tenantID}`, tenant)
-  )
+  return handleResponse(() => axios.patch(`${URL_PATH_PROFILE}/${tenantID}`, tenant))
 }
 
 // Patch tenant preference by ID
 const patchTenantPref = async (preferenceID, tenantPref) => {
-  return handleResponse(() =>
-    axios.patch(`${URL_PATH_PREFERENCE}/${preferenceID}`, tenantPref)
-  )
+  return handleResponse(() => axios.patch(`${URL_PATH_PREFERENCE}/${preferenceID}`, tenantPref))
 }
 
 export default {
