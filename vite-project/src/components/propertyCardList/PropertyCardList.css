@@ -142,6 +142,7 @@
 
 .recommendation-property-card {
   min-height: 600px;
+  width: 30vw;
 }
 
 .property-card:hover {
@@ -168,7 +169,7 @@
 
 /* Responsive styles for medium screens */
 @media (max-width: 1402px) {
-  
+
   .map-border {
     width: 100%;
   }
@@ -178,11 +179,20 @@
     padding-right: 30px;
   }
 
+  .property-card.recommendation-property-card {
+    width: 30vw;
+    padding: 10px;
+    font-size: 0.8em;
+    min-height: 550px;
+  }
+
   .property-card {
     width: 100%;
     padding: 10px;
     font-size: 0.8em;
   }
+
+
 }
 
 @media (max-width: 1067px) {
@@ -210,4 +220,15 @@
     padding: 10px;
     font-size: 0.8em;
   }
+
+  .property-card.recommendation-property-card {
+    width: 30vw;
+    padding: 10px;
+    font-size: 0.8em;
+    min-height: 550px;
+  }
+  .buttons-row{
+    font-size: 0.6em;
+  }
+
 }
