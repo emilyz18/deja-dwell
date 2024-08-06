@@ -90,7 +90,6 @@ function PropertyCardList({ searchMode }) {
   const reloadProperties = () => {
     dispatch(getUnmatchedPropertiesAsync(user.TenantID))
     dispatch(getPreferPropertiesAsync(user.TenantID))
-    console.log('Properties Reloaded')
   }
 
   const likedProperty = (id) => {
