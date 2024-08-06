@@ -86,7 +86,9 @@ To further improve the app, we would focus on enhancing the matching functionali
 
 ## Contributors
 ### Derek 
-TBD
+- Designed the project's structure, and defined and implemented the data structure of the project.
+- Designed and Implemented the core recommendation algorithm.
+- Refactored frontend functions to improve performance and fixed bugs in frontend and backend.
 
 ### Emily
 - Developed and refactored a large portion of React components using plain React, React libraries, and CSS to enhance UI/UX features
