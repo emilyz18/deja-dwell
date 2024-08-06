@@ -100,7 +100,7 @@ function MatchItem({ match, displayPopup }) {
           {currentProperty && (
             <Carousel
               data={currentProperty.HouseImgs}
-              size={{ width: 240, height: 150 }}
+              size={{ width: '100%', height: '100%' }}
             />
           )}
         </div>
@@ -154,7 +154,13 @@ function MatchItem({ match, displayPopup }) {
         <Alert
           onClose={handleNotificationClose}
           severity={notification.severity}
-          sx={{ width: '100%' }}
+          sx={{
+            position: 'fixed',
+            top: '2%',
+            left: '46%',
+            transform: 'translateX(-50%)',
+            zIndex: 1000,
+            fontSize: '1.2rem' }}
         >
           {notification.message}
         </Alert>

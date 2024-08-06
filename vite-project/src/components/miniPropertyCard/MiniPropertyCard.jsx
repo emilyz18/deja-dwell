@@ -58,8 +58,8 @@ function MiniPropertyCard(props) {
   }
 
   const carouselSize = searchMode
-    ? { width: '100%', height: 230 }
-    : { width: '100%', height: 250 }
+    ? { width: '100%', height: '16vw' }
+    : { width: '100%', height: '20vw' }
 
   const cardClassName = searchMode ? '' : 'recommendation-property-card'
 
