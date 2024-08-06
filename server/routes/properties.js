@@ -1,11 +1,15 @@
 var express = require('express')
 var router = express.Router()
+const axios = require('axios')
+require('dotenv').config()
 
 const tenantProfileQueries = require('../dataBase/queries/tenantProfileQueries')
 const tenantPrefQueries = require('../dataBase/queries/tenantPrefQueries')
 const propertyQueries = require('../dataBase/queries/propertyQueries')
 const matchQueries = require('../dataBase/queries/matchQueries')
 const { randomInt } = require('crypto')
+
+const distanceCache = {}
 
 const loadPropertiesJson = async () => {
   try {
@@ -107,6 +111,7 @@ const getScore = (property, preference) => {
     heatW: 3,
     furnishW: 3,
     parkingMatchW: 3,
+    distanceW: 20,
 
     // Add more properties and their weights as needed
   }
@@ -124,12 +129,58 @@ const getScore = (property, preference) => {
           property.City.toLowerCase() == preference.City.toLowerCase()
         ) {
           score += weights.cityW
-          if (
-            property.Street &&
-            preference.Street &&
-            property.Street.toLowerCase() == preference.Street.toLowerCase()
-          ) {
-            score += weights.streetW // no negative score if missed on street because it is likely going to miss
+
+          const convertToAddressString = (propertyAddress) => {
+            let { Street, City, Province } = propertyAddress
+
+            if (!Street) Street = ''
+            if (!City) City = ''
+            if (!Province) Province = ''
+
+            return `${Street}, ${City}, ${Province}`
+          }
+
+          const tenantPref = {
+            Street: preference.Street,
+            City: preference.City,
+            Province: preference.Province,
+          }
+          const propertyAddress = {
+            Street: property.Street,
+            City: property.City,
+            Province: property.Province,
+          }
+
+          // if strret is invalid, then api will calculate prov and city
+          const origins = convertToAddressString(tenantPref)
+          const destinations = convertToAddressString(propertyAddress)
+
+          const cacheKey = `${origins}%-%${destinations}`
+
+          if (distanceCache[cacheKey]) {
+            const distanceValue = distanceCache[cacheKey]
+
+            score += weights.distanceW * (1 - distanceValue / 10000)
+          } else {
+            const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${encodeURIComponent(origins)}&destinations=${encodeURIComponent(destinations)}&mode=driving&key=${process.env.MAP_API_KEY}`
+            axios
+              .get(url)
+              .then((response) => {
+                if (response.data.status === 'OK') {
+                  // driving distance in meters
+                  const distanceValue =
+                    response.data.rows[0].elements[0].distance.value
+
+                  distanceCache[cacheKey] = distanceValue
+
+                  score += weights.distanceW * (1 - distanceValue / 10000)
+                } else {
+                  console.error('Error: ' + response.data.status)
+                }
+              })
+              .catch((error) => {
+                console.error('Error: ' + error.message)
+              })
           }
         } else {
           score -= weights.cityW
@@ -312,6 +363,7 @@ router.get('/preferProperties/:tenantID', async (req, res) => {
         prefScore: getScore(property, tenantPrefs),
       }
     })
+
     prefProperties.sort((a, b) => b.prefScore - a.prefScore)
 
     return res.status(200).send(prefProperties)
