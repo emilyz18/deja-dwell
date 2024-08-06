@@ -31,7 +31,8 @@
 }
 
 .active-dropzone {
-  opacity: 0.8; /* More visible when active */
+  opacity: 0.8;
+  /* More visible when active */
   min-height: 600px;
 }
 
@@ -100,6 +101,16 @@
   gap: 10px;
 }
 
+.search-display .map-border {
+  flex: 2;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  max-width: 550px;
+}
+
 .cards-container {
   max-height: 550px;
   padding: 10px;
@@ -152,4 +163,25 @@
     box-shadow 0.3s ease,
     transform 0.3s ease;
   border: 2px solid red;
+}
+
+
+/* Responsive styles for medium screens */
+@media (max-width: 1067px) {
+  .search-display {
+    flex-direction: column;
+  }
+
+  .map-border {
+    max-width: 50%;
+    margin-bottom: 10px;
+  }
+
+  .cards-container {
+    max-width: 100%;
+  }
+
+  .property-card {
+    width: 100%;
+  }
 }
