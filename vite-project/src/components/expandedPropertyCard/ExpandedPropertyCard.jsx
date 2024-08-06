@@ -27,6 +27,8 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch = false, showButto
     HouseImgs,
     Description,
     NumOfParking,
+    StartDate,
+    EndDate,
   } = propertyInfo;
 
   const address = [{ HouseID: HouseID, ExpectedPrice: ExpectedPrice, Street: Street, City: City, Province: Province }];
@@ -40,6 +42,18 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch = false, showButto
     dislikedFn(propertyInfo.HouseID)
     setPopupVisible(false)
   }
+
+  const formatDate = (dateString) => {
+    console.log("reached format data")
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const startDate = StartDate? formatDate(StartDate): "Right away"
+  const endDate = EndDate? formatDate(EndDate): "Long term"
 
   return (
     <div className="expanded-property-popup">
@@ -58,6 +72,9 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch = false, showButto
         <InfoItem label="Parking Availability" value={NumOfParking} />
         <InfoItem label="Number of Bedrooms" value={NumBedroom} />
         <InfoItem label="Number of Bathrooms" value={NumBathroom} />
+        <InfoItem label="Start Date" value={startDate} />
+        <InfoItem label="End Date" value={endDate} />
+
       </div>
       <div className="details-row-expand">
         {isAC && <span className="amenity">AC</span>}
