@@ -44,7 +44,7 @@ export function ExpandedPropertyCard({ propertyInfo, isSearch = false, showButto
   }
 
   const formatDate = (dateString) => {
-    console.log("reached format data")
+    // console.log("reached format data")
     const date = new Date(dateString);
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
