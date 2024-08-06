@@ -150,7 +150,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
       <div className="landlord-dashboard-display">
         <div className="landlord-property-card">
           <div className="landlord-carousel-container">
-            <Carousel data={images} size={{ width: '100%', height: '100%' }} />
+            <Carousel data={images} size={{ width: '100%', height: '24vw' }} />
           </div>
           <div className="property-information">
             <h3>{title}</h3>
