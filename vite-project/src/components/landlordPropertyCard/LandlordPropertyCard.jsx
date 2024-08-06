@@ -13,12 +13,8 @@ import { getLandlordMatchesAsync, reopenMatchesAsync, updateMatchAsync } from '.
 const LandlordPropertyCard = ({ landlordId }) => {
   const dispatch = useDispatch()
   const properties = useSelector((state) => state.properties.list)
-  const getLandlordMatchesStatus = useSelector(
-    (state) => state.matches.getLandlordMatches,
-  )
-  const landlordMatchesApplicants = useSelector(
-    (state) => state.matches.landlordMatches,
-  )
+  const getLandlordMatchesStatus = useSelector((state) => state.matches.getLandlordMatches)
+  const landlordMatchesApplicants = useSelector((state) => state.matches.landlordMatches)
   const landlordID = useSelector((state) => state.user.user.LandlordID)
 
   const [selectedProperty, setSelectedProperty] = useState(null)
@@ -38,7 +34,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
       dispatch(getLandlordMatchesAsync(landlordID))
     } else if (getLandlordMatchesStatus === 'FULFILLED') {
       setApplicants(landlordMatchesApplicants)
-      if (landlordMatchesApplicants.some(applicant => applicant.matchStatus === 'Accepted')) {
+      if (landlordMatchesApplicants.some((applicant) => applicant.matchStatus === 'Accepted')) {
         setHasAccept(true)
       } else {
         setHasAccept(false)
@@ -54,9 +50,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
   }, [properties, landlordId])
 
   const handleRejectApplicant = (name) => {
-    const rejectedApplicant = applicants.find(
-      (applicant) => applicant.name === name,
-    )
+    const rejectedApplicant = applicants.find((applicant) => applicant.name === name)
     dispatch(
       updateMatchAsync({
         matchId: rejectedApplicant.matchID,
@@ -66,7 +60,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
           HouseID: rejectedApplicant.houseID,
           MatchStatus: 'Rejected',
         },
-      }),
+      })
     )
     setNotification({
       open: true,
@@ -76,9 +70,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
   }
 
   const handleAcceptApplicant = (name) => {
-    const acceptedApplicant = applicants.find(
-      (applicant) => applicant.name === name,
-    )
+    const acceptedApplicant = applicants.find((applicant) => applicant.name === name)
     dispatch(
       updateMatchAsync({
         matchId: acceptedApplicant.matchID,
@@ -88,7 +80,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
           HouseID: acceptedApplicant.houseID,
           MatchStatus: 'Accepted',
         },
-      }),
+      })
     )
     setNotification({
       open: true,
@@ -99,9 +91,7 @@ const LandlordPropertyCard = ({ landlordId }) => {
 
   const handleReopenMatch = () => {
     if (selectedProperty) {
-      dispatch(
-        reopenMatchesAsync(selectedProperty.HouseID),
-      )
+      dispatch(reopenMatchesAsync(selectedProperty.HouseID))
     }
   }
 
@@ -124,15 +114,14 @@ const LandlordPropertyCard = ({ landlordId }) => {
   const reloadApplicants = () => {
     dispatch(getPropertiesAsync())
     dispatch(getLandlordMatchesAsync(landlordID))
-
   }
 
   if (!selectedProperty) {
-    return <div className="no-property-container">
-            <span className="no-property-message">
-            You have not created a property yet
-          </span>
-    </div>
+    return (
+      <div className="no-property-container">
+        <span className="no-property-message">You have not created a property yet</span>
+      </div>
+    )
   }
 
   const {
@@ -210,23 +199,13 @@ const LandlordPropertyCard = ({ landlordId }) => {
         </div>
         {popupVisible && (
           <div className="property-popup-background" onClick={handleClosePopup}>
-            <div
-              className="applicant-popup"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ExpandedApplicantCard
-                applicant={selectedApplicant}
-                onClose={handleClosePopup}
-              />
+            <div className="applicant-popup" onClick={(e) => e.stopPropagation()}>
+              <ExpandedApplicantCard applicant={selectedApplicant} onClose={handleClosePopup} />
             </div>
           </div>
         )}
       </div>
-      <Snackbar
-        open={notification.open}
-        autoHideDuration={3000}
-        onClose={handleNotificationClose}
-      >
+      <Snackbar open={notification.open} autoHideDuration={3000} onClose={handleNotificationClose}>
         <Alert
           onClose={handleNotificationClose}
           severity={notification.severity}
@@ -267,7 +246,6 @@ const LandlordPropertyCard = ({ landlordId }) => {
         </Fab>
       </Box>
     </>
-
   )
 }
 

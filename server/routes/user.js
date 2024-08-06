@@ -1,5 +1,5 @@
-var express = require('express')
-var crypto = require('crypto')
+const express = require('express')
+const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
 
 const { db } = require('../db')
@@ -97,20 +97,14 @@ router.post('/register', async (req, res) => {
 
       try {
         await userQueries.signUp(newUser)
-        await tenantProfileQueries.creatTenantProfile(
-          newTenantProfile(userId, tenantId, tenantPrefID)
-        )
-        await tenantPrefQueries.creatTenantPref(
-          newTenantPref(tenantId, tenantPrefID)
-        )
+        await tenantProfileQueries.creatTenantProfile(newTenantProfile(userId, tenantId, tenantPrefID))
+        await tenantPrefQueries.creatTenantPref(newTenantPref(tenantId, tenantPrefID))
       } catch (error) {
         return res.status(401).json({ message: error.message })
       }
     }
 
-    res
-      .status(201)
-      .json({ message: 'User registered', Auth: true, User: newUser })
+    res.status(201).json({ message: 'User registered', Auth: true, User: newUser })
   }
 })
 
@@ -175,9 +169,7 @@ router.patch('/edit', async (req, res) => {
       return res.status(404).json({ message: `No such user for update` })
     }
   } catch (err) {
-    return res
-      .status(500)
-      .json({ message: `Error updating user profile: ${err.message}` })
+    return res.status(500).json({ message: `Error updating user profile: ${err.message}` })
   }
 })
 

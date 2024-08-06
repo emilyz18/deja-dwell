@@ -23,26 +23,16 @@ const Carousel = ({ data, size }) => {
       <BsArrowLeftCircleFill onClick={prevSlide} className="arrow arrow-left" />
       {data.map((item, idx) => {
         return (
-          <img
-            src={item.src}
-            alt={item.alt}
-            key={idx}
-            className={slide === idx ? 'slide' : 'slide slide-hidden'}
-          />
+          <img src={item.src} alt={item.alt} key={idx} className={slide === idx ? 'slide' : 'slide slide-hidden'} />
         )
       })}
-      <BsArrowRightCircleFill
-        onClick={nextSlide}
-        className="arrow arrow-right"
-      />
+      <BsArrowRightCircleFill onClick={nextSlide} className="arrow arrow-right" />
       <span className="indicators">
         {data.map((_, idx) => {
           return (
             <button
               key={idx}
-              className={
-                slide === idx ? 'indicator' : 'indicator indicator-inactive'
-              }
+              className={slide === idx ? 'indicator' : 'indicator indicator-inactive'}
               onClick={() => setSlide(idx)}
             ></button>
           )

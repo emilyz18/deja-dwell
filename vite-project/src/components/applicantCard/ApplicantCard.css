@@ -16,7 +16,9 @@
   margin: 12px 0;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   cursor: pointer;
   position: relative;
   overflow-x: hidden;
@@ -107,7 +109,7 @@
   font-family: 'Mulish', sans-serif;
 }
 
-@media screen and (max-width:957px) {
+@media screen and (max-width: 957px) {
   .applicant-card {
     width: 100%;
     padding: 12px;
@@ -125,12 +127,12 @@
 
   .applicant-info {
     padding-left: 10px;
-    padding-right:10px;
+    padding-right: 10px;
     font-size: 0.8em;
   }
 
   .applicant-info h3 {
-    font-size: 1.0em;
+    font-size: 1em;
   }
 
   .applicant-actions button {

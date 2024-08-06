@@ -16,10 +16,7 @@ const ApplicantCard = ({ applicant, onReject, onAccept, onClick }) => {
   }
 
   return (
-    <div
-      className={`applicant-card ${matchStatus === 'Accepted' ? 'accepted' : ''}`}
-      onClick={onClick}
-    >
+    <div className={`applicant-card ${matchStatus === 'Accepted' ? 'accepted' : ''}`} onClick={onClick}>
       <div className="applicant-image">
         <img src={image} alt={`${name}'s profile`} />
       </div>

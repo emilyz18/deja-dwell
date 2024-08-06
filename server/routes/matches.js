@@ -6,18 +6,17 @@ const tenantProfileQueries = require('../dataBase/queries/tenantProfileQueries')
 const userQueries = require('../dataBase/queries/userQueries')
 const { v4: uuid } = require('uuid')
 
-
 // Create a new match
 router.post('/', async (req, res) => {
   let newMatch = req.body
 
   try {
-    const existingMatch = await matchQueries.findMatchWithIds(newMatch.HouseID, newMatch.TenantID);
+    const existingMatch = await matchQueries.findMatchWithIds(newMatch.HouseID, newMatch.TenantID)
     if (existingMatch) {
-      return res.status(409).json({ message: 'Duplicate match exists' });
+      return res.status(409).json({ message: 'Duplicate match exists' })
     }
     const matchID = uuid()
-    newMatch.MatchID = matchID;
+    newMatch.MatchID = matchID
 
     const createdMatch = await matchQueries.createMatch(newMatch)
     res.status(201).json(createdMatch)
@@ -37,19 +36,18 @@ router.patch('/:matchId', async (req, res) => {
 
   try {
     if (MatchStatus == 'Accepted') {
-      const allMatch = await matchQueries.getAllMatches();
-      const acceptedMatch = allMatch.find(match => (match.MatchID === matchId));
-      const rejectedMatches = allMatch.filter(match => (match.MatchID !== matchId && match.HouseID === acceptedMatch.HouseID));
+      const allMatch = await matchQueries.getAllMatches()
+      const acceptedMatch = allMatch.find((match) => match.MatchID === matchId)
+      const rejectedMatches = allMatch.filter(
+        (match) => match.MatchID !== matchId && match.HouseID === acceptedMatch.HouseID
+      )
       await Promise.all(
         rejectedMatches.map((rejectedMatch) => {
           matchQueries.updateMatchStatus(rejectedMatch.MatchID, 'Rejected')
         })
       )
     }
-    const updatedMatch = await matchQueries.updateMatchStatus(
-      matchId,
-      MatchStatus
-    )
+    const updatedMatch = await matchQueries.updateMatchStatus(matchId, MatchStatus)
     if (!updatedMatch) {
       return res.status(404).send('Match not found')
     }
@@ -80,10 +78,7 @@ router.get('/landlord/:landlordId', async (req, res) => {
   try {
     const matches = await matchQueries.getAllMatches(landlordId)
     const activedMatches = matches.filter(
-      (match) =>
-        match.MatchStatus !== 'Rejected' &&
-        match.MatchStatus !== 'Disliked' &&
-        match.LandlordID === landlordId
+      (match) => match.MatchStatus !== 'Rejected' && match.MatchStatus !== 'Disliked' && match.LandlordID === landlordId
     )
     const tenantPrefs = await tenantPrefQueries.getAllTenantPrefs()
     const tenantProfiles = await tenantProfileQueries.getAllTenantProfile()
@@ -92,16 +87,11 @@ router.get('/landlord/:landlordId', async (req, res) => {
     const combinedResults = activedMatches.map((match) => {
       const tenantID = match.TenantID
 
-      const tenantProfile = tenantProfiles.find(
-        (profile) => profile.TenantID === tenantID
-      )
+      const tenantProfile = tenantProfiles.find((profile) => profile.TenantID === tenantID)
       const userProfile = users.find((user) => user.TenantID === tenantID)
 
       const tenantPreference = tenantProfile
-        ? tenantPrefs.find(
-            (pref) =>
-              pref.TenantPreferenceID === tenantProfile.TenantPreferenceID
-          )
+        ? tenantPrefs.find((pref) => pref.TenantPreferenceID === tenantProfile.TenantPreferenceID)
         : null
 
       return {
@@ -145,16 +135,15 @@ router.post('/reopen/:houseID', async (req, res) => {
   const { houseID } = req.params
   try {
     const matches = await matchQueries.getAllMatches()
-    const houseMatches = matches.filter(match => (match.HouseID === houseID));
+    const houseMatches = matches.filter((match) => match.HouseID === houseID)
     await Promise.all(
-      houseMatches.map(houseMatch => {
+      houseMatches.map((houseMatch) => {
         matchQueries.updateMatchStatus(houseMatch.MatchID, 'Applied')
-      }
-      )
-    );
-    return res.status(201).send('Matches Reopened!');
+      })
+    )
+    return res.status(201).send('Matches Reopened!')
   } catch (err) {
-    res.status(500).send('Error reopen matches data: ' + err.message);
+    res.status(500).send('Error reopen matches data: ' + err.message)
   }
 })
 module.exports = router

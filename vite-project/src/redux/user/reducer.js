@@ -1,12 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { REQUEST_STATE } from '../utils'
-import {
-  signInAsync,
-  signUpAsync,
-  editUserAsync,
-  getUserAsync,
-  getUsersAsync,
-} from './thunks'
+import { signInAsync, signUpAsync, editUserAsync, getUserAsync, getUsersAsync } from './thunks'
 
 const INITIAL_STATE = {
   user: null,

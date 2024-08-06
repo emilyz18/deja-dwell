@@ -11,11 +11,7 @@ export function LandLordSideBar({ profile }) {
   return (
     <>
       <div>
-        <BaseSideBar
-          navBarLinks={landlordLinks}
-          profile={profile}
-          accountType={LANDLORD}
-        />
+        <BaseSideBar navBarLinks={landlordLinks} profile={profile} accountType={LANDLORD} />
       </div>
     </>
   )

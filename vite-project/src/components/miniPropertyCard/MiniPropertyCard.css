@@ -22,7 +22,7 @@
   background-color: white;
   display: flex;
   flex-direction: column;
-  
+
   padding: 8px;
   padding-top: 20px;
 }
@@ -37,14 +37,14 @@
   text-align: left;
 }
 
-.details-row, .details-row-amenity{
+.details-row,
+.details-row-amenity {
   display: flex;
   align-items: center;
   margin-top: 10px;
   flex-wrap: wrap;
   gap: 5px;
 }
-
 
 .details-row span {
   font-size: 0.9em;
@@ -69,7 +69,6 @@
   padding: 6px;
   background-color: white;
   margin-top: auto; /* Ensure buttons row is always at the bottom */
-
 }
 
 .price {

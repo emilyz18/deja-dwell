@@ -7,21 +7,17 @@ import './History.css'
 import { getPropertiesAsync } from '../../redux/properties/thunks'
 import { getTenantMatchesAsync } from '../../redux/matches/matchThunks'
 import { Typography } from '@mui/material'
-import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
-import  ReplayRoundedIcon from '@mui/icons-material/ReplayRounded'
+import Box from '@mui/material/Box'
+import Fab from '@mui/material/Fab'
+import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded'
 
 function History() {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.user)
   const [popupVisible, setPopupVisible] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState(null)
-  const getPropertiesStatus = useSelector(
-    (state) => state.properties.getProperties
-  )
-  const getTenantMatchesStatus = useSelector(
-    (state) => state.matches.getTenantMatches
-  )
+  const getPropertiesStatus = useSelector((state) => state.properties.getProperties)
+  const getTenantMatchesStatus = useSelector((state) => state.matches.getTenantMatches)
   const tenantID = user.TenantID
 
   useEffect(() => {
@@ -34,9 +30,7 @@ function History() {
   const matches = useSelector((state) => state.matches.tenantMatches)
 
   const displayPopup = (match) => {
-    const currentProperty = allProperties.find(
-      (property) => property.HouseID === match.HouseID
-    )
+    const currentProperty = allProperties.find((property) => property.HouseID === match.HouseID)
 
     setSelectedProperty(currentProperty)
     setPopupVisible(true)
@@ -78,17 +72,11 @@ function History() {
       <div className="match-list">
         {matches.length === 0 ? (
           <div className="no-matches-container">
-            <span className="no-matches-message">
-            You have not applied to a posting yet
-          </span>
+            <span className="no-matches-message">You have not applied to a posting yet</span>
           </div>
         ) : (
           matches.map((match) => (
-            <MatchItem
-              key={match.MatchID}
-              match={match}
-              displayPopup={() => displayPopup(match)}
-            />
+            <MatchItem key={match.MatchID} match={match} displayPopup={() => displayPopup(match)} />
           ))
         )}
       </div>

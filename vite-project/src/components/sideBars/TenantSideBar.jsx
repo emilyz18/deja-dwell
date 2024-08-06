@@ -13,11 +13,7 @@ export function TenantSideBar({ profile }) {
   return (
     <>
       <div>
-        <BaseSideBar
-          navBarLinks={tenantLinks}
-          profile={profile}
-          accountType={TENANT}
-        />
+        <BaseSideBar navBarLinks={tenantLinks} profile={profile} accountType={TENANT} />
       </div>
     </>
   )

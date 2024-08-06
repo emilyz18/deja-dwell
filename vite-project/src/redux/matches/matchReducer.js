@@ -27,9 +27,7 @@ const matchSlice = createSlice({
   reducers: {
     // Update specific match in the state
     updateMatch: (state, action) => {
-      const index = state.list.findIndex(
-        (match) => match.MatchID === action.payload.MatchID
-      )
+      const index = state.list.findIndex((match) => match.MatchID === action.payload.MatchID)
       if (index !== -1) {
         state.list[index] = { ...state.list[index], ...action.payload }
       }
@@ -64,9 +62,7 @@ const matchSlice = createSlice({
         state.updateMatch = REQUEST_STATE.FULFILLED
         state.getLandlordMatches = REQUEST_STATE.IDLE
         state.getTenantMatches = REQUEST_STATE.IDLE
-        const index = state.list.findIndex(
-          (match) => match.MatchID === action.payload.MatchID
-        )
+        const index = state.list.findIndex((match) => match.MatchID === action.payload.MatchID)
         if (index !== -1) {
           state.list[index] = action.payload
         }
@@ -85,9 +81,7 @@ const matchSlice = createSlice({
       })
       .addCase(deleteMatchAsync.fulfilled, (state, action) => {
         state.deleteMatch = REQUEST_STATE.FULFILLED
-        state.list = state.list.filter(
-          (match) => match.MatchID !== action.payload
-        )
+        state.list = state.list.filter((match) => match.MatchID !== action.payload)
       })
       .addCase(deleteMatchAsync.rejected, (state, action) => {
         state.deleteMatch = REQUEST_STATE.REJECTED

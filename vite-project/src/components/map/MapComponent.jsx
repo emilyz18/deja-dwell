@@ -32,7 +32,7 @@ const geocodeCache = new Map()
 function MapComponent({
   properties = [], // all properties passed in from search page
   propertyAddresses, // property addresses displayed
-  zoomMapProperty, // single property that the map will zoom on 
+  zoomMapProperty, // single property that the map will zoom on
   zoomTrigger, // changes value on every card click, used to trigger another zoom
   isRecommendation = false,
   likedFn,
@@ -102,13 +102,11 @@ function MapComponent({
   const geocodeAddress = (address) => {
     return new Promise((resolve, reject) => {
       if (geocodeCache.has(address)) {
-        // console.log("zoom addr " + JSON.stringify(geocodeCache.get(address)))
         resolve(geocodeCache.get(address))
       } else {
         geocoderRef.current.geocode({ address }, (results, status) => {
           if (status === 'OK') {
             const position = results[0].geometry.location
-            console.log('api call count')
             geocodeCache.set(address, {
               lat: position.lat(),
               lng: position.lng(),
@@ -124,12 +122,9 @@ function MapComponent({
 
   const zoomCenter = () => {
     return new Promise((resolve, reject) => {
-      //TODO: handle reject case
       if (zoomMapProperty && geocoderRef.current) {
         const addr = convertToAddressString(zoomMapProperty)
         geocodeAddress(addr).then(resolve).catch(reject)
-      } else {
-        // reject(('No zoomMapProperty provided'));
       }
     })
   }
@@ -138,8 +133,6 @@ function MapComponent({
     if (zoomMapProperty) {
       zoomCenter()
         .then((position) => {
-          // console.log("setting center: " + JSON.stringify(position))
-          // setCenter(position)
           setCenter((prev) => ({ ...prev, ...position }))
 
           setIsZoom(true)
@@ -158,7 +151,7 @@ function MapComponent({
         const address = convertToAddressString(propertyAddress)
         // return geocodeAddress(address);
 
-       return geocodeAddress(address).then((geocodedMarker) => {
+        return geocodeAddress(address).then((geocodedMarker) => {
           if (geocodedMarker) {
             return {
               ...geocodedMarker,
@@ -173,7 +166,7 @@ function MapComponent({
 
       Promise.all(geocodePromises)
         .then((geocodedMarkers) => {
-          const validMarkers = geocodedMarkers.filter(marker => marker !== null);
+          const validMarkers = geocodedMarkers.filter((marker) => marker !== null)
           setMarkers(validMarkers)
           // console.log(geocodedMarkers)
           if (validMarkers.length > 0) {
@@ -192,14 +185,12 @@ function MapComponent({
   const onMarkerClick = useCallback(
     (houseID) => {
       if (!isRecommendation) {
-      return () => {
-        const property = properties.find(
-          (property) => property.HouseID === houseID
-        )
-        setSelectedProperty(property)
-        setPopupVisible(true)
+        return () => {
+          const property = properties.find((property) => property.HouseID === houseID)
+          setSelectedProperty(property)
+          setPopupVisible(true)
+        }
       }
-    }
     },
     [properties]
   )
@@ -246,8 +237,6 @@ function MapComponent({
   const onLoad = (mapInstance) => {
     mapRef.current = mapInstance
   }
-
-  // console.log("map center: " + JSON.stringify(center))
 
   return isLoaded ? (
     <>

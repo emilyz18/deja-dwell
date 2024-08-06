@@ -35,13 +35,7 @@ export default function SignUp() {
       Password: data.get('password'),
       accountType: accountType,
     }
-    if (
-      !user.UserName ||
-      !user.Email ||
-      !user.Password ||
-      !user.accountType ||
-      !confirmPassword
-    ) {
+    if (!user.UserName || !user.Email || !user.Password || !user.accountType || !confirmPassword) {
       setSnackbar({
         open: true,
         message: 'All fields are required.',
@@ -92,23 +86,13 @@ export default function SignUp() {
                 <label htmlFor="userName" className="auth-label">
                   User Name
                 </label>
-                <input
-                  id="userName"
-                  name="userName"
-                  required
-                  className="auth-input"
-                />
+                <input id="userName" name="userName" required className="auth-input" />
               </div>
               <div className="auth-form-group">
                 <label htmlFor="email" className="auth-label">
                   Email Address
                 </label>
-                <input
-                  id="email"
-                  name="email"
-                  required
-                  className="auth-input"
-                />
+                <input id="email" name="email" required className="auth-input" />
               </div>
               <div className="auth-form-group">
                 <label htmlFor="password" className="auth-label">
@@ -167,16 +151,8 @@ export default function SignUp() {
           </div>
         </div>
       </div>
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-      >
-        <Alert
-          onClose={handleSnackbarClose}
-          severity={snackbar.severity}
-          sx={{ width: '100%' }}
-        >
+      <Snackbar open={snackbar.open} autoHideDuration={3000} onClose={handleSnackbarClose}>
+        <Alert onClose={handleSnackbarClose} severity={snackbar.severity} sx={{ width: '100%' }}>
           {snackbar.message}
         </Alert>
       </Snackbar>

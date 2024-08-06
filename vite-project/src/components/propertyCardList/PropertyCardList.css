@@ -8,7 +8,6 @@
   margin: 0 auto;
 }
 
-
 .dropzone-container {
   display: flex;
   width: 100%;
@@ -166,10 +165,8 @@
   border: 2px solid red;
 }
 
-
 /* Responsive styles for medium screens */
 @media (max-width: 1402px) {
-
   .map-border {
     width: 100%;
   }
@@ -191,8 +188,6 @@
     padding: 10px;
     font-size: 0.8em;
   }
-
-
 }
 
 @media (max-width: 1067px) {
@@ -227,8 +222,7 @@
     font-size: 0.8em;
     min-height: 550px;
   }
-  .buttons-row{
+  .buttons-row {
     font-size: 0.6em;
   }
-
 }

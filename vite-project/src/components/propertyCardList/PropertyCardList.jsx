@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  closestCenter,
-  DndContext,
-  DragOverlay,
-  useDroppable,
-} from '@dnd-kit/core'
+import { closestCenter, DndContext, DragOverlay, useDroppable } from '@dnd-kit/core'
 import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable'
 import MiniPropertyCard from '../miniPropertyCard/MiniPropertyCard'
 import { ExpandedPropertyCard } from '../expandedPropertyCard/ExpandedPropertyCard.jsx'
@@ -13,10 +8,7 @@ import './PropertyCardList.css'
 import SearchBar from '../searchBar/SearchBar.jsx'
 import MapComponent from '../map/MapComponent.jsx'
 import HelpPopOver from './HelpPopOver.jsx'
-import {
-  getPreferPropertiesAsync,
-  getUnmatchedPropertiesAsync,
-} from '../../redux/properties/thunks'
+import { getPreferPropertiesAsync, getUnmatchedPropertiesAsync } from '../../redux/properties/thunks'
 import { createMatchAsync } from '../../redux/matches/matchThunks'
 import { Box, Typography, Fab, Snackbar, Alert } from '@mui/material'
 import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded'
@@ -26,17 +18,11 @@ function PropertyCardList({ searchMode }) {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.user)
 
-  const getUnMatchedPropertiesStatus = useSelector(
-    (state) => state.properties.getUnmatchedProperties
-  )
-  const getPreferPropertiesStatus = useSelector(
-    (state) => state.properties.getPreferProperties
-  )
+  const getUnMatchedPropertiesStatus = useSelector((state) => state.properties.getUnmatchedProperties)
+  const getPreferPropertiesStatus = useSelector((state) => state.properties.getPreferProperties)
 
   const properties = searchMode
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     ? useSelector((state) => state.properties.unmatchProperties)
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     : useSelector((state) => state.properties.preferProperties)
 
   const [activeId, setActiveId] = useState(null) // activeId only used when dragging
@@ -51,7 +37,6 @@ function PropertyCardList({ searchMode }) {
 
   const [zoomMapProperty, setzoomMapProperty] = useState(null)
   const [zoomTrigger, setZoomTrigger] = useState(0)
-
 
   const [searchTerm, setSearchTerm] = useState('')
   const [filters, setFilters] = useState({
@@ -74,18 +59,10 @@ function PropertyCardList({ searchMode }) {
   })
 
   useEffect(() => {
-    if (
-      getPreferPropertiesStatus === 'IDLE' ||
-      getUnMatchedPropertiesStatus === 'IDLE'
-    ) {
+    if (getPreferPropertiesStatus === 'IDLE' || getUnMatchedPropertiesStatus === 'IDLE') {
       reloadProperties()
     }
-  }, [
-    getUnMatchedPropertiesStatus,
-    getPreferPropertiesStatus,
-    searchMode,
-    dispatch,
-  ])
+  }, [getUnMatchedPropertiesStatus, getPreferPropertiesStatus, searchMode, dispatch])
 
   const reloadProperties = () => {
     dispatch(getUnmatchedPropertiesAsync(user.TenantID))
@@ -113,9 +90,7 @@ function PropertyCardList({ searchMode }) {
   }
 
   const dislikedProperty = (id) => {
-    const dislikedProperty = properties.find(
-      (property) => property.HouseID === id
-    )
+    const dislikedProperty = properties.find((property) => property.HouseID === id)
     dispatch(
       createMatchAsync({
         TenantID: user.TenantID,
@@ -169,37 +144,24 @@ function PropertyCardList({ searchMode }) {
   }
 
   const { setNodeRef: setLikeRef, isOver: isOverLike } = useDroppable({
-    id: 'like-dropzone'
+    id: 'like-dropzone',
   })
 
   const { setNodeRef: setDislikeRef, isOver: isOverDislike } = useDroppable({
-    id: 'dislike-dropzone'
+    id: 'dislike-dropzone',
   })
 
   const displaySearchProperties = properties.filter((property) => {
-    const matchesSearchTerm = property.Title.toLowerCase().includes(
-      searchTerm.toLowerCase()
-    )
-    const matchesMaxPrice =
-      filters.maxPrice === '' ||
-      property.ExpectedPrice <= parseFloat(filters.maxPrice)
+    const matchesSearchTerm = property.Title.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesMaxPrice = filters.maxPrice === '' || property.ExpectedPrice <= parseFloat(filters.maxPrice)
     const matchesProvince =
-      filters.province === '' ||
-      property.Province.toLowerCase() === filters.province.toLowerCase()
-    const matchesCity =
-      filters.city === '' ||
-      property.City.toLowerCase() === filters.city.toLowerCase()
+      filters.province === '' || property.Province.toLowerCase() === filters.province.toLowerCase()
+    const matchesCity = filters.city === '' || property.City.toLowerCase() === filters.city.toLowerCase()
 
-    const matchesStartDate =
-      filters.startDate === '' || property.StartDate === filters.startDate
-    const matchesEndDate =
-      filters.endDate === '' || property.EndDate === filters.endDate
-    const matchesBedroomNum =
-      filters.bedroomNum === '' ||
-      property.NumBedroom === parseFloat(filters.bedroomNum)
-    const matchesBathroomNum =
-      filters.bathroomNum === '' ||
-      property.NumBathroom === parseFloat(filters.bathroomNum)
+    const matchesStartDate = filters.startDate === '' || property.StartDate === filters.startDate
+    const matchesEndDate = filters.endDate === '' || property.EndDate === filters.endDate
+    const matchesBedroomNum = filters.bedroomNum === '' || property.NumBedroom === parseFloat(filters.bedroomNum)
+    const matchesBathroomNum = filters.bathroomNum === '' || property.NumBathroom === parseFloat(filters.bathroomNum)
 
     const matchesAllowPet = !filters.allowPet || property.AllowPet
     const matchesAllowSmoke = !filters.allowSmoke || property.AllowSmoke
@@ -278,12 +240,7 @@ function PropertyCardList({ searchMode }) {
               Search
             </Typography>
           </Box>
-          <SearchBar
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            filters={filters}
-            setFilters={setFilters}
-          />
+          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} filters={filters} setFilters={setFilters} />
           <div className="search-display">
             <div className="map-border">
               <MapComponent
@@ -298,9 +255,7 @@ function PropertyCardList({ searchMode }) {
             <div className="cards-container">
               <div className="cards-list">
                 {displaySearchProperties.length === 0 ? (
-                  <li className="no-properties-message">
-                    No more properties to show
-                  </li>
+                  <li className="no-properties-message">No more properties to show</li>
                 ) : (
                   displaySearchProperties.map((property) => (
                     <MiniPropertyCard
@@ -318,10 +273,7 @@ function PropertyCardList({ searchMode }) {
             </div>
             {popupVisible && (
               <div className="property-popup-background" onClick={closePopup}>
-                <div
-                  className="property-popup"
-                  onClick={(e) => e.stopPropagation()}
-                >
+                <div className="property-popup" onClick={(e) => e.stopPropagation()}>
                   <ExpandedPropertyCard propertyInfo={selectedProperty} />
                 </div>
               </div>
@@ -335,7 +287,7 @@ function PropertyCardList({ searchMode }) {
               display: 'flex',
               alignItems: 'center',
               paddingLeft: 2,
-              pt: 2
+              pt: 2,
             }}
           >
             <Typography
@@ -358,28 +310,17 @@ function PropertyCardList({ searchMode }) {
             </Box>
           </Box>
 
-          <DndContext
-            collisionDetection={closestCenter}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-          >
+          <DndContext collisionDetection={closestCenter} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
             <div className="dropzone-container">
               {isDragging ? (
                 <div
-                  className={`dropzone left-dropzone active-dropzone ${
-                    isOverDislike ? 'active' : ''
-                  }`}
+                  className={`dropzone left-dropzone active-dropzone ${isOverDislike ? 'active' : ''}`}
                   ref={setDislikeRef}
                 >
                   <span className="dropzone-icon">✖</span>
                 </div>
               ) : (
-                <div
-                  className={`dropzone left-dropzone${
-                    isOverDislike ? 'active' : ''
-                  }`}
-                  ref={setDislikeRef}
-                >
+                <div className={`dropzone left-dropzone${isOverDislike ? 'active' : ''}`} ref={setDislikeRef}>
                   <span className="dropzone-icon">✖</span>
                 </div>
               )}
@@ -396,9 +337,7 @@ function PropertyCardList({ searchMode }) {
                           propertyInfo={nextRecommendationProperty}
                           likedFn={likedProperty}
                           dislikedFn={dislikedProperty}
-                          displayPopup={() =>
-                            displayPopup(nextRecommendationProperty)
-                          }
+                          displayPopup={() => displayPopup(nextRecommendationProperty)}
                         />
                       </>
                     ) : (
@@ -408,35 +347,24 @@ function PropertyCardList({ searchMode }) {
                           propertyInfo={displayedRecommendationProperty}
                           likedFn={likedProperty}
                           dislikedFn={dislikedProperty}
-                          displayPopup={() =>
-                            displayPopup(displayedRecommendationProperty)
-                          }
+                          displayPopup={() => displayPopup(displayedRecommendationProperty)}
                         />
                       </>
                     )
                   ) : (
-                    <li className="no-properties-message">
-                      No more properties to show
-                    </li>
+                    <li className="no-properties-message">No more properties to show</li>
                   )}
                 </ul>
               </SortableContext>
               {isDragging ? (
                 <div
-                  className={`dropzone right-dropzone active-dropzone ${
-                    isOverLike ? 'active' : ''
-                  }`}
+                  className={`dropzone right-dropzone active-dropzone ${isOverLike ? 'active' : ''}`}
                   ref={setLikeRef}
                 >
                   <span className="dropzone-icon">✔</span>
                 </div>
               ) : (
-                <div
-                  className={`dropzone right-dropzone ${
-                    isOverLike ? 'active' : ''
-                  }`}
-                  ref={setLikeRef}
-                >
+                <div className={`dropzone right-dropzone ${isOverLike ? 'active' : ''}`} ref={setLikeRef}>
                   <span className="dropzone-icon">✔</span>
                 </div>
               )}
@@ -447,33 +375,21 @@ function PropertyCardList({ searchMode }) {
                   propertyInfo={displayedRecommendationProperty}
                   likedFn={likedProperty}
                   dislikedFn={dislikedProperty}
-                  displayPopup={() =>
-                    displayPopup(displayedRecommendationProperty)
-                  }
+                  displayPopup={() => displayPopup(displayedRecommendationProperty)}
                 />
               )}
             </DragOverlay>
           </DndContext>
           {popupVisible && (
             <div className="property-popup-background" onClick={closePopup}>
-              <div
-                className="property-popup"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ExpandedPropertyCard
-                  propertyInfo={selectedProperty}
-                  isSearch={true}
-                />
+              <div className="property-popup" onClick={(e) => e.stopPropagation()}>
+                <ExpandedPropertyCard propertyInfo={selectedProperty} isSearch={true} />
               </div>
             </div>
           )}
         </div>
       )}
-      <Snackbar
-        open={notification.open}
-        autoHideDuration={3000}
-        onClose={handleNotificationClose}
-      >
+      <Snackbar open={notification.open} autoHideDuration={3000} onClose={handleNotificationClose}>
         <Alert
           onClose={handleNotificationClose}
           severity={notification.severity}
@@ -483,7 +399,7 @@ function PropertyCardList({ searchMode }) {
             left: '46%',
             transform: 'translateX(-50%)',
             zIndex: 1000,
-            fontSize: '1.2rem'
+            fontSize: '1.2rem',
           }}
         >
           {notification.message}

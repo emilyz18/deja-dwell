@@ -60,45 +60,18 @@ function App() {
         <Routes>
           {accountType === LANDLORD ? (
             <>
-              <Route
-                path="/"
-                element={<LandlordPropertyCard landlordId={landlordId} />}
-              />
-              <Route
-                path="/landlordAccount/applicants"
-                element={<LandlordPropertyCard landlordId={landlordId} />}
-              />
-              <Route
-                path="/landlordAccount/profile"
-                element={<GeneralInputForm />}
-              />
-              <Route
-                path="/landlordAccount/property"
-                element={<PropertyEditPage />}
-              />
+              <Route path="/" element={<LandlordPropertyCard landlordId={landlordId} />} />
+              <Route path="/landlordAccount/applicants" element={<LandlordPropertyCard landlordId={landlordId} />} />
+              <Route path="/landlordAccount/profile" element={<GeneralInputForm />} />
+              <Route path="/landlordAccount/property" element={<PropertyEditPage />} />
             </>
           ) : (
             <>
-              <Route
-                path="/tenantAccount/matches"
-                element={<PropertyCardList searchMode={false} />}
-              />
-              <Route
-                path="/tenantAccount/search"
-                element={<PropertyCardList searchMode={true} />}
-              />
-              <Route
-                path="/tenantAccount/profile"
-                element={<GeneralInputForm />}
-              />
-              <Route
-                path="/tenantAccount/preference"
-                element={<TenantEditPage />}
-              />
-              <Route
-                path="/tenantAccount/history"
-                element={<History tenantId={user.TenantID} />}
-              />
+              <Route path="/tenantAccount/matches" element={<PropertyCardList searchMode={false} />} />
+              <Route path="/tenantAccount/search" element={<PropertyCardList searchMode={true} />} />
+              <Route path="/tenantAccount/profile" element={<GeneralInputForm />} />
+              <Route path="/tenantAccount/preference" element={<TenantEditPage />} />
+              <Route path="/tenantAccount/history" element={<History tenantId={user.TenantID} />} />
             </>
           )}
         </Routes>

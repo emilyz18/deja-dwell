@@ -29,36 +29,14 @@ const importData = async () => {
 
       await mongoose.connection.collection('users').dropIndexes()
       // Read JSON files
-      const users = JSON.parse(
-        fs.readFileSync(path.join(__dirname, '../mockData/Users.json'), 'utf-8')
-      )
-      const landlords = JSON.parse(
-        fs.readFileSync(
-          path.join(__dirname, '../mockData/Landlord.json'),
-          'utf-8'
-        )
-      )
-      const tenants = JSON.parse(
-        fs.readFileSync(
-          path.join(__dirname, '../mockData/Tenant.json'),
-          'utf-8'
-        )
-      )
+      const users = JSON.parse(fs.readFileSync(path.join(__dirname, '../mockData/Users.json'), 'utf-8'))
+      const landlords = JSON.parse(fs.readFileSync(path.join(__dirname, '../mockData/Landlord.json'), 'utf-8'))
+      const tenants = JSON.parse(fs.readFileSync(path.join(__dirname, '../mockData/Tenant.json'), 'utf-8'))
       const tenantPreferences = JSON.parse(
-        fs.readFileSync(
-          path.join(__dirname, '../mockData/TenantPreference.json'),
-          'utf-8'
-        )
+        fs.readFileSync(path.join(__dirname, '../mockData/TenantPreference.json'), 'utf-8')
       )
-      const properties = JSON.parse(
-        fs.readFileSync(
-          path.join(__dirname, '../mockData/Properties.json'),
-          'utf-8'
-        )
-      )
-      const matches = JSON.parse(
-        fs.readFileSync(path.join(__dirname, '../mockData/Match.json'), 'utf-8')
-      )
+      const properties = JSON.parse(fs.readFileSync(path.join(__dirname, '../mockData/Properties.json'), 'utf-8'))
+      const matches = JSON.parse(fs.readFileSync(path.join(__dirname, '../mockData/Match.json'), 'utf-8'))
 
       // Import data to MongoDB
       await User.insertMany(users)
