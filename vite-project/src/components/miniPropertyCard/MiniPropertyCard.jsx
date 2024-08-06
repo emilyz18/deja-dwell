@@ -31,7 +31,7 @@ function MiniPropertyCard(props) {
   // dnd toolkit to incorporate drag and drop functionality on the miniProperty card + "code in this file".
   // The generated code was adapted: I changed div organization to exclude some elements from being draggable
 
-  // transform and transition not used currently, but keep them to potentially add further UI
+  // transform and transition not used currently, but keep them to add further UI
   // improvements in the future
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: propertyInfo.HouseID,

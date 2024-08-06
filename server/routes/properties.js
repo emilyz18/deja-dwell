@@ -57,7 +57,6 @@ router.get('/getPropertyById/:HouseID', async (req, res) => {
   try {
     const { HouseID } = req.params
     const property = await propertyQueries.getOneProperty(HouseID)
-    // console.log('Property fetched in server:', property);
 
     if (!property) {
       return res.status(404).json({ message: 'Property not found' })
@@ -349,7 +348,6 @@ router.get('/preferProperties/:tenantID', async (req, res) => {
 
     return res.status(200).send(prefProperties)
   } catch (err) {
-    console.log(err)
     res.status(500).send(`Error loading prefer property for user: ${tenantID} from DB: ${err.message}`)
   }
 })

@@ -22,10 +22,8 @@ function PropertyCardList({ searchMode }) {
   const getPreferPropertiesStatus = useSelector((state) => state.properties.getPreferProperties)
 
   const properties = searchMode
-    ? // eslint-disable-next-line react-hooks/rules-of-hooks
-      useSelector((state) => state.properties.unmatchProperties)
-    : // eslint-disable-next-line react-hooks/rules-of-hooks
-      useSelector((state) => state.properties.preferProperties)
+    ? useSelector((state) => state.properties.unmatchProperties)
+    : useSelector((state) => state.properties.preferProperties)
 
   const [activeId, setActiveId] = useState(null) // activeId only used when dragging
   const [popupVisible, setPopupVisible] = useState(false)

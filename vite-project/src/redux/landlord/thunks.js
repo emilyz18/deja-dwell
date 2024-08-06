@@ -7,6 +7,5 @@ export const getLandlordAsync = createAsyncThunk(actionTypes.GET_LANDLORD, async
 })
 
 export const createLandlordAsync = createAsyncThunk(actionTypes.CREATE_LANDLORD, async (landlordData) => {
-  const response = await landlordService.createLandlord(landlordData)
-  return response
+  return await landlordService.createLandlord(landlordData)
 })

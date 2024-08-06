@@ -9,7 +9,7 @@ function MatchItem({ match, displayPopup }) {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.user)
   const allProperties = useSelector((state) => state.properties.list)
-  const currentProperty = allProperties.find((property) => property.HouseID == match.HouseID)
+  const currentProperty = allProperties.find((property) => property.HouseID === match.HouseID)
 
   const [notification, setNotification] = useState({
     open: false,

@@ -1,40 +1,34 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {
   createMatch,
-  updateMatch,
   deleteMatch,
   getLandlordMatches,
   getTenantMatches,
   reopenMatches,
+  updateMatch,
 } from './matchService'
 import { actionTypes } from './actionTypes'
 
 export const createMatchAsync = createAsyncThunk(actionTypes.CREATE_MATCH, async (matchData) => {
-  const response = await createMatch(matchData)
-  return response
+  return await createMatch(matchData)
 })
 
 export const updateMatchAsync = createAsyncThunk(actionTypes.UPDATE_MATCH, async ({ matchId, matchData }) => {
-  const response = await updateMatch(matchId, matchData)
-  return response
+  return await updateMatch(matchId, matchData)
 })
 
 export const deleteMatchAsync = createAsyncThunk(actionTypes.DELETE_MATCH, async (matchId) => {
-  const response = await deleteMatch(matchId)
-  return response
+  return await deleteMatch(matchId)
 })
 
 export const getLandlordMatchesAsync = createAsyncThunk(actionTypes.GET_LANDLORD_MATCHES, async (landlordId) => {
-  const response = await getLandlordMatches(landlordId)
-  return response
+  return await getLandlordMatches(landlordId)
 })
 
 export const getTenantMatchesAsync = createAsyncThunk(actionTypes.GET_TENANT_MATCHES, async (tenantId) => {
-  const response = await getTenantMatches(tenantId)
-  return response
+  return await getTenantMatches(tenantId)
 })
 
 export const reopenMatchesAsync = createAsyncThunk(actionTypes.REOPEN_MATCHES, async (matchId) => {
-  const response = await reopenMatches(matchId)
-  return response
+  return await reopenMatches(matchId)
 })

@@ -38,8 +38,7 @@ export default function SignIn() {
     try {
       await dispatch(signInAsync(user)).unwrap()
     } catch (error) {
-      //console.log('Error caught:', error.message);
-      if (error.message == "Cannot set properties of null (setting 'HashKey')") {
+      if (error.message === "Cannot set properties of null (setting 'HashKey')") {
         setSnackbar({
           open: true,
           message: 'Incorrect email or password.',

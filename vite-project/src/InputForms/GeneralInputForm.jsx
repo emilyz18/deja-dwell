@@ -58,7 +58,6 @@ export function GeneralInputForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    //using HTML5 validation
     dispatch(editUserAsync(user))
     setIsEditing(false)
   }
