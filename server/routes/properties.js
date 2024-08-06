@@ -7,7 +7,6 @@ const tenantProfileQueries = require('../dataBase/queries/tenantProfileQueries')
 const tenantPrefQueries = require('../dataBase/queries/tenantPrefQueries')
 const propertyQueries = require('../dataBase/queries/propertyQueries')
 const matchQueries = require('../dataBase/queries/matchQueries')
-const { randomInt } = require('crypto')
 
 const distanceCache = {}
 

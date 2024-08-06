@@ -2,7 +2,6 @@ var express = require('express')
 var crypto = require('crypto')
 const jwt = require('jsonwebtoken')
 
-const { db } = require('../db')
 const { v4: uuid } = require('uuid')
 
 const userQueries = require('../dataBase/queries/userQueries')
