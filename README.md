@@ -60,6 +60,7 @@ Mock credentials:
     - Chat message
     - Contact exchange
     - Interview process
+8. ❌ Enhance UI to be responsive, regardless of window size. Reduce unnecessary page scrolling when app contents could have a better layout
   
 ## Tech Usage
 - **Unit 1 - HTML, CSS, JavaScript** - These fundamental technologies were essential for building our application's interface. HTML provided the structure, CSS was used for styling, and JavaScript enabled interactivity. React utilized these technologies to create dynamic and responsive UI components, ensuring a seamless and engaging user experience.
@@ -69,7 +70,7 @@ Mock credentials:
 - **Unit 5 - Release Engineering via Render** - Render was utilized for deploying our application, providing a robust platform for hosting backend services and serving the frontend via static files during the build step. The deployment process was streamlined with automatic updates from our GitHub repository through GitHub Actions and Render's deploy hooks, ensuring our application remained current and efficient.
 
 ## Above and Beyond Functionality
-Our project goes above and beyond by incorporating two distinct search methods, allowing two ways for tenants to view properties, which improves the user experience. We have a Tinder-like recommendation page that suggests postings to users based on their preferences, determined by our custom algorithm which generates a "match score". This feature enables tenants to flawlessly drag and drop properties to like or dislike, implemented using advanced React libraries and handling UI interactions, which demonstrates a level of proficiency beyond course expectations. The second type of search is where tenants can view property postings in a list format. Users can enter keywords or apply filters to find properties that meet their criteria. This search functionality ensures users have flexible and efficient ways to discover properties that suit their needs.
+Our project goes above and beyond by incorporating two distinct search methods, allowing tenants to view properties in two ways, which improves the user experience. We have a Tinder-like recommendation page that suggests postings to users based on their preferences, determined by our custom algorithm which generates a "match score". This feature enables tenants to flawlessly drag and drop properties to like or dislike, implemented using advanced React libraries and handling UI interactions, demonstrating proficiency beyond course expectations. The second search type is where tenants can view property postings in a list format. Users can enter keywords or apply filters to find properties that meet their criteria. This search functionality ensures users have flexible and efficient ways to discover properties that suit their needs.
 To further improve the user experience, we integrated the Google Maps API to add sophisticated map functionalities. By default, the map centers on the user's location, providing a personalized starting point. The map supports several advanced features, including:
 - Displaying markers for all property addresses.
 - Clustering markers when zooming out to avoid clutter.
@@ -79,11 +80,13 @@ To further improve the user experience, we integrated the Google Maps API to add
 All these user interactions are robust and bug-free, showcasing a seamless user experience. Implementing these map features demonstrated advanced usage of React and external API integration, as it was entirely done on the frontend using multiple React hooks.
 
 ## Next Steps
-To further improve the app, we would focus on enhancing the matching functionality, as it is the core feature of our platform:
-- Implement on-demand feedback to understand why users did not choose specific options.
-- Add profile reviews for tenant and landlord profiles to build trust and transparency within the platform.
-- Enhance our preference updating system based on user interactions and feedback, ensuring our matching algorithm continuously evolves to provide the best possible matches.
+To further improve the app, we will focus on enhancing the matching functionality and streamlining related components to ensure a seamless user experience, as it is the core feature of our platform:
 
+- **Implement on-demand feedback** to understand why tenants disliked a property and why landlords rejected an applicant. For tenants, we would add a 'Give Feedback' option for each property that was disliked on the 'View Applied' page. For landlords, we would similarly add a 'Give Feedback' option to each rejected tenant.
+
+- **Enhance our preference updating system** based on user interactions and feedback, ensuring our matching algorithm continuously evolves to provide the best possible matches. For example, we could adjust our match score weightings based on user feedback; maybe certain things were under/over-prioritized.
+
+- **Upgrade UI Components** since some pages, like the input forms, require scrolling to access all the content. Redesign certain pages to minimize the need for scrolling and improve overall user experience. This would involve creating more compact layouts, implementing collapsible sections, and enhancing navigation elements to ensure that key information is easily accessible without excessive scrolling.
 
 ## Contributors
 ### Derek 
@@ -92,20 +95,20 @@ To further improve the app, we would focus on enhancing the matching functionali
 - Refactored frontend functions to improve performance and fixed bugs in frontend and backend.
 
 ### Emily
-- Developed and refactored a large portion of React components using plain React, React libraries, and CSS to enhance UI/UX features
-- Implemented and optimized external API integration, including the Google Maps API, geocoding API, and distance matrix API
-- Performed a lot of manual testings to identify and resolve bugs in the frontend and API endpoints
+- Developed and refactored a large portion of React components using plain React, React libraries, and CSS to enhance UI/UX features.
+- Implemented and optimized external API integration, including the Google Maps API, Geocoding API, and distance matrix API.
+- Performed a lot of manual tests to identify and resolve bugs in the frontend and API endpoints.
 
 ### Jackson
-- Took over the majority of the frontend styling, fixed UI bugs, and enhanced UI features and functionality.
+- Worked on the majority of the frontend styling, fixed UI bugs, and enhanced UI features and functionality.
 - Developed the backend logic and integrated it with the database.
 - Established release engineering using Render and GitHub Actions to implement CI/CD.
 
 ### Xinyue 
-- Implement main React & Redux componemnts, including user and property input forms with validations, React Routers
-- Prepared mock data, set up MongoDB schemas and import script 
-- Developed server routes and NoSQL queries for user signIn/register, user and property information management.  
-- Enhanced UI/UX styling, added responsiveness for change screen sizes.
+- Implemented main React & Redux components, including user and property input forms with validations, and React Routers.
+- Prepared mock data, set up MongoDB schemas, and imported script.
+- Developed server routes and NoSQL queries for user sign-in/register, and user and property information management.  
+- Enhanced UI/UX styling, and added responsiveness for changing screen sizes.
 
 ## Prototype Sketches
 #### Tenant Dashboard
