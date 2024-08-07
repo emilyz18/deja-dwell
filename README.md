@@ -6,6 +6,7 @@
 Our project, DejaDwell, is a platform designed for tenants and landlords to facilitate finding rental accommodations. It allows tenants to post their profile data and preferences while enabling landlords to post details of their units. Tenants are matched with homes that fit their preferences, while landlords connect with tenants who meet their criteria. With DejaDwell, we offer a streamlined and effective process for finding your perfect rental or tenant.
  
 Deployed Link: https://deja-dwell.onrender.com/login 
+
 Mock credentials:
 - Tenant Account: 
     Username: MockTenant@demo.com
